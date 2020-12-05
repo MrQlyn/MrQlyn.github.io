@@ -66,6 +66,68 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/" class="article-date">
+  <time datetime="2018-09-09T02:19:21.000Z" itemprop="datePublished">2018-09-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/">Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   <strong>目录</strong></p>
+<p>一、String、StringBuffer/StringBuilder、基本类型包装类（如：Float、Double）、<br>Byte[ ]、char[ ]转换图<br>二、String：字符串，==比较的是引用是否相同，equals比较的是内容是否相同。<br>三、StringBuffer/StringBuilder：可修改字符串，java.lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。</p>
+<hr>
+<h3 id="一、String、StringBuffer-StringBuilder、基本类型包装类（如：Float、Double）、Byte-、char-转换图"><a href="#一、String、StringBuffer-StringBuilder、基本类型包装类（如：Float、Double）、Byte-、char-转换图" class="headerlink" title="一、String、StringBuffer/StringBuilder、基本类型包装类（如：Float、Double）、Byte[ ]、char[ ]转换图"></a>一、String、StringBuffer/StringBuilder、基本类型包装类（如：Float、Double）、Byte[ ]、char[ ]转换图</h3><p>Float和float区别：一个类、一个是基本类型关键字  </p>
+<p> <img src="https://img-blog.csdnimg.cn/20190113182149961.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<p>总结：转大包容小。</p>
+<blockquote>
+<pre><code>StringBuffer,等级比String高，用构造函数包含即可
+转回String用:toString()
+String等级比字节数组、字符数组高，转换成String用构造函数包含即可
+转回字节数组用：getByte() 转回字符数组用:toCharArray()
+String转换成基本数据类型，包装类用:Integer.parseXxx()方法 
+基本数据类型，包装类转换成String用:String.ValueOF(int)方法</code></pre></blockquote>
+<h3 id="二、String：字符串，-比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意-的使用，比较的是引用"><a href="#二、String：字符串，-比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意-的使用，比较的是引用" class="headerlink" title="二、String：字符串，==比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意==的使用，比较的是引用"></a>二、String：字符串，==比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意==的使用，比较的是引用</h3><blockquote>
+<pre><code>String str1=&quot;abc&quot;;                //直接在字符串常量池里引用
+String str2=new String(&quot;abc&quot;);    //new一定会新建一个对象，存放字符串。
+System.out.println(str1==str2);          //false
+System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
+<blockquote>
+<p>char charAt(int index)：返回索引为index的字符<br>int length()：返回字符串长度<br>int indexOf(String str)：返回字符串中第一次出现的索引值<br>String replace(char old , char new)：替换所有old字符为new字符<br>String substring(int begin)：抓取索引为begin开始至结束的字符串<br>String substring(int begin , int end)：抓取从索引begin开始至end的字符串<br>String trim()：删除起始和结束俩段空格<br>String[] spilt(String str)：分割str字符串为若干子串<br>String toUpperCase()：转化大写<br>String toLowerCase()：转化小写<br>boolean equals(String str)：判断与str字符串内容是否一致<br>boolean startsWith(String str)：判断是否已str字符串开始<br>boolean endsWith(String str)：判断是否已str字符串结束</p>
+</blockquote>
+<h3 id="三、StringBuffer-StringBuilder：可修改字符串，java-lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。"><a href="#三、StringBuffer-StringBuilder：可修改字符串，java-lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。" class="headerlink" title="三、StringBuffer/StringBuilder：可修改字符串，java.lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。"></a>三、StringBuffer/StringBuilder：可修改字符串，java.lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。</h3><blockquote>
+<p>StringBuffer append(char c)：追加字符c<br>StringBuffer insert(int index , String str)：在索引index处插入字符串str<br>StringBuffer delete(int start , int end)：删除索引从start至end字符串<br>StringBuffer delete(int index)：删除索引为index字符<br>StringBuffer setCharAt(int index , char c)：设置索引为index字符为c<br>StringBuffer reverse()：反转字符串<br>String toString()：转化为String类型</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/" data-id="ckib94p1l003o3otpw720lop3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Web/JNDI和Local" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/08/Web/JNDI和Local/" class="article-date">
@@ -109,7 +171,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/08/Web/JNDI和Local/" data-id="ckib8b2im0014vctpug1x6h58" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/08/Web/JNDI和Local/" data-id="ckib94oza00183otp3zwx7cpk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -169,7 +231,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/08/数据库/JDBC学习笔记(cp30数据库连接池)/" data-id="ckib8b2l6004bvctpzrt0l091" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/08/数据库/JDBC学习笔记(cp30数据库连接池)/" data-id="ckib94p2i004f3otpaixl2oab" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -211,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Web项目里的各种路径/" data-id="ckib8b2j9001xvctph5tdzsb4" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Web项目里的各种路径/" data-id="ckib94p0200233otp704hvxek" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -334,7 +396,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/JSTL/" data-id="ckib8b2ip0019vctppkbe3zn6" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/JSTL/" data-id="ckib94ozf001d3otp9f780k1b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -431,7 +493,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Cookie和Session/" data-id="ckib8b2ii000zvctpjjkpsq35" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Cookie和Session/" data-id="ckib94oz600143otpdn9ip38c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -501,7 +563,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/EL表达式/" data-id="ckib8b2ik0011vctpp56asrhy" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/EL表达式/" data-id="ckib94oz800173otp0f8clk9z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -571,7 +633,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/06/Web/JavaBean及BeanUtils的使用/" data-id="ckib8b2ir001bvctpqrqxyavg" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/06/Web/JavaBean及BeanUtils的使用/" data-id="ckib94ozl001i3otpjwbfcyqq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -638,7 +700,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/05/Web/JavaWeb的JSP/" data-id="ckib8b2it001fvctpymlgc4qm" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/05/Web/JavaWeb的JSP/" data-id="ckib94ozn001l3otpmzemkeos" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -771,97 +833,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/08/25/Web/myeclipse新建项目设置编码/" data-id="ckib8b2jd0021vctpkno7h4gs" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Web/JavaWeb的Servlet、ServletContext" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/08/22/Web/JavaWeb的Servlet、ServletContext/" class="article-date">
-  <time datetime="2018-08-21T17:05:58.000Z" itemprop="datePublished">2018-08-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/22/Web/JavaWeb的Servlet、ServletContext/">JavaWeb的Servlet、ServletContext</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81911306" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81911306</a><br>   一、Servlet是什么？他是一个处理网页请求或者提交数据的处理容器，每个Servlet是独特的，用来处理不同的网页请求方式，同</p>
-<p> 时Servlet容器内部又是单例多线程的，对多个网页的同一请求采取多线程方式快速处理，在使用时要注意线程安全问题。</p>
-<p> 二、自定义Servlet需要的步骤：</p>
-<p> 1、自定义Servlet继承于HttpServlet，重写doGet()和doPost()</p>
-<p> 2、在WebRoot的WEB-INF的web.xml下配置Servlet</p>
-<p> 以下为配置格式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet&gt;</span><br><span class="line">   &lt;servlet-name&gt;别名（任取，但需与以下servlet-mapping的别名一致）&lt;/servlet-name&gt;</span><br><span class="line">   &lt;servlet-class&gt;com.firstServlet&lt;/servlet-class&gt;    &lt;!--（项目工程src下的类路径）--&gt;</span><br><span class="line"> &lt;/servlet&gt;</span><br><span class="line"></span><br><span class="line"> &lt;servlet-mapping&gt;</span><br><span class="line">   &lt;servlet-name&gt;别名&lt;/servlet-name&gt;</span><br><span class="line">   &lt;url-pattern&gt;/firstServlet&lt;/url-pattern&gt;	        &lt;!--设置浏览器访问的路径--&gt;</span><br><span class="line">   &lt;!--真正浏览器的访问路径还得在前面加上项目名即http:localhost:8080/项目名/此处路径--&gt;</span><br><span class="line"> &lt;/servlet-mapping&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 1、 若想设置Servlet在服务器启动时就创建只需在<servlet>里添加：<load-on-startup>0</load-on-startup>即可，此处0为启动</servlet></p>
-<p> 优先级，Servlet启动顺序按优先级从小到大依次启动（优先级必须为非负整数）。</p>
-<p> 2、 配置Servlet初始化参数方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">     &lt;servlet&gt;</span><br><span class="line"></span><br><span class="line">    .......</span><br><span class="line"></span><br><span class="line">     &lt;init-param&gt;</span><br><span class="line"></span><br><span class="line">     &lt;param-name&gt;paramName&lt;/param-name&gt;</span><br><span class="line"></span><br><span class="line">     &lt;param-value&gt;paramValue&lt;/param-value&gt;</span><br><span class="line"></span><br><span class="line">     &lt;/init-param&gt;</span><br><span class="line"></span><br><span class="line">     &lt;/servlet&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 三、Servlet生命周期</p>
-<p> <strong>init() :</strong>进行初始化工作</p>
-<p> <strong>service():</strong>提供服务响应请求，自动判断调用doGet或者doPost方法</p>
-<p> <strong>destory():</strong>Servlet被销毁的时候调用</p>
-<p> 调用顺序:构造器-&gt;init()-&gt;service()-&gt;destory()</p>
-<p> 四、Servlet的常用方法：</p>
-<blockquote>
-<p>doGet(HttpServletRequest request, HttpServletResponse response)：处理get请求，默认启动方</p>
-<p> doPost(HttpServletRequest request, HttpServletResponse response)：处理post请求</p>
-<p> getServletConetext():获取ServletContext对象</p>
-<p> 五、ServletContext对象（上下文对象）</p>
-</blockquote>
-<p> 服务器会为每个web项目创建一个ServletContext对象，该对象在服务器启动时创建，在服务器关闭时销毁。</p>
-<p> 作用：进行Servlet之间的数据传递</p>
-<p> ServletContext对象拥有的方法：</p>
-<blockquote>
-<p>setAttribute(String name,Object Key)：使用键值对方式存入数据对象</p>
-<p> getAttribute(String name)：通过键名取出数据对象</p>
-<p> removeAttribute(String name)：通过键名删除已存入的数据对象</p>
-<p> getAttributeNames()：取出所有键名</p>
-<p> getInitParameter(String name)：通过键名取出全局初始化参数值（ServletConfig里同样方法获得当前Servlet</p>
-<p> 初始化参数）</p>
-<p> 全局初始化参数配置：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;      &lt;web-app&gt;</span><br><span class="line">        &lt;context-param&gt;</span><br><span class="line">            &lt;param-name&gt;cluster&lt;/param-name&gt;</span><br><span class="line">            &lt;param-value&gt;false&lt;/param-value&gt;</span><br><span class="line">        &lt;/context-param&gt;</span><br><span class="line">        .......</span><br><span class="line">    &lt;/web-app&gt;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p> getRealPath(String path)：通过文件名获取文件的绝对路径</p>
-<p> getResourceAsStream(String path)：通过文件名获取文件的输入流对象（InputStream）</p>
-<p> getResource(String path)：通过文件名获取文件的网址URL对象</p>
-<p> getResourcePaths(String path)：通过文件名获取当前文件名目录下的所有资源的路径的Set集合</p>
-</blockquote>
-<p> 六、获取src路径（类路径WEB-INF\classes）下的资源：所有src下的文件都会在映射在WEB-INF\classes里</p>
-<blockquote>
-<p>第一种：getClass().getClassLoader().getResourceAsStream是从src路径（即classes路径）开始的，同时路径不用”/“开头</p>
-</blockquote>
-<blockquote>
-<p>第二种：getClass().getResourceAsStream是分俩种情况：<br> <strong>“/“开头</strong>是从src路径（即classes路径）开始的，<br> <strong>不用”/“开头</strong>是从当前包路径下开始的</p>
-<p> 若想返回上级路径使用../</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/08/22/Web/JavaWeb的Servlet、ServletContext/" data-id="ckib8b2iv001hvctp5tk6orsq" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/08/25/Web/myeclipse新建项目设置编码/" data-id="ckib94p0600273otpfhz3s7rx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -910,7 +882,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
     </div>
   </div>
 
@@ -921,6 +893,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/12/05/article-name/">article_name</a>
+          </li>
         
           <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
@@ -936,10 +912,6 @@
         
           <li>
             <a href="/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
           </li>
         
       </ul>
