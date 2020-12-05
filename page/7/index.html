@@ -66,49 +66,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-数据结构与算法/数据结构：约瑟夫问题（链式结构）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（链式结构）/" class="article-date">
-  <time datetime="2019-01-12T07:18:17.000Z" itemprop="datePublished">2019-01-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（链式结构）/">数据结构：约瑟夫问题（链式结构）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"> package Linear;</span><br><span class="line">/*</span><br><span class="line"> * (链式结构)</span><br><span class="line"> * 约瑟夫问题：n个人围坐在一张桌子上，从第s个人开始数，数第m个人，该人出局。</span><br><span class="line"> * 			    从下一个人开始数，数第m个人，该人出局。。。循环往复直至所有人出局</span><br><span class="line"> */</span><br><span class="line">public class K &#123;</span><br><span class="line">	public static void yuesefuTwo(Node h,int n,int s,int m) &#123;</span><br><span class="line">		int i=0;</span><br><span class="line">		Node p =h;</span><br><span class="line">		Node pre=h;		//pre永远指向p的前一结点</span><br><span class="line">		while (i&lt;s) &#123;</span><br><span class="line">			p=p.next;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">		while (pre.next!=p) &#123;</span><br><span class="line">			pre=pre.next;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(p.data);</span><br><span class="line">		while (n!=0) &#123;</span><br><span class="line">			i=0;</span><br><span class="line">			while (i&lt;m-1) &#123;</span><br><span class="line">				p=p.next;</span><br><span class="line">				pre=pre.next;</span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line">			if (n!=1) &#123;		//删除p结点</span><br><span class="line">				pre.next=p.next;</span><br><span class="line">				System.out.println(p.data);</span><br><span class="line">				p=null;</span><br><span class="line">				p=pre.next;</span><br><span class="line">				n--;</span><br><span class="line">			&#125;else &#123;			//当n==1（即只有最后一个结点时，p和pre指向同一结点）:删除最后一个结点</span><br><span class="line">				System.out.println(p.data);</span><br><span class="line">				p=null;</span><br><span class="line">				pre=null;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Node h =NodeTool.CreateNodeList(&quot;12345&quot;);</span><br><span class="line">		Node p =h;</span><br><span class="line">		while (p.next!=null) &#123;</span><br><span class="line">			p=p.next;</span><br><span class="line">		&#125;</span><br><span class="line">		p.next=h.next;</span><br><span class="line">		yuesefuTwo(h, 5, 3, 2);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（链式结构）/" data-id="ckib94p3z005r3otpc1kd7any" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-数据结构与算法/数据结构：约瑟夫问题（顺序结构）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（顺序结构）/" class="article-date">
@@ -140,7 +97,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（顺序结构）/" data-id="ckib94p40005s3otphwkaamll" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（顺序结构）/" data-id="ckib9iqim00609wtpzc8m0b8a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -179,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表改为双向循环链表/" data-id="ckib94p3g00583otpw4ywk0zv" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表改为双向循环链表/" data-id="ckib9iqi1005c9wtp5w1axcim" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -218,7 +175,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表构造成三环形链表/" data-id="ckib94p3j005b3otpk8p6wrlp" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表构造成三环形链表/" data-id="ckib9iqi6005h9wtp126wryej" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -261,7 +218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/删除结点/" data-id="ckib94p3e00573otpahw0cuv4" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/删除结点/" data-id="ckib9iqhz00599wtpbo5au4zv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -300,7 +257,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/链表寻找相同数据/" data-id="ckib94p42005v3otprmbb41tx" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/链表寻找相同数据/" data-id="ckib9iqiq00659wtpmc2zgry4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -339,7 +296,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（不生成新链表）/" data-id="ckib94p3m005f3otpqrdqm7nc" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（不生成新链表）/" data-id="ckib9iqia005m9wtp1c0q0wu0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -378,7 +335,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/分解链表/" data-id="ckib94p3d00553otphkvxwtas" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/分解链表/" data-id="ckib9iqi3005e9wtpmidjthgb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -421,7 +378,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/一元多项式相加/" data-id="ckib94p3a00513otp11aklphi" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/一元多项式相加/" data-id="ckib9iqhx00579wtpet02qoog" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -460,7 +417,46 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（生成新链表）/" data-id="ckib94p3o005g3otpysxb9lbf" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（生成新链表）/" data-id="ckib9iqic005n9wtphfa36n0v" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据结构与算法/单链表逆置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/11/数据结构与算法/单链表逆置/" class="article-date">
+  <time datetime="2019-01-11T06:41:58.000Z" itemprop="datePublished">2019-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/11/数据结构与算法/单链表逆置/">单链表逆置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/86300728" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/86300728</a><br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"> package Linear;</span><br><span class="line">/*</span><br><span class="line"> * 单链表逆置:只能在当前链表上操作，链表中包含了头结点</span><br><span class="line"> * </span><br><span class="line"> * 补充知识点：1、先去除链表两个节点情况即，第三个节点为空</span><br><span class="line"> *               if(p==null) return;</span><br><span class="line"> *            2、在对第三结点判断是否为空</span><br><span class="line"> */</span><br><span class="line">public class A &#123;</span><br><span class="line">	public static Node inverse(Node h) &#123;</span><br><span class="line">		Node q=h;</span><br><span class="line">		Node p=q.next;</span><br><span class="line">		if(p==null) &#123;	//只有一个头结点</span><br><span class="line">			return h;</span><br><span class="line">		&#125;</span><br><span class="line">		if(p.next==null) &#123;//只有两个结点</span><br><span class="line">			p.next=q;</span><br><span class="line">			q.next=null;</span><br><span class="line">			return p;</span><br><span class="line">		&#125;</span><br><span class="line">		Node t=p.next;</span><br><span class="line">		while(t!=null) &#123;</span><br><span class="line">			p.next=q;</span><br><span class="line">			q=p;</span><br><span class="line">			p=t;</span><br><span class="line">			t=t.next;</span><br><span class="line">		&#125;</span><br><span class="line">		p.next=q;</span><br><span class="line">		h.next=null;</span><br><span class="line"></span><br><span class="line">		while(p!=null) &#123;</span><br><span class="line">			System.out.println(p.data);</span><br><span class="line">			p=p.next;</span><br><span class="line">		&#125;</span><br><span class="line">		return p;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		String string=&quot;abcd&quot;;</span><br><span class="line">		Node h=NodeTool.CreateNodeList(string);</span><br><span class="line">		NodeTool.traverseWithHead(h);</span><br><span class="line">		inverse(h);</span><br><span class="line">		NodeTool.traverseWithHead(h);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表逆置/" data-id="ckib9iqi8005j9wtplpjn7xy4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -509,7 +505,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
     </div>
   </div>
 
@@ -520,10 +516,6 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2020/12/05/article-name/">article_name</a>
-          </li>
         
           <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
@@ -539,6 +531,10 @@
         
           <li>
             <a href="/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
           </li>
         
       </ul>

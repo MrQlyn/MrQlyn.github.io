@@ -66,45 +66,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-数据结构与算法/单链表逆置" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/11/数据结构与算法/单链表逆置/" class="article-date">
-  <time datetime="2019-01-11T06:41:58.000Z" itemprop="datePublished">2019-01-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/11/数据结构与算法/单链表逆置/">单链表逆置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/86300728" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/86300728</a><br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"> package Linear;</span><br><span class="line">/*</span><br><span class="line"> * 单链表逆置:只能在当前链表上操作，链表中包含了头结点</span><br><span class="line"> * </span><br><span class="line"> * 补充知识点：1、先去除链表两个节点情况即，第三个节点为空</span><br><span class="line"> *               if(p==null) return;</span><br><span class="line"> *            2、在对第三结点判断是否为空</span><br><span class="line"> */</span><br><span class="line">public class A &#123;</span><br><span class="line">	public static Node inverse(Node h) &#123;</span><br><span class="line">		Node q=h;</span><br><span class="line">		Node p=q.next;</span><br><span class="line">		if(p==null) &#123;	//只有一个头结点</span><br><span class="line">			return h;</span><br><span class="line">		&#125;</span><br><span class="line">		if(p.next==null) &#123;//只有两个结点</span><br><span class="line">			p.next=q;</span><br><span class="line">			q.next=null;</span><br><span class="line">			return p;</span><br><span class="line">		&#125;</span><br><span class="line">		Node t=p.next;</span><br><span class="line">		while(t!=null) &#123;</span><br><span class="line">			p.next=q;</span><br><span class="line">			q=p;</span><br><span class="line">			p=t;</span><br><span class="line">			t=t.next;</span><br><span class="line">		&#125;</span><br><span class="line">		p.next=q;</span><br><span class="line">		h.next=null;</span><br><span class="line"></span><br><span class="line">		while(p!=null) &#123;</span><br><span class="line">			System.out.println(p.data);</span><br><span class="line">			p=p.next;</span><br><span class="line">		&#125;</span><br><span class="line">		return p;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		String string=&quot;abcd&quot;;</span><br><span class="line">		Node h=NodeTool.CreateNodeList(string);</span><br><span class="line">		NodeTool.traverseWithHead(h);</span><br><span class="line">		inverse(h);</span><br><span class="line">		NodeTool.traverseWithHead(h);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表逆置/" data-id="ckib94p3k005c3otpikf17qws" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-前端/前端重要知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/11/前端/前端重要知识点总结/" class="article-date">
@@ -336,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/前端/前端重要知识点总结/" data-id="ckib94p6000813otpj0iax6zv" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/前端/前端重要知识点总结/" data-id="ckib9iqjz007i9wtprnxemhra" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -425,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/10/前端/Javascript的DOM对象/" data-id="ckib94p2b00493otp095khdw7" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/10/前端/Javascript的DOM对象/" data-id="ckib9iqhq00529wtp263kp74e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -483,7 +444,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/10/06/Git/Git使用报错解决/" data-id="ckib94oyx000v3otp3kmt0849" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/10/06/Git/Git使用报错解决/" data-id="ckib9iqe4000u9wtpaal0rqrj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -537,7 +498,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/26/Web高阶/Mybatis查找返回Map，List集合类型的数据/" data-id="ckib94p0e002i3otpqyy6k26z" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/26/Web高阶/Mybatis查找返回Map，List集合类型的数据/" data-id="ckib9iqfb002d9wtpjoui0uz1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -604,7 +565,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/25/Web高阶/MyBatis的初步使用/" data-id="ckib94p09002b3otpm5hdjojt" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/25/Web高阶/MyBatis的初步使用/" data-id="ckib9iqf400249wtpy8tv8k98" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -664,7 +625,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/16/数据库/MySQL恢复root用户超级权限方法/" data-id="ckib94p38004z3otpdc4woh6d" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/16/数据库/MySQL恢复root用户超级权限方法/" data-id="ckib9iqhn004x9wtp5c7s4r0m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -706,7 +667,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/16/Web/MyEclipse的非法关闭导致servers报错/" data-id="ckib94ozu001t3otp2is0alv5" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/16/Web/MyEclipse的非法关闭导致servers报错/" data-id="ckib9iqev001s9wtpyksv1k0u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -746,7 +707,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/16/Web/MyEclipse移植工作空间配置/" data-id="ckib94ozw001v3otpyehdadvu" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/16/Web/MyEclipse移植工作空间配置/" data-id="ckib9iqew001u9wtp8bqwwiue" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -796,7 +757,58 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/15/Web/JSONObject：将Bean对象转化为JSON数据/" data-id="ckib94ozd001b3otp1n3fs5br" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/15/Web/JSONObject：将Bean对象转化为JSON数据/" data-id="ckib9iqeh001a9wtp3s63cl21" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/XStream：将Bean对象转为XML数据" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/15/Web/XStream：将Bean对象转为XML数据/" class="article-date">
+  <time datetime="2018-09-15T07:48:10.000Z" itemprop="datePublished">2018-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/15/Web/XStream：将Bean对象转为XML数据/">XStream：将Bean对象转为XML数据</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82714611" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82714611</a><br>   需要导入的包：xstream-1.4.7.jar，xpp3_min-1.1.4c（XML Pull Parser，一款速度很快的XML解析器）；</p>
+<p> 使用步骤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> * XStream xstream = new XStream();</span><br><span class="line">* String xmlStr = xstream.toXML(javabean);</span><br></pre></td></tr></table></figure>
+
+<p> XStream对象拥有的方法（用来修改生成的xml格式String数据）：</p>
+<blockquote>
+<p>alias(String,Class):修改元素名,String为最终元素名，CLass为类.class</p>
+<p> useAttributeFor(Class,String)：把元素设置成属性,Class为设置成哪个标签的属性，String为被设置元素名</p>
+<p> addImplicitCollection(Class,String):删除某个元素（Collection类型）,Class为上司（表示哪个元素里的Collection），</p>
+<p> String为元素名（即不显示的元素名）</p>
+<p> omitField(Class,String):删除某个元素（普通类型（String等类型））,Class为上司（表示哪个元素里的普通元素），</p>
+<p> String为元素名（即不显示的元素名）</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/09/15/Web/XStream：将Bean对象转为XML数据/" data-id="ckib9iqf600269wtpsgzw2lww" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -845,7 +857,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
     </div>
   </div>
 
@@ -856,10 +868,6 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2020/12/05/article-name/">article_name</a>
-          </li>
         
           <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
@@ -875,6 +883,10 @@
         
           <li>
             <a href="/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
           </li>
         
       </ul>

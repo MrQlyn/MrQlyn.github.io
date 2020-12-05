@@ -66,60 +66,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-Web高阶/SpringMVC的拦截器" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/07/14/Web高阶/SpringMVC的拦截器/" class="article-date">
-  <time datetime="2019-07-14T03:04:32.000Z" itemprop="datePublished">2019-07-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/14/Web高阶/SpringMVC的拦截器/">SpringMVC的拦截器</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>拦截器：拦截网页请求,只能拦截发送至Handler类方法的请求。访问网页（html，jsp）不拦截,若想外部无法访问直接放入</p>
-<p> WEB-INF文件夹内  </p>
-<ul>
-<li>1、创建自定义拦截器类实现HandlerInterceptor接口  </li>
-<li>2、在springmvc配置文件的<a href="mvc:interceptors" target="_blank" rel="noopener">mvc:interceptors</a>里配置<bean>拦截所有或者<a href="mvc:interceptor" target="_blank" rel="noopener">mvc:interceptor</a>拦截具体哪些方法的请求</bean></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">	&lt;!-- 配置拦截器: 所有拦截器都包含在mvc:interceptors标签里--&gt;</span><br><span class="line">&lt;mvc:interceptors&gt;</span><br><span class="line">	&lt;!-- 配置拦截器：会拦截所有请求 --&gt;</span><br><span class="line">	&lt;bean class=&quot;crud.Filters.FirstFilter&quot;&gt;&lt;/bean&gt;</span><br><span class="line">	&lt;!-- 配置具体资源拦截器 --&gt;</span><br><span class="line">	&lt;mvc:interceptor&gt;</span><br><span class="line">		&lt;!-- 拦截的请求 ,path设置为：/@RequestMapping里的value值 --&gt;</span><br><span class="line">		&lt;mvc:mapping path=&quot;/emps&quot;/&gt;</span><br><span class="line">		&lt;!-- &lt;mvc:mapping path=&quot;/testFilter&quot;/&gt; --&gt;</span><br><span class="line">		&lt;!-- 不拦截的请求 ,path设置为：/@RequestMapping里的value值--&gt;</span><br><span class="line">		&lt;mvc:exclude-mapping path=&quot;/testFilter&quot;/&gt;</span><br><span class="line">		&lt;bean class=&quot;crud.Filters.SecondFilter&quot;&gt;&lt;/bean&gt;</span><br><span class="line">	&lt;/mvc:interceptor&gt;</span><br><span class="line">&lt;/mvc:interceptors&gt;</span><br><span class="line"></span><br><span class="line">&lt;mvc:view-controller path=&quot;views/success&quot; view-name=&quot;success&quot;/&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"> package crud.Filters;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line">import org.springframework.web.servlet.HandlerInterceptor;</span><br><span class="line">import org.springframework.web.servlet.ModelAndView;</span><br><span class="line"></span><br><span class="line">public class FirstFilter  implements HandlerInterceptor&#123;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 该方法在目标方法之前被调用.</span><br><span class="line">	 * 若返回值为 true, 则继续调用后续的拦截器和目标方法. </span><br><span class="line">	 * 若返回值为 false, 则不会再调用后续的拦截器和目标方法. </span><br><span class="line">	 * </span><br><span class="line">	 * 可以考虑做权限. 日志, 事务等. </span><br><span class="line">	 */</span><br><span class="line">	@Override</span><br><span class="line">	public boolean preHandle(HttpServletRequest request,</span><br><span class="line">			HttpServletResponse response, Object handler) throws Exception &#123;</span><br><span class="line">		System.out.println(&quot;第一个拦截器： preHandle&quot;);</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 调用目标方法之后, 但渲染视图之前. </span><br><span class="line">	 * 可以对请求域中的属性或视图做出修改. </span><br><span class="line">	 */</span><br><span class="line">	@Override</span><br><span class="line">	public void postHandle(HttpServletRequest request,</span><br><span class="line">			HttpServletResponse response, Object handler,</span><br><span class="line">			ModelAndView modelAndView) throws Exception &#123;</span><br><span class="line">		System.out.println(&quot;第一个拦截器：postHandle&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	/**</span><br><span class="line">	 * 渲染视图之后被调用. 释放资源</span><br><span class="line">	 */</span><br><span class="line">	@Override</span><br><span class="line">	public void afterCompletion(HttpServletRequest request,</span><br><span class="line">			HttpServletResponse response, Object handler, Exception ex)</span><br><span class="line">			throws Exception &#123;</span><br><span class="line">		System.out.println(&quot;第一个拦截器：afterCompletion&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SpringMVC的拦截器/" data-id="ckib94p0t002w3otp7i19adz5" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-Web高阶/SpringMVC的JSP文件及其提供的form标签" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/14/Web高阶/SpringMVC的JSP文件及其提供的form标签/" class="article-date">
@@ -157,7 +103,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SpringMVC的JSP文件及其提供的form标签/" data-id="ckib94p0q002s3otpmva3ihdn" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SpringMVC的JSP文件及其提供的form标签/" data-id="ckib9iqfi002m9wtpzz9hk8d4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -218,7 +164,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SpringMVC的初步使用/" data-id="ckib94p0z00323otpxwjf502b" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SpringMVC的初步使用/" data-id="ckib9iqfk002o9wtpwdvna1lz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -347,7 +293,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的AOP切面编程/" data-id="ckib94p5m007j3otpivjki8oy" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的AOP切面编程/" data-id="ckib9iqjo00749wtpu9vdd9qy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -407,7 +353,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的初步使用/" data-id="ckib94p1500383otph8b3laxn" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的初步使用/" data-id="ckib9iqft00309wtp7bp4y8rv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -463,7 +409,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的事务处理/" data-id="ckib94p1300363otp59utjz7x" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的事务处理/" data-id="ckib9iqfv00329wtppgd7nd1c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -646,7 +592,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的BeanXML文件配置/" data-id="ckib94p6d008b3otptfw82f93" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的BeanXML文件配置/" data-id="ckib9iqkf007w9wtpxsykg8sg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -693,7 +639,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring不常用知识/" data-id="ckib94p0x00303otpl8e12ged" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring不常用知识/" data-id="ckib9iqfq002w9wtp2n0wqrt8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -745,7 +691,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SSM异常/" data-id="ckib94p0j002n3otphbk9go8u" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SSM异常/" data-id="ckib9iqff002i9wtpq8v2yx19" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -815,7 +761,124 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Mybatis缓存篇/" data-id="ckib94p0g002k3otpzd8qtfrh" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Mybatis缓存篇/" data-id="ckib9iqfd002g9wtpijz528gf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web高阶/Mybatis动态拼接SQL语句篇" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/14/Web高阶/Mybatis动态拼接SQL语句篇/" class="article-date">
+  <time datetime="2019-07-14T03:00:59.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/14/Web高阶/Mybatis动态拼接SQL语句篇/">Mybatis动态拼接SQL语句篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   <strong>MyBatis常用OGNL表达式</strong></p>
+<blockquote>
+<blockquote>
+<ul>
+<li><code>e1 or e2</code>  </li>
+<li><code>e1 and e2</code>  </li>
+<li><code>e1 == e2</code> , <code>e1 eq e2</code>  </li>
+<li><code>e1 != e2</code> , <code>e1 neq e2</code>  </li>
+<li><code>e1 lt e2</code> ：小于 </li>
+<li><code>e1 lte e2</code> ：小于等于，其他gt（大于）,gte（大于等于） </li>
+<li><code>e1 in e2</code>  </li>
+<li><code>e1 not in e2</code>  </li>
+<li><code>e1 + e2</code> , <code>e1 * e2</code> , <code>e1/e2</code> , <code>e1 - e2</code> , <code>e1%e2</code>  </li>
+<li><code>!e</code> , <code>not e</code> ：非，求反 </li>
+<li><code>e.method(args)</code> 调用对象方法 </li>
+<li><code>e.property</code> 对象属性值 </li>
+<li><code>e1[ e2 ]</code> 按索引取值， <code>List</code> ,数组和 <code>Map</code>  </li>
+<li><code>@class@method(args)</code> 调用类的静态方法 </li>
+<li><code>@class@field</code> 调用类的静态字段值<br>一、 动态拼接SQL语句：根据传入的参数值进行判断拼接出正确的SQL语句。</li>
+</ul>
+</blockquote>
+</blockquote>
+<p> 使用OGNL表达式，类似EL表达式。使用如下标签，类似JSTL标签</p>
+<p> 以下介绍的标签基本都在操作标签内（<select>、<insert>、<delete>、<update>）</update></delete></insert></select></p>
+<p> 1、<where>：相当于给sql语句后面自动添加一个 where 1=1，避免sql语句where后面紧跟着一个and即第一个条件为假  </where></p>
+<p> 2、<if>：if语句<br> test:对属性的条件，填写OGNL表达式，</if></p>
+<p> 3、<trim>: 对拼接后的sql语句再进行最后的修改<br> prefix：给拼串后的整个字符串加一个前缀<br> prefixOverrides:前缀覆盖： 去掉整个字符串前面多余的字符<br> suffix：suffix给拼串后的整个字符串加一个后缀<br> suffixOverrides：去掉整个字符串后面多余的字符</trim></p>
+<p> 4、<choose>:相当于带break的choose语句，只能执行第一个匹配条件的语句<br> <when>：相当于switch语句<br> test:属性值的判断，ONGL表达式<br> <otherwise>:相当于default语句</otherwise></when></choose></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">  &lt;select id=&quot;getEmpByCondition&quot; resultType=&quot;mybatis.bean.Employee&quot;&gt;</span><br><span class="line">     select* from tb1_employee</span><br><span class="line">     </span><br><span class="line">     &lt;where&gt;</span><br><span class="line">          &lt;if test=&quot;id!=null&quot;&gt;</span><br><span class="line">              and id=#&#123;id&#125;</span><br><span class="line">          &lt;/if&gt;</span><br><span class="line">          &lt;if test=&quot;lastName!=null&quot;&gt;</span><br><span class="line">              and last_name=#&#123;lastName&#125;</span><br><span class="line">          &lt;/if&gt;</span><br><span class="line">          &lt;if test=&quot;email!=null&quot;&gt;</span><br><span class="line">              and email=#&#123;email&#125;</span><br><span class="line">          &lt;/if&gt;</span><br><span class="line">          &lt;if test=&quot;gender!=null&quot;&gt;</span><br><span class="line">              and gender=#&#123;gender&#125;</span><br><span class="line">          &lt;/if&gt; </span><br><span class="line">     &lt;/where&gt;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">   	&lt;trim prefix=&quot;where&quot; prefixOverrides=&quot;and&quot;&gt;</span><br><span class="line">   	    &lt;if test=&quot;id!=null&quot;&gt;</span><br><span class="line">              and id=#&#123;id&#125;</span><br><span class="line">          &lt;/if&gt;</span><br><span class="line">          &lt;if test=&quot;lastName!=null&quot;&gt;</span><br><span class="line">              and last_name=#&#123;lastName&#125;</span><br><span class="line">          &lt;/if&gt;</span><br><span class="line">          &lt;if test=&quot;email!=null&quot;&gt;</span><br><span class="line">              and email=#&#123;email&#125;</span><br><span class="line">          &lt;/if&gt;</span><br><span class="line">          &lt;if test=&quot;gender!=null&quot;&gt;</span><br><span class="line">              and gender=#&#123;gender&#125;</span><br><span class="line">          &lt;/if&gt; </span><br><span class="line">   	&lt;/trim&gt;</span><br><span class="line">   </span><br><span class="line">&lt;where&gt;</span><br><span class="line">    &lt;choose&gt;</span><br><span class="line">        &lt;when test=&quot;id!=null&quot;&gt;and id=#&#123;id&#125;&lt;/when&gt;</span><br><span class="line">        &lt;when test=&quot;lastName!=null&quot;&gt;and last_name=#&#123;lastName&#125;&lt;/when&gt;</span><br><span class="line">        &lt;when test=&quot;email!=null&quot;&gt; and email=#&#123;email&#125;&lt;/when&gt;</span><br><span class="line">        &lt;otherwise&gt;</span><br><span class="line">             and gender=#&#123;gender&#125;</span><br><span class="line">        &lt;/otherwise&gt;</span><br><span class="line">    &lt;/choose&gt;</span><br><span class="line">   &lt;/where&gt;</span><br><span class="line"> &lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 5、<set>：相当于给sql语句后面自动添加一个 set，同时去掉set条件后的逗号（ , ）,在更新数据表数据时使用。</set></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"> &lt;update id=&quot;updateByCondition&quot;&gt;</span><br><span class="line">    update tb1_employee </span><br><span class="line">    &lt;set&gt;</span><br><span class="line">        &lt;if test=&quot;id!=null&quot;&gt;</span><br><span class="line">         id=#&#123;id&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test=&quot;lastName!=null&quot;&gt;</span><br><span class="line">            last_name=#&#123;lastName&#125;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test=&quot;email!=null&quot;&gt;</span><br><span class="line">            email=&quot;2983482850@qq.com&quot;</span><br><span class="line">        &lt;/if&gt;</span><br><span class="line">        &lt;if test=&quot;gender!=null&quot;&gt;</span><br><span class="line">            gender=#&#123;gender&#125;</span><br><span class="line">        &lt;/if&gt; </span><br><span class="line">    &lt;/set&gt;</span><br><span class="line">    where email=#&#123;email&#125;;</span><br><span class="line">&lt;/update&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 6、<foreach>：遍历传入的List列表参数或Map集合参数的标签</foreach></p>
+<p> collection：指定要遍历的集合<strong>参数名</strong></p>
+<p> item：正在遍历的元素名（自己取名）</p>
+<p> separator：每个元素之间的分隔符</p>
+<p> open：在遍历出来的结果前添加前缀</p>
+<p> close：在遍历出来的结果后添加后缀</p>
+<p> index：索引。遍历list的时候是index就是索引，item就是当前值</p>
+<p> #{元素名（即item）}：取出元素</p>
+<p> 使用<foreach>根据传入的List拼接sql查询语句</foreach></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> &lt;select id=&quot;getEmpsByList&quot; resultType=&quot;mybatis.bean.Employee&quot;&gt;</span><br><span class="line">     select* from tb1_employee where id in</span><br><span class="line">    &lt;foreach collection=&quot;list&quot; item=&quot;idItem&quot; separator=&quot;,&quot; open=&quot;(&quot; close=&quot;)&quot;&gt;</span><br><span class="line">        #&#123;idItem&#125;</span><br><span class="line">    &lt;/foreach&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 使用<foreach>进行批量插入的俩种方法：</foreach></p>
+<p> 第一种：MySQL支持values(…),values(…),…来插入多条数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">	&lt;insert id=&quot;insertBatchOne&quot;&gt;</span><br><span class="line">    insert into tb1_employee values</span><br><span class="line">    &lt;foreach collection=&quot;list&quot; item=&quot;employee&quot; separator=&quot;,&quot;&gt;</span><br><span class="line">        (</span><br><span class="line">        	#&#123;employee.id&#125;,</span><br><span class="line">        	#&#123;employee.lastName&#125;,</span><br><span class="line">        	#&#123;employee.gender&#125;,</span><br><span class="line">        	#&#123;employee.email&#125;,</span><br><span class="line">        	#&#123;employee.dept.id&#125;</span><br><span class="line">        )</span><br><span class="line">    &lt;/foreach&gt;</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 第二种：拼写多条insert语句，需要开启在全局配置文件中修改</p>
+<blockquote>
+<p>database=jdbc:mysql://localhost:3306/mybatis?allowMultiQueries=true</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">	&lt;insert id=&quot;insertBatchTwo&quot;&gt;</span><br><span class="line">    &lt;foreach collection=&quot;list&quot; item=&quot;employee&quot; separator=&quot;;&quot;&gt;</span><br><span class="line">        insert into tb1_employee values(#&#123;employee.id&#125;,#&#123;employee.lastName&#125;,</span><br><span class="line">           #&#123;employee.gender&#125;, #&#123;employee.email&#125;,#&#123;employee.dept.id&#125;)</span><br><span class="line">    &lt;/foreach&gt;</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 7、<bind>：存储常用ONGL表达式</bind></p>
+<p> name：引用时别名</p>
+<p> value ：ONGL表达式</p>
+<p> #{name}：使用ONGL表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">	&lt;select id=&quot;getByLastName&quot; resultType=&quot;mybatis.bean.Employee&quot;&gt;</span><br><span class="line">    &lt;bind name=&quot;similarLastName&quot; value=&quot;&apos;%&apos;+lastName+&apos;%&apos;&quot;/&gt;</span><br><span class="line">    select* from tb1_employee where last_name like #&#123;similarLastName&#125;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 8、<sql>：存储sql语句的数据库常用列名</sql></p>
+<p> id：引用时别名</p>
+<p> <include>：根据refid取出<sql>标签存储的列名</sql></include></p>
+<p> refid：取出refid与id相同的列名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">	&lt;sql id=&quot;insertColumn&quot;&gt;</span><br><span class="line">    last_name,gender</span><br><span class="line">&lt;/sql&gt;</span><br><span class="line">&lt;insert id=&quot;insertEmployee&quot;&gt;</span><br><span class="line">    insert into tb1_employee(</span><br><span class="line">		&lt;include refid=&quot;insertColumn&quot;&gt;</span><br><span class="line">		&lt;/include&gt;</span><br><span class="line">    ) values</span><br><span class="line">       (</span><br><span class="line">       	#&#123;lastName&#125;,</span><br><span class="line">       	#&#123;gender&#125;</span><br><span class="line">       )</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 二、内置参数</p>
+<blockquote>
+<p>_parameter:代表整个参数<br> 单个参数：_parameter就是这个参数<br> 多个参数：参数会被封装为一个map；_parameter就是代表这个map  </p>
+<p> _databaseId:如果配置了databaseIdProvider标签。<br> _databaseId就是代表当前数据库的别名</p>
+<p> 使用_parameter得要进行非空判断，即以下格式：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">         &lt;if test=&quot;_parameter!=null&quot;&gt;</span><br><span class="line">            where id = #&#123;_parameter.id&#125;</span><br><span class="line">        &lt;/if&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Mybatis动态拼接SQL语句篇/" data-id="ckib9iqf9002b9wtp4bt2dckj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -864,7 +927,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
     </div>
   </div>
 
@@ -875,10 +938,6 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2020/12/05/article-name/">article_name</a>
-          </li>
         
           <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
@@ -894,6 +953,10 @@
         
           <li>
             <a href="/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
           </li>
         
       </ul>

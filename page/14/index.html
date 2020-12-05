@@ -66,45 +66,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-c++/c++引用" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/10/08/c++/c++引用/" class="article-date">
-  <time datetime="2017-10-08T07:35:16.000Z" itemprop="datePublished">2017-10-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/08/c++/c++引用/">c++引用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/78175248" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/78175248</a><br>   <strong>引用的概念:引用就是给内存空间取别名</strong><br> <strong>一、引用有很多用法</strong><br> <strong>1.引用可以给变量取别名</strong><br> [代码]:<br> int a=10;<br> int b=20;<br> int &amp;p=a; //此时p和a代表同一块内存空间<br> cout&lt;&lt;p&lt;&lt;’\t’;<br> p=b; //此时p和b代表同一块内存空间<br> cout&lt;&lt;p&lt;&lt;endl;<br> system(“pause”);<br> [输出结果]：10 20<br> <strong>2.引用可以给做函数形参和实参之间的传递，也就是**</strong>引用传递**<br> [代码]:<br> void Swap(int &amp;a,int &amp;b) //此时相当于给实参变量取别名，直接操控实参变量所代表的内存空间<br> {<br> int temp;<br> temp=a;<br> a=b;<br> b=temp;<br> }<br> void main()<br> {<br> int a=10;<br> int b=20;<br> cout&lt;&lt;a&lt;&lt;”\t”&lt;&lt;b&lt;&lt;endl;<br> Swap(a,b);<br> cout&lt;&lt;a&lt;&lt;”\t”&lt;&lt;b&lt;&lt;endl;<br> system(“pause”);<br> }<br> [输出结果]：10 20<br> 20 10<br> 小结：以往函数常用值传递，在函数执行中需要再开辟形参变量空间，通过实参传给形参进行复制，效率不高，而引用传递直接调用原有变量空间进行操作，效率较高。具体事例要具体分析，如图中交换函数(Swap)如使用值传递，最后交换的不过是形参值，实参值没有改变。所以我们往往采用引用传递或指针传递<br> <strong>3.函数返回值的引用</strong><br> [代码]:<br> int &amp; Quote()<br> {<br> int s=10;<br> s++;<br> return s;<br> }<br> void main()<br> {<br> int a=Quote();<br> int <em>b=&amp;Quote(); //此时临时变量被回收，返回变量内存空间地址，b指向该内存空间<br> int &amp;c=Quote(); //同理：此时c是该内存空间的别名<br> cout&lt;&lt;a&lt;&lt;”\t”&lt;&lt;</em>b&lt;&lt;”\t”&lt;&lt;c&lt;&lt;endl;<br> system(“pause”);<br> }<br> [输出结果]:11 11 11<br> 注意:函数返回值不能是局部变量(如例子里的s)的引用，因为局部变量会被释放，返回引用此时已经找不到原局部变量地址，所以出错。  </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2017/10/08/c++/c++引用/" data-id="ckib94p17003a3otpcg2apx96" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-c++/c++里的const" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/10/06/c++/c++里的const/" class="article-date">
@@ -139,7 +100,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2017/10/06/c++/c++里的const/" data-id="ckib94p19003c3otpq8j5zi48" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2017/10/06/c++/c++里的const/" data-id="ckib9iqfy00369wtpkwavbcty" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
@@ -188,7 +149,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
     </div>
   </div>
 
@@ -199,10 +160,6 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2020/12/05/article-name/">article_name</a>
-          </li>
         
           <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
@@ -218,6 +175,10 @@
         
           <li>
             <a href="/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
           </li>
         
       </ul>

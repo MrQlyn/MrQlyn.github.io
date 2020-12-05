@@ -66,85 +66,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-数据库/JDBC学习笔记（SQL语句的执行）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/" class="article-date">
-  <time datetime="2018-04-28T07:40:06.000Z" itemprop="datePublished">2018-04-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/">JDBC学习笔记（SQL语句的执行）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/80135309" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/80135309</a><br>   在获得数据库连接后，紧接着就是执行SQL语句。这里用到俩个类：Statement和PreparedStatement</p>
-<h3 id="一、Statment"><a href="#一、Statment" class="headerlink" title="一、Statment"></a>一、Statment</h3><p> <strong>Statement提供了以下方法用来执行SQL语句：</strong></p>
-<blockquote>
-<p>** * executeQuery(String sql):执行一条SQL查询语句，返回查询结果对象（ResultSet）  </p>
-<ul>
-<li>executeUpdate(String sql):执行一条SQL更新，插入，删除操作语句。**</li>
-</ul>
-<p> ** * execute(String sql):执行一条SQL语句**</p>
-<p> ** <em>close():关闭Statement。和Connection一样，Statement使用后也需要关闭。*</em></p>
-</blockquote>
-<p> *注意：Statement通过connection的createStatement方法获得。</p>
-<p> 以下为执行SQL语句示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">     Statement statement=connection.createStatement();</span><br><span class="line">String sql=&quot;insert into table_01 values(&apos;呵呵&apos;,1,&apos;男&apos;),(&apos;哈哈&apos;,2,&apos;女&apos;),(&apos;嘿嘿&apos;,3,&apos;男&apos;)&quot;;</span><br><span class="line">statement.executeUpdate(sql);</span><br><span class="line">sql=&quot;delete from table_01 where id=3&quot;;</span><br><span class="line">statement.executeUpdate(sql);</span><br><span class="line">sql=&quot;update table_01 set id=3,name=&apos;hh&apos; where id=2&quot;;</span><br><span class="line">statement.executeUpdate(sql);</span><br><span class="line"></span><br><span class="line">//使用后一定要关闭</span><br><span class="line">connection.close();</span><br><span class="line">statement.close();</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="二、PreparedStatement"><a href="#二、PreparedStatement" class="headerlink" title="二、PreparedStatement"></a>二、PreparedStatement</h3><p> ProparedStatement:是Statement的子接口，同样用来执行SQL语句，比Statement书写方便<br> ProparedStatement的优点：  </p>
-<ul>
-<li><p>1、书写方便，先写好SQL语句再设置参数。如：INSERT INTO table VALUES(?,?,?…)，不用拼写SQL语句</p>
-</li>
-<li><p>2、防止SQL注入（这点很重要）</p>
-</li>
-<li><p>注意：在开始就赋入sql语句（此时的sql语句可以设置未知参数，通过？设置），后通过SetObject(int index,Object obj)设置sql语句里的参数，索引从1开始</p>
-</li>
-</ul>
-<p> <strong>PreparedStatement提供了三个方法：</strong></p>
-<blockquote>
-<p>** setXxx():设置SQL语句里的参数,Xxx为参数的类型**</p>
-<p> ** executeUpdate():参数设置完毕后，执行插入、删除、更新的sql语句。**</p>
-<p> ** executeQuery():参数设置完毕后，执行查询的sql语句，返回结果对象（ResultSet）**</p>
-</blockquote>
-<p> 以下为使用示例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> String sql=&quot;insert into table_01 values(?,?,?)&quot;;</span><br><span class="line">PreparedStatement preparedstatement=connection.prepareStatement(sql); //需要提前设置好SQL语句</span><br><span class="line">//设置SQL里的参数(索引从1开始)</span><br><span class="line">preparedstatement.setString(1,&quot;张天笑&quot;);</span><br><span class="line">preparedstatement.setInt(2,2);</span><br><span class="line">preparedstatement.setString(3,&quot;女&quot;);</span><br><span class="line">//直接executeUpdate()方法，不用传入SQL语句</span><br><span class="line"></span><br><span class="line">preparedstatement.executeUpdate();</span><br></pre></td></tr></table></figure>
-
-
-
-<p> 不要求掌握知识：即在插入时获得主键</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> //获得主键</span><br><span class="line">String sql=&quot;INSERT INTO table_01(name,sex) VALUES(?,?)&quot;;</span><br><span class="line">Connection connection=JDBCTools.getConnection();</span><br><span class="line">//设置好PreparedStatement是返回主键类型</span><br><span class="line"></span><br><span class="line">PreparedStatement preparedstatement=</span><br><span class="line"></span><br><span class="line">                connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);</span><br><span class="line"></span><br><span class="line">preparedstatement.setObject(1,&quot;王富贵&quot;);</span><br><span class="line">preparedstatement.setObject(2, &quot;男&quot;);</span><br><span class="line">preparedstatement.executeUpdate();</span><br><span class="line"></span><br><span class="line">ResultSet resultset=preparedstatement.getGeneratedKeys();</span><br><span class="line">ResultSetMetaData resultsetmetadata=resultset.getMetaData();</span><br><span class="line">System.out.println(resultsetmetadata.getColumnName(1));</span><br><span class="line">while(resultset.next()) &#123;</span><br><span class="line">System.out.println(resultset.getObject(1));</span><br><span class="line">&#125;</span><br><span class="line">JDBCTools.release(connection, preparedstatement,resultset);</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/" data-id="ckib94p2r004j3otpgbsir223" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-数据库/JDBC学习笔记（获取数据库连接的俩种方式）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/" class="article-date">
@@ -226,7 +147,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/" data-id="ckib94p2y004p3otpggfjdwm9" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/" data-id="ckib9iqha004p9wtpj3c7ojks" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -291,7 +212,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/18/前端/JQuery笔记/" data-id="ckib94p5w007x3otpsmaybr91" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/18/前端/JQuery笔记/" data-id="ckib9iqk0007k9wtp67u5a51x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -477,7 +398,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/HTML笔记/" data-id="ckib94p5y007z3otpbgh4kf98" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/HTML笔记/" data-id="ckib9iqk3007o9wtp6p905nmx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -537,7 +458,7 @@ background-color:red;color:green
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/CSS笔记/" data-id="ckib94p2700463otpuv1qvfm0" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/CSS笔记/" data-id="ckib9iqgq00479wtpr2hiiwax" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -604,7 +525,7 @@ background-color:red;color:green
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/JavaScript笔记/" data-id="ckib94p6100833otpyjsonh4j" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/JavaScript笔记/" data-id="ckib9iqk5007s9wtpexjcu2zv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -658,7 +579,7 @@ background-color:red;color:green
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/03/30/数据库/修改mysql默认密码方法/" data-id="ckib94p37004x3otp11uknm11" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/03/30/数据库/修改mysql默认密码方法/" data-id="ckib9iqho004z9wtpixre617x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -702,66 +623,10 @@ background-color:red;color:green
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/02/03/基础操作/win10禁用笔记本原本键盘/" data-id="ckib94p2d004b3otptkioxuw8" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/02/03/基础操作/win10禁用笔记本原本键盘/" data-id="ckib9iqgs004a9wtp66an95uh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础操作/">基础操作</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-c++/八皇后问题" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/29/c++/八皇后问题/" class="article-date">
-  <time datetime="2018-01-28T19:36:45.000Z" itemprop="datePublished">2018-01-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/29/c++/八皇后问题/">八皇后问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79191125" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79191125</a><br>   <strong>首先，我们需要了解八皇后是什么？**</strong><a href="https://baike.baidu.com/item/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/11053477?fr=aladdin&amp;fromid=10742426&amp;fromtitle=%E5%85%AB%E7%9A%87%E5%90%8E" target="_blank" rel="noopener">八皇后问题</a>（可点击访问）<strong>**是指在一个 8×8 的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后。</strong></p>
-<p> <strong>听起来总是很简单，但实际上<img src="https://img-blog.csdn.net/20180129031257963?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt></strong></p>
-<p> **<br>**</p>
-<p> <strong>好了，开始进入正题：</strong></p>
-<p> <strong>首先构造一个皇后节点类（每一个节点拥有八个方向的节点指针，可以说就是个罗盘）</strong></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129031728567?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> <strong>接下来是八皇后的数组类（stl作为八皇后节点的容器栈）</strong></p>
-<p> *<em><img src alt><img src="https://img-blog.csdn.net/20180129031948046?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> <strong>最后，就是各个函数的实现了。</strong></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129032319550?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129032446154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129032633219?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129032823017?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129033034603?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129033206167?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><img src="https://img-blog.csdn.net/20180129033311408?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> <strong>到这就基本结束了，具体实现函数有231行，基本都有注释，欢迎提出改进意见。</strong></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129033558768?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> **<br>**</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/01/29/c++/八皇后问题/" data-id="ckib94p1a003f3otpaasgufa6" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
 
     </footer>
   </div>
@@ -814,10 +679,105 @@ background-color:red;color:green
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/01/29/数据结构与算法/八皇后问题/" data-id="ckib94p3b00533otpg0cy9r1a" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/01/29/数据结构与算法/八皇后问题/" data-id="ckib9iqhu00549wtp4h63mz9m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-c++/八皇后问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/29/c++/八皇后问题/" class="article-date">
+  <time datetime="2018-01-28T19:36:45.000Z" itemprop="datePublished">2018-01-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/29/c++/八皇后问题/">八皇后问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79191125" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79191125</a><br>   <strong>首先，我们需要了解八皇后是什么？**</strong><a href="https://baike.baidu.com/item/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/11053477?fr=aladdin&amp;fromid=10742426&amp;fromtitle=%E5%85%AB%E7%9A%87%E5%90%8E" target="_blank" rel="noopener">八皇后问题</a>（可点击访问）<strong>**是指在一个 8×8 的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后。</strong></p>
+<p> <strong>听起来总是很简单，但实际上<img src="https://img-blog.csdn.net/20180129031257963?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt></strong></p>
+<p> **<br>**</p>
+<p> <strong>好了，开始进入正题：</strong></p>
+<p> <strong>首先构造一个皇后节点类（每一个节点拥有八个方向的节点指针，可以说就是个罗盘）</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129031728567?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>接下来是八皇后的数组类（stl作为八皇后节点的容器栈）</strong></p>
+<p> *<em><img src alt><img src="https://img-blog.csdn.net/20180129031948046?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>最后，就是各个函数的实现了。</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032319550?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032446154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032633219?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032823017?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033034603?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033206167?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><img src="https://img-blog.csdn.net/20180129033311408?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>到这就基本结束了，具体实现函数有231行，基本都有注释，欢迎提出改进意见。</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033558768?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> **<br>**</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/01/29/c++/八皇后问题/" data-id="ckib9iqg000399wtpoqleu4zj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-c++/c++引用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/08/c++/c++引用/" class="article-date">
+  <time datetime="2017-10-08T07:35:16.000Z" itemprop="datePublished">2017-10-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/08/c++/c++引用/">c++引用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/78175248" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/78175248</a><br>   <strong>引用的概念:引用就是给内存空间取别名</strong><br> <strong>一、引用有很多用法</strong><br> <strong>1.引用可以给变量取别名</strong><br> [代码]:<br> int a=10;<br> int b=20;<br> int &amp;p=a; //此时p和a代表同一块内存空间<br> cout&lt;&lt;p&lt;&lt;’\t’;<br> p=b; //此时p和b代表同一块内存空间<br> cout&lt;&lt;p&lt;&lt;endl;<br> system(“pause”);<br> [输出结果]：10 20<br> <strong>2.引用可以给做函数形参和实参之间的传递，也就是**</strong>引用传递**<br> [代码]:<br> void Swap(int &amp;a,int &amp;b) //此时相当于给实参变量取别名，直接操控实参变量所代表的内存空间<br> {<br> int temp;<br> temp=a;<br> a=b;<br> b=temp;<br> }<br> void main()<br> {<br> int a=10;<br> int b=20;<br> cout&lt;&lt;a&lt;&lt;”\t”&lt;&lt;b&lt;&lt;endl;<br> Swap(a,b);<br> cout&lt;&lt;a&lt;&lt;”\t”&lt;&lt;b&lt;&lt;endl;<br> system(“pause”);<br> }<br> [输出结果]：10 20<br> 20 10<br> 小结：以往函数常用值传递，在函数执行中需要再开辟形参变量空间，通过实参传给形参进行复制，效率不高，而引用传递直接调用原有变量空间进行操作，效率较高。具体事例要具体分析，如图中交换函数(Swap)如使用值传递，最后交换的不过是形参值，实参值没有改变。所以我们往往采用引用传递或指针传递<br> <strong>3.函数返回值的引用</strong><br> [代码]:<br> int &amp; Quote()<br> {<br> int s=10;<br> s++;<br> return s;<br> }<br> void main()<br> {<br> int a=Quote();<br> int <em>b=&amp;Quote(); //此时临时变量被回收，返回变量内存空间地址，b指向该内存空间<br> int &amp;c=Quote(); //同理：此时c是该内存空间的别名<br> cout&lt;&lt;a&lt;&lt;”\t”&lt;&lt;</em>b&lt;&lt;”\t”&lt;&lt;c&lt;&lt;endl;<br> system(“pause”);<br> }<br> [输出结果]:11 11 11<br> 注意:函数返回值不能是局部变量(如例子里的s)的引用，因为局部变量会被释放，返回引用此时已经找不到原局部变量地址，所以出错。  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2017/10/08/c++/c++引用/" data-id="ckib9iqfw00349wtpq6nnjcl3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
 
     </footer>
   </div>
@@ -863,7 +823,7 @@ background-color:red;color:green
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
     </div>
   </div>
 
@@ -874,10 +834,6 @@ background-color:red;color:green
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2020/12/05/article-name/">article_name</a>
-          </li>
         
           <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
@@ -893,6 +849,10 @@ background-color:red;color:green
         
           <li>
             <a href="/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
           </li>
         
       </ul>
