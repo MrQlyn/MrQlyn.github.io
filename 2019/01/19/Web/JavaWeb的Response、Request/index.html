@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>JavaWeb的Response、Request | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81948544    HttpServletResponse：在客户端发出每个请求时，服务器都会创建一个HttpServletResponse对象，用来对客户端进行响应。 HttpServletResponse对象的功能（方法）： 一、发送状态码：20">
+<meta name="keywords" content="Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaWeb的Response、Request">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/19/Web/JavaWeb的Response、Request/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81948544    HttpServletResponse：在客户端发出每个请求时，服务器都会创建一个HttpServletResponse对象，用来对客户端进行响应。 HttpServletResponse对象的功能（方法）： 一、发送状态码：20">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:07:15.386Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaWeb的Response、Request">
+<meta name="twitter:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81948544    HttpServletResponse：在客户端发出每个请求时，服务器都会创建一个HttpServletResponse对象，用来对客户端进行响应。 HttpServletResponse对象的功能（方法）： 一、发送状态码：20">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Web/JavaWeb的Response、Request" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/01/19/Web/JavaWeb的Response、Request/" class="article-date">
+  <time datetime="2019-01-19T06:09:33.000Z" itemprop="datePublished">2019-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaWeb的Response、Request
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81948544" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81948544</a>   </p>
+<h3 id="HttpServletResponse：在客户端发出每个请求时，服务器都会创建一个HttpServletResponse对象，用来对客户端进行响应。"><a href="#HttpServletResponse：在客户端发出每个请求时，服务器都会创建一个HttpServletResponse对象，用来对客户端进行响应。" class="headerlink" title="HttpServletResponse：在客户端发出每个请求时，服务器都会创建一个HttpServletResponse对象，用来对客户端进行响应。"></a>HttpServletResponse：在客户端发出每个请求时，服务器都会创建一个HttpServletResponse对象，用来对客户端进行响应。</h3><p> HttpServletResponse对象的功能（方法）：</p>
+<h3 id="一、发送状态码：200表示成功、302表示重定向、404表示客户端错（访问的资源不存在）、500表示服务器端错"><a href="#一、发送状态码：200表示成功、302表示重定向、404表示客户端错（访问的资源不存在）、500表示服务器端错" class="headerlink" title="一、发送状态码：200表示成功、302表示重定向、404表示客户端错（访问的资源不存在）、500表示服务器端错"></a>一、发送状态码：200表示成功、302表示重定向、404表示客户端错（访问的资源不存在）、500表示服务器端错</h3><blockquote>
+<p>sendError(int sc) –&gt; 发送错误状态码，例如404、500<br>sendError(int sc, String msg) –&gt; 也是发送错误状态码，还可以带一个错误信息！<br>setStatus(int sc) –&gt; 发送成功的状态码，可以用来发送302</p>
+</blockquote>
+<h3 id="二、设置响应头（即响应类型）：即设置响应各种信息的键值对，有Content-Type、Refresh、Location等等"><a href="#二、设置响应头（即响应类型）：即设置响应各种信息的键值对，有Content-Type、Refresh、Location等等" class="headerlink" title="二、设置响应头（即响应类型）：即设置响应各种信息的键值对，有Content-Type、Refresh、Location等等"></a>二、设置响应头（即响应类型）：即设置响应各种信息的键值对，有Content-Type、Refresh、Location等等</h3><blockquote>
+<p>addHeader(String name, String value)：适用于多值的响应头<br> 例：response.addHeader(“aaa”, “A”);<br> response.addHeader(“aaa”, “AA”);<br> response.addHeader(“aaa”, “AAA”);<br>setIntHeader(String name, int value)：适用于单值的int类型的响应头<br> response.setIntHeader(“Content-Length”, 888);<br>addIntHeader(String name, int value)：适用于多值的int类型的响应头<br>setDateHeader(String name, long value)：适用于单值的毫秒类型的响应头<br> response.setDateHeader(“expires”, 1000 * 60 * 60 * 24);<br>addDateHeader(String name, long value)：适用于多值的毫秒类型的响应头</p>
+</blockquote>
+<p> Http常见的响应头</p>
+<blockquote>
+<p>Location：服务器通过这个头告诉浏览器去访问哪个页面，这个头通常配合302状态码使用</p>
+<p> server: 服务器通过这个头，告诉浏览器服务器类型</p>
+<p> Content-Encoding: 服务器通过这个头告诉浏览器，回送的数据采用的压缩格式</p>
+<p> Content-Length: 服务器通过这个头告诉浏览器，回送的数据的大小长度</p>
+<p> Content-Type: 服务器通过这个头告诉浏览器，回送数据的类型</p>
+<p> Last-Modified: 服务器通过这个头告诉浏览器，缓存资源的最后修改时间</p>
+<p> Refresh：服务器通过这个头告诉浏览器，定时刷新网页</p>
+<p> 例：设置Content-Type: text/html;设置charset:utf-8; 其中text/html为文件类型</p>
+</blockquote>
+<p> 常见的文件类型如下：</p>
+<blockquote>
+<blockquote>
+<ul>
+<li>text/html ： HTML格式 </li>
+<li>text/plain ：纯文本格式  </li>
+<li>text/xml ： XML格式 </li>
+<li>image/gif ：gif图片格式  </li>
+<li>image/jpeg ：jpg图片格式 </li>
+<li>image/png：png图片格式 </li>
+<li>以application开头的媒体格式类型：</li>
+</ul>
+</blockquote>
+<ul>
+<li>application/xhtml+xml ：XHTML格式 </li>
+<li>application/xml ： XML数据格式 </li>
+<li>application/atom+xml ：Atom XML聚合格式  </li>
+<li>application/json ： JSON数据格式 </li>
+<li>application/pdf ：pdf格式  </li>
+<li>application/msword ： Word文档格式 </li>
+<li>application/octet-stream ： 二进制流数据（如常见的文件下载） </li>
+<li>application/x-www-form-urlencoded ： <form enctype="””">中默认的encType，form表单数据被编码为key/value格式发送到服务器（表单默认的提交数据的格式） </form></li>
+<li>另外一种常见的媒体格式是上传文件之时使用的：</li>
+</ul>
+<ul>
+<li>multipart/form-data ： 需要在表单中进行文件上传时，就需要使用该格式 </li>
+</ul>
+</blockquote>
+<h3 id="三、设置响应正文："><a href="#三、设置响应正文：" class="headerlink" title="三、设置响应正文："></a>三、设置响应正文：</h3><ol>
+<li>PrintWriter out = response.getWriter()：获取字符流； </li>
+<li>ServletOutputStream out = response.getOutputStream()：获取字节流； <blockquote>
+<p>响应正文内容为字符：使用response.getWriter()</p>
+<p> 响应内容是字节（例如下载时）：使用response.getOutputStream()</p>
+<p>注意：在一个请求中，不能同时使用这两个流repsonse.getWriter()和response.getOutputStream()，会抛出异常。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="四、重定向：即发起俩次请求，使得访问A网页，同时快速再次请求访问B网页（如登录）"><a href="#四、重定向：即发起俩次请求，使得访问A网页，同时快速再次请求访问B网页（如登录）" class="headerlink" title="四、重定向：即发起俩次请求，使得访问A网页，同时快速再次请求访问B网页（如登录）"></a>四、重定向：即发起俩次请求，使得访问A网页，同时快速再次请求访问B网页（如登录）</h3><p> 普通方法：</p>
+<blockquote>
+<p>response.sendStatus(302);<br>repsonse.setHeader(“Location”, “<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>);</p>
+</blockquote>
+<p> 快捷方法：</p>
+<blockquote>
+<p>response.sendRedirect(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>);</p>
+</blockquote>
+<p> 例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    //重定向到百度网页：需要完整地址</span><br><span class="line">response.sendRedirect(&quot;http://www.baidu.com&quot;);</span><br><span class="line">   //也可重定向项目里的任何一个包下文件，路径：/项目名+url-pattern值</span><br><span class="line">response.sendRedirect(&quot;/UseServlet/firstServlet&quot;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h3 id="HttpServletRequest：在客户端发出每个请求时，服务器都会创建一个request对象，并把请求数据封装到request中。"><a href="#HttpServletRequest：在客户端发出每个请求时，服务器都会创建一个request对象，并把请求数据封装到request中。" class="headerlink" title="HttpServletRequest：在客户端发出每个请求时，服务器都会创建一个request对象，并把请求数据封装到request中。"></a>HttpServletRequest：在客户端发出每个请求时，服务器都会创建一个request对象，并把请求数据封装到request中。</h3><p> HttpServletRequest对象的功能（方法）：</p>
+<p> 一、获取请求头，请求信息</p>
+<ul>
+<li><p>获取常用信息  </p>
+<blockquote>
+<p>获取客户端IP，案例：封IP。request.getRemoteAddr()<br>请求方式，request.getMethod()，可能是POST也可能是GET</p>
+</blockquote>
+</li>
+<li><p>获取请求URL<br>URI地址：<a href="http://localhost:8080/day10_2/AServlet?username=xxx&amp;password=yyy" target="_blank" rel="noopener">http://localhost:8080/day10_2/AServlet?username=xxx&amp;password=yyy</a>  </p>
+<blockquote>
+<p>String getScheme()：获取协议，http<br>String getServerName()：获取服务器名，localhost<br>String getServerPort()：获取服务器端口，8080<br>*****String getContextPath()：获取项目名，/day10_2<br>String getServletPath()：获取Servlet路径，/AServlet<br>String getQueryString()：获取参数部分，即问号后面的部分。username=xxx&amp;password=yyy<br>String getRequestURI()：获取请求URI，等于项目名+Servlet路径。/day10_2/AServlet<br>String getRequestURL()：获取请求URL，等于不包含参数的整个请求路径。<a href="http://localhost:8080/day10_2/AServlet" target="_blank" rel="noopener">http://localhost:8080/day10_2/AServlet</a></p>
+</blockquote>
+</li>
+<li><p>获取HTTP请求头  </p>
+<blockquote>
+<p>*****String getHeader(String name)，适用于单值头<br>int getIntHeader(String name)，适用于单值int类型的请求头<br>long getDateHeader(String name)，适用于单值毫秒类型的请求头<br>Enumeration<string> getHeaders(String name)，适用于多值请求头 </string></p>
+</blockquote>
+<blockquote>
+<p>可以通过<strong>User-Agent</strong>请求头识别用户浏览器类型<br>防盗链：如果请求不是通过本站的超链接发出的，发送错误状态码404。可以通过<strong>Referer</strong>这个请求头，表示请求的来</p>
+</blockquote>
+<p>源（即上一访问当前网页的地址）！</p>
+<p>二、获取请求参数：请求参数是由客户端发送给服务器的！<strong>有可能是在请求体中（POST），也可能是在URL之后（GET）</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>请求参数：有一个参数一个值的，还有一个参数多个值！  </p>
+<blockquote>
+<p>String getParameter(String name)：获取指定名称的请求参数值，适用于单值请求参数<br>String[] getParameterValues(String name)：获取指定名称的请求参数值，适用于多值请求参数<br>Enumeration<string> getParameterNames()：获取所有请求参数名称<br>Map&lt;String,String[]&gt; getParameterMap()：获取所有请求参数，其中key为参数名，value为参数值。</string></p>
+</blockquote>
+<p> 三、请求转发</p>
+</blockquote>
+<p> //使用request获取RequestDispatcher对象，方法 的参数是被转发或包含的Servlet的Servlet路径</p>
+<blockquote>
+<p>RequestDispatcher rd = request.getRequestDispatcher(“/MyServlet”); </p>
+<p> 请求转发：rd.forward(request,response);</p>
+<p> 请求包含：rd.include(request,response);</p>
+<p> 有时一个请求需要多个Servlet协作才能完成，所以需要在一个Servlet跳到另一个Servlet！<br><strong>一个请求</strong>跨多个Servlet，需要使用转发和包含。<br>请求转发：由下一个Servlet完成响应体！当前Servlet可以设置响应头，设置响应体，转发的Servlet设置则不起作用。<br>请求转发还使用同一个request和response！</p>
+</blockquote>
+<p> △△△请求转发和重定向的区别  </p>
+<blockquote>
+<p>请求转发是一个请求<strong>一次响应</strong>，而重定向是两次请求<strong>两次响应</strong><br>请求转发地址栏<strong>不变化</strong>，而重定向会<strong>显示后一个请求的地址</strong><br>请求转发只能<strong>转发到本项目其他Servlet</strong>，而重定向不只能重定向到本项目的其他Servlet，还能<strong>定向到其他项目</strong><br>请求转发是服务器端行为，只需给出转发的Servlet路径，而重定向需要给出requestURI，即<strong>包含项目名</strong>！<br>请求转发比重定向效率高，因为是一个请求。<br> &lt;&gt; 需要地址栏发生变化，那么必须使用重定向！<br> &lt;&gt; 需要在下一个Servlet中获取request域中的数据，必须要使用转发。</p>
+</blockquote>
+<p> 四、Servlet三大域对象之一</p>
+<p> Servlet中三大域对象：request、session、application，都有如下三个方法：</p>
+<blockquote>
+<p>setAttribute(String name,Object Key)：使用键值对方式存入数据对象</p>
+<p> getAttribute(String name)：通过键名取出数据对象</p>
+<p> removeAttribute(String name)：通过键名删除已存入的数据对象</p>
+<p> request可以使用其在请求转发、请求包含里传递数据,即使用相同request域对象的Servlet都可以使用其传递数据。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/19/Web/JavaWeb的Response、Request/" data-id="ckib6fit1007eg4tpt4ebfzqc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2019/01/19/Git/Git的使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Git的使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2019/01/16/java基础/Java基本功：容器Map/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java基本功：容器Map</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

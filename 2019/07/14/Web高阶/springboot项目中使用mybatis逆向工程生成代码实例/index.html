@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>springboot项目中使用mybatis逆向工程生成代码实例 | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近项目差不多快上线了，终于有空搭建下Springboot Mybatis逆向工程了，但是百度了半天网上就两篇原创，其余的写着原创但是连错别字都一样。尝试了搭建下各种报错。最后还是自己研究了半天一点点试的，并没有网上说的这么繁琐，也不用继承模板什么的。当然这只是我个人的尝试，给大家提供一下第三种思路。  Mybatis逆向工程使用逆向生成工具：mybatis-generator，使用此插件可">
+<meta name="keywords" content="Web高阶">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springboot项目中使用mybatis逆向工程生成代码实例">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="最近项目差不多快上线了，终于有空搭建下Springboot Mybatis逆向工程了，但是百度了半天网上就两篇原创，其余的写着原创但是连错别字都一样。尝试了搭建下各种报错。最后还是自己研究了半天一点点试的，并没有网上说的这么繁琐，也不用继承模板什么的。当然这只是我个人的尝试，给大家提供一下第三种思路。  Mybatis逆向工程使用逆向生成工具：mybatis-generator，使用此插件可">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20180104135102129?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzQ3MTkyOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:image" content="https://img-blog.csdn.net/20180104135322815?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzQ3MTkyOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+<meta property="og:updated_time" content="2019-07-14T08:09:29.226Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springboot项目中使用mybatis逆向工程生成代码实例">
+<meta name="twitter:description" content="最近项目差不多快上线了，终于有空搭建下Springboot Mybatis逆向工程了，但是百度了半天网上就两篇原创，其余的写着原创但是连错别字都一样。尝试了搭建下各种报错。最后还是自己研究了半天一点点试的，并没有网上说的这么繁琐，也不用继承模板什么的。当然这只是我个人的尝试，给大家提供一下第三种思路。  Mybatis逆向工程使用逆向生成工具：mybatis-generator，使用此插件可">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20180104135102129?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzQ3MTkyOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Web高阶/springboot项目中使用mybatis逆向工程生成代码实例" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/" class="article-date">
+  <time datetime="2019-07-14T03:07:15.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      springboot项目中使用mybatis逆向工程生成代码实例
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   最近项目差不多快上线了，终于有空搭建下Springboot Mybatis逆向工程了，但是百度了半天网上就两篇原创，其余的写着原创但是连错别字都一样。尝试了搭建下各种报错。最后还是自己研究了半天一点点试的，并没有网上说的这么繁琐，也不用继承模板什么的。当然这只是我个人的尝试，给大家提供一下第三种思路。</p>
+<p> Mybatis逆向工程使用逆向生成工具：mybatis-generator，使用此插件可以从数据库生成指定表格对应的实体类、mapper接口以及对应的xml文件（包含一些常用的方法实现）</p>
+<p> 一、首先是通过Maven添加必须的的jar包以及插件，配置如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span><br><span class="line">    xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</span><br><span class="line">    &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;groupId&gt;com.example&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;demo&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">    &lt;packaging&gt;jar&lt;/packaging&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;name&gt;demo&lt;/name&gt;</span><br><span class="line">    &lt;description&gt;Demo project for Spring Boot&lt;/description&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;parent&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</span><br><span class="line">        &lt;version&gt;1.5.9.RELEASE&lt;/version&gt;</span><br><span class="line">        &lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;</span><br><span class="line">    &lt;/parent&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;properties&gt;</span><br><span class="line">        &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;</span><br><span class="line">        &lt;project.reporting.outputEncoding&gt;UTF-8&lt;/project.reporting.outputEncoding&gt;</span><br><span class="line">        &lt;java.version&gt;1.8&lt;/java.version&gt;</span><br><span class="line">    &lt;/properties&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">    </span><br><span class="line">        &lt;!-- web  --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;!-- 测试 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</span><br><span class="line">            &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line">        </span><br><span class="line">        &lt;!-- Orcale Jdbc驱动 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;com.oracle&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;ojdbc14&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;10.2&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"> </span><br><span class="line">        &lt;!-- SpringBoot - MyBatis --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.mybatis.spring.boot&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-spring-boot-starter&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.3.0&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"> </span><br><span class="line">        &lt;!-- SpringBoot - MyBatis 逆向工程 --&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;mybatis-generator-core&lt;/artifactId&gt;</span><br><span class="line">            &lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"> </span><br><span class="line">        &lt;dependency&gt;    </span><br><span class="line">            &lt;groupId&gt;commons-codec&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;commons-codec&lt;/artifactId&gt;</span><br><span class="line">        &lt;/dependency&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;/dependencies&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;build&gt;</span><br><span class="line">        &lt;plugins&gt;</span><br><span class="line">            &lt;!-- MyBatis 逆向工程 插件 --&gt;</span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.mybatis.generator&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;mybatis-generator-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;version&gt;1.3.5&lt;/version&gt;</span><br><span class="line">                &lt;!--插件依赖的jar包--&gt;</span><br><span class="line">                &lt;dependencies&gt;</span><br><span class="line">                    &lt;dependency&gt;</span><br><span class="line">                        &lt;groupId&gt;com.oracle&lt;/groupId&gt;</span><br><span class="line">                        &lt;artifactId&gt;ojdbc14&lt;/artifactId&gt;</span><br><span class="line">                        &lt;version&gt;10.2&lt;/version&gt;</span><br><span class="line">                    &lt;/dependency&gt;</span><br><span class="line">                &lt;/dependencies&gt;</span><br><span class="line">                &lt;configuration&gt;</span><br><span class="line">                    &lt;!--允许移动生成的文件--&gt;</span><br><span class="line">                    &lt;verbose&gt;true&lt;/verbose&gt;</span><br><span class="line">                    &lt;!--允许覆盖生成的文件--&gt;</span><br><span class="line">                    &lt;overwrite&gt;true&lt;/overwrite&gt;</span><br><span class="line">                    &lt;!--配置文件的路径 默认resources目录下--&gt;</span><br><span class="line">                    &lt;configurationFile&gt;src/main/resources/config/generatorConfig.xml&lt;/configurationFile&gt;</span><br><span class="line">                &lt;/configuration&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line"> </span><br><span class="line">            &lt;plugin&gt;</span><br><span class="line">                &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">                &lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</span><br><span class="line">                &lt;configuration&gt;</span><br><span class="line">                    &lt;fork&gt;true&lt;/fork&gt;</span><br><span class="line">                &lt;/configuration&gt;</span><br><span class="line">            &lt;/plugin&gt;</span><br><span class="line">        &lt;/plugins&gt;</span><br><span class="line">    &lt;/build&gt;</span><br><span class="line"> </span><br><span class="line">&lt;/project&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 我用的是oracle的连接，mysql的童鞋要注意换jar包哟</p>
+<p> 二、然后新建配置文件generatorConfig.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;!DOCTYPE generatorConfiguration PUBLIC</span><br><span class="line">        &quot;-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN&quot;</span><br><span class="line">        &quot;http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd&quot;&gt;</span><br><span class="line">&lt;generatorConfiguration&gt;</span><br><span class="line">        &lt;!--数据库驱动 --&gt;</span><br><span class="line">        &lt;properties resource=&quot;jdbc.properties&quot; /&gt;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    &lt;!-- 用户相关 --&gt;</span><br><span class="line">    &lt;context id=&quot;DB2Tables&quot; targetRuntime=&quot;MyBatis3&quot;&gt;</span><br><span class="line">        &lt;!-- 是否去除自动生成的注释 true：是 ： false:否 --&gt;  </span><br><span class="line">        &lt;commentGenerator&gt;</span><br><span class="line">            &lt;property name=&quot;suppressAllComments&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">        &lt;/commentGenerator&gt;</span><br><span class="line">        &lt;!-- 数据库连接--&gt;</span><br><span class="line">        &lt;jdbcConnection driverClass=&quot;$&#123;jdbc.driverClassName&#125;&quot;</span><br><span class="line">                        connectionURL=&quot;$&#123;jdbc.url&#125;&quot;</span><br><span class="line">                        userId= &quot;$&#123;jdbc.username&#125;&quot;</span><br><span class="line">                        password= &quot;$&#123;jdbc.password&#125;&quot;&gt;</span><br><span class="line">        &lt;/jdbcConnection&gt;</span><br><span class="line"> </span><br><span class="line">        &lt;!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 和  </span><br><span class="line">           NUMERIC 类型解析为java.math.BigDecimal --&gt;  </span><br><span class="line">        &lt;javaTypeResolver &gt;</span><br><span class="line">            &lt;property name=&quot;forceBigDecimals&quot; value=&quot;false&quot; /&gt;</span><br><span class="line">        &lt;/javaTypeResolver&gt;</span><br><span class="line"> </span><br><span class="line">        &lt;!--指定javaBean生成的位置 javaBean生成的位置--&gt;</span><br><span class="line">        &lt;javaModelGenerator targetPackage=&quot;com.kayak.demo.mybatis.entity&quot; targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;!-- enableSubPackages:是否让schema作为包的后缀 --&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">             &lt;!-- 从数据库返回的值被清理前后的空格 --&gt;</span><br><span class="line">            &lt;property name=&quot;trimStrings&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">        &lt;/javaModelGenerator&gt;</span><br><span class="line"> </span><br><span class="line">       &lt;!--sql映射文件生成的位置--&gt;</span><br><span class="line">        &lt;sqlMapGenerator targetPackage=&quot;com.kayak.demo.mybatis.mapper&quot;  targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">        &lt;/sqlMapGenerator&gt;</span><br><span class="line"> </span><br><span class="line">        &lt;!--指定dao接口生成的位置--&gt;</span><br><span class="line">        &lt;javaClientGenerator type=&quot;XMLMAPPER&quot; targetPackage=&quot;com.kayak.demo.mybatis.dao&quot;  targetProject=&quot;src/main/java&quot;&gt;</span><br><span class="line">            &lt;property name=&quot;enableSubPackages&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">        &lt;/javaClientGenerator&gt;</span><br><span class="line"> </span><br><span class="line">        &lt;!--table是指定每个表的生成策略 生成对应表及类名--&gt;</span><br><span class="line">        &lt;table tableName=&quot;sys_user&quot; domainObjectName=&quot;sysUser&quot;&gt;&lt;/table&gt;</span><br><span class="line"> </span><br><span class="line">    &lt;/context&gt;</span><br><span class="line">&lt;/generatorConfiguration&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 各个配置都有注释，按照上面略微改下参数就可以用了</p>
+<p> 然后是我的jdbc.properties配置了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> jdbc.driverClassName=oracle.jdbc.driver.OracleDriver</span><br><span class="line">jdbc.url=jdbc:oracle:thin:@//127.0.0.1:1521/test</span><br><span class="line">jdbc.username=root</span><br><span class="line">jdbc.password=root</span><br></pre></td></tr></table></figure>
+
+<p> 配置完这些，然后启动就可以启动mybatis-generator插件<br> idea启动</p>
+<p> ecilpse启动</p>
+<p> <img src="https://img-blog.csdn.net/20180104135102129?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzQ3MTkyOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt><br> *注意点：<br> 1.使用idea的mybatis-generator插件生成,但是同样配置用ecilpse插件mybatis-generator 生成的话，可能会报Exception getting JDBC Driver 错误</p>
+<p> 解决方法：<br> 需要在generatorConfig.xml 添加<br> <classpathentry location="E:\maven\repository\com\oracle\ojdbc14\10.2\ojdbc14-10.2.jar"></classpathentry></p>
+<p> 2、同样配置用ecilpse插件mybatis-generator 生成的话，可能会报Project src does not exist 错误</p>
+<p> 解决方法：<br> 需要在generatorConfig.xml 修改<br> 指定生成目录 targetProject配置加上项目名<br> <javamodelgenerator targetpackage="com.kayak.demo.mybatis.entity" targetproject="demo/src/main/java"></javamodelgenerator></p>
+<p> 启动后就会在目录下自动生成文件。</p>
+<p> <img src="https://img-blog.csdn.net/20180104135322815?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzQ3MTkyOTE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/" data-id="ckib6fit5007kg4tp5eeyltdw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SpringBoot开发总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SpringMVC对网页发来的数据请求处理和转发</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

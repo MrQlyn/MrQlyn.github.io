@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="シェンキンリンのブログ">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/page/13/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="シェンキンリンのブログ">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-数据库/JDBC学习笔记（获取数据库连接的俩种方式）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/" class="article-date">
+  <time datetime="2018-04-28T07:08:50.000Z" itemprop="datePublished">2018-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/">JDBC学习笔记（获取数据库连接的俩种方式）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/80134941" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/80134941</a><br>   发出疑问：JDBC是什么？</p>
+<p> JDBC是java操纵数据库的一种方法的总称。</p>
+<p> 在介绍俩种连接数据库方式之前，还有一项必须进行的操作，即加入mysql驱动</p>
+<blockquote>
+<p>*** 加入mysql驱动方法：  </p>
+<ul>
+<li><p>1、解压mysql-connector-java-5.1.7.zip  </p>
+</li>
+<li><p>2、在当前项目下新建lib文件(目录)  </p>
+</li>
+<li><p>3、把mysql-connector-java-5.1.7-bin.jar复制到lib目录下**</p>
+</li>
+<li><ul>
+<li><ul>
+<li>4、右键mysql-connector-java-5.1.7-bin.jar点击build-path，add to BuildPath加入到类路径下.s**</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="获取连接的俩种方法："><a href="#获取连接的俩种方法：" class="headerlink" title="获取连接的俩种方法："></a>获取连接的俩种方法：</h3><p> 要知道我们操纵数据库，必须获取到数据库的许可，即设置用户，密码，url等信息。所以我们首先必须要做的就是获取数据库的连接。</p>
+<p> 获得数据库连接的类：Connection（也就是我们接下来操纵数据库的基础）</p>
+<p> 有俩个方法：</p>
+<blockquote>
+<p>createStatement() : 获取Statement对象</p>
+<p> prepareStatement(SQL) : 获取PreparedStatement对象</p>
+<p> close() : 关闭数据库连接，在获取数据库连接后必须要关闭。</p>
+</blockquote>
+<p> 第一种方式：直接设置数据库的连接信息（不推荐这种方法）</p>
+<p> Driver：是一个接口，有数据厂商实现，能从其中获取数据库连接</p>
+<p> //1、 创建一个Driver实现类对象<br> Driver driver=new com.mysql.jdbc.Driver();  </p>
+<p> //2、准备连接数据库的基本信息:<br> //url(String类型，确定连接的IP端口号和数据库),<br> //info(Properties类型，设置user,password)。<br> String url=”jdbc:mysql://localhost:3306/test”;<br> Properties info=new Properties();<br> info.put(“user”,”root”); //设置数据库使用者<br> info.put(“password”,”123456”); //设置数据库密码  </p>
+<p> //3、调用Driver 接口的connect(url,info)获取数据库连接<br> Connection connection=driver.connect(url,info);</p>
+<p> System.out.println(connection);</p>
+<p> 第二种方式：在配置文件里设置好连接数据库的基本信息，通过读取配置文件获得连接。（此方法较为通用）</p>
+<p> 如何编写一个通用的获取数据库连接方法?</p>
+<p> 在类同目录下添加一个配置文件,将url,user,password放入一个配置文件，通过修改配置文件达到不同数据库的连接实现</p>
+<p> 首先在scr目录下（注意：一定要是src目录下）创建一个配置文件（配置文件以.properties结尾）</p>
+<p> 在配置文件下设置以下信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> driver=com.mysql.jdbc.Driver</span><br><span class="line">jdbcUrl=jdbc:mysql://localhost:3306/test</span><br><span class="line">user=root</span><br><span class="line"></span><br><span class="line">password=123456</span><br></pre></td></tr></table></figure>
+
+<p> 回到获取连接方法： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">       String drivername=null;</span><br><span class="line">String url=null;</span><br><span class="line">String user=null;</span><br><span class="line">String password=null;</span><br><span class="line"></span><br><span class="line">//1、读取配置文件</span><br><span class="line">InputStream in=get_Connection.class.getClassLoader().getResourceAsStream(&quot;jdbc.properties&quot;);</span><br><span class="line">Properties properties=new Properties(); //创建读取配置文件对象(properties)</span><br><span class="line">properties.load(in); //逐行读取配置文件</span><br><span class="line">drivername=properties.getProperty(&quot;driver&quot;);</span><br><span class="line">url=properties.getProperty(&quot;jdbcUrl&quot;);</span><br><span class="line">user=properties.getProperty(&quot;user&quot;);</span><br><span class="line">password=properties.getProperty(&quot;password&quot;);</span><br><span class="line"></span><br><span class="line">//2、注册驱动(用DriverManager,因为DriverManager已经内置静态代码块，所以只需一句话)</span><br><span class="line">Class.forName(drivername);</span><br><span class="line"></span><br><span class="line">//3、通过DriverManager.getConnection(url,user,password)连接数据库</span><br><span class="line"></span><br><span class="line">Connection connection=DriverManager.getConnection(url,user,password);</span><br></pre></td></tr></table></figure>
+
+
+
+<p> <strong>补充知识：</strong></p>
+<p> /*<br> 1.与普通程序不同的是，Java程序（class文件）并不是本地的可执行程序。当运行Java程序时，首先运行JVM（Java虚拟机），<br> 然后再把Java class加载到JVM里头运行，负责加载Java class的这部分就叫做Class Loader。中文叫做类加载器。<br> Java虚拟机中可以安装多个类加载器，系统默认三个主要类加载器，每个类负责加载特定位置的类：BootStrap,ExtClassLoader,AppClassLoader  </p>
+<p> 类加载器也是Java类，因为其他是java类的类加载器本身也要被类加载器加载，显然必须有第一个类加载器不是不是java类，这正是BootStrap。  </p>
+<p> Java虚拟机中的所有类装载器采用具有父子关系的树形结构进行组织，在实例化每个类装载器对象时，需要为其指定一个父级类装载器对象或者默认采用系统类装载器为其父级类加载。  </p>
+<p> 2.类加载指的是将类的class文件读入内存,并为之创建一个java.lang.Class对象,而系统中所有的类,它们实际上也是对象,称为类对象,<br> 它们都是java.lang.Class的实例,虚拟机为每种类型管理一个独一无二的Class对象,也就是说,每个类(型)都有一个Class对象.  </p>
+<ol start="3">
+<li>java中class.forName和classLoader都可用来对类进行加载。properties一般放配置信息的,存放的是键值对格式.如userName=root 这样便于管理!<br>jdbcUtil.class 得到的是class JdbcUtil ,class对象是java.lang.Class<t>这个类生成的对象,每个类都有一个class对象<br>getResourceAsStream(),返回的是InputStream 对象,<br>Properties类是用来操作properties文件的<br>props.load(in) ,加载进来,进行一行一行的读取<br>类加载器属于动态的载入,可以提高读写效率.<br>还可以用java.util.ResourceBundle的类来读取properties文件.ResourceBundle.getBundle(“文件名”).getString(“键”);*/</t></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/" data-id="ckib6fiqu004og4tpk7ebld5i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-前端/JQuery笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/04/18/前端/JQuery笔记/" class="article-date">
+  <time datetime="2018-04-18T07:12:29.000Z" itemprop="datePublished">2018-04-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/04/18/前端/JQuery笔记/">JQuery笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79990722" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79990722</a><br>   一、Jquery的简介<br> JQuery是javascript的升级版，优点是：写的少实现的多。<br>二、Jquery的使用<br> 1、每个JQuery文件使用前都要导入jquery-1.7.2.js，添加语句<script type="text/javascript" src="jquery-1.7.2.js"></script><br> 2、开头都是$(function(){})（是$(document).ready(function(){})的简写）,代码写在{}里<br>二、Jquery对象<br> 含义：jQuery 对象就是通过 jQuery($()) 包装 DOM 对象后产生的对象数组，本质是一个数组。<br> jQuery 对象无法使用 DOM 对象的任何方法, 同样 DOM 对象也不能使用 jQuery 里的任何方法<br> 约定：如果获取的是 jQuery 对象, 那么要在变量前面加上 $.<br> var $variable = jQuery 对象<br> var variable = DOM 对象<br>三、Jquery对象和DOM对象的转换<br> jquery-&gt;dom： (1) jQuery 对象是一个数组对象, 可以通过 [index] 的方法得到对应的 DOM对象.<br>  (2) 使用 jQuery 中的 get(index) 方法得到相应的 DOM 对象<br> dom-&gt;jquery：用 $() 把 DOM 对象包装起来，即是一个jquery对象。<br>四、jQuery 基本选择器(最重要，最常用，是所有选择器基础)<br> 有以下几种方式：<br> 通过id属性值获得jquery对象：$(“#id属性值”)<br> 通过class属性值获得jquery对象：$(“.class属性值”)<br> 通过标签名获得jquery对象：$(“标签名”)<br> 获得所有jquery对象：$(“*”)<br> 综合多个选择器:$(“#id属性值,.class属性值,标签名,….”)  </p>
+<p> 注意：id属性值在网页中不能相同（即不能重复），class属性值可以相同（允许重复使用）。  </p>
+<p> 案例：BasicSelect 补充知识：jquery对象有一个方法.css(“属性名”,”属性值”)来修改css样式<br> jquery对象有一个方法.click()来触发点击事件<br>五、jquery的层次选择器<br> $(“acestor grandson”):选取选择器acestor所有grandson选择器jquery对象<br> $(“parent &gt; child”):选取选择器parent的下一层级所有child选择器jquery对象<br> $(“pre + next”):选取选择器pre同一层级后的下一个next选择器jquery对象,若对象并不相邻，此时无效。<br> $(“pre ~ siblings”):选取选择器pre同一层级后的所有next选择器jquery对象  </p>
+<p> 注意：(“prev ~ div”) 选择器只能选择 prev元素后面的同辈元素;<br>  而 jQuery 中的方法 siblings() 与前后位置无关, 只要是同辈节点就可以选取  </p>
+<p> 案例：GradationSelect  </p>
+<p> 补充知识：next([selector]):返回相邻第一个基本选择器jq对象,必须相邻。<br>  nextAll([selector]):返回同一层级后面所有基本选择器jq对象<br>  :first返回第一个匹配的DOM元素<br>  prev([selector]) : 获取匹配元素紧邻的前一个兄弟元素,必须相邻。<br>  prevAll([selector]) :获得所有前面的兄弟元素。   </p>
+<p>六、过滤选择器<br> 过滤选择器主要是通过特定的过滤规则来筛选出所需的 DOM 元素, 该选择器都以 “:” 开头<br> 1、基本过滤<br> :first 选取第一个元素<br> :last 选取最后一个元素<br> :not(selector) 去除所有与指定选择器匹配的元素<br> :even 选取索引是偶数的所有元素，索引从0开始<br> :odd 选取索引是奇数的所有元素，索引从0开始<br> :eq(index) 选取索引等于index的元素，索引从0开始<br> :gt(index) 选取索引大于index的元素，索引从0开始<br> :lt(index) 选取索引小于index的元素，索引从0开始<br> :header 选取所有的标题元素，如:h1、h2等<br> :animated 选取当前正在执行动画的所有元素  </p>
+<p> 案例:BasicFilter<br> 2、内容过滤<br> :contains(text) 选取含有文本内容为text的元素<br> :empty 选取不包含子元素或文字的空元素<br> :has(selector) 选取含有选择器所匹配的元素的元素<br> :parent 选取含有子元素或者文本的元素  </p>
+<p> 案例:ContentFilter<br> 3、可见性过滤<br> :hidden 选取所有不可见元素<br> :visible 选取所有可见元素  </p>
+<p> 案例：visibleFilter<br> 补充知识：jq里的一些方法<br> show(time):time为毫秒，设置显示秒数<br> val()：可以返回某一个表单元素的 value 属性值.<br> 4、属性过滤<br> [attribute] 选取拥有此属性的元素<br> [attribute=value] 选取拥有此属性并值等于value的元素<br> [attribute!=value] 选取拥有此属性并值不等于value的元素<br> [attribute^=value] 选取拥有此属性并值以value开始的元素<br> [attribute$=value] 选取拥有此属性并值以value结束的元素<br> [attribute*=value] 选取拥有此属性并值含有value的元素<br> [select1][select2]… 多个属性过滤合并后的所有元素  </p>
+<p> 案例：AttributeFilter<br> 5、子元素过滤和<br> 子元素过滤选择器：在所有”:”之前要加一个空格,索引从1开始<br>  :nth-child()<br> (1) :nth-child(even/odd): 能选取每个父元素下的索引值为偶(奇)数的元素<br> (2) :nth-child(2): 能选取每个父元素下的索引值为 2 的元素<br> (3) :nth-child(3n): 能选取每个父元素下的索引值是 3 的倍数 的元素<br> (3) :nth-child(3n + 1): 能选取每个父元素下的索引值是 3n + 1的元素  </p>
+<p>  :first-child 选取每个父元素的第一个子元素<br>  :last-child 选取每个父元素的最后一个子元素<br>  :only-child 如果某个元素是它父元素中唯一的子元素，那么将被匹配。<br> 案例：ChildFilter  </p>
+<p> 6、表单对象属性过滤选择器.  </p>
+<p> :input 选取所有<input><textarea></textarea><select>和</select><button>元素<br> :text 选取所有的单行文本框<br> :password 选取所有的密码框<br> :radio 选取所有的单选框<br> :checkbox 选取所有的多选框<br> :submit 选取所有的提交按钮<br> :image 选取所有的图像按钮<br> :reset 选取所有的重置按钮<br> :button 选取所有的按钮<br> :file 选取所有的上传域  </button></p>
+<p> :enabled 选取所有可用元素<br> :disabled 选取所有不可用元素<br> :checked 选取所有被选中的元素（单选框，复选框）<br> :selected 选取所有被选中选项元素（下拉列表）  </p>
+<p> 注意：下拉框jq对象用select标签选择器获得,:selected前面要有空格<br> 案例：FormFilter<br> 补充知识：val(“str”)：设置元素的value属性为str<br>  each(function(){})：遍历每一个对象，为每一个对象执行function里的代码   </p>
+<p>七、结点的操作<br> 1、<br> 查找结点：通过jq选择器完成或find(select):通过选择器select返回匹配元素后代<br> 操作属性结点：通过jq方法attr() 设置属性value值可用jq方法val()<br> 操作文本结点：通过jq方法text()<br> 创建结点:$(“</p><p id="a"></p>“)或(“<p id="a"></p>“)<br> 2、<br> 创建结点（插入节点）：<br> append():在元素内部结尾处追加内容<br> appendTo():插入到指定的元素中的内部结尾处<br> prepend():在元素内部开始处追加内容<br> prependTo():插入到指定元素内部开始除  <p></p>
+<p> 以下方法不但能将新创建的DOM元素插入到文档中，还能对原有DOM元素进行移动<br> after():在元素之后插入内容<br> before():在元素之前插入内容<br> insertAfter():将元素插入到指定元素之后<br> insertBefore():将元素插入到指定元素之前  </p>
+<p> 案例：InsertNode Create_Insert<br> 补充知识：1、$.trim(str): 可以去除 str 的前后空格.str为字符串<br>  2、当调用方法返回调用对象时（如append()）可再次使用.方法名()等方法  </p>
+<p> 3、<br> 删除节点：<br> remove(): 删除传入选择器的结点，调用remove()的结点及其后代结点同样被删除，返回已被删除的调用结点<br> empty(): 清空结点中的所有子节点包括文本<br> 案例：RemoveNode<br> 补充知识：find(select):返回所有匹配选择器select的元素后代<br>  取消默认提交：return false;<br> 4、<br> 复制结点：<br> clone(): 克隆匹配的 DOM 元素, 返回值为克隆后的副本. 但此时复制的新节点不具有任何行为.<br> clone(true): 复制元素的同时也复制元素中的的事件<br> 替代结点：<br> replaceWith(str或jq对象): 将所有匹配的元素都替换为str或jq对象<br> replaceAll(jq对象): jq对象替换所有匹配的jq对象<br> 注意: 若在替换之前, 已经在元素上绑定了事件, 替换后原先绑定的事件会与原先的元素一起消失<br> 5、<br> 包裹结点：<br> wrap(): 将指定节点用包裹起来，（单独包裹）当选择器选择多个jq对象时，每个jq对象都会在外面进行包裹<br> wrapAll(): 将所有匹配的元素用一个元素来包裹. （全部包裹）<br> wrapInner(): 将每一个匹配的元素的子内容(包括文本节点)包裹起来.<br>八、样式操作<br> 获取 class 和设置 class : class 是元素的一个属性, 所以获取 class 和设置 class 都可以使用 attr() 方法来完成.<br> 追加样式: addClass()<br> 移除样式: removeClass() — 从匹配的元素中删除全部或指定的 class<br> 切换样式: toggleClass() — 控制样式上的重复切换.如果类名存在则删除它, 如果类名不存在则添加它.<br> 判断是否含有某个样式: hasClass() — 判断元素中是否含有某个 class, 如果有, 则返回 true; 否则返回 false<br> 案例：Css案例  </p>
+<p>九、几个常用方法：<br> val():获取或设置value值<br> 获取：$(“选择器”).val()<br> 设置：$(“选择器”).val(str).<br> 1、当下拉框里的选项option未设置value值时，value值为文本值，即可以选中select对象或radio对象或checkbox对象，<br> 设置select或radio或checkbox的val()方法来设置下拉框,单选框，多选框选中值。<br> 2、val([“”,…]),val(“”)分数组和单个元素俩种，单选下拉框用第二种方法，多选下拉框，单选框，多选框都用第一种<br>  即数组法<br> 3、对于文本框, 下拉列表框, 单选框该方法可返回元素的值(多选框只能返回第一个值).<br> 如果为多选下拉框, 则返回一个包含所有选择值的数组<br> attr():获取或设置属性值<br> 获取：$(“选择器”).attr(属性名)<br> 设置：$(“选择器”).attr(属性名,属性值)<br> text():获取或设置文本<br> 获取：$(“选择器”).text()<br> 设置：$(“选择器”).text(str)<br> removeAttr(): 删除指定元素的指定属性<br> focus():获取焦点<br> blur():失去焦点<br> each():对jq对象执行遍历，执行里面的fuction功能代码，this为正在遍历的dom对象<br> next():取得匹配元素后面紧邻的同辈元素的集合(但集合中只有一个元素)<br> prev():取得匹配元素前面紧邻的同辈元素的集合(但集合中只有一个元素)<br> siblings(): 取得匹配元素前后所有的同辈元素<br> children()：取得对象所有子结点元素，不包含子节点后代元素。<br> html()：读取和设置某个元素中的 HTML 内容，和text()功能类似，text()更强大  </p>
+<p>综合案例：Integrated<br> 补充知识：jq对象设置段落文本用text()方法<br>  CommonMethod<br> 补充知识：1、defaultValue为jq对象的默认值<br>  2、当下拉框里的选项option未设置value值时，value值为文本值，<br>  即可以选中select对象或radio对象或checkbox对象，<br>  设置select或radio或checkbox的val()方法来设置下拉框,单选框，多选框选中值。<br>  3、即便是为一组 radio 赋值, val 参数中也应该使用数组，使用一个值不起作用。<br>十、事件的绑定<br> on(事件类型，触发函数)：绑定事件和触发函数，当事件发生时触发函数。<br> off(事件类型)：移除元素上所有符合事件类型的事件，当没有事件类型时为移除所有事件<br> hover(函数1，函数2): 模拟光标悬停事件. 当光标移动到元素上时, 会触发指定的第一个函数,<br>  当光标移出这个元素时, 会触发指定的第二个函数.<br> toggle(函数1，函数2): 用于模拟鼠标连续单击事件. 第一次单击元素, 触发指定的第一个函数,<br>  当再一次单击同一个元素时, 则触发指定的第二个函数, 如果有更多个函数, 则依次触发, 直到最后一个.<br>  鼠标连续点击时，即会不停执行函数1，函数2<br> one(事件类型，触发函数): 该方法可以为元素绑定处理函数. 当处理函数触发一次后, 立即被删除.<br>  即在每个对象上, 事件处理函数只会被执行一次.  </p>
+<p> 事件冒泡：即事件会按照 DOM 层次结构像水泡一样不断向上只止顶端<br>  解决: 在事件处理函数中返回 false, 会对事件停止冒泡. 还可以停止元素的默认行为.  </p>
+<p> 案例： Event 事件的冒泡属性 实时更新鼠标坐标案例<br> //补充知识：is()：判断元素是否存在，true为存在，false为不存在<br>  和:hidden选择器搭配可判断元素是否被隐藏。<br>  .mousemove()为鼠标移动事件 和pageX, pageY 属性搭配可获得鼠标坐标<br>  .mouseover()为鼠标放上元素时触发事件<br>  .mouseout()为鼠标移出元素时触发事件<br>  .show()显示元素<br>  .hide()隐藏元素<br>十一、动画效果<br> show()：显示元素<br> hide()：隐藏元素<br> fadeOut()：会在指定的一段时间内降低元素的不透明度, 直到元素完全消失.<br> fadeIn()：会在指定的一段时间内增加元素的不透明度, 直到元素完全显现.   </p>
+<p> slideDown(), slideUp(): 只会改变元素的高度. 如果一个元素的 display 属性为 none, 当调用 slideDown() 方法时,<br> 这个元素将由上至下延伸显示. slideUp() 方法正好相反, 元素由下至上缩短隐藏.   </p>
+<p> //下面三种方式为上面方式的简便写法，都是用来切换状态<br> toggle(): 切换元素的可见状态: 如果元素时可见的, 则切换为隐藏; 如果元素时隐藏的, 则切换为可见的.<br> slideToggle(): 通过高度变化来切换元素的可见性.<br> fadeToggle(): 通过隐藏度变化来切换元素的可见性<br> fadeTo(): 调整透明度 (0 – 1 之间).   </p>
+<p> 案例：animation  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/18/前端/JQuery笔记/" data-id="ckib6fitf007yg4tp0hfl1z4j" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/前端/">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-前端/HTML笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/04/11/前端/HTML笔记/" class="article-date">
+  <time datetime="2018-04-11T04:20:15.000Z" itemprop="datePublished">2018-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/04/11/前端/HTML笔记/">HTML笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79888657" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79888657</a><br>   HTML部分：</p>
+<p> Html：标签语言,间隔用空格不用,或; </p>
+<p> <strong>所有都是用标签操作<xxx>&lt;/ XXX &gt;<br> 从<xxx>开始，到<xxx>结束，有些标签直接在开始标签内结束，如<hr>,<br><br> 设置属性时，属性值必须加””</xxx></xxx></xxx></strong></p>
+<p> Html操作思想：当要实现不同效果的文字或图片时，用不同的标签将各自的文字或图片包起来，在通过修改标签内的属性值来实现改变样式的效果。  </p>
+<p> 一、常用标签:</p>
+<blockquote>
+<head><meta name="generator" content="Hexo 3.9.0">:包含网页文档信息，浏览器不会向用户显示这些头部信息（"head information"）。下面这些标签可用在 head 部分：<base>, <link>, <meta>, <script>, <style>, 以及 <title>。   
+ <html>:html网页标签，包含所有标签  
+ <title>:标题栏  
+ <hr/>:水平线  
+ <br/>:换行符  
+ <h?>:?在范围1-6之间，设置一个可变大小标题，同时会自动换行  
+ <body>: body 元素定义文档的主体。其中包含文档的所有内容（比如文本、图像、颜色、图形等等）。
+
+
+<p> 二、文字标签和注释标签：</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p> <font>:文字标签，规定文本的字体外观、字体尺寸和字体颜色。<br> 属性:</p>
+</blockquote>
+<p> size:设置文字大小(1-7)，默认大小为7<br> color:设置文字颜色，可用color=”red”,或color=”#9900cc”(十六进制表示颜色法)  </p>
+ <!-- …-->:注释标签，可在…部分添加注释
+
+
+<p> 三、水平线标签和特殊字符</p>
+</blockquote>
+<blockquote>
+<blockquote>
+ </hr>:水平线标签。  
+ 属性：
+</blockquote>
+<p> size:设置线的粗细(1-7)，默认大小为7<br> Color;设置线的颜色，同样俩种表示法:  </p>
+<p> 特殊字符：当在网页上显示以下内容时：<html>是网页标签<br> 要使用转义字符将<html>里的格式：&lt;字符代码&gt;转换为字符形式。<br> &lt; 字符使用&lt;%lt&gt;;  </p>
+<blockquote>
+<p>字符使用&lt;&amp;gt&gt;;  </p>
+</blockquote>
+<p> 当显示多个空格时，同样需要转义字符:&nbsp;</p>
+<p> 四、列表标签<br> 1、普通列表标签<br> 比如要显示以下效果：<br> 武汉生物工程学院<br> 教务处<br> 财务处<br> 学管处<br> 通过<dl>，<dt>,<dd>三个标签实现<br> <dl>:表示列表的范围<br> 在<dl>里面<dt>: 设置列表标题<br> 在<dl>里面<dd>:设置列表内容  </p>
+</blockquote>
+<p> 2、有序列表标签<br> 1.教务处<br> 2.财务处<br> 3.学管处<br> 使用<ol>和<li><br> <ol>:表示列表范围 属性:type,可设置为,”1”（默认）,”a”,”i”。<br> <li>:表示列表内容  </p>
+<p> 3、符号列表标签<br> 使用<ul>和<li><br> <ul>表示符号列表范围 属性:type,可设置为实心圆(disc)(默认),空心圆(circle),实心方块(square)。<br> <li>:表示列表内容  </p>
+<p> 五、图像标签（重点）</p>
+<blockquote>
+<blockquote>
+ <img src=”图片的路径”/>  
+ 属性  
+ src:图片的路径  
+ width:图片的宽度  
+ height:图片的高度  
+ alt:鼠标停留片刻后图片上显示文字,有些浏览器不支持，较少使用
+</blockquote>
+<p> 六、路径(默认目录为当前项目目录)</p>
+</blockquote>
+<p> <strong>绝对路径：从其它地方获取信息的路径</strong><br> 如: C:\Users\13928\Desktop\Qt素材\图片1.png、<br> <a href="https://www.baidu.com/b.jpg">https://www.baidu.com/b.jpg</a></p>
+<p> <strong>相对路径：从当前项目目录获取信息的路径</strong><br> 如:b.jpg<br> 因为<strong>默认目录为当前项目目录</strong>，表示下层目录:文件夹名/b.jpg即可<br> 表示上层目录： ../b.jpg  </p>
+<p> 七、超链接标签<br> 1、链接资源</p>
+<p> <a href=”链接到的路径”>显示在页面上的内容</a><br> 属性<br> href:链接到的路径，必须以/开头，是相对路径</p>
+<p> target:打开方式，在新窗口打开(_blank),在当前页打开(_self)(默认)当超链接不需要链接到某些资源时，设置路径</p>
+<p> 为#即可，如不设置路径，会打开项目路径。即<a href=”#”>这个链接不链接任何资源</a>  </p>
+<p> 2、定位资源（注意：位置名称可随意设置，如top等）<br> 定义一个位置: <a name=”位置名称”>顶部</a><br> 回到位置:<a href=”#位置名称”>回到顶部</a>  </p>
+<p> 3、原样输出标签:使用<pre>标签，写什么样输出什么样。<br> Public static void main(String agrs[]){<br> System.out.println(“Hello”);<br> }  </p>
+<p> 八、表格标签<br> 1、基本标签<br> <table>:表示表格范围<br> 属性:<br> border:表格线的粗细<br> cellspacing:单元格之间距离（为0时级没有距离，重合为一条线）<br> width:表格宽度<br> height:表格高度<br> bordercolor:表格外围线颜色  </p>
+ <tr>:表示一个元组范围（一行数据（记录）范围）  
+ 属性:  
+ align:元组里的对齐方式 left center right  
+
+
+ <td>:表示元组范围里的单元格  
+ 属性:  
+ align:单元格里的对齐方式left center right  
+
+
+ <th>也同样可以表示单元格,与<td>不同：<th>自动设置了居中和加粗  
+
+
+ <caption>:表格标题标签，在<table>和<tr>之间使用  
+
+
+<p> 2、合并单元格<br> 跨行合并单元格:rowspan<br> 跨列合并单元格:colspan<br> 使用方式：在合并后的单元格属性rowspan或colspan里设置合并的行数或烈数  </p>
+<p> 如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> &lt;table border=&quot;1&quot; cellspacing=&quot;0&quot; width=&quot;400&quot; height=&quot;150&quot;&gt;</span><br><span class="line">&lt;caption&gt;人员信息&lt;/caption&gt;</span><br><span class="line">&lt;tr align=&quot;center&quot;&gt;</span><br><span class="line">&lt;td&gt;名字&lt;/td&gt;</span><br><span class="line">&lt;td&gt;性别&lt;/td&gt;</span><br><span class="line">&lt;td&gt;武力值&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;tr align=&quot;center&quot;&gt;</span><br><span class="line">&lt;td&gt;关羽&lt;/td&gt;</span><br><span class="line">&lt;td&gt;男&lt;/td&gt;</span><br><span class="line">&lt;td&gt;98&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;tr align=&quot;center&quot;&gt;</span><br><span class="line">&lt;td&gt;貂蝉&lt;/td&gt;</span><br><span class="line">&lt;td&gt;女&lt;/td&gt;</span><br><span class="line">&lt;td&gt;20&lt;/td&gt;</span><br><span class="line">&lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 九、表单标签（重中之重）<br> <form>:包含表单的范围<br> 属性：<br> action:输入项数据提交到的页面路径，默认为提交到当前页面<br> method:表单提交方式，get(默认)，post<br> enctype:一般不需要这个属性，在文件上传时需要使用  </p>
+<p> 面试题目：get和post区别？<br> get会在地址栏显示提交信息，post不会显示提交信息，信息在请求体里。<br> get安全性低，post安全性高.<br> get有数据大小限制，post没有  </p>
+<p> 输入项：可以输入或选择内容的部分<br> 输入项的注意事项：<br> <strong>*绝大部分输入项使用<input type=”输入项的类型” /><br> *</strong>输入项必须设置一个name属性，才能获得数据,提交至服务器</p>
+<blockquote>
+<blockquote>
+<p> 文本输入:<input type=”text”/><br> 密码输入:<input type=”password”/><br> 单选框输入<input type=”radio” name=”属性名称” value=""><br> 复选框输入<input type=”checkbox” name=”属性名称” value=""/><br> 文件输入<input type="file"/><br> 隐藏项<input type=”hidden”>不会在页面显示，但存在于html代码中</p>
+</blockquote>
+<p> 单选框和复选框使用的注意事项：<br> 1、 必须要有name属性</p>
+<p> 2、name属性值必须相同</p>
+<p> 3、必须要有value属性</p>
+<p> 4、实现默认选中使用checked属性：checked=”checked”</p>
+</blockquote>
+<p> 下拉选择(不属于input)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> &lt;select name=”birth”&gt;</span><br><span class="line">&lt;option value=”1”&gt;请选择&lt;/option&gt;</span><br><span class="line">&lt;option value=”1996”&gt;1996&lt;/option&gt;</span><br><span class="line">&lt;option value=” 1997”&gt;1997&lt;/option&gt;</span><br><span class="line">&lt;option value=” 1998”&gt;1998&lt;/option&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 1、 value属性用来设置提交的数据值，与显示内容应该一致<br> 2、 实现默认选中使用selected属性：selected=”selected”<br> 文本框<textarea><br> 属性:<br> rows:文本框的行<br> cols:文本框的列<br> 提交按钮<input type=”submit”/><br> 属性<br> value:设置按钮上显示内容  </p>
+<p> 提交时的数据小结: </p>
+<p> 如：<br> file:///E:/code/Html/Label.html?phone=22&password=22&sex=woman&sports=run&birth=1996<br> file:///E:/code/Html/Label.html?phone=%3D%22post%22&password=%3D%22post%22&sex=woman</p>
+<blockquote>
+<blockquote>
+<p> 显然输入项的提交通过标签里的<strong>name属性</strong>和<strong>value属性</strong>完成<br> name对应的数据类型名 values对应的数据值<br> 提交的页面可通过<strong><form>里的action属性</strong>修改  </p>
+</blockquote>
+<p> 使用图片提交效果:<br> <input type=”image”,src=”图片地址”/>  </p>
+</blockquote>
+<p> 重置按钮:将表单重置为初始化状态<br> <input type="reset"/>  </p>
+<p> 普通按钮:就一个普通按钮，无任何操作<br> <input type="button" value="">  </p>
+<p> 十、其它常用标签的使用</p>
+<blockquote>
+<blockquote>
+<p> <b>:加粗<br> <s>:删除线<br> <u>:下划线<br> <i>:斜体  </p>
+</blockquote>
+<p> <sub>:下标<br> <sup>:上标  </p>
+ <pre>:原样输出  
+
+
+ <p>:段落标签，比<br/>标签在结尾多换一行  
+
+
+ 在css里经常使用  
+ <div>:所有<div>里内容自动换行  
+ <span>:所有<span>里内容缩在一行  
+
+
+
+ 十一、头标签的使用  
+ <html>里包含了<head>和<body>,<head>就是头标签，用来设置页面的属性
+</blockquote>
+<blockquote>
+<blockquote>
+ <title>:设置标签上显示内容  
+ <meta>:设置页面相关内容
+</blockquote>
+<blockquote>
+<p> //早期搜索引擎根据content里的内容显示搜索网页<br> <meta name="keywords" content="页面介绍内容"></p>
+</blockquote>
+<blockquote>
+<p> 几秒后转向其它页面功能实现:<br> <meta http-equiv="refresh" content="5,url=register.html"/> //其中5为几秒后刷新，url为转到的页面地址</p>
+</blockquote>
+ <base>:设置超链接的基本设置  
+ 统一设置超链接打开一个新窗口方式:<base target="_blank"/>  
+
+ <link>:引入外部文件
+
+
+</blockquote>
+</script></head></blockquote>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/11/前端/HTML笔记/" data-id="ckib6fitd007wg4tplc17gzw2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/前端/">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-前端/CSS笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/04/11/前端/CSS笔记/" class="article-date">
+  <time datetime="2018-04-11T04:20:06.000Z" itemprop="datePublished">2018-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/04/11/前端/CSS笔记/">CSS笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79888685" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79888685</a>   </p>
+<h3 id="CSS部分："><a href="#CSS部分：" class="headerlink" title="CSS部分："></a>CSS部分：</h3><p>一、CSS简介</p>
+<p> 层叠样式表<br> 层叠：一层层叠加，显示最上面层。<br> 样式表：很多属性和属性值<br> 作用：使得网页显示效果更好，将内容和样式进行分离。<br> 格式：CSS属性之间用;相隔，HTML用空格<br>  CSS属性和属性值用:相连，HTML用等号<br>二、HTML和CSS的四种结合方式<br>（1）每个标签上都有一个style属性，把HTML和CSS结合在一起。<br> -<div style="background-color:red;color:green">HTML和CSS结合方式一</div><br>（2）使用HTML里的<style>标签，放在head里面<br> -<style type="text/css"><br> CSS代码<br> </style>  </p>
+<ul>
+<li><style type="text/css">  
+div{   
+background-color:red;color:green  
+}  
+</style>  
+（3）在<style type="text/css">标签里面使用语句，导入CSS文件，CSS文件放入CSS代码  </li>
+<li>第一步，创建一个CSS文件<br>@import url(CSS文件路径);<br>（4）使用头标签<link>,引入外部css文件  </li>
+<li>第一步，创建一个CSS文件  </li>
+<li><link rel="stylesheet" type="text/css" href="css文件路径">  
+
+
+</li>
+</ul>
+<p> ****第三种结合方式，缺点：在某些浏览器不能使用，为了实现CSS和内容和样式分离，一般使用第四种方式。  </p>
+<p> 三、CSS的优先级和格式<br> 优先级：从上到下，从外到内，优先级从低到高。  </p>
+<p> 格式：<br> 选择器{属性名：属性值;属性名：属性值;…<br> }<br>四、三种选择器<br>（1）标签选择器：使用标签名作为选择器名称<br> div{<br> background-color:red;color:green;<br> }<br>（2）class选择器：每个HTML标签都有一个class属性<br> div.hh{<br> background-color:red;color:green;<br> }<br> <div class="hh"><br>（3）id选择器：每个HTML标签都有一个id属性<br> div#hh{<br> background-color:#ffff00;color:#9933ff;<br> }<br> <div id="hh"><br> ***优先级：style(即第一种HTML与CSS结合方式)&gt;id选择器&gt;class选择器&gt;标签选择器  </p>
+<p>五、扩展选择器<br>（1）关联选择器；设置被嵌套标签里的样式<br> div p{<br> background-color:#ffff00;color:#9933ff;<br> }<br>（2）组合选择器：把几个标签设置成统一样式<br> div p{<br> background-color:#ffff00;color:#9933ff;<br> }<br>（3）伪元素选择器：css里提供了一些定义好的样式，可以拿来使用。（了解即可）<br>  比如超链接：<br> 原始状态 鼠标悬停状态 点击瞬间状态 点击之后状态<br> :link :hover  :active  :visited  </p>
+<p>六、CSS的盒子模型<br> 边框：border属性（统一设置） border-top（上） border-buttom（下） border-left（左） border-right（右）<br> 内边距：padding属性（统一设置）padding-top（上）padding-buttom（下）padding-left（左） padding-right（右）<br> 外边距：margin属性（统一设置）margin-top（上） margin-buttom（下） margin-left（左） margin-right（右）<br>七、CSS的漂浮<br> float属性（这个属性总应用于图像，使文本围绕在图像周围）：left(元素往左移动) right(元素往右移动边框)<br>八、CSS的定位<br> position属性:absolute:元素框从文档流完全删除，可以通过top,left,righ进行移动元素框<br>  relative元素框不从文档流删除，保留原位置，同样可以通过top,left,righ进行移动元素框  </p>
+</style></li></ul>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/11/前端/CSS笔记/" data-id="ckib6fiq30045g4tpernl2kqd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/前端/">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-前端/JavaScript笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/04/11/前端/JavaScript笔记/" class="article-date">
+  <time datetime="2018-04-11T04:19:59.000Z" itemprop="datePublished">2018-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/04/11/前端/JavaScript笔记/">JavaScript笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79888711" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79888711</a><br>   一、JavaScipt的简介<br> 是基于对象的事件驱动的语言，应用于客服端  </p>
+<p> 二、javascript与HTML的结合方式<br> 第一种：使用标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;js代码;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 第二种：使用script标签，引入一个外部的js文件<br> 1、创建一个js文件，写js代码<br> 2、<script type="text/script" src="js文件路径"></script><br> 注意：使用第二种方式时，不会执行script标签里的代码  </p>
+<p> 三、js的语法规则<br> 1、javascript里的变量类型<br> 重点：javascript里定义变量，对象都用var<br> 五个原始类型：<br> string:字符串类型<br> var str=”abc”;<br> number:数字类型<br> var num=123;<br> boolean:布尔类型<br> var b=true;<br> null:对象引用为空<br> var date=null;<br> undifined:定义的变量未赋值<br> var u;<br> typeof():获取当前变量类型  </p>
+<p> 2、javascript里的语句<br> 选择语句：if,switch(在java里1.7版本后才支持，javascrpit一直支持)<br> 循环语句：while,do while,for<br> 自增语句：i++，++i  </p>
+<p> 3、javascript里的运算符<br> （1）js里不区分整数和小数<br> var a=123;<br> //alert(a/1000*1000);//java里为0，由于不区分小数整数，JavaScript为123  </p>
+<p> （2）js里的字符串相加是连接操作，相减时候执行减法运算操作<br> var str=”123”;<br> //alert(str+4);//执行字符串连接操作<br> //alert(str-4);//执行算术减法操作  </p>
+<p> （3）boolean类型，执行运算符操作时，false为0，true为1.<br> var b1=true;<br> var b2=false;<br> alert(b1+1);<br> alert(b2+1);<br> （4）==和===区别：==比较的是值，===比较的是值和类型。<br> var b=”5”;<br> if(b===5){ //当值为5，但类型不一致时不相等<br> alert(5);<br> }<br> else{<br> alert(“other”);<br> }<br> 引入知识：直接在页面输出语句,可输出变量，值，html标签：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.wirte(“......”);</span><br></pre></td></tr></table></figure>
+
+<p> document.wirte(“123”);<br> document.write(a);<br> document.write(“<hr>“);  </p>
+<p> 5、javascript的数组<br> 注意：1、广义上的数组不规定一定要为某一类型<br> 2、数组有个属性length,记录数组长度<br> 第一种：var arr=[1,2,3]; var arr=[true,1,”a”];<br> 第二种：使用Array对象<br> var arr=new Array(5);//创建一个长度为5的数组<br> var arr=new Array(1,2,3);//创建赋初值的数组，长度为3  </p>
+<p> 6、javascript的函数<br> 需要返回值的函数只需写return句子，参数表不需要写参数类型，只需要写参数名<br> 第一种：function 函数名(参数列表){<br> 函数体<br> 返回值<br> }<br> 第二种：匿名函数<br> var 函数名=function(参数列表){<br> 函数体<br> 返回值<br> }  </p>
+<p> 7、全局变量和局部变量<br> 全局变量：定义在<script>内，可以在所有js代码(即script里使用)里使用（作用域为整个js代码块）<br> 局部变量：定义在函数内，只能在函数内使用。（作用域为定义函数）  </p>
+<p> 8、Script标签放置位置：一般放在</body>后面，当需要获取input标签里的值时，不会出现错误  </p>
+<p> 10、JavaScript里的常用对象<br> String对象 定义方式：var str="abc";<br> 属性：length<br> 方法：<br> （1）与HTML相关方法<br> bold():加粗<br> fontcolor():设置字体颜色<br> fontsize():设置字体大小<br> link("src"):将字符串设置为超链接，src为链接的地址<br> sub()和sup():下标和上标<br> （2）与java相似方法：<br> concat(str1,str2):连接俩个字符串<br> charAt(index):返回指定位置字符串<br> indexOf(str):返回字符串索引值<br> split(","):根据符号(默认为,)将字符串切割为字符串数组<br> replace(s1,s2):替代字符串(s2替代s1)<br> substr(n):返回从起始位置开始指定数目字符串<br> substring(begin,end):返回从begin到end的字符串<br> Array对象<br> 属性：length<br> 方法：<br> concat():连接两个或更多的数组，并返回结果。<br> join():把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔。<br> push():向数组的末尾添加一个或更多元素，并返回新的长度。<br> pop():删除并返回数组的最后一个元素<br> reverse():扭转数组顺序<br> sort():对数组进行排序<br> shift():删除并返回数组的第一个元素<br> Date对象<br> 创建一个Date对象默认为当前时间对象<br> 方法：<br> Date()：返回当日的日期和时间。(默认格式)<br> toLocaleString()：根据本地时间格式，把 Date 对象转换为字符串。<br> getFullYear()：获得当前对象的年。<br> getMonth()：获得当前对象的月(0 ~ 11)，此时需加1。<br> getDate()：获得当前对象的日 (1 ~ 31)。<br> getDay()：获得当前对象的周(0 ~ 6)。<br> getHours() 返回 Date 对象的小时 (0 ~ 23)。<br> getMinutes() 返回 Date 对象的分钟 (0 ~ 59)。<br> getSeconds() 返回 Date 对象的秒数 (0 ~ 59)。   </p>
+<p> getTime() 返回 1970 年 1 月 1 日至今的毫秒数。(实时更新)<br> 应用场景：使用毫秒数处理缓存效果（不有缓存）<br> <a href="http://www.baidu.com?毫秒数">http://www.baidu.com?毫秒数</a><br> Math对象<br> 和java一样，都是静态方法，使用方法：Math.方法名()<br> 方法：<br> ceil(x) 对数进行上舍入。<br> floor(x) 对数进行下舍入。<br> round(x)：四舍五入。<br> random() 返回 0 ~ 1 之间的随机数（伪随机数）。<br> 得到0-9随机数Math.floor(Math.random()*10)。  </p>
+<p> 11、javascript的全局函数<br> eval(string):用来执行js代码,string为要执行的代码。<br> encodeURI()：对字符串进行编码。<br> decodeURI()；对字符串进行解码。<br> isNaN() 检查某个值是否是数字。<br> Number() 把对象的值转换为数字。<br> parseFloat() 解析一个字符串并返回一个浮点数。<br> parseInt() 解析一个字符串并返回一个整数。<br> String() 把对象的值转换为字符串。   </p>
+<p> 12、javascript里的模拟重载<br> js里存在重载吗？<br> 不存在，会自动调用最后一个函数。<br> 但可以通过arguments数组模拟重载  </p>
+<p> arguments：保存了函数的参数列表里的参数  </p>
+<p> 四、javascript的BOM对象  </p>
+<p> window对象：顶层对象，所有DOM对象都可以用window.对象名.属性（方法）来使用，如window.loaction.href<br> 方法:<br> alert():弹出一个框，显示内容<br> confirm():确认框，显示内容,并返回一个值（确定返回true ，取消返回false）<br> prompt(text,defaulttext):输入时的对话框,text为显示内容，defaulttext为对话框默认内容<br> open():打开一个新浏览器窗口<br> open("新窗口的地址url",",","窗口信息(如width=200,height=100)")<br> close():关闭窗口(浏览器兼容性较差)  </p>
+<p> 定时器方法:<br> setInterval("js代码",毫秒数):每过指定毫秒数执行一次js代码,返回一个对象<br> 1秒=1000毫秒<br> window.setInterval("alert(123)",3000);//表示每三秒执行一次alert方法，执行次数无穷  </p>
+<p> setTimeout("js代码"，毫秒数)：过了指定毫秒数执行一次js代码，返回一个对象<br> window.setTimeout("alert(123)",3000);//表示在三秒后执行一次alert方法，执行次数为1  </p>
+<p> clearInterval("对象名"):通过对象名清除setInterval()设置的定时器<br> clearTimeout("对象名"):清楚setTimeout()设置的定时器  </p>
+<p> 案例：通过俩个按钮触发关闭设置定时器<br> 案例：实现一个实时的时间显示器  </p>
+<p> navigator对象：获取客户机信息（浏览器信息）<br> navigator.appName():返回浏览器的名称<br> screen:获取屏幕信息<br> screen.width:屏幕的宽<br> location:包含有关当前 URL 的信息<br> href：设置或返回完整的 URL<br> hictory:包含访问过的url<br> back() 加载 history 列表中的前一个 URL。<br> forward() 加载 history 列表中的下一个 URL。</p>
+</script></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/11/前端/JavaScript笔记/" data-id="ckib6fith0080g4tpglvf7kqf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/前端/">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据库/修改mysql默认密码方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/03/30/数据库/修改mysql默认密码方法/" class="article-date">
+  <time datetime="2018-03-30T13:46:05.000Z" itemprop="datePublished">2018-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/03/30/数据库/修改mysql默认密码方法/">修改mysql默认密码方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p> 今天在MAC上安装完MYSQL后，MYSQL默认给分配了一个默认密码，但当自己在终端上使用默认密码登录的时候，总会提示一个授权失败的错误：Access denied for user ‘root’@’localhost’ (using passwor)如图：</p>
+<p> <img src="https://img-blog.csdn.net/20170226164101751?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h1 id="解决方案（x）"><a href="#解决方案（x）" class="headerlink" title="解决方案（x）"></a><a href></a>解决方案（x）</h1><p> 既然现在没法登录到数据库中，改密码和添加用户等操作也无从谈起。好在MySQL中还提供了一种免去密码校验进入数据库的方法，我们就先使用这种方法登入到数据库中。然后将默认密码替换掉，上面的问题就可以解决掉啦~具体操作如下</p>
+<h2 id="一、找到Mysql配置文件"><a href="#一、找到Mysql配置文件" class="headerlink" title="一、找到Mysql配置文件"></a><a href></a>一、找到Mysql配置文件</h2><p> 这个操作，在不同平台下对应的不同的操作文件<br> mac系统中配置文件是mysql安装目录support_file下的my-default文件<br><img src="https://img-blog.csdn.net/20170226170443002?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<blockquote>
+<p>需要注意的是：默认该配置文件不具备写权限需要使用chmod命令先为该文件添加写权限才能进行更改</p>
+<p> ps:windows系统的配置文件是mysql安装根目录的my.ini文件</p>
+</blockquote>
+<h2 id="二、修改配置文件"><a href="#二、修改配置文件" class="headerlink" title="二、修改配置文件"></a><a href></a>二、修改配置文件</h2><p> 打开刚才我们找到的配置文件，然后在里面找到  <code>[mysqld]</code>  这一项，然后在该配置项下添加  <code>skip-grant-tables</code> 这个配置，然后保存文件。<br><img src="https://img-blog.csdn.net/20170226170828229?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="三、重启mysql服务"><a href="#三、重启mysql服务" class="headerlink" title="三、重启mysql服务"></a><a href></a>三、重启mysql服务</h2><p> 为了使上一步的配置项生效，我们需要重启MySQL的服务<br> Mac系统可以在系统偏好中进行重启：<br><img src="https://img-blog.csdn.net/20170226170943542?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> windows系统可以通过：在我的电脑上右键–&gt;服务–&gt;找到mysql服务进行重启<br> linux系统可以使用：service mysqld restart来重启</p>
+<h2 id="四、免密登录MySQL"><a href="#四、免密登录MySQL" class="headerlink" title="四、免密登录MySQL"></a><a href></a>四、免密登录MySQL</h2><p> 然后再次进入到终端当中，敲入  <code>mysql -u root -p</code>  命令然后回车，当需要输入密码时，直接按enter键，便可以不用密码登录到数据库当中</p>
+<h2 id="五、修改默认的密码"><a href="#五、修改默认的密码" class="headerlink" title="五、修改默认的密码"></a><a href></a>五、修改默认的密码</h2><p> 使用  <code>set password for &#39;username&#39;@&#39;host&#39; = password(&#39;newpassword&#39;)</code>  命令修改新的密码。</p>
+<p> //我的是: <code>set password for &#39;root&#39;@&#39;host&#39; = password(&#39;123456&#39;)</code>  命令修改新的密码。</p>
+<h2 id="六、检验成果"><a href="#六、检验成果" class="headerlink" title="六、检验成果"></a><a href></a>六、检验成果</h2><p> 我们改完默认密码后，再次进入到之前的配置文件中，将我们跳过密码的那个配置行给删除掉，变为系统原先的配置。重启MySQL服务，下次再登录的时候便可以解决掉这个问题了。</p>
+<h1 id="快速方案"><a href="#快速方案" class="headerlink" title="快速方案"></a><a href></a>快速方案</h1><p> 要是你觉得上面的操作过于麻烦，可以使用下面的快捷方式达到上面的效果，针对mac系统为例：<br> 首先进入到  <code>/usr/local/mysql/support-file</code>  这个目录下,然后按照图片上的步骤进行操作</p>
+<p> <img src="https://img-blog.csdn.net/20170226174906154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 进入mysql的安全模式后，键入图中圈起来的四行配置（必须逐行输入），输入完成后使用  <code>contrl+z</code>  键结束输入<br> 然后再终端中使用 mysql -u root -p 同样可以实现密码登录，另外此时密码也已经修改为了  <code>pass</code>  ，下次的登录即可使用pass这个新密码了。与上面的操作达成的效果是相同的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/03/30/数据库/修改mysql默认密码方法/" data-id="ckib6fir4004yg4tpe3auywau" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-基础操作/win10禁用笔记本原本键盘" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/02/03/基础操作/win10禁用笔记本原本键盘/" class="article-date">
+  <time datetime="2018-02-03T12:51:18.000Z" itemprop="datePublished">2018-02-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/02/03/基础操作/win10禁用笔记本原本键盘/">win10禁用笔记本原本键盘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   以管理员身份运行命令提示符: </p>
+<p> 输入：sc config i8042prt start= disabled</p>
+<p> 重启电脑</p>
+<p> 想恢复时：</p>
+<p> 输入:sc config i8042prt start= auto  </p>
+<p> 转自：<a href="https://www.chenxublog.com/2016/08/12/win10-disable-keybroad.html" target="_blank" rel="noopener">https://www.chenxublog.com/2016/08/12/win10-disable-keybroad.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/02/03/基础操作/win10禁用笔记本原本键盘/" data-id="ckib6fiq7004ag4tpqfamsd0e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据结构与算法/八皇后问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/01/29/数据结构与算法/八皇后问题/" class="article-date">
+  <time datetime="2018-01-28T19:36:45.000Z" itemprop="datePublished">2018-01-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/01/29/数据结构与算法/八皇后问题/">八皇后问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79191125" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79191125</a><br>   <strong>首先，我们需要了解八皇后是什么？**</strong><a href="https://baike.baidu.com/item/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/11053477?fr=aladdin&amp;fromid=10742426&amp;fromtitle=%E5%85%AB%E7%9A%87%E5%90%8E" target="_blank" rel="noopener">八皇后问题</a>（可点击访问）<strong>**是指在一个 8×8 的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后。</strong></p>
+<p> <strong>听起来总是很简单，但实际上<img src="https://img-blog.csdn.net/20180129031257963?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt></strong></p>
+<p> **<br>**</p>
+<p> <strong>好了，开始进入正题：</strong></p>
+<p> <strong>首先构造一个皇后节点类（每一个节点拥有八个方向的节点指针，可以说就是个罗盘）</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129031728567?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>接下来是八皇后的数组类（stl作为八皇后节点的容器栈）</strong></p>
+<p> *<em><img src alt><img src="https://img-blog.csdn.net/20180129031948046?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>最后，就是各个函数的实现了。</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032319550?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032446154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032633219?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032823017?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033034603?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033206167?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><img src="https://img-blog.csdn.net/20180129033311408?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>到这就基本结束了，具体实现函数有231行，基本都有注释，欢迎提出改进意见。</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033558768?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> **<br>**</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/01/29/数据结构与算法/八皇后问题/" data-id="ckib6fir50050g4tp8cgl0vd1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-c++/八皇后问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/01/29/c++/八皇后问题/" class="article-date">
+  <time datetime="2018-01-28T19:36:45.000Z" itemprop="datePublished">2018-01-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/01/29/c++/八皇后问题/">八皇后问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79191125" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79191125</a><br>   <strong>首先，我们需要了解八皇后是什么？**</strong><a href="https://baike.baidu.com/item/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/11053477?fr=aladdin&amp;fromid=10742426&amp;fromtitle=%E5%85%AB%E7%9A%87%E5%90%8E" target="_blank" rel="noopener">八皇后问题</a>（可点击访问）<strong>**是指在一个 8×8 的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后。</strong></p>
+<p> <strong>听起来总是很简单，但实际上<img src="https://img-blog.csdn.net/20180129031257963?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt></strong></p>
+<p> **<br>**</p>
+<p> <strong>好了，开始进入正题：</strong></p>
+<p> <strong>首先构造一个皇后节点类（每一个节点拥有八个方向的节点指针，可以说就是个罗盘）</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129031728567?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>接下来是八皇后的数组类（stl作为八皇后节点的容器栈）</strong></p>
+<p> *<em><img src alt><img src="https://img-blog.csdn.net/20180129031948046?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>最后，就是各个函数的实现了。</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032319550?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032446154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032633219?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032823017?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033034603?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033206167?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><img src="https://img-blog.csdn.net/20180129033311408?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>到这就基本结束了，具体实现函数有231行，基本都有注释，欢迎提出改进意见。</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033558768?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> **<br>**</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/01/29/c++/八皇后问题/" data-id="ckib6fipi003eg4tpxkfs5fpn" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/C/">C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-c++/c++引用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2017/10/08/c++/c++引用/" class="article-date">
+  <time datetime="2017-10-08T07:35:16.000Z" itemprop="datePublished">2017-10-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2017/10/08/c++/c++引用/">c++引用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/78175248" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/78175248</a><br>   <strong>引用的概念:引用就是给内存空间取别名</strong><br> <strong>一、引用有很多用法</strong><br> <strong>1.引用可以给变量取别名</strong><br> [代码]:<br> int a=10;<br> int b=20;<br> int &amp;p=a; //此时p和a代表同一块内存空间<br> cout&lt;&lt;p&lt;&lt;’\t’;<br> p=b; //此时p和b代表同一块内存空间<br> cout&lt;&lt;p&lt;&lt;endl;<br> system(“pause”);<br> [输出结果]：10 20<br> <strong>2.引用可以给做函数形参和实参之间的传递，也就是**</strong>引用传递**<br> [代码]:<br> void Swap(int &amp;a,int &amp;b) //此时相当于给实参变量取别名，直接操控实参变量所代表的内存空间<br> {<br> int temp;<br> temp=a;<br> a=b;<br> b=temp;<br> }<br> void main()<br> {<br> int a=10;<br> int b=20;<br> cout&lt;&lt;a&lt;&lt;”\t”&lt;&lt;b&lt;&lt;endl;<br> Swap(a,b);<br> cout&lt;&lt;a&lt;&lt;”\t”&lt;&lt;b&lt;&lt;endl;<br> system(“pause”);<br> }<br> [输出结果]：10 20<br> 20 10<br> 小结：以往函数常用值传递，在函数执行中需要再开辟形参变量空间，通过实参传给形参进行复制，效率不高，而引用传递直接调用原有变量空间进行操作，效率较高。具体事例要具体分析，如图中交换函数(Swap)如使用值传递，最后交换的不过是形参值，实参值没有改变。所以我们往往采用引用传递或指针传递<br> <strong>3.函数返回值的引用</strong><br> [代码]:<br> int &amp; Quote()<br> {<br> int s=10;<br> s++;<br> return s;<br> }<br> void main()<br> {<br> int a=Quote();<br> int <em>b=&amp;Quote(); //此时临时变量被回收，返回变量内存空间地址，b指向该内存空间<br> int &amp;c=Quote(); //同理：此时c是该内存空间的别名<br> cout&lt;&lt;a&lt;&lt;”\t”&lt;&lt;</em>b&lt;&lt;”\t”&lt;&lt;c&lt;&lt;endl;<br> system(“pause”);<br> }<br> [输出结果]:11 11 11<br> 注意:函数返回值不能是局部变量(如例子里的s)的引用，因为局部变量会被释放，返回引用此时已经找不到原局部变量地址，所以出错。  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2017/10/08/c++/c++引用/" data-id="ckib6fipf0039g4tpkf9e2sgu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/C/">C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/Blog/master/page/12/">&laquo; 上一页</a><a class="page-number" href="/Blog/master/">1</a><span class="space">&hellip;</span><a class="page-number" href="/Blog/master/page/11/">11</a><a class="page-number" href="/Blog/master/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/Blog/master/page/14/">14</a><a class="extend next" rel="next" href="/Blog/master/page/14/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

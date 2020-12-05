@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Android里使用百度地图api | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81462435   准备工作：在使用前需要到百度开发者平台申请API Key，这里不多赘述，各位读者可自行查询文章。  一、修改AndroidManifest.xml文件，添加权限和API Key，以下为需要权限（注释部分是因为项目之前有添加过，读者仍">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android里使用百度地图api">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2018/08/12/Android/Android里使用百度地图api/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81462435   准备工作：在使用前需要到百度开发者平台申请API Key，这里不多赘述，各位读者可自行查询文章。  一、修改AndroidManifest.xml文件，添加权限和API Key，以下为需要权限（注释部分是因为项目之前有添加过，读者仍">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T07:37:27.537Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android里使用百度地图api">
+<meta name="twitter:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81462435   准备工作：在使用前需要到百度开发者平台申请API Key，这里不多赘述，各位读者可自行查询文章。  一、修改AndroidManifest.xml文件，添加权限和API Key，以下为需要权限（注释部分是因为项目之前有添加过，读者仍">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android/Android里使用百度地图api" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/08/12/Android/Android里使用百度地图api/" class="article-date">
+  <time datetime="2018-08-12T12:50:49.000Z" itemprop="datePublished">2018-08-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android里使用百度地图api
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81462435" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81462435</a><br>   准备工作：在使用前需要到百度开发者平台申请API Key，这里不多赘述，各位读者可自行查询文章。</p>
+<p> 一、修改AndroidManifest.xml文件，添加权限和API Key，以下为需要权限（注释部分是因为项目之前有添加过，读者仍需注册）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--&amp;lt;!&amp;ndash; 读取权限 &amp;ndash;&amp;gt;--&gt;</span><br><span class="line">   &lt;!--&lt;uses-permission android:name=&quot;android.permission.READ_EXTERNAL_STORAGE&quot; /&gt;--&gt;</span><br><span class="line">   &lt;!--&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot; /&gt;--&gt;</span><br><span class="line"></span><br><span class="line">   &lt;!--百度地图需要权限--&gt;</span><br><span class="line">   &lt;!--&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt;--&gt;</span><br><span class="line">   &lt;!--&amp;lt;!&amp;ndash;//获取设备网络状态，禁用后无法获取网络状态&amp;ndash;&amp;gt;--&gt;</span><br><span class="line">   &lt;!--&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot;/&gt;--&gt;</span><br><span class="line">   &lt;!--&amp;lt;!&amp;ndash;//网络权限，当禁用后，无法进行检索等相关业务&amp;ndash;&amp;gt;--&gt;</span><br><span class="line">   &lt;!--&lt;uses-permission android:name=&quot;android.permission.READ_PHONE_STATE&quot; /&gt;--&gt;</span><br><span class="line">   &lt;!--&amp;lt;!&amp;ndash;//读取设备硬件信息，统计数据&amp;ndash;&amp;gt;--&gt;</span><br><span class="line">   &lt;!--&lt;uses-permission android:name=&quot;com.android.launcher.permission.READ_SETTINGS&quot; /&gt;--&gt;</span><br><span class="line">   &lt;!--&amp;lt;!&amp;ndash;//读取系统信息，包含系统版本等信息，用作统计&amp;ndash;&amp;gt;--&gt;</span><br><span class="line">   &lt;!--&lt;uses-permission android:name=&quot;android.permission.ACCESS_WIFI_STATE&quot; /&gt;--&gt;</span><br><span class="line">   &lt;!--&amp;lt;!&amp;ndash;//获取设备的网络状态，鉴权所需网络代理&amp;ndash;&amp;gt;--&gt;</span><br><span class="line">   &lt;!--&lt;uses-permission android:name=&quot;android.permission.WRITE_EXTERNAL_STORAGE&quot;/&gt;--&gt;</span><br><span class="line">   &lt;!--//允许sd卡写权限，需写入地图数据，禁用后无法显示地图--&gt;</span><br><span class="line">   &lt;uses-permission android:name=&quot;android.permission.WRITE_SETTINGS&quot; /&gt;</span><br><span class="line">   &lt;!--//获取统计数据--&gt;</span><br><span class="line">   &lt;uses-permission android:name=&quot;android.permission.GET_TASKS&quot; /&gt;</span><br><span class="line">   &lt;!--//鉴权所需该权限获取进程列表--&gt;</span><br><span class="line">   &lt;uses-permission android:name=&quot;android.permission.CAMERA&quot; /&gt;</span><br><span class="line">   &lt;!--//使用步行AR导航，配置Camera权限--&gt;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> &lt;application</span><br><span class="line">    ...&gt;</span><br><span class="line">&lt;meta-data</span><br><span class="line">            android:name=&quot;com.baidu.lbsapi.API_KEY&quot;</span><br><span class="line">            android:value=&quot;此处填申请到的API Key&quot;</span><br><span class="line">            /&gt;</span><br><span class="line">&lt;application&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 二、在build.gradle里添加以下代码</p>
+<blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;  android&#123;</span><br><span class="line">sourceSets&#123;</span><br><span class="line">    main&#123;</span><br><span class="line">        jniLibs.srcDir &apos;libs&apos;</span><br><span class="line">        //说明so的路径为该libs路径，关联所有地图SDK的so文件</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;  dependencies &#123;</span><br><span class="line">    implementation files(&apos;libs/BaiduLBS_Android.jar&apos;)</span><br><span class="line">    compile files(&apos;libs/BaiduLBS_Android.jar&apos;)</span><br><span class="line">&#125;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<p> 三、在项目目录下的libs导入下载好的jar包(需要从百度开发者平台下载)：右键jar包点击Add as Library</p>
+</blockquote>
+<p> 四、在XML里放置一个MapView地图，在Activity里设置各种参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;com.baidu.mapapi.map.MapView</span><br><span class="line">       android:id=&quot;@+id/bmapView&quot;</span><br><span class="line">       android:layout_width=&quot;fill_parent&quot;</span><br><span class="line">       android:layout_height=&quot;fill_parent&quot;</span><br><span class="line">       android:clickable=&quot;true&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line"> public class MapActivity extends Activity &#123;</span><br><span class="line">    BaiduMap mBaiduMap;//定义地图实例</span><br><span class="line">    MapView mMapView;</span><br><span class="line">    public LocationClient mLocationClient = null;//定义LocationClient</span><br><span class="line">    private MyLocationListener myListener = new MyLocationListener();//继承BDAbstractLocationListener的class</span><br><span class="line">    boolean ifFrist = true;//判断是否是第一次进去</span><br><span class="line">    class MyLocationListener extends BDAbstractLocationListener &#123;</span><br><span class="line">        @Override</span><br><span class="line">        public void onReceiveLocation(BDLocation location) &#123;</span><br><span class="line">            //此处的BDLocation为定位结果信息类，通过它的各种get方法可获取定位相关的全部结果</span><br><span class="line">            //以下只列举部分获取经纬度相关（常用）的结果信息</span><br><span class="line">            //更多结果信息获取说明，请参照类参考中BDLocation类中的说明</span><br><span class="line"></span><br><span class="line">            double latitude = location.getLatitude();    //获取纬度信息</span><br><span class="line">            double longitude = location.getLongitude();    //获取经度信息</span><br><span class="line">            float radius = location.getRadius();    //获取定位精度，默认值为0.0f</span><br><span class="line"></span><br><span class="line">            String coorType = location.getCoorType();</span><br><span class="line">            //获取经纬度坐标类型，以LocationClientOption中设置过的坐标类型为准</span><br><span class="line"></span><br><span class="line">            int errorCode = location.getLocType();</span><br><span class="line">            Log.i(&quot;---------&quot;, location.getCityCode() + &quot;---&quot; + latitude + &quot;--&quot; + longitude + &quot;----&quot; + coorType + &quot;--&quot; + location.getCountry() + &quot;--&quot; + location.getCity() + &quot;--&quot; + location.getAddrStr());</span><br><span class="line">            //获取定位类型、定位错误返回码，具体信息可参照类参考中BDLocation类中的说明</span><br><span class="line"></span><br><span class="line">            // 构造定位数据</span><br><span class="line">	        MyLocationData locData = new MyLocationData.Builder()</span><br><span class="line">	                .accuracy(location.getRadius())</span><br><span class="line">	                // 此处设置开发者获取到的方向信息，顺时针0-360</span><br><span class="line">	                .direction(100).latitude(location.getLatitude())</span><br><span class="line">	                .longitude(location.getLongitude()).build();</span><br><span class="line"></span><br><span class="line">	        // 设置定位数据</span><br><span class="line">	        mBaiduMap.setMyLocationData(locData);</span><br><span class="line"></span><br><span class="line">            if (ifFrist) &#123;</span><br><span class="line">                MapStatusUpdate update = MapStatusUpdateFactory.zoomBy(5f);</span><br><span class="line">                // 放大</span><br><span class="line">                mBaiduMap.animateMapStatus(update);</span><br><span class="line">                // 显示个人位置,定位数据建造器</span><br><span class="line">                MyLocationData.Builder builder = new MyLocationData.Builder();</span><br><span class="line">                builder.latitude(location.getLatitude());</span><br><span class="line">                builder.longitude(location.getLongitude());</span><br><span class="line">                MyLocationData data = builder.build();</span><br><span class="line">                mBaiduMap.setMyLocationData(data);</span><br><span class="line">                ifFrist = false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        SDKInitializer.initialize(getApplicationContext());</span><br><span class="line"></span><br><span class="line">        setContentView( R.layout.maplayout);</span><br><span class="line">        mMapView = (MapView) findViewById(R.id.bmapView);</span><br><span class="line">        mBaiduMap = mMapView.getMap();//获取地图实例对象</span><br><span class="line">        // 开启定位图层</span><br><span class="line">        mBaiduMap.setMyLocationEnabled(true);</span><br><span class="line">        //设置定位图标,第二个参数设置是否有箭头，第三个设置图标样式</span><br><span class="line">        //mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(MyLocationConfiguration.LocationMode.FOLLOWING, false,null));</span><br><span class="line">        mBaiduMap.setMyLocationConfiguration(new MyLocationConfiguration(MyLocationConfiguration.LocationMode.FOLLOWING, false, null));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //声明LocationClient类</span><br><span class="line">        mLocationClient = new LocationClient(getApplicationContext());</span><br><span class="line">        //注册监听函数</span><br><span class="line">        mLocationClient.registerLocationListener(myListener);</span><br><span class="line"></span><br><span class="line">        LocationClientOption option = new LocationClientOption();</span><br><span class="line">        option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);</span><br><span class="line">        //可选，设置定位模式，默认高精度</span><br><span class="line">        //LocationMode.Hight_Accuracy：高精度；</span><br><span class="line">        //LocationMode. Battery_Saving：低功耗；</span><br><span class="line">        //LocationMode. Device_Sensors：仅使用设备；</span><br><span class="line"></span><br><span class="line">        option.setCoorType(&quot;bd09ll&quot;);</span><br><span class="line">        //可选，设置返回经纬度坐标类型，默认gcj02</span><br><span class="line">        //gcj02：国测局坐标；</span><br><span class="line">        //bd09ll：百度经纬度坐标；</span><br><span class="line">        //bd09：百度墨卡托坐标；</span><br><span class="line">        //海外地区定位，无需设置坐标类型，统一返回wgs84类型坐标</span><br><span class="line"></span><br><span class="line">        option.setScanSpan(10000);</span><br><span class="line">        //可选，设置发起定位请求的间隔，int类型，单位ms</span><br><span class="line">        //如果设置为0，则代表单次定位，即仅定位一次，默认为0</span><br><span class="line">        //如果设置非0，需设置1000ms以上才有效</span><br><span class="line"></span><br><span class="line">        option.setOpenGps(true);</span><br><span class="line">        //可选，设置是否使用gps，默认false</span><br><span class="line">        //使用高精度和仅用设备两种定位模式的，参数必须设置为true</span><br><span class="line"></span><br><span class="line">        option.setLocationNotify(true);</span><br><span class="line">        //可选，设置是否当GPS有效时按照1S/1次频率输出GPS结果，默认false</span><br><span class="line"></span><br><span class="line">        option.setIgnoreKillProcess(false);</span><br><span class="line">        //可选，定位SDK内部是一个service，并放到了独立进程。</span><br><span class="line">        //设置是否在stop的时候杀死这个进程，默认（建议）不杀死，即setIgnoreKillProcess(true)</span><br><span class="line"></span><br><span class="line">        option.SetIgnoreCacheException(false);</span><br><span class="line">        //可选，设置是否收集Crash信息，默认收集，即参数为false</span><br><span class="line"></span><br><span class="line">        option.setWifiCacheTimeOut(5 * 60 * 1000);</span><br><span class="line">        //可选，7.2版本新增能力</span><br><span class="line">        //如果设置了该接口，首次启动定位时，会先判断当前WiFi是否超出有效期，若超出有效期，会先重新扫描WiFi，然后定位</span><br><span class="line"></span><br><span class="line">        option.setEnableSimulateGps(false);</span><br><span class="line">        //可选，设置是否需要过滤GPS仿真结果，默认需要，即参数为false</span><br><span class="line">        option.setIsNeedAddress(true);</span><br><span class="line"></span><br><span class="line">        //传入位置客户端设置好的位置客户端选项</span><br><span class="line">        mLocationClient.setLocOption(option);</span><br><span class="line">        //调用LocationClient的start()方法，便可发起定位请求</span><br><span class="line">        mLocationClient.start();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    protected void onStop() &#123;</span><br><span class="line">        super.onStop();</span><br><span class="line">    &#125;</span><br><span class="line">    protected void onDestroy() &#123;</span><br><span class="line">        super.onDestroy();</span><br><span class="line">        //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理</span><br><span class="line">        mMapView.onDestroy();</span><br><span class="line">        mLocationClient.stop();</span><br><span class="line">        // 关闭定位图层</span><br><span class="line">        mBaiduMap.setMyLocationEnabled(false);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    protected void onPause() &#123;</span><br><span class="line">        super.onPause();</span><br><span class="line">        mMapView.onPause();</span><br><span class="line">    &#125;</span><br><span class="line">    protected void onResume() &#123;</span><br><span class="line">        super.onResume();</span><br><span class="line">        //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理</span><br><span class="line">        mMapView.onResume();</span><br><span class="line">        //调用LocationClient的start()方法，便可发起定位请求</span><br><span class="line">        mLocationClient.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 已经申请过api key的读者可在百度开发者网站修改包名（需要与文件build.gradle中defaultConfig的applicationId一致），后按上述流程走一遍即可</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/08/12/Android/Android里使用百度地图api/" data-id="ckib6fist0075g4tpgpb5udk2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2018/08/14/Android/Android阶段总结/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Android阶段总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2018/07/31/Android/Android的开发技巧/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android的开发技巧</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Spring的AOP切面编程 | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="AOP切面编程：即对当前已添加入IOC容器Bean类进行相应的统一日志操作，一个切面即对Bean类的包装代理。  目录  一、注解方式进行AOP编程  二、XML文件方式进行AOP编程  一、注解方式进行AOP编程 1、导包：  com.springsource.net.sf.cglib-2.2.0.jar    com.springsource.org.aopalliance-1.0.0.">
+<meta name="keywords" content="Web高阶">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring的AOP切面编程">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/Web高阶/Spring的AOP切面编程/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="AOP切面编程：即对当前已添加入IOC容器Bean类进行相应的统一日志操作，一个切面即对Bean类的包装代理。  目录  一、注解方式进行AOP编程  二、XML文件方式进行AOP编程  一、注解方式进行AOP编程 1、导包：  com.springsource.net.sf.cglib-2.2.0.jar    com.springsource.org.aopalliance-1.0.0.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190405161346831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190405161346831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-07-14T08:10:05.608Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring的AOP切面编程">
+<meta name="twitter:description" content="AOP切面编程：即对当前已添加入IOC容器Bean类进行相应的统一日志操作，一个切面即对Bean类的包装代理。  目录  一、注解方式进行AOP编程  二、XML文件方式进行AOP编程  一、注解方式进行AOP编程 1、导包：  com.springsource.net.sf.cglib-2.2.0.jar    com.springsource.org.aopalliance-1.0.0.">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190405161346831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Web高阶/Spring的AOP切面编程" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/07/14/Web高阶/Spring的AOP切面编程/" class="article-date">
+  <time datetime="2019-07-14T03:03:37.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Spring的AOP切面编程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   AOP切面编程：即对当前<strong>已添加入IOC容器Bean类</strong>进行相应的统一日志操作，一个切面即对Bean类的包装代理。</p>
+<p> <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%E3%80%81%E6%B3%A8%E8%A7%A3%E6%96%B9%E5%BC%8F%E8%BF%9B%E8%A1%8CAOP%E7%BC%96%E7%A8%8B">一、注解方式进行AOP编程</a></p>
+<p> <a href="#%E4%BA%8C%E3%80%81XML%E6%96%87%E4%BB%B6%E6%96%B9%E5%BC%8F%E8%BF%9B%E8%A1%8CAOP%E7%BC%96%E7%A8%8B">二、XML文件方式进行AOP编程</a></p>
+<hr>
+<h3 id="一、注解方式进行AOP编程"><a href="#一、注解方式进行AOP编程" class="headerlink" title="一、注解方式进行AOP编程"></a>一、注解方式进行AOP编程</h3><p> 1、导包：</p>
+<ul>
+<li><p>com.springsource.net.sf.cglib-2.2.0.jar  </p>
+</li>
+<li><p>com.springsource.org.aopalliance-1.0.0.jar  </p>
+</li>
+<li><p>com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar  </p>
+</li>
+<li><p>spring-aspects-4.0.0.RELEASE.jar</p>
+<p>2、在<beans>标签添加属性</beans></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</span><br></pre></td></tr></table></figure>
+
+<p> 或者鼠标点击快速导入</p>
+<p> <img src="https://img-blog.csdnimg.cn/20190405161346831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<p> 3、 在XML文件里添加配置</p>
+<p> 使用注解方式自动扫描并自动装载入IOC容器的配置：<strong>&lt;context:component-scan base-package=”包名”&gt;</strong></p>
+<p> 使 @AspjectJ 注解起作用的配置: <strong><a href="aop:aspectj-autoproxy" target="_blank" rel="noopener">aop:aspectj-autoproxy</a></strong></p>
+<p> 4、编写切面类，并在类前添加注解<strong>@Aspect，@Component。</strong></p>
+<p> ** @order(int)：可不加，有多个切面类时可以指定切面类的优先级，索引从0开始**</p>
+<p> 给切面类的方法前添加@注解名（切面表达式）</p>
+<p> 方法的注解：有5种，代表了当前是什么类型的包装；</p>
+<p> 切面表达式：对哪个类或者哪个方法的包装及动态代理。</p>
+<p> *<em>@Before: *</em>前置通知, 在方法执行之前执行</p>
+<p> *<em>@After: *</em>后置通知, 在方法执行之后执行，无论当前方法是否发送异常</p>
+<p> *<em>@AfterReturning: *</em>返回通知, 在方法返回结果之后(正常结束后)执行</p>
+<p> <strong>@AfterThrowing**</strong>: **异常通知, 在方法抛出异常之后</p>
+<p> *<em>@Around: *</em>环绕通知, 围绕着方法执行</p>
+<p> 切面表达式格式：</p>
+<blockquote>
+<p><strong>@注解类型(“execution(public int 包名.类名.方法名(参数类型,..))”)</strong></p>
+<p> 注意： public int可用一个<em>表示通配符，int也可用一个</em>表示通配符，public不可以。</p>
+</blockquote>
+<p> 包名、类名、方法名都可以用*表示通配符。</p>
+<p> 参数类型可用..表示匹配数目不限的所有类型。</p>
+<p> 切面表达式例子：</p>
+<p> public * 包名.类名.*(参数类型,..)：该类所有匹配参数类型的所有公有方法</p>
+<p> public * AOP.<em>.</em>(..))：该类所有方法</p>
+<p> 切面表达式可以提取为方法给多个注解使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> @Component</span><br><span class="line">@Aspect</span><br><span class="line">class LogAspect&#123;</span><br><span class="line">        @Pointcut(&quot;切面表达式&quot;)</span><br><span class="line">        public void 切面表达式名() &#123;&#125;</span><br><span class="line">    	//前置通知</span><br><span class="line">    	@Before(&quot;切面表达式名()&quot;)</span><br><span class="line">    	public void beforeAdd(JoinPoint joinPoint) &#123;</span><br><span class="line">	    	String methodName=joinPoint.getSignature().getName();</span><br><span class="line">	    	List&lt;Object&gt; list=Arrays.asList(joinPoint.getArgs());</span><br><span class="line">	    	System.out.println(&quot;方法开始了，方法名：&quot;+methodName+&quot;，方法列表&quot;+list);</span><br><span class="line">    	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 示例：切面类的方法可以定义一个JoinPoint类型参数，getSignature().getName()：获取被包装代理的方法名</p>
+<p> getArgs()：获取被包装代理方法的Object类型参数数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"> package AOP;</span><br><span class="line"></span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.aspectj.lang.JoinPoint;</span><br><span class="line">import org.aspectj.lang.annotation.After;</span><br><span class="line">import org.aspectj.lang.annotation.AfterReturning;</span><br><span class="line">import org.aspectj.lang.annotation.AfterThrowing;</span><br><span class="line">import org.aspectj.lang.annotation.Aspect;</span><br><span class="line">import org.aspectj.lang.annotation.Before;</span><br><span class="line">import org.aspectj.lang.annotation.Pointcut;</span><br><span class="line">import org.springframework.core.annotation.Order;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 日志切面类</span><br><span class="line"> */</span><br><span class="line">@Order(2)</span><br><span class="line">@Component</span><br><span class="line">@Aspect</span><br><span class="line">public class LoggingAspect &#123;</span><br><span class="line">	//切面表达式可以复用</span><br><span class="line">	@Pointcut(&quot;execution(public int AOP.CountService.add(..))&quot;)</span><br><span class="line">	public void addExecution() &#123;&#125;</span><br><span class="line">	</span><br><span class="line">	//前置通知</span><br><span class="line">	@Before(&quot;addExecution()&quot;)</span><br><span class="line">	public void beforeAdd(JoinPoint joinPoint) &#123;</span><br><span class="line">		String methodName=joinPoint.getSignature().getName();</span><br><span class="line">		List&lt;Object&gt; list=Arrays.asList(joinPoint.getArgs());</span><br><span class="line">		System.out.println(&quot;方法开始了，方法名：&quot;+methodName+&quot;，方法列表&quot;+list);</span><br><span class="line">	&#125;</span><br><span class="line">	//后置通知</span><br><span class="line">	@After(&quot;addExecution()&quot;)</span><br><span class="line">	public void afterAdd() &#123;</span><br><span class="line">		System.out.println(&quot;当前操作已执行完毕&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	//返回通知</span><br><span class="line">	@AfterReturning(value=&quot;addExecution()&quot;</span><br><span class="line">			,returning=&quot;result&quot;)</span><br><span class="line">	public void returnAdd(Object result) &#123;</span><br><span class="line">		System.out.println(&quot;当前返回结果:&quot;+result);</span><br><span class="line">	&#125;</span><br><span class="line">	//异常通知</span><br><span class="line">	@AfterThrowing(value=&quot;execution(public * AOP.CountService.*(..))&quot;</span><br><span class="line">			,throwing=&quot;e&quot;)</span><br><span class="line">	public void exceptionDiv(Exception e) &#123;</span><br><span class="line">		System.out.println(&quot;异常信息:&quot;+e.toString());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line"> * 验证切面类</span><br><span class="line"> */</span><br><span class="line">@Order(1)</span><br><span class="line">@Component</span><br><span class="line">@Aspect</span><br><span class="line">class ValidateAspect&#123;</span><br><span class="line">	//前置通知</span><br><span class="line">	@Before(&quot;execution(public int AOP.CountService.add(..))&quot;)</span><br><span class="line">	public void beforeAdd(JoinPoint joinPoint) &#123;</span><br><span class="line">		System.out.println(&quot;我是验证，我先开始&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 待包装代理类：需要装载入IOC容器，所以使用了@Service注解 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> package AOPAnnotation;</span><br><span class="line"></span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line">@Service</span><br><span class="line">public class CountService &#123;</span><br><span class="line">	public int add(int i,int j) &#123;</span><br><span class="line">		System.out.println(&quot;now[&quot;+i+&quot;,&quot;+j+&quot;]&quot;);</span><br><span class="line">		return i+j;</span><br><span class="line">	&#125;</span><br><span class="line">	public int Div(int i,int j) throws Exception&#123;</span><br><span class="line">		System.out.println(&quot;now[&quot;+i+&quot;,&quot;+j+&quot;]&quot;);</span><br><span class="line">		return i/j;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 5、调用方法测试，日志打印是否成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">	//测试AOP切面编程</span><br><span class="line">CountService countService=context.getBean(CountService.class);</span><br><span class="line">countService.add(2, 3);</span><br><span class="line"></span><br><span class="line">//关闭IOC容器：必须先转为子类ClassPathXmlApplicationContext对象后才能关闭</span><br><span class="line">((AbstractApplicationContext) context).close();</span><br></pre></td></tr></table></figure>
+
+<p> 注意：如果被包装代理的类是继承了接口的，则@Service,@Controller@Component@Respository是加在被包装代理类上，</p>
+<p> 而不是接口中。如果想让该接口的所有方法都被包装动态代理，则修改切面表达式如下。</p>
+<p> 格式：<strong>@注解类型(“execution(public * 包名.**</strong>接口名<strong><em>*.</em>(参数类型,..))”)</strong></p>
+<h3 id="二、XML文件方式进行AOP编程"><a href="#二、XML文件方式进行AOP编程" class="headerlink" title="二、XML文件方式进行AOP编程"></a>二、XML文件方式进行AOP编程</h3><p> 1、导包：</p>
+<ul>
+<li><p>com.springsource.net.sf.cglib-2.2.0.jar  </p>
+</li>
+<li><p>com.springsource.org.aopalliance-1.0.0.jar  </p>
+</li>
+<li><p>com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar  </p>
+</li>
+<li><p>spring-aspects-4.0.0.RELEASE.jar</p>
+<p>2、在<beans>标签添加属性</beans></p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;</span><br></pre></td></tr></table></figure>
+
+<p> 或者鼠标点击快速导入</p>
+<p> <img src="https://img-blog.csdnimg.cn/20190405161346831.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<p> 3、添加待包装类和切面类（此时不用添加注解，使用的是XML文件方式）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> package AOPXML;</span><br><span class="line"></span><br><span class="line">public class CountService &#123;</span><br><span class="line">	public int add(int i,int j) &#123;</span><br><span class="line">		System.out.println(&quot;now[&quot;+i+&quot;,&quot;+j+&quot;]&quot;);</span><br><span class="line">		return i+j;</span><br><span class="line">	&#125;</span><br><span class="line">	public int Div(int i,int j) throws Exception&#123;</span><br><span class="line">		System.out.println(&quot;now[&quot;+i+&quot;,&quot;+j+&quot;]&quot;);</span><br><span class="line">		return i/j;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"> package AOPXML;</span><br><span class="line"></span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">import org.aspectj.lang.JoinPoint;</span><br><span class="line">import org.aspectj.lang.annotation.After;</span><br><span class="line">import org.aspectj.lang.annotation.AfterReturning;</span><br><span class="line">import org.aspectj.lang.annotation.AfterThrowing;</span><br><span class="line">import org.aspectj.lang.annotation.Aspect;</span><br><span class="line">import org.aspectj.lang.annotation.Before;</span><br><span class="line">import org.aspectj.lang.annotation.Pointcut;</span><br><span class="line">import org.springframework.core.annotation.Order;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 日志切面类</span><br><span class="line"> */</span><br><span class="line">public class LoggingAspect &#123;</span><br><span class="line">	//前置通知</span><br><span class="line">	public void beforeAdd(JoinPoint joinPoint) &#123;</span><br><span class="line">		String methodName=joinPoint.getSignature().getName();</span><br><span class="line">		List&lt;Object&gt; list=Arrays.asList(joinPoint.getArgs());</span><br><span class="line">		System.out.println(&quot;方法开始了，方法名：&quot;+methodName+&quot;，方法列表&quot;+list);</span><br><span class="line">	&#125;</span><br><span class="line">	//后置通知</span><br><span class="line">	public void afterAdd() &#123;</span><br><span class="line">		System.out.println(&quot;当前操作已执行完毕&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	//返回通知</span><br><span class="line">	public void returnAdd(Object result) &#123;</span><br><span class="line">		System.out.println(&quot;当前返回结果:&quot;+result);</span><br><span class="line">	&#125;</span><br><span class="line">	//异常通知</span><br><span class="line">	public void exceptionDiv(Exception e) &#123;</span><br><span class="line">		System.out.println(&quot;异常信息:&quot;+e.toString());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line"> * 验证切面类</span><br><span class="line"> */</span><br><span class="line">class ValidateAspect&#123;</span><br><span class="line">	//前置通知</span><br><span class="line">	public void beforeAdd(JoinPoint joinPoint) &#123;</span><br><span class="line">		System.out.println(&quot;我是验证，我先开始&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 4、在XML文件里添加配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">	 &lt;!-- AOPXML文件方式切面编程 --&gt;</span><br><span class="line"> &lt;!-- 配置服务类（待包装类） --&gt;</span><br><span class="line">&lt;bean id=&quot;countService&quot; </span><br><span class="line">	class=&quot;AOPXML.CountService&quot;&gt;&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 配置切面类bean. --&gt;</span><br><span class="line">&lt;bean id=&quot;loggingAspect&quot;</span><br><span class="line">	class=&quot;AOPXML.LoggingAspect&quot;&gt;&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;bean id=&quot;vlidateAspect&quot;</span><br><span class="line">	class=&quot;AOPXML.ValidateAspect&quot;&gt;&lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 配置 AOP --&gt;</span><br><span class="line">&lt;aop:config&gt;</span><br><span class="line">	&lt;!-- 配置切点表达式 --&gt;</span><br><span class="line">	&lt;aop:pointcut expression=&quot;execution(* AOPXML.*.*(int, int))&quot; </span><br><span class="line">		id=&quot;expressionOne&quot;/&gt;</span><br><span class="line">	&lt;!-- 配置切面及通知 --&gt;</span><br><span class="line">	&lt;aop:aspect ref=&quot;loggingAspect&quot; order=&quot;2&quot;&gt;</span><br><span class="line">		&lt;aop:before method=&quot;beforeAdd&quot; pointcut-ref=&quot;expressionOne&quot;/&gt;</span><br><span class="line">		&lt;aop:after method=&quot;afterAdd&quot; pointcut-ref=&quot;expressionOne&quot;/&gt;</span><br><span class="line">		&lt;aop:after-throwing method=&quot;exceptionDiv&quot; pointcut-ref=&quot;expressionOne&quot; throwing=&quot;e&quot;/&gt;</span><br><span class="line">		&lt;aop:after-returning method=&quot;returnAdd&quot; pointcut-ref=&quot;expressionOne&quot; returning=&quot;result&quot;/&gt;</span><br><span class="line">	&lt;/aop:aspect&gt;	</span><br><span class="line">	&lt;aop:aspect ref=&quot;vlidateAspect&quot; order=&quot;1&quot;&gt;</span><br><span class="line">		&lt;aop:before method=&quot;beforeAdd&quot; pointcut-ref=&quot;expressionOne&quot;/&gt;</span><br><span class="line">	&lt;/aop:aspect&gt;</span><br><span class="line">&lt;/aop:config&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 5、调用方法测试，日志打印是否成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">	//测试AOP切面编程</span><br><span class="line">CountService countService=context.getBean(CountService.class);</span><br><span class="line">countService.add(2, 3);</span><br><span class="line"></span><br><span class="line">//关闭IOC容器：必须先转为子类ClassPathXmlApplicationContext对象后才能关闭</span><br><span class="line">((AbstractApplicationContext) context).close();</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/Web高阶/Spring的AOP切面编程/" data-id="ckib6fit4007ig4tpgmbhf8xc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC的初步使用/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SpringMVC的初步使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2019/07/14/Web高阶/Spring的初步使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Spring的初步使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

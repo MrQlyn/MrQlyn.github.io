@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>MySQL学习笔记(三) | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/79508140   目录  一、数据表里内容的修改和删除（更改，删除）  二、数据表里内容的更新（更新）  三、索引和视图  四、 内置函数  准备好一个表的员工，接下来都是对这个表进行操作   一、数据表里内容的修改和删除（更改，删除） 1.1增加一">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL学习笔记(三)">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2018/07/11/数据库/MySQL学习笔记(三)/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/79508140   目录  一、数据表里内容的修改和删除（更改，删除）  二、数据表里内容的更新（更新）  三、索引和视图  四、 内置函数  准备好一个表的员工，接下来都是对这个表进行操作   一、数据表里内容的修改和删除（更改，删除） 1.1增加一">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/2018031016064672">
+<meta property="og:image" content="https://img-blog.csdn.net/20180310161806939">
+<meta property="og:image" content="https://img-blog.csdn.net/20180310161819102">
+<meta property="og:image" content="https://img-blog.csdn.net/20180310161825976">
+<meta property="og:image" content="https://img-blog.csdn.net/20180310162803161">
+<meta property="og:image" content="https://img-blog.csdn.net/20180310162812722">
+<meta property="og:image" content="https://img-blog.csdn.net/20180310162825626">
+<meta property="og:image" content="https://img-blog.csdn.net/20180310193119237">
+<meta property="og:image" content="https://img-blog.csdn.net/20180310193124599">
+<meta property="og:updated_time" content="2019-07-14T08:21:17.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL学习笔记(三)">
+<meta name="twitter:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/79508140   目录  一、数据表里内容的修改和删除（更改，删除）  二、数据表里内容的更新（更新）  三、索引和视图  四、 内置函数  准备好一个表的员工，接下来都是对这个表进行操作   一、数据表里内容的修改和删除（更改，删除） 1.1增加一">
+<meta name="twitter:image" content="https://img-blog.csdn.net/2018031016064672">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-数据库/MySQL学习笔记(三)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/07/11/数据库/MySQL学习笔记(三)/" class="article-date">
+  <time datetime="2018-07-11T09:28:52.000Z" itemprop="datePublished">2018-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MySQL学习笔记(三)
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79508140" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79508140</a><br>   <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%E3%80%81%E6%95%B0%E6%8D%AE%E8%A1%A8%E9%87%8C%E5%86%85%E5%AE%B9%E7%9A%84%E4%BF%AE%E6%94%B9%E5%92%8C%E5%88%A0%E9%99%A4%EF%BC%88%E6%9B%B4%E6%94%B9%EF%BC%8C%E5%88%A0%E9%99%A4%EF%BC%89">一、数据表里内容的修改和删除（更改，删除）</a></p>
+<p> <a href="#%E4%BA%8C%E3%80%81%E6%95%B0%E6%8D%AE%E8%A1%A8%E9%87%8C%E5%86%85%E5%AE%B9%E7%9A%84%E6%9B%B4%E6%96%B0%EF%BC%88%E6%9B%B4%E6%96%B0%EF%BC%89">二、数据表里内容的更新（更新）</a></p>
+<p> <a href="#%E4%B8%89%E3%80%81%E7%B4%A2%E5%BC%95%E5%92%8C%E8%A7%86%E5%9B%BE">三、索引和视图</a></p>
+<p> <a href="#%E5%9B%9B%E3%80%81%20%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0">四、 内置函数</a></p>
+<hr>
+<p>准备好一个表的员工，接下来都是对这个表进行操作</p>
+<p> <img src="https://img-blog.csdn.net/2018031016064672" alt></p>
+<h2 id="一、数据表里内容的修改和删除（更改，删除）"><a href="#一、数据表里内容的修改和删除（更改，删除）" class="headerlink" title="一、数据表里内容的修改和删除（更改，删除）"></a>一、数据表里内容的修改和删除（更改，删除）</h2><p> <strong>1.1增加一列数据</strong></p>
+<p> <strong>格式：alter table 表名 add column 列名 数据类型（数据长度）;</strong></p>
+<p> 注意：当名添加至某一固定位置时，在尾部添加之后列名1即可添加至列名1的后面，当添加至第一列时直接在尾部添加第一即可。</p>
+<p> 在名字的后面增加一列数据薪水</p>
+<p> alter table employee add column salary float（1）;</p>
+<p> <img src="https://img-blog.csdn.net/20180310161806939" alt></p>
+<p> <strong>1.2删除一列数据</strong></p>
+<p> <strong>格式：alter table 表名 drop column 列名;</strong></p>
+<p> 删除薪水列</p>
+<p> alter table employee drop column salary;</p>
+<p> <img src="https://img-blog.csdn.net/20180310161819102" alt></p>
+<p> ** 1.3删除一行数据**</p>
+<p> <strong>格式：delete from 表名 where 条件</strong></p>
+<p> 注意：若不添加条件，则清空整张表</p>
+<p> 删除最后一行玛丽的数据</p>
+<p> delete from employee where name =’mary’;</p>
+<p> <img src="https://img-blog.csdn.net/20180310161825976" alt></p>
+<p> <strong>1.4对一列数据的重定义（一般用来重命名）</strong></p>
+<p> <strong>格式：alter table 表名 change 原列名新列名数据类型（数据长度）约束;</strong></p>
+<p> 注意：此时若修改了数据类型，可能会造成数据丢失。</p>
+<p> 添加一列薪水（ENUM），后修改为性别</p>
+<p> alter table employee add column salary int（1）;</p>
+<p> alter table employee change salary sex int（1）;</p>
+<p> <img src="https://img-blog.csdn.net/20180310162803161" alt></p>
+<p> <strong>1.5对一列数据类型的修改</strong></p>
+<p> <strong>格式：alter table 表名 modiify 列名 数据类型</strong></p>
+<p> 将性别的INT型改成枚举类型</p>
+<p> alter table employee modify sex enum（’男’，’女’）;</p>
+<p> <img src="https://img-blog.csdn.net/20180310162812722" alt></p>
+<h2 id="二、数据表里内容的更新（更新）"><a href="#二、数据表里内容的更新（更新）" class="headerlink" title="二、数据表里内容的更新（更新）"></a>二、数据表里内容的更新（更新）</h2><p> <strong>2.1更新表中某行一个或多个数据</strong></p>
+<p> <strong>格式：update 表名 set 列名=’更新值’，列名=更新值……where 条件（条件用来确定哪一行，可确定多行）</strong></p>
+<p> 注意：若不加条件，则会更新每一行的列数据</p>
+<p> 将第一行汤姆的性别改为男，年龄改为1岁</p>
+<p> 更新员工设置性别=’男’，年龄= 1，其中name =’tom’;</p>
+<p> <img src="https://img-blog.csdn.net/20180310162825626" alt></p>
+<h2 id="三、索引和视图"><a href="#三、索引和视图" class="headerlink" title="三、索引和视图"></a>三、索引和视图</h2><p> <strong>3.1索引：就像字典里的目录，加快查找数据速度</strong></p>
+<blockquote>
+<blockquote>
+<ol>
+<li>主键列一定要建立索引 </li>
+<li>外键列可以建立索引 </li>
+<li>text和二进制数据不要建立索引<br><strong>格式：create index 索引名 on 表名（列名）</strong></li>
+</ol>
+</blockquote>
+</blockquote>
+<p> 给ID加上索引</p>
+<p> 在雇员（ID）上创建索引idsy;</p>
+<p> <img src="https://img-blog.csdn.net/20180310193119237" alt></p>
+<p> <strong>显示当前已加的索引：show indexs from 表名</strong></p>
+<p> <img src="https://img-blog.csdn.net/20180310193124599" alt></p>
+<p> 可以看到员工表中已经设置有索引的有编号和名称俩项。</p>
+<p> <strong>删除索引：drop index 索引名 on 表名</strong></p>
+<p> <strong>3.2视图的创建</strong></p>
+<p> 视图：在原有表或视图的基础上，挑选需要的列数据创建的一个新表叫做视图，这个新表的数据全部来源于原有表，当原有表的</p>
+<p> 数据改变时，视图的数据也会跟着改变。视图可以看做一张表，对视图数据进行更改，原有表数据也会更改。</p>
+<p> <strong>格式：create view 视图名（列名，….）as select 语句 【with local / cascaded check option】</strong></p>
+<p> <strong>with local check option（可不加） ：在对视图进行update、insert、delete时要保证满足select语句里的where条件</strong></p>
+<p> ** 若当前视图建立在视图基础上，只检查当前视图的select语句里的where条件**</p>
+<p> <strong>with cascaded check option（可不加）：在对视图进行update、insert、delete时要保证满足select语句里的where条件</strong> </p>
+<p> ** 若当前视图建立在视图基础上，检查当前视图、底层视图的select语句里的where条件**</p>
+<h2 id="四、-内置函数"><a href="#四、-内置函数" class="headerlink" title="四、 内置函数"></a>四、 内置函数</h2><p> 内置函数：即mysql里已有的函数，函数可以嵌套。</p>
+<p> <strong>4.1数学函数</strong></p>
+<blockquote>
+<p>abs（x）：返回x的绝对值</p>
+<p> pow（x，y）：x的y次方/幂</p>
+<p> mod（x，y）：x除以y后的余数</p>
+<p> sqrt（x）：x的二次方开方，求根。</p>
+<p> exp（x）：e的x次方</p>
+<p> ceil（x）：返回不小于x的最小整数值</p>
+<p> floor（x）：返回不大于x的最大整数值</p>
+<p> rand（）：返回0~1的随机数</p>
+<p> pi（）：返回PI值</p>
+<p> round（x）：返回离x最近的整数</p>
+<p> round（x，y）：保留x小数点后y位的值，截取时需要四舍五入</p>
+<p> <strong>4.2字符串函数</strong></p>
+</blockquote>
+<blockquote>
+<p>concat（s1，s2，…）：将多个字符串连接为一个字符串</p>
+<p> group_concat（列名）：将一整列数据连接成未一个字符串</p>
+<p> 4.3日期和时间函数</p>
+</blockquote>
+<blockquote>
+<p>curdate（）：返回日期，即年月日</p>
+<p> curtime（）：返回时间，即时分秒</p>
+<p> Now（）：返回当前日期和时间</p>
+<p> year（d）：返回日期d里的年份</p>
+<p> month（d）：返回日期的月份</p>
+<p> dayofmonth（d）：返回日期d是本月第几天</p>
+<p> hour（d）/ minute（d）/ second（d）：返回日期里的小时值，分钟值，秒值</p>
+<p> datediff（d1，d2）：日期d1和日期d2相隔天数</p>
+<p> adddate（d，n）：日期+n天后的日期</p>
+<p> subdate（d，n）：日期-n天后的日期</p>
+</blockquote>
+<p> <strong>相关章节：</strong></p>
+<p> （一）<a href="https://blog.csdn.net/qq_38487155/article/details/79475851" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79475851</a></p>
+<p> （二）<a href="https://blog.csdn.net/qq_38487155/article/details/79488478" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79488478</a></p>
+<p> （四）<a href="https://blog.csdn.net/qq_38487155/article/details/79516314" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79516314</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/07/11/数据库/MySQL学习笔记(三)/" data-id="ckib6fir0004ug4tpjiffmbm1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2018/07/11/数据库/MySQL学习笔记(四)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          MySQL学习笔记(四)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2018/07/11/数据库/MySQL学习笔记(一)/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MySQL学习笔记(一)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="シェンキンリンのブログ">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/page/8/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="シェンキンリンのブログ">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-前端/前端重要知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/01/11/前端/前端重要知识点总结/" class="article-date">
+  <time datetime="2019-01-11T06:17:19.000Z" itemprop="datePublished">2019-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2019/01/11/前端/前端重要知识点总结/">前端重要知识点总结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/86298199" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/86298199</a><br>   <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%E3%80%81%E5%BC%95%E5%85%A5js%E6%96%87%E4%BB%B6%E5%92%8Ccss%E6%96%87%E4%BB%B6%EF%BC%9A%E5%9C%A8%3Chead%3E%E9%87%8C%E6%B7%BB%E5%8A%A0%E4%BB%A5%E4%B8%8B%E8%AF%AD%E5%8F%A5%EF%BC%8Cjs%E4%BB%A3%E7%A0%81%E5%92%8Ccss%E4%BB%A3%E7%A0%81%E5%86%99%E5%9C%A8js%E6%96%87%E4%BB%B6%E9%87%8C%E3%80%81">一、引入js文件和css文件：</a></p>
+<p> <a href="#%E4%BA%8C%E3%80%81%E8%AE%BE%E7%BD%AEUTF-8%E7%BC%96%E7%A0%81">二、设置UTF-8编码</a></p>
+<p> <a href="#%E4%B8%89%E3%80%81%E5%B8%B8%E8%A7%81%E7%9A%84css%E5%B1%9E%E6%80%A7%E5%8F%8A%E5%85%B6%E5%8A%9F%E8%83%BD%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0">三、常见的css属性及其功能 </a></p>
+<p> <a href="#%E5%9B%9B%E3%80%81%E5%B8%B8%E8%A7%81CSS%E5%8A%9F%E8%83%BD%E5%92%8CJS%E5%8A%9F%E8%83%BD">四、常见CSS功能和JS功能</a></p>
+<p> <a href="#%E4%BA%94%E3%80%81iframe%E6%A0%87%E7%AD%BE%EF%BC%9A%E5%AE%9E%E7%8E%B0%E9%A1%B5%E9%9D%A2%E5%B1%80%E9%83%A8%E5%88%B7%E6%96%B0">五、iframe标签：实现页面局部刷新</a></p>
+<hr>
+<h3 id="一、引入js文件和css文件：在里添加以下语句，js代码和css代码写在js文件里、"><a href="#一、引入js文件和css文件：在里添加以下语句，js代码和css代码写在js文件里、" class="headerlink" title="一、引入js文件和css文件：在里添加以下语句，js代码和css代码写在js文件里、"></a>一、引入js文件和css文件：在<head><meta name="generator" content="Hexo 3.9.0">里添加以下语句，js代码和css代码写在js文件里、</head></h3><h3 id="css文件里，js文件和css文件不用在包含和"><a href="#css文件里，js文件和css文件不用在包含和" class="headerlink" title="css文件里，js文件和css文件不用在包含和"></a>css文件里，js文件和css文件不用在包含<style>和<script></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">	&lt;script type=&quot;text/javascript&quot; src=&quot;js文件路径&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;css文件路径&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二、设置UTF-8编码"><a href="#二、设置UTF-8编码" class="headerlink" title="二、设置UTF-8编码"></a>二、设置UTF-8编码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">	&lt;!--设置UTF编码--&gt;</span><br><span class="line">&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="三、常见的css属性及其功能"><a href="#三、常见的css属性及其功能" class="headerlink" title="三、常见的css属性及其功能"></a>三、常见的css属性及其功能</h3><blockquote>
+<p>width/height：设置元素宽度，高度</p>
+<p> color：字体颜色</p>
+<p> text-align:字体位置，居中为center</p>
+<p> font-size：字体大小</p>
+<p> font-family：字体种类，可为“华文楷体”等等</p>
+<p> margin-top、bottom、left、right：设置离外包含元素距离</p>
+<p> padding-top、bottom、left、right：设置离内包含元素距离，可设置内部字体形状等</p>
+<p> background-color：设置背景颜色</p>
+<p> position：可设置为relative或absolute，紧接着在下面设置top、bottom、left、right移动元素 </p>
+<p> text-decoration: none; 去除下划线</p>
+<p> border-radius:100%; overflow:hidden; 设置圆角图片 </p>
+</blockquote>
+<h3 id="四、常见CSS功能和JS功能"><a href="#四、常见CSS功能和JS功能" class="headerlink" title="四、常见CSS功能和JS功能"></a>四、常见CSS功能和JS功能</h3><p> CSS功能：</p>
+<p> <strong>（**</strong>1<strong>**）图片悬停放大效果</strong></p>
+<p> #p3:hover{</p>
+<p> transform: scale(1.18); /<em>设置图片悬停放大倍数</em>/</p>
+<p> }</p>
+<p> #p3{</p>
+<p> margin-left: 10%;</p>
+<p> transition: all 0.6s; /<em>设置图片悬停放大时间</em>/</p>
+<p> }</p>
+<p> <strong>（**</strong>2<strong>**）实现菜单项的悬停下拉</strong></p>
+<p> .dropdown:hover .dropdown-menu { /<em>实现悬停下拉效果，hover为悬停后css样式</em>/</p>
+<p> display: block; /<em>block为显示，none不显示</em>/</p>
+<p> background: #90EE90;</p>
+<p> }</p>
+<p> <strong>（**</strong>3<strong>**）点击按钮回到顶部，设置锚点</strong></p>
+ <!--头部,同时定义锚点id为header-->
+
+ <div id="header" class="container-fluid bg-primary ">
+
+<p> ** …..**</p>
+<p> <strong></</strong>div** >**</p>
+<p> #goTop{ /<em>回到顶部css</em>/</p>
+<p> position: fixed; /<em>fix格式：固定在浏览器窗口上</em>/</p>
+<p> bottom: 100px;</p>
+<p> left: 96%;</p>
+<p> }</p>
+<p> <strong>（**</strong>4<strong>**）小说页里的分页效果，悬停显示手指，同时字体变红</strong></p>
+<p> .page a,span{ </p>
+<p> text-decoration: none; </p>
+<p> border:1px solid #f9d52b; </p>
+<p> padding: 5px 7px; </p>
+<p> color: #767675;</p>
+<p> cursor: pointer; /<em>鼠标放在元素上变为手指</em>/ </p>
+<p> }</p>
+<p> .page a:hover,.page span:hover{ /<em>鼠标放在元素上的效果</em>/</p>
+<p> color: red; </p>
+<p> }</p>
+<p> <strong>（**</strong>5<strong>**）背景图像问题，铺满整个屏幕</strong></p>
+<p> body{</p>
+<p> margin: 0 auto;</p>
+<p> background-repeat:no-repeat ; /<em>背景图像铺满屏幕</em>/</p>
+<p> background-size:100% 100%; </p>
+<p> background-attachment: fixed;</p>
+<p> }</p>
+<p> <strong>（**</strong>6<strong><strong>）</strong></strong>span<strong>**标签无法设置长宽效果</strong></p>
+<p> #already span{</p>
+<p> display: inline-block; /<em>span标签必须设置display:inline-block才能设置长度和宽度</em>/</p>
+<p> width: 8%;</p>
+<p> height: 5%;</p>
+<p> border-top: 1px solid ;</p>
+<p> border-left: 1px solid ;</p>
+<p> border-right: 1px solid;</p>
+<p> text-align: center;</p>
+<p> font-size: 16px;</p>
+<p> padding-top: 12px;</p>
+<p> margin-top: 10px;</p>
+<p> background-color: gainsboro;</p>
+<p> }</p>
+<p> JS功能：</p>
+<p> <strong>（**</strong>1<strong><strong>）随机改变网页背景：点击按钮触发事件，获取随机数来改变网页背景颜色的</strong></strong>js<strong>**代码</strong></p>
+<p> //获取n位随机数</p>
+<p> var char=["#DC143C","#D8BFD8","#6A5ACD","#4169E1","#1E90FF","#40E0D0","#90EE90","#FFDEAD",</p>
+<p> "#FF0000","#A9A9A9","black"];</p>
+<p> function generateMixed() {</p>
+<p> var res = "";</p>
+<p> var id = Math.floor(Math.random() * 10);</p>
+<p> res += char[id];</p>
+<p> return res;</p>
+<p> }</p>
+<p> function changeColor(){</p>
+<p> var background=document.getElementById("main");</p>
+<p> //获取n位随机数,随机来源chars</p>
+<p> var color = generateMixed();</p>
+<p> background.style.backgroundColor=color;</p>
+<p> }</p>
+<p> <strong>（**</strong>2<strong><strong>）时钟显示器：在网页上显示时间，通过</strong></strong>jq<strong><strong>操作</strong></strong>css<strong>**属性来显示不同的图片实现时钟效果</strong></p>
+<p> function add(i) { //设置函数，如果获取到的时间<10,就在它前面加上字符“0”，比如获取到的小时为5，那么输出就是“05”</p>
+<p> if(i<10)</p>
+<p> return '0'+i;</p>
+<p> else</p>
+<p> return ''+i;</p>
+<p> }</p>
+<p> window.onload=function () {</p>
+<p> setInterval(function(){</p>
+<p> var time = new Date();</p>
+<p> var hour = time.getHours(), //获取当前小时数字</p>
+<p> min = time.getMinutes(), //获取当前分钟数字</p>
+<p> sec = time.getSeconds(); //获取当前秒数数字</p>
+<p> hour=add(hour); //应用转化函数</p>
+<p> min=add(min); //应用转化函数</p>
+<p> sec=add(sec); //应用转化函数</p>
+<p> var Img=document.getElementsByClassName('clockI') //获取图片，此时获取到是数组</p>
+<p> var array=hour+min+sec; //将当前时间连接在一起</p>
+<p> for(var i=0;i<Img.length;i++){</p>
+<p> Img[i].src='images/num'+array.charAt(i)+'.png'; //charAt(i)获取某字符串的第i个字符</p>
+<p> }</p>
+<p> },1000) //设置定时器，每隔一秒刷新页面</p>
+<p> }</p>
+<p> <strong>（**</strong>3<strong>**）删除元素：点击删除按钮隐藏元素</strong></p>
+<p> window.onload=function(){</p>
+<p> $(document).ready(function(){</p>
+<p> $("#btn1").click(function(){</p>
+<p> $("#btn1").parent().hide();</p>
+<p> })</p>
+<p> $("#btn2").click(function(){</p>
+<p> $("#btn2").parent().hide();</p>
+<p> })</p>
+<p> $("#btn3").click(function(){</p>
+<p> $("#btn3").parent().hide();</p>
+<p> })</p>
+<p> });</p>
+<p> }</p>
+<p> <strong>（**</strong>4<strong>**）二级菜单：悬停一级菜单时显示二级菜单，移出一级菜单范围时隐藏二级菜单。二级菜单可点击</strong></p>
+<p> /<em>二级菜单效果</em>/</p>
+<p> $("#e1").hide();</p>
+<p> $("#e2").hide();</p>
+<p> $("#e3").hide();</p>
+<p> var judge1=1; //判断从组移出时是移至外部还是移至标签（0代表一直标签，1代表移至外部）</p>
+<p> var judge2=1;</p>
+<p> var judge3=1;</p>
+<p> $("#p1").mouseover(function(){</p>
+<p> $("#p1").css('backgroundColor','yellowgreen');</p>
+<p> $("#e1").show();</p>
+<p> })</p>
+<p> $("#p1").mouseout(function(){</p>
+<p> $("#p1").css('backgroundColor','green');</p>
+<p> if(judge1==1)$("#e1").hide();</p>
+<p> })</p>
+<p> $("#e1").mouseover(function(){</p>
+<p> $("#e1").show();</p>
+<p> judge1=0;</p>
+<p> })</p>
+<p> $("#e1").mouseout(function(){</p>
+<p> $("#e1").hide();</p>
+<p> judge1=1;</p>
+<p> })</p>
+<p> $("#p2").mouseover(function(){</p>
+<p> $("#p2").css('backgroundColor','yellowgreen');</p>
+<p> $("#e2").show();</p>
+<p> })</p>
+<p> $("#p2").mouseout(function(){</p>
+<p> $("#p2").css('backgroundColor','green');</p>
+<p> if(judge2==1)$("#e2").hide();</p>
+<p> })</p>
+<p> $("#e2").mouseover(function(){</p>
+<p> $("#e2").show();</p>
+<p> judge2=0;</p>
+<p> })</p>
+<p> $("#e2").mouseout(function(){</p>
+<p> $("#e2").hide();</p>
+<p> judge2=1;</p>
+<p> })</p>
+<p> $("#p3").mouseover(function(){</p>
+<p> $("#p3").css('backgroundColor','yellowgreen');</p>
+<p> $("#e3").show();</p>
+<p> })</p>
+<p> $("#p3").mouseout(function(){</p>
+<p> $("#p3").css('backgroundColor','green');</p>
+<p> if(judge3==1)$("#e3").hide();</p>
+<p> })</p>
+<p> $("#e3").mouseover(function(){</p>
+<p> $("#e3").show();</p>
+<p> judge3=0;</p>
+<p> })</p>
+<p> $("#e3").mouseout(function(){</p>
+<p> $("#e3").hide();</p>
+<p> judge3=1;</p>
+<p> })</p>
+<p> <strong>（**</strong>5<strong><strong>）使用</strong></strong>iframe<strong><strong>嵌套页面：使用</strong></strong>jq<strong><strong>操纵</strong></strong>iframe<strong><strong>标签的</strong></strong>src<strong>**属性达到页面局部切换效果。</strong></p>
+<p> $("#deleteGG").click(function(){</p>
+<p> $("#ifr").attr('src','deleteGG.html');</p>
+<p> })</p>
+<p> $("#manageGG").click(function(){</p>
+<p> $("#ifr").attr('src','manageGG.html');</p>
+<p> })</p>
+<p> $("#deleteNovel").click(function(){</p>
+<p> $("#ifr").attr('src','deleteNovel.html');</p>
+<p> })</p>
+<h3 id="五、iframe标签：实现页面局部刷新"><a href="#五、iframe标签：实现页面局部刷新" class="headerlink" title="五、iframe标签：实现页面局部刷新"></a>五、iframe标签：实现页面局部刷新</h3><p> /*<br> iframe:<br> 第一种:让菜单项每个超链接都与iframe绑定<br> <a href="指向跳转链接" target="iframe标签的name属性"><br> <iframe name=""><br> 第二种：通过jq或js设置iframe的src属性（该属性设置iframe的显示页）来切换不同的菜单项<br> $("#manageGG").click(function(){<br> $("#ifr").attr('src','manageGG.html');<br> })<br> */  </p>
+</style></h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/11/前端/前端重要知识点总结/" data-id="ckib6fiti0082g4tp41lha9pq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/前端/">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-前端/Javascript的DOM对象" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/01/10/前端/Javascript的DOM对象/" class="article-date">
+  <time datetime="2019-01-10T02:31:18.000Z" itemprop="datePublished">2019-01-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2019/01/10/前端/Javascript的DOM对象/">Javascript的DOM对象</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82701273" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82701273</a><br>   DOM：将HTML文档转换成一个DOM树，所有HTML标签都转换成对象，用js代码形式操纵HTML标签文档。  </p>
+<p> document对象：整个文档对象<br> element对象：标签对象<br> 属性对象<br> 文本对象  </p>
+<p> DHTML：是指HTML、CSS、javascript、dom技术集合  </p>
+<p> 补充：所有DOM树<strong>除了顶层结点</strong>（document）外<strong>其它结点</strong>都继承于Node结点，<strong>都有以下方法和属性</strong><br> （一）方法：</p>
+<blockquote>
+<blockquote>
+<p> getElementsByTagName()：获取当前节点的指定标签名孩子节点  </p>
+</blockquote>
+<p> appendChild(oNode) ：给标签对象添加子节点。oNode是要添加的子节点。  </p>
+<p> removeChild(oNode)：删除子节点。oNode是要删除的孩子节点  </p>
+<p> cloneNode( [bCloneChildren]) ：克隆一个对象，bCloneChildren：表示是否需要克隆孩子节点  </p>
+<p> getAttribute(sAttributeName)：获取属性值，sAttributeName是要获取的属性名</p>
+<p> （二）属性：</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p> childNodes:获取当前节点的所有子节点，返回一个数组。(兼容性差，建议使用getElementsByTagName())  </p>
+</blockquote>
+<p> firstChild:获取当前节点的第一个子节点  </p>
+<p> lastChild:获取当前节点的最后一个子节点  </p>
+<p> parentNode:获取当前节点的父节点  </p>
+<p> nextSibling:获取当前节点的下一个节点  </p>
+<p> previousSibling:获取当前节点的上一个节点  </p>
+<p> className:用于获取或设置标签的class属性值  </p>
+<p> innerHTML :表示获取/设置起始标签和结束标签中的内容</p>
+<p> 1、document对象(注意：以下方法作用域都是文档对象，即HTML标签下的第一层标签)<br> 方法：<br> write()：在页面显示变量，对象，或HTML标签<br> 补充属性： document.body.innerText：在document.write()失效时(需要不停调用write()时)使用，如实时显示时间案例。</p>
+</blockquote>
+<blockquote>
+<p>getElementById(“id值”):通过标签里的id属性值获得一个标签对象（记住所有对象定义都用var）<br> getElementsByName(“Name值”)：通过标签里的name属性值获得标签对象数组<br> getElementsByTagName(“标签名”)：通过标签名获得标签对象数组<br> createElement(tagName)：创建标签（元素）节点。tagName为标签名<br> createTextNode(text)：创建文本节点。</p>
+<p> 注意:<br> HTML标签有的有name属性，比如input、select、button等，而很多是没有的，比如td、div等，<br> 只有有name属性的标签才可以使用getElementsByName方法。  </p>
+</blockquote>
+<p> 2、Element对象:标签对象（注意：以下方法作用域都是标签对象，即标签对象下的第一层标签）<br> 方法：</p>
+<blockquote>
+<blockquote>
+<p> 获取属性：getAttribute(name);方法<br> 设置属性：setAttribute(name,value)方法。<br> 删除属性：removeAttribute(name);方法。<br> 在Element对象作用范围内查找其它结点（Element对象）唯一有效的<br> 方法就是:getElementsByTagName(),该方法返回一个数组</p>
+</blockquote>
+<p> 案例：弹窗案例<br> 补充window重要属性：<br> opener 返回对创建此窗口的窗口的引用对象。 （用于页面间的切换）  </p>
+</blockquote>
+<p> 案例：在DOM树上添加DOM树结点，即添加标签<br> 案例：下拉列表左右选择<br> 案例：五国省市联动<br> 案例：动态生成表格  </p>
+<p> 总结：在html标签（即document对象）上加内容：<br> 1、设置一个<div>标签，内容为空<br> 2、利用<div>innerHTML属性往<div>标签加代码  </div></div></div></p>
+<p>** 在普通标签（即Element对象）上加内容：**<br> 1、利用document的俩个方法写好标签对象和文本对象（注意：文本对象放在标签对象下）<br> createElement(tagName)：创建标签（元素）节点。tagName为标签名<br> createTextNode(text)：创建文本节点。<br> 2、获取到要添加到的普通标签对象（Element对象）<br> 3、利用对象的appendChild（）方法将创建好的标签对象添加至该对象的分支下<br> appendChild(oNode) ：给标签对象添加子节点。oNode是要添加的子节点。  </p>
+<p> 同理可以删除HTML里的某些标签，获取到要删除的对象的上一级对象，通过removeChild(oNode)方法删除。  </p>
+<p> 获取对象俩种情况：<br> HTML标签对象document下一般使用：getElementById(),getElementsByName(),getElementsByTagName()三种方法。<br> 普通标签对象Element下使用:getElementByTagName()。  </p>
+<p> 十二、js里表单标签的提交方式：<br> 1、通过按钮输入项提交<br> -（1）获得表单对象form<br> -（2）也可以设置表单对象form的属性action，method等,必须在提交前设置(即调用submit()前设置)<br> -（3）调用表单对象的方法form.submit()<br> 2、超链接提交<br> <a href="提交页面地址?name属性值=value属性值"></a>  </p>
+<p> 十三常用事件介绍：</p>
+<blockquote>
+<blockquote>
+<p> onclick():鼠标点击事件<br> onchange():内容改变事件（一般在select里使用）<br> onfocus():得到焦点事件<br> onblur():失去焦点事件</p>
+</blockquote>
+<p> 案例：文本框未输入效果焦点</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/10/前端/Javascript的DOM对象/" data-id="ckib6fiq60048g4tpk1obl779" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/前端/">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Git/Git使用报错解决" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/10/06/Git/Git使用报错解决/" class="article-date">
+  <time datetime="2018-10-06T11:06:45.000Z" itemprop="datePublished">2018-10-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/10/06/Git/Git使用报错解决/">Git使用报错解决</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   1、下载远程库时（git pull）报错：fatal: refusing to merge unrelated histories</p>
+<p> 原因：GitHub认为本地库和远端库是俩个不同的库，所以告知无法合并。</p>
+<p> 解决方法：</p>
+<p> 1、修改git pull语句使得俩个分支合并在一起</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull 远程版本库名(origin) 远程版本库的分支(master) --allow-unrelated-histories</span><br></pre></td></tr></table></figure>
+
+<p> 2、下载GitHub库，将改动文件添加到拉下来的远程库，然后再提交。这被GitHub看作是一次更新。</p>
+<p> 2、提交时（git add .）换行符在不同操作系统上出现转换问题：</p>
+<p> <img src="https://img-blog.csdn.net/20181006182136336?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt> </p>
+<p> 解决方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> #提交时转换为LF，检出时转换为CRLF</span><br><span class="line">$ git config --global core.autocrlf true</span><br></pre></td></tr></table></figure>
+
+<p> 具体查看这篇文章<a href="https://www.jianshu.com/p/450cd21b36a4" target="_blank" rel="noopener">https://www.jianshu.com/p/450cd21b36a4</a></p>
+<p> 3、推送时（git push 远程库名 远程库分支名）出现错误：主要因为缺少readme.md不在代码目录中。</p>
+<p> <img src="https://img-blog.csdn.net/2018100618442899?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p> 解决方法：</p>
+<blockquote>
+<p>使用pull（fetch+merge）克隆远程项目库文件，也可以直接使用git clone下载文件</p>
+<p> 特殊情况：使用git pull –rebase origin master将本地代码覆盖。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/10/06/Git/Git使用报错解决/" data-id="ckib6finj000ug4tpl9uckcrx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Git/">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web高阶/Mybatis查找返回Map，List集合类型的数据" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/26/Web高阶/Mybatis查找返回Map，List集合类型的数据/" class="article-date">
+  <time datetime="2018-09-26T08:35:32.000Z" itemprop="datePublished">2018-09-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/26/Web高阶/Mybatis查找返回Map，List集合类型的数据/">Mybatis查找返回Map，List集合类型的数据</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82854803" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82854803</a><br>   一、查找返回Bean对象的List集合</p>
+<p> 基本与返回Bean对象没什么区别，<strong>resultType</strong>依然为<strong>Bean对象的全类名</strong>，只是接口中的方法类型要进行修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">       public List&lt;Employee&gt; getEmpListByEmail(String email);</span><br></pre></td></tr></table></figure>
+
+<p> 二、查询返回Bean对象的Map集合</p>
+<p> 同样，<strong>resultType</strong>依然为<strong>Bean对象的全类名</strong>，只是接口中的方法类型要进行修改，添加注解。</p>
+<p> @MapKey(“Bean对象属性名”)：指定Map的键为Bean对象的哪个属性，一般设置为主键，因为Map不能存重复的键。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">	@MapKey(&quot;id&quot;)</span><br><span class="line">public Map&lt;Integer,Employee&gt; getEmpMapByEmail(String email);</span><br></pre></td></tr></table></figure>
+
+<p> 三、查询返回单条纪录的Map集合，即当前记录以键为列名，值为列属性存入map（查询到的记录一定要只有一条，否则报错）</p>
+<p> 注意，<strong>resultType</strong>需要设置为<strong>map</strong>，接口中方法类型需要修改，Map的<strong>键默认为列名</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public Map&lt;String, Object&gt; getEmpByEmail(String email);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/26/Web高阶/Mybatis查找返回Map，List集合类型的数据/" data-id="ckib6fios002hg4tpldprhhh6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web高阶/MyBatis的初步使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/25/Web高阶/MyBatis的初步使用/" class="article-date">
+  <time datetime="2018-09-25T11:40:40.000Z" itemprop="datePublished">2018-09-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/25/Web高阶/MyBatis的初步使用/">MyBatis的初步使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82843635" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82843635</a><br>   MyBatis：是一个轻量级的数据库管理框架，更多的使用配置文件来设置连接数据库的属性，达到解耦合的效果。</p>
+<p> 在项目路径下创建一个conf文件（Source Folder类型）用来存放配置文件，<strong>conf文件（与src文件同级）下的文件最终会和src文件下的文件合并到bin文件，即与src同级文件的路径也作为类路径。</strong></p>
+<p> ** 如：conf文件下有1.txt 文件的路径为 ：1.txt**</p>
+<p> bin文件下也称作类路径下。</p>
+<p> <strong>总结：1、全局配置文件注册sql映射文件</strong></p>
+<p> ** 2、sql映射文件绑定接口，接口方法，以及Bean类。**</p>
+<p> ** 3、测试获得接口实例化对象，调用方法获得数据库映射到Bean类的实例化对象。**</p>
+<h3 id="1、新建一个全局配置文件mybatis-config-xml"><a href="#1、新建一个全局配置文件mybatis-config-xml" class="headerlink" title="1、新建一个全局配置文件mybatis-config.xml"></a>1、新建一个全局配置文件mybatis-config.xml</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE configuration</span><br><span class="line">PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span><br><span class="line">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- </span><br><span class="line">全局映射文件 :设置连接数据库类型，名称，用户名，密码等信息</span><br><span class="line">--&gt;</span><br><span class="line"></span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">	&lt;environments default=&quot;development&quot;&gt;</span><br><span class="line">	&lt;environment id=&quot;development&quot;&gt;</span><br><span class="line">	&lt;transactionManager type=&quot;JDBC&quot;/&gt;</span><br><span class="line">	&lt;dataSource type=&quot;POOLED&quot;&gt;</span><br><span class="line">		&lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;</span><br><span class="line">		&lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/mybatis&quot;/&gt;</span><br><span class="line">		&lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;</span><br><span class="line">		&lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;</span><br><span class="line">	&lt;/dataSource&gt;</span><br><span class="line">	&lt;/environment&gt;</span><br><span class="line">	&lt;/environments&gt;</span><br><span class="line">	&lt;!-- 将我们写好的sql映射文件（EmployeeMapper.xml）一定要注册到全局配置文件（mybatis-config.xml）中 --&gt;</span><br><span class="line">	&lt;mappers&gt;</span><br><span class="line">		&lt;mapper resource=&quot;EmployeeMapper.xml&quot;/&gt;</span><br><span class="line">	&lt;/mappers&gt;</span><br><span class="line">	</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 每个sql映射文件都需要在全局配置文件下的mappers标签下通过添加<mapper>进行注册：</mapper></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mapper resource=&quot;sql映射文件名.xml&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2、在conf目录下继续新建一个sql映射文件EmployeeMapper-xml来存放sql语句：此处存放一个查询语句"><a href="#2、在conf目录下继续新建一个sql映射文件EmployeeMapper-xml来存放sql语句：此处存放一个查询语句" class="headerlink" title="2、在conf目录下继续新建一个sql映射文件EmployeeMapper.xml来存放sql语句：此处存放一个查询语句"></a>2、在conf目录下继续新建一个sql映射文件EmployeeMapper.xml来存放sql语句：此处存放一个查询语句</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper</span><br><span class="line">PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span><br><span class="line">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span><br><span class="line">    &lt;!-- </span><br><span class="line">    sql映射文件:用来存放sql语句，需要在全局配置文件中注册</span><br><span class="line"></span><br><span class="line">    namespace:名称空间;绑定的接口的全类名</span><br><span class="line">    id：唯一标识符，用来绑定接口的方法名</span><br><span class="line">    resultType：返回值类型</span><br><span class="line">    #&#123;id&#125;：相当于占位符,#&#123;Bean对象的属性名&#125;，由select标签的id值即接口的方法传入参数来确定占位符</span><br><span class="line">           实际值，与该方法的参数名无关，参数名不需要与bean属性名对应</span><br><span class="line"></span><br><span class="line">    public Employee getEmpById(Integer id);</span><br><span class="line">     --&gt;</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">&lt;mapper namespace=&quot;mybatis.dao.EmployeeMapper&quot;&gt;</span><br><span class="line">	&lt;select id=&quot;getEmpById&quot; resultType=&quot;mybatis.bean.Employee&quot;&gt;</span><br><span class="line">		select id,last_name lastName,email,gender from tb1_employee where id = #&#123;id&#125;</span><br><span class="line">	&lt;/select&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 同样的sql配置文件也需要一个<mapper>来设置属性，如从数据库中映射到对象的类(resultType)、获取占位id实际值使用的方法（实际就是该方法传入的参数就是占位符实际值）、以及sql映射文件对应的接口(namespace)。</mapper></p>
+<h3 id="3、当然我们还需要设置该接口以及对应方法："><a href="#3、当然我们还需要设置该接口以及对应方法：" class="headerlink" title="3、当然我们还需要设置该接口以及对应方法："></a>3、当然我们还需要设置该接口以及对应方法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> package mybatis.dao;</span><br><span class="line"></span><br><span class="line">import mybatis.bean.Employee;</span><br><span class="line"></span><br><span class="line">public interface EmployeeMapper &#123;</span><br><span class="line">	public Employee getEmpById(Integer id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="4、最后执行sql语句代码："><a href="#4、最后执行sql语句代码：" class="headerlink" title="4、最后执行sql语句代码："></a>4、最后执行sql语句代码：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	//获取工厂对象方法</span><br><span class="line">private static SqlSessionFactory getSqlSessionFactory() throws IOException &#123;</span><br><span class="line">	String resource = &quot;mybatis-config.xml&quot;;</span><br><span class="line">	InputStream inputStream = Resources.getResourceAsStream(resource);</span><br><span class="line">	SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);</span><br><span class="line">	return sqlSessionFactory;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">	public static void main(String[] args) throws Exception &#123;</span><br><span class="line">	//获取工厂对象</span><br><span class="line">	SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();</span><br><span class="line">	</span><br><span class="line">	//获取session，session表示一个会话即对数据库的一次操作</span><br><span class="line">	SqlSession session = sqlSessionFactory.openSession();</span><br><span class="line">	</span><br><span class="line">	try &#123;</span><br><span class="line">		// session对象的getMapper方法传入接口class获得代理对象（接口的实例化对象）</span><br><span class="line">		EmployeeMapper mapper = session.getMapper(EmployeeMapper.class);</span><br><span class="line">		//通过设置好的方法传入占位符值得到Bean对象</span><br><span class="line">		Employee employee = mapper.getEmpById(1);</span><br><span class="line">	&#125; finally &#123;</span><br><span class="line">		//会话使用完要进行关闭</span><br><span class="line">		session.close();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/25/Web高阶/MyBatis的初步使用/" data-id="ckib6fion002ag4tpyawli3e2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据库/MySQL恢复root用户超级权限方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/16/数据库/MySQL恢复root用户超级权限方法/" class="article-date">
+  <time datetime="2018-09-16T08:50:32.000Z" itemprop="datePublished">2018-09-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/16/数据库/MySQL恢复root用户超级权限方法/">MySQL恢复root用户超级权限方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82725873" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82725873</a><br>   1、在my.ini里的[mysqld]后面添加：</p>
+<blockquote>
+<p>skip-grant-tables </p>
+<p> 停止mysql服务器。不用密码按enter键即可登陆。</p>
+</blockquote>
+<p> 2 手动修改用户的权限。使其可以设置权限。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE mysql.user SET Grant_priv=&apos;Y&apos;, Super_priv=&apos;Y&apos; WHERE User=&apos;root&apos;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 3 刷新缓冲区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<p> 4、授权</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL ON *.* TO &apos;root&apos;@&apos;localhost&apos;;</span><br></pre></td></tr></table></figure>
+
+<p> 5、可以使用如下命令产看用户权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from mysql.user\G</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/16/数据库/MySQL恢复root用户超级权限方法/" data-id="ckib6fiqy004sg4tposwc727p" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/MyEclipse的非法关闭导致servers报错" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/16/Web/MyEclipse的非法关闭导致servers报错/" class="article-date">
+  <time datetime="2018-09-16T05:24:40.000Z" itemprop="datePublished">2018-09-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/16/Web/MyEclipse的非法关闭导致servers报错/">MyEclipse的非法关闭导致servers报错</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82723177" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82723177</a><br>   <strong>进入工作空间下的</strong></p>
+<p> <strong>.metadata.plugins\org.eclipse.core.runtime.settings</strong></p>
+<p> <strong>删除com.genuitec.eclipse.ast.deploy.core.prefs</strong></p>
+<p> <strong>重启myeclipse，ok搞定。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/16/Web/MyEclipse的非法关闭导致servers报错/" data-id="ckib6fio9001sg4tpavfy4yzc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/MyEclipse移植工作空间配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/16/Web/MyEclipse移植工作空间配置/" class="article-date">
+  <time datetime="2018-09-16T04:53:16.000Z" itemprop="datePublished">2018-09-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/16/Web/MyEclipse移植工作空间配置/">MyEclipse移植工作空间配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82722464" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82722464</a><br>   将旧的工作空间的配置文件目录：.metadata.plugins\org.eclipse.core.runtime 的setting文件夹复制替换</p>
+<p> 新的工作空间的.metadata.plugins\org.eclipse.core.runtime\setting文件</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/16/Web/MyEclipse移植工作空间配置/" data-id="ckib6fiob001ug4tpl8qxdhi5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/JSONObject：将Bean对象转化为JSON数据" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/15/Web/JSONObject：将Bean对象转化为JSON数据/" class="article-date">
+  <time datetime="2018-09-15T08:19:01.000Z" itemprop="datePublished">2018-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/15/Web/JSONObject：将Bean对象转化为JSON数据/">JSONObject：将Bean对象转化为JSON数据</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82715067" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82715067</a><br>   导入的包：</p>
+<p> commons-beanutils-1.8.3.jar<br> commons-collections-3.2.1.jar<br> commons-lang-2.5.jar<br> commons-logging-1.1.1.jar<br> ezmorph-1.0.6.jar<br> json-lib-2.4-jdk15.jar<br> xom-1.1.jar</p>
+<blockquote>
+<p><strong>JSONObject.fromObject(Bean).toString()：将Bean对象转化为String类型的JSON数据</strong></p>
+<p> <strong>JSONArray.fromObject(List<bean>).toString()：将Bean的List列表转化为String类型的JSON数据</bean></strong></p>
+<p> JSONArray还可以这么使用：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">         City city1=new City(&quot;张三&quot;,&quot;dsda1&quot;);</span><br><span class="line">        City city2=new City(&quot;李四&quot;,&quot;我是李四&quot;);</span><br><span class="line">        JSONArray jsonArray=new JSONArray();</span><br><span class="line">        jsonArray.add(city1);</span><br><span class="line">        jsonArray.add(city2);</span><br><span class="line">        System.out.println(jsonArray.toString());</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/15/Web/JSONObject：将Bean对象转化为JSON数据/" data-id="ckib6finw001ag4tpph75mqz0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/XStream：将Bean对象转为XML数据" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/15/Web/XStream：将Bean对象转为XML数据/" class="article-date">
+  <time datetime="2018-09-15T07:48:10.000Z" itemprop="datePublished">2018-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/15/Web/XStream：将Bean对象转为XML数据/">XStream：将Bean对象转为XML数据</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82714611" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82714611</a><br>   需要导入的包：xstream-1.4.7.jar，xpp3_min-1.1.4c（XML Pull Parser，一款速度很快的XML解析器）；</p>
+<p> 使用步骤：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> * XStream xstream = new XStream();</span><br><span class="line">* String xmlStr = xstream.toXML(javabean);</span><br></pre></td></tr></table></figure>
+
+<p> XStream对象拥有的方法（用来修改生成的xml格式String数据）：</p>
+<blockquote>
+<p>alias(String,Class):修改元素名,String为最终元素名，CLass为类.class</p>
+<p> useAttributeFor(Class,String)：把元素设置成属性,Class为设置成哪个标签的属性，String为被设置元素名</p>
+<p> addImplicitCollection(Class,String):删除某个元素（Collection类型）,Class为上司（表示哪个元素里的Collection），</p>
+<p> String为元素名（即不显示的元素名）</p>
+<p> omitField(Class,String):删除某个元素（普通类型（String等类型））,Class为上司（表示哪个元素里的普通元素），</p>
+<p> String为元素名（即不显示的元素名）</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/15/Web/XStream：将Bean对象转为XML数据/" data-id="ckib6fioi0024g4tp9xreabpp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/Blog/master/page/7/">&laquo; 上一页</a><a class="page-number" href="/Blog/master/">1</a><span class="space">&hellip;</span><a class="page-number" href="/Blog/master/page/6/">6</a><a class="page-number" href="/Blog/master/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/Blog/master/page/9/">9</a><a class="page-number" href="/Blog/master/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/Blog/master/page/14/">14</a><a class="extend next" rel="next" href="/Blog/master/page/9/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

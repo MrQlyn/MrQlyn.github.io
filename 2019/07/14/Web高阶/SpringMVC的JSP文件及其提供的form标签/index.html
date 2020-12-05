@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>SpringMVC的JSP文件及其提供的form标签 | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="form：form是MVC提供的表单标签，还提供了相应的输入项标签。  使用需要导入： 1&amp;lt;%@ taglib prefix=&amp;quot;form&amp;quot; uri=&amp;quot;http://www.springframework.org/tags/form&amp;quot; %&amp;gt;   注意：实际开发action路径需要使用全局路径：${pageContext.request.con">
+<meta name="keywords" content="Web高阶">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMVC的JSP文件及其提供的form标签">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/Web高阶/SpringMVC的JSP文件及其提供的form标签/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="form：form是MVC提供的表单标签，还提供了相应的输入项标签。  使用需要导入： 1&amp;lt;%@ taglib prefix=&amp;quot;form&amp;quot; uri=&amp;quot;http://www.springframework.org/tags/form&amp;quot; %&amp;gt;   注意：实际开发action路径需要使用全局路径：${pageContext.request.con">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:09:34.297Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringMVC的JSP文件及其提供的form标签">
+<meta name="twitter:description" content="form：form是MVC提供的表单标签，还提供了相应的输入项标签。  使用需要导入： 1&amp;lt;%@ taglib prefix=&amp;quot;form&amp;quot; uri=&amp;quot;http://www.springframework.org/tags/form&amp;quot; %&amp;gt;   注意：实际开发action路径需要使用全局路径：${pageContext.request.con">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Web高阶/SpringMVC的JSP文件及其提供的form标签" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC的JSP文件及其提供的form标签/" class="article-date">
+  <time datetime="2019-07-14T03:04:18.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      SpringMVC的JSP文件及其提供的form标签
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   form：form是MVC提供的表单标签，还提供了相应的输入项标签。</p>
+<p> 使用需要导入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib prefix=&quot;form&quot; uri=&quot;http://www.springframework.org/tags/form&quot; %&gt;</span><br></pre></td></tr></table></figure>
+
+<p> <strong>注意：实际开发action路径需要使用全局路径：${pageContext.request.contextPath}/@RequestMapping注解value请求值</strong></p>
+<p> 一、使用SpringMVC的form标签<br> 作用：可以快速开发表单，可以方便进行表单值回显<br> 注意：表单标签需要和Bean类属性匹配，默认从 request 域对象中读取command类，可以使用modelAttribute属性指定<br> 1、 form:form:表单标签<br> action：请求URL<br> method：请求方式<br> modelAttribute：指定绑定的Bean（默认从 request 域对象中读取command 的表单 bean，若command不存在报错）<br> 2、form:input、form:select ：输入项、下拉框<br> path：表单字段，对应 HTML 元素的 name 属性，支持级联属性 –<br> htmlEscape：是否对表单值的 HTML 特殊字符进行转换，默认值为 true<br> cssClass：表单组件对应的 CSS – 样式类名<br> cssErrorClass：表单组件的数据存在错误时，采取的 CSS – 样式<br> 3、form:input、form:password、form:hidden、form:textarea •：对应 HTML 表单的 text、password、hidden、textarea标签<br> 4、form:radiobutton：• 单选按钮标签，当表单 bean 对应的属性值和 value 值相等时，单选框被选中<br> 5、form:radiobuttons：单选按钮组标签，用于构造多个单选 •框<br> items：设置显示的输入项集合，可以是一个 List、String[] 或 Map，常常配合EL表达式使用<br> path：表单字段，对应 HTML 元素的 name 属性，支持级联属性 –<br> itemValue：设置 输入项 的 value 值。若集合中存放的是Bean类型，可以知道Bean的具体某一属性<br> itemLabel：设置 输入项 的 label值,即显示在网页的值<br> delimiter：设置 分隔符<br> 6、form:checkbox：• 复选框组件。用于构造单个复选框<br> 7、form:checkboxs：用于构造多个复选框。使用方式同form:radiobuttons 标签<br> 8、form:select：用于构造下拉框组件。使用方式同form:radiobuttons 标签<br> 9、form:option：下拉框选项组件标签。使用方式同form:radiobuttons 标签<br> 10、form:errors：显示表单组件或数据校验所对应的错误 •<br> &lt;form:errors path= “ *” /&gt; ：显示表单所有的错误 –<br> &lt;form:errors path= “ user*” /&gt; ：显示所有以 user 为前缀的属性对应 –的错误<br> &lt;form:errors path= “username” /&gt; ：显示特定表单对象属性的错误 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"> &lt;%@page import=&quot;java.util.HashMap&quot;%&gt;</span><br><span class="line">&lt;%@page import=&quot;java.util.Map&quot;%&gt;</span><br><span class="line">&lt;%@ page language=&quot;java&quot; contentType=&quot;text/html; charset=ISO-8859-1&quot;</span><br><span class="line">    pageEncoding=&quot;ISO-8859-1&quot;%&gt;</span><br><span class="line">&lt;%@ taglib prefix=&quot;c&quot; uri=&quot;http://java.sun.com/jsp/jstl/core&quot; %&gt;</span><br><span class="line">&lt;%@ taglib prefix=&quot;form&quot; uri=&quot;http://www.springframework.org/tags/form&quot; %&gt;</span><br><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=ISO-8859-1&quot;&gt;</span><br><span class="line">&lt;title&gt;Insert title here&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;!-- 使用SpringMVC的form标签</span><br><span class="line">		作用：可以快速开发表单，可以方便进行表单值回显</span><br><span class="line">		注意：表单标签需要和Bean类属性匹配，默认从 request 域对象中读取command类，可以使用modelAttribute属性指定</span><br><span class="line">	form:form:表单标签 </span><br><span class="line">	        action：请求URL</span><br><span class="line">	        method：请求方式</span><br><span class="line">	        modelAttribute：指定绑定的Bean（默认从 request 域对象中读取command 的表单 bean，若command不存在报错）</span><br><span class="line">	form:input、form:select ：输入项、下拉框</span><br><span class="line">	        path：表单字段，对应 HTML 元素的 name 属性，支持级联属性 –</span><br><span class="line">	        htmlEscape：是否对表单值的 HTML 特殊字符进行转换，默认值为 true</span><br><span class="line">	        cssClass：表单组件对应的 CSS – 样式类名</span><br><span class="line">	        cssErrorClass：表单组件的数据存在错误时，采取的 CSS – 样式</span><br><span class="line">	form:input、form:password、form:hidden、form:textarea •：对应 HTML 表单的 text、password、hidden、textarea标签</span><br><span class="line">	form:radiobutton：• 单选按钮标签，当表单 bean 对应的属性值和 value 值相等时，单选框被选中</span><br><span class="line">	form:radiobuttons：单选按钮组标签，用于构造多个单选 •框</span><br><span class="line">	        items：设置显示的输入项集合，可以是一个 List、String[] 或 Map，常常配合EL表达式使用</span><br><span class="line">	        path：表单字段，对应 HTML 元素的 name 属性，支持级联属性 –</span><br><span class="line">	        itemValue：设置 输入项 的 value 值。若集合中存放的是Bean类型，可以知道Bean的具体某一属性</span><br><span class="line">	        itemLabel：设置 输入项 的 label值,即显示在网页的值</span><br><span class="line">	        delimiter：设置 分隔符</span><br><span class="line">	form:checkbox：• 复选框组件。用于构造单个复选框</span><br><span class="line">	form:checkboxs：用于构造多个复选框。使用方式同form:radiobuttons 标签</span><br><span class="line">	form:select：用于构造下拉框组件。使用方式同form:radiobuttons 标签</span><br><span class="line">	form:option：下拉框选项组件标签。使用方式同form:radiobuttons 标签</span><br><span class="line">	form:errors：显示表单组件或数据校验所对应的错误 •</span><br><span class="line">		&lt;form:errors path= &quot; *&quot; /&gt; ：显示表单所有的错误 –</span><br><span class="line">		&lt;form:errors path= &quot; user*&quot; /&gt; ：显示所有以 user 为前缀的属性对应 –的错误</span><br><span class="line">		&lt;form:errors path= &quot;username&quot; /&gt; ：显示特定表单对象属性的错误</span><br><span class="line"> --&gt;</span><br><span class="line"> 	&lt;!-- 实际开发action路径需要使用全局路径：$&#123;pageContext.request.contextPath&#125;/注解value请求值 --&gt;</span><br><span class="line"> 	&lt;form:form action=&quot;$&#123;pageContext.request.contextPath&#125;/emp&quot; method=&quot;post&quot; modelAttribute=&quot;emp&quot;&gt;</span><br><span class="line"> 		&lt;c:if test=&quot;$&#123;emp.id == null &#125;&quot;&gt;&lt;!-- 如果id为空，说明是添加操作 --&gt;</span><br><span class="line"> 			LastName:&lt;form:input path=&quot;lastName&quot;/&gt;&lt;br/&gt;</span><br><span class="line"> 		&lt;/c:if&gt;</span><br><span class="line"> 		&lt;c:if test=&quot;$&#123;emp.id != null &#125;&quot;&gt;&lt;!-- 如果id不为空，说明是编辑操作 --&gt;</span><br><span class="line"> 			&lt;form:hidden path=&quot;id&quot;/&gt;	&lt;!-- 使用隐藏标签将id作为隐藏输入项 --&gt;</span><br><span class="line"> 			&lt;input type=&quot;hidden&quot; name=&quot;_method&quot; value=&quot;PUT&quot;/&gt;&lt;!-- 将POST请求转为PUT请求，</span><br><span class="line"> 			                                                      不能使用form:hidden原因：form:form标签要求与modelAttribute属性的bean对象</span><br><span class="line"> 			                                                                              一一对应，此时bean对象没有_method属性 --&gt;</span><br><span class="line"> 		&lt;/c:if&gt;</span><br><span class="line"> 		Email:&lt;form:input path=&quot;email&quot;/&gt;&lt;br/&gt;</span><br><span class="line"> 		&lt;%</span><br><span class="line"> 			Map&lt;String,String&gt; map=new HashMap();</span><br><span class="line"> 			map.put(&quot;1&quot;, &quot;Male&quot;);</span><br><span class="line"> 			map.put(&quot;0&quot;, &quot;Female&quot;);</span><br><span class="line"> 			request.setAttribute(&quot;genders&quot;, map);</span><br><span class="line"> 		%&gt;</span><br><span class="line"> 		Gender:&lt;br/&gt;&lt;form:radiobuttons path=&quot;gender&quot; items=&quot;$&#123;genders &#125;&quot; delimiter=&quot;&lt;br/&gt;&quot;/&gt;&lt;br/&gt;</span><br><span class="line"> 		Department:&lt;form:select path=&quot;department.id&quot; items=&quot;$&#123;departments&#125;&quot; itemLabel=&quot;departmentName&quot; itemValue=&quot;id&quot;&gt;&lt;/form:select&gt;&lt;br/&gt;</span><br><span class="line"> 		&lt;input type=&quot;submit&quot; value=&quot;Submit&quot;/&gt;</span><br><span class="line"> 	&lt;/form:form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/Web高阶/SpringMVC的JSP文件及其提供的form标签/" data-id="ckib6fip0002rg4tp52m5fhpi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC的拦截器/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SpringMVC的拦截器
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC的初步使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SpringMVC的初步使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

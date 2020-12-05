@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>详解STL里的Vector底层代码 | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/90572977   目录  Vector.h  Vector.hpp  Vector.h1234567891011121314151617181920212223242526272829303132333435363738394041424344454">
+<meta name="keywords" content="C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解STL里的Vector底层代码">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2019/05/26/c++/详解STL里的Vector底层代码/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/90572977   目录  Vector.h  Vector.hpp  Vector.h1234567891011121314151617181920212223242526272829303132333435363738394041424344454">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T07:30:47.136Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="详解STL里的Vector底层代码">
+<meta name="twitter:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/90572977   目录  Vector.h  Vector.hpp  Vector.h1234567891011121314151617181920212223242526272829303132333435363738394041424344454">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-c++/详解STL里的Vector底层代码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/05/26/c++/详解STL里的Vector底层代码/" class="article-date">
+  <time datetime="2019-05-26T01:35:41.000Z" itemprop="datePublished">2019-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      详解STL里的Vector底层代码
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/90572977" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/90572977</a><br>   <strong>目录</strong></p>
+<p> <a href="#Vector.h">Vector.h</a></p>
+<p> <a href="#Vector.hpp">Vector.hpp</a></p>
+<hr>
+<h3 id="Vector-h"><a href="#Vector-h" class="headerlink" title="Vector.h"></a>Vector.h</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"> #define DEFAULT_CAPACITY 3	//默认初始容量(实际应用中可设置为更大)</span><br><span class="line">template &lt;typename T&gt; class Vector	//向量模板</span><br><span class="line">&#123;</span><br><span class="line">	protected:</span><br><span class="line">		int _size;int _capacity;T *_elem;	//规模,容量,数据区	</span><br><span class="line">		void copyFrom(T const*A,int lo,int hi);	//复制数组区间		</span><br><span class="line">		void expand();	//空间不足时扩容												</span><br><span class="line">		void shrink();	//装填因子过小时压缩		</span><br><span class="line">		bool bubble(int lo,int hi);	//扫描交换	</span><br><span class="line">		void bubbleSort(int lo,int hi);	//起泡(冒泡)排序算法</span><br><span class="line">		int max(int lo,int hi);	//选取最大元素</span><br><span class="line">		void seletcionSort(int lo,int hi);	//选择排序算法</span><br><span class="line">		void mergeSort(int lo,int hi);	//归并算法	</span><br><span class="line">		void merge(int lo,int mi,int hi);	//归并排序算法</span><br><span class="line">		int partition(int lo,int hi);	//轴点构造算法</span><br><span class="line">		void quickSort(int lo,int hi);	//快速排序算法</span><br><span class="line">		void heapSort(int lo,int hi);		//堆排序(稍后结合完全堆讲解)</span><br><span class="line">	public:</span><br><span class="line">		//构造函数</span><br><span class="line">		Vector(int c=DEFAULT_CAPACITY,int s=0,T v=0);//容量为c，规模为s，所有元素初始为v</span><br><span class="line">		Vector(T const*A,int n);                	//数组整体复制</span><br><span class="line">		Vector(T const*A,int lo,int hi);			//区间</span><br><span class="line">		Vector(Vector &lt;T&gt;const&amp; V);					//向量整体复制</span><br><span class="line">		Vector(Vector &lt;T&gt;const&amp; V,int lo,int hi);	//区间</span><br><span class="line">		//析构函数</span><br><span class="line">		~Vector();				//释放内部空间</span><br><span class="line">		//只读访问接口</span><br><span class="line">		int size()const;		//规模</span><br><span class="line">		bool empty()const;		//判空</span><br><span class="line">		int disordered()const;	//判断向量是否已排序</span><br><span class="line">		int find(T const&amp; e)const;	//无序向量整体查找</span><br><span class="line">		int find(T const&amp; e,int lo,int hi)const;	//无序向量区间查找</span><br><span class="line">		int search(T const&amp; e)const;	//有序向量整体查找</span><br><span class="line">		int search(T const&amp; e,int lo,int hi)const;//有序向量区间查找</span><br><span class="line">		int binsearch(T* A,T const&amp; e,int lo,int hi)const;//二分查找</span><br><span class="line">		//可写访问接口</span><br><span class="line">		T&amp; operator[](int r)const;	//重载下标操作符,可以类似于数组形式引用各元素</span><br><span class="line"> 		Vector&lt;T&gt; &amp;operator=(Vector&lt;T&gt; const&amp;);//重载赋值操作符,以便直接克隆向量</span><br><span class="line">		T remove(int r);	//删除秩为r的元素</span><br><span class="line">		int remove(int lo,int hi);	//删除秩在区间[ho,hi)之内的元素</span><br><span class="line">		int insert(int r,T const&amp; e);	//插入元素</span><br><span class="line">		int insert(T const&amp; e);//默认作为末元素插入</span><br><span class="line">		void sort(int lo,int hi);	//对[lo，hi)排序</span><br><span class="line">		void sort();					//整体排序</span><br><span class="line">		void unsort(int lo,int hi);	//对[lo，hi）置乱</span><br><span class="line">		void unsort();					//整体置乱</span><br><span class="line">		int deduplicate();	//无序去重</span><br><span class="line">		int uniquify();	//有序去重</span><br><span class="line">		//遍历</span><br><span class="line">		void traverse(void(*visit)(T&amp;));//遍历（使用函数指针,只读或局部性修改）</span><br><span class="line">		//template&lt;typename VST&gt;void traverse(VST&amp; );//遍历（使用函数对象，可全局性修改）</span><br><span class="line">		void display();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Vector-hpp"><a href="#Vector-hpp" class="headerlink" title="Vector.hpp"></a>Vector.hpp</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br></pre></td><td class="code"><pre><span class="line"> #include &lt;iostream&gt;</span><br><span class="line">#include &quot;Vector.h&quot;</span><br><span class="line">using namespace std ;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::copyFrom(T const*A,int lo,int hi) 	//复制数组区间(未开辟空间情况下，给构造函数使用)	</span><br><span class="line">&#123;</span><br><span class="line">	_elem=new T[_capacity=2*(hi-lo)];							//开辟复制俩倍的空间。</span><br><span class="line">	for(_size=0;lo&lt;hi;_size++,lo++)</span><br><span class="line">	&#123;</span><br><span class="line">		_elem[_size]=A[lo];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;	</span><br><span class="line">void Vector&lt;T&gt;::expand() 	//空间不足时扩容	</span><br><span class="line">&#123;</span><br><span class="line">	T *another=_elem;</span><br><span class="line">	if(_size&lt;_capacity)return;									//容器尚未装满</span><br><span class="line">	if(_capacity&lt;DEFAULT_CAPACITY)_capacity=DEFAULT_CAPACITY</span><br><span class="line">	_elem=new T[_capacity&lt;&lt;=1];									//开辟翻一倍的空间</span><br><span class="line">	for(int i=0;i&lt;_size;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		_elem=another[i];</span><br><span class="line">	&#125;</span><br><span class="line">	delete[]another;</span><br><span class="line">&#125;		</span><br><span class="line">template &lt;typename T&gt;									</span><br><span class="line">void Vector&lt;T&gt;::shrink() 	//装填因子过小时压缩	</span><br><span class="line">&#123;</span><br><span class="line">	if(_capacity&lt;DEFAULT_CAPACITY&lt;&lt;1)return ;//不致收缩到DEFAULT_CAPACITY以下,《小于&lt;优先级,《n表示乘以n*2</span><br><span class="line">	//我:if((_capacity&gt;&gt;1)&lt;DEFAULT_CAPACITY)return;//容量缩小一倍后不能低于初始值</span><br><span class="line">	if(_size&lt;&lt;2&gt;_capacity)return;			//以容量的25%为限</span><br><span class="line">	//我:if(_size&gt;(_capacity&gt;&gt;2))return;	//以25%为例，规模要大于容量的25%</span><br><span class="line">	T* another=_elem;</span><br><span class="line">	_elem=new T[_capacity&gt;&gt;=1]				//容量减半</span><br><span class="line">	for(int i=0;i&lt;_size;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		_elem[i]=another[i];</span><br><span class="line">	&#125;</span><br><span class="line">	delete[]another;</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;	</span><br><span class="line">bool Vector&lt;T&gt;::bubble(int lo,int hi) 	//扫描交换	</span><br><span class="line">&#123;</span><br><span class="line">	bool sort=true;		//整体有序标志(作用:若循环一遍发现整体有序后可不实现交换)</span><br><span class="line">	while (++lo&lt;hi)</span><br><span class="line">	&#123;</span><br><span class="line">		if(_elem[lo]&lt;_elem[lo-1])</span><br><span class="line">		&#123;</span><br><span class="line">			sort=false;</span><br><span class="line">			swap(_elem[lo],_elem[lo-1]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return sort;</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::bubbleSort(int lo,int hi) 	//起泡(冒泡)排序算法</span><br><span class="line">&#123;</span><br><span class="line">	while (!bubble(lo,hi--))		//hi--每一次确定最后一个元素后将hi前移</span><br><span class="line">	&#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">int Vector&lt;T&gt;::max(int lo,int hi) 	//选取最大元素(在[lo,hi]里选取最大元素)</span><br><span class="line">&#123;</span><br><span class="line">	T max=_elem[hi];</span><br><span class="line">	while(lo&lt;=hi--)</span><br><span class="line">	&#123;</span><br><span class="line">		if(_elem[hi]&lt;max)max=hi;</span><br><span class="line">	&#125;</span><br><span class="line">	return hi;	</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::seletcionSort(int lo,int hi) 	//选择排序算法</span><br><span class="line">&#123;</span><br><span class="line">	for(int i=0;i&lt;hi-lo;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		int k=i;</span><br><span class="line">		for(int j=i+1;j&lt;hi-lo;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(_elem[j]&lt;_elem[k])k=j;</span><br><span class="line">		&#125;</span><br><span class="line">		if(k!=i)swap(_elem[i],_elem[k]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::mergeSort(int lo,int hi) 	//归并算法	</span><br><span class="line">&#123;</span><br><span class="line">	if(hi-lo&lt;2)return ;			//当区间为单个数时自然有序</span><br><span class="line">	int mi=(lo+hi)&gt;&gt;1;</span><br><span class="line">	merge(lo,mi);merge(mi,hi);	//无序序列不停分割成俩个区间直至一个自然数</span><br><span class="line">	mergeSort(lo,mi,hi);		//当返回至俩个自然数这层进行归并排序</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::merge(int lo,int mi,int hi) 	//归并排序算法</span><br><span class="line">&#123;</span><br><span class="line">	T* A=_elem+lo;		//设置合并后的向量[0,hi-lo)</span><br><span class="line">	int lb=mi-lo;	//设置前部分向量大小	</span><br><span class="line">	T* B=new T[lb];</span><br><span class="line">	for(int i=0;i&lt;lb;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		B[i]=A[i];</span><br><span class="line">	&#125;</span><br><span class="line">	int lc=hi-mi;</span><br><span class="line">	T* C=_elem+mi;</span><br><span class="line">	int i,j,k;</span><br><span class="line">	for(i=j=k=0;j&lt;lb||k&lt;lc;)</span><br><span class="line">	&#123;</span><br><span class="line">		if((j&lt;lb)&amp;&amp;(k&gt;=lc)||(B[j]&lt;=C[k]))A[i++]=B[j++];</span><br><span class="line">		if((k&lt;lc)&amp;&amp;(j&gt;=lb)||(C[k]&lt;B[j]))A[i++]=C[k++];</span><br><span class="line">	&#125;</span><br><span class="line">	delete[]B;</span><br><span class="line">	B=NULL;</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">int Vector&lt;T&gt;::partition(int lo,int hi) 	//轴点构造算法</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::quickSort(int lo,int hi) 	//快速排序算法</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::heapSort(int lo,int hi) 		//堆排序(稍后结合完全堆讲解)</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">//构造函数</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">Vector&lt;T&gt;::Vector(int c=DEFAULT_CAPACITY,int s=0,T v=0)//容量为c，规模为s，所有元素初始为v</span><br><span class="line">&#123;</span><br><span class="line">	_elem=new T[_capacity=c];</span><br><span class="line">	for(_size=0;_size&lt;s;_size++)_elem[_size]=v;</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">Vector&lt;T&gt;::Vector(T const*A,int n)	//数组整体复制</span><br><span class="line">&#123;</span><br><span class="line">	copyFrom(A,0,n);</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">Vector&lt;T&gt;::Vector(T const*A,int lo,int hi)	//区间</span><br><span class="line">&#123;</span><br><span class="line">	copyFrom(A,lo,hi);</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">Vector&lt;T&gt;::Vector(Vector &lt;T&gt;const&amp; V)	//向量整体复制</span><br><span class="line">&#123;</span><br><span class="line">	copyFrom(V._elem,0,V._size);</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">Vector&lt;T&gt;::Vector(Vector &lt;T&gt;const&amp; V,int lo,int hi)	//区间</span><br><span class="line">&#123;</span><br><span class="line">	copyFrom(V._elem,lo,hi);</span><br><span class="line">&#125;</span><br><span class="line">//析构函数</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">Vector&lt;T&gt;::~Vector()	//释放内部空间</span><br><span class="line">&#123;</span><br><span class="line">	if(_elem)delete []_elem;</span><br><span class="line">	_elem=NULL;</span><br><span class="line">	_capacity=_size=0;</span><br><span class="line">&#125;</span><br><span class="line">//只读访问接口</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">int Vector&lt;T&gt;::size()const	//规模</span><br><span class="line">&#123;</span><br><span class="line">	return _size;</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">bool Vector&lt;T&gt;::empty()const</span><br><span class="line">&#123;</span><br><span class="line">	return !_size;</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">int Vector&lt;T&gt;::disordered()const 	//判断向量是否已排序</span><br><span class="line">&#123;</span><br><span class="line">	int n=0;</span><br><span class="line">	for(int i=1;i&lt;_size;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if(_elem[i-1]&gt;_elem[i])n++;</span><br><span class="line">	&#125;</span><br><span class="line">	return n;</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">int Vector&lt;T&gt;::find(T const&amp; e)const	//无序向量整体查找</span><br><span class="line">&#123;</span><br><span class="line">	return find(e,0,_size);</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">int Vector&lt;T&gt;::find(T const&amp; e,int lo,int hi)const 	//无序向量区间查找</span><br><span class="line">&#123;</span><br><span class="line">	while p((lo&lt;hi--)&amp;&amp;(e!=_elem[hi]))		//逆序查找，默认返回秩最大的元素。</span><br><span class="line">	return hi;</span><br><span class="line">	/*我：正序查找，默认返回秩最小的元素</span><br><span class="line">	for(;lo&lt;hi;lo++)</span><br><span class="line">	&#123;</span><br><span class="line">		if(e==_elem[lo])break;</span><br><span class="line">	&#125;</span><br><span class="line">	return lo;</span><br><span class="line">	*/</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">int Vector&lt;T&gt;::search(T const&amp; e)const	//有序向量整体查找</span><br><span class="line">&#123;</span><br><span class="line">	return (0&gt;=_size)?-1:search(e,0,_size);</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">int Vector&lt;T&gt;::search(T const&amp; e,int lo,int hi)const //有序向量区间查找</span><br><span class="line">&#123;</span><br><span class="line">	return binsearch(_elem,e,lo,hi);</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">int Vector&lt;T&gt;::binsearch(T* A,T const&amp; e,int lo,int hi)const//二分查找</span><br><span class="line">&#123;</span><br><span class="line">	/*int mi;</span><br><span class="line">	while (lo&lt;hi)</span><br><span class="line">	&#123;</span><br><span class="line">		mi=(lo+hi)&gt;&gt;1;</span><br><span class="line">		if(e&lt;A[mi])hi=mi;</span><br><span class="line">		else if(e&gt;[mi])lo=mi;</span><br><span class="line">		else return mi;</span><br><span class="line">	&#125;</span><br><span class="line">	return -1;				//未找到变量*/</span><br><span class="line">	//更新版</span><br><span class="line">	int mi;</span><br><span class="line">	while (lo&lt;hi)</span><br><span class="line">	&#123;</span><br><span class="line">		mi=(lo+hi)&gt;&gt;1;</span><br><span class="line">		(e&lt;_elem[mi])?hi=mi:lo=mi+1;</span><br><span class="line">	&#125;</span><br><span class="line">	return --lo;</span><br><span class="line">&#125;</span><br><span class="line">//可写访问接口</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">T&amp; Vector&lt;T&gt;::operator[](int r)const 	//重载下标操作符,可以类似于数组形式引用各元素</span><br><span class="line">&#123;</span><br><span class="line">	return _elem[r];</span><br><span class="line">	//我:if（r&lt;0||r&gt;=_size）exit(1);应增加此句判断数组越界问题。</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">Vector&lt;T&gt;&amp; Vector&lt;T&gt;::operator=(Vector&lt;T&gt;const&amp; V) //重载赋值操作符,以便直接克隆向量</span><br><span class="line">&#123;</span><br><span class="line">	if(_elem)delete[]_elem;</span><br><span class="line">	_elem=new T[_capacity=V._capacity];</span><br><span class="line">	for(_size=0;_size&lt;V._size;_size++)</span><br><span class="line">	&#123;</span><br><span class="line">		_elem[_size]=V._elem[_size];</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	//邓:copyFrom(V._elem,0,V.size());	意见：copyFrom（）函数是给构造函数使用，如若在这使用，可能会使被赋值容量数值与复制容量数值不同。</span><br><span class="line">	return*this;</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">T Vector&lt;T&gt;::remove(int r) 	//删除秩为r的元素</span><br><span class="line">&#123;</span><br><span class="line">	T e=_elem[r];			//备份被删除元素</span><br><span class="line">	remove(r,r+1);			//[r,r+1)相等于删除r</span><br><span class="line">	return e;</span><br><span class="line">	/*</span><br><span class="line">	T e=_elem[r];</span><br><span class="line">	for(int i=r;i&lt;_size;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		_elem[i]=_elem[i+1];</span><br><span class="line">	&#125;</span><br><span class="line">	_size--;</span><br><span class="line">	return _elem[r];</span><br><span class="line">	*/</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">int Vector&lt;T&gt;::remove(int lo,int hi) 	//删除秩在区间[ho,hi)之内的元素</span><br><span class="line">&#123;</span><br><span class="line">	if(lo==hi)return 0;		//优化效率。</span><br><span class="line">	while (hi&lt;_size)		//将[hi,size)的元素依次往前移动</span><br><span class="line">	&#123;</span><br><span class="line">		_elem[lo++]=_elem[hi++];</span><br><span class="line">	&#125;</span><br><span class="line">	_size=lo;				//更新规模</span><br><span class="line">	shrink();				//若有必要缩容,shrink（）函数已包含判断是否缩容语句。</span><br><span class="line">	return hi-lo			//返回被删除元素数目</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">int Vector&lt;T&gt;::insert(int r,T const&amp; e) 	//插入元素</span><br><span class="line">&#123;</span><br><span class="line">	//邓：按秩插入</span><br><span class="line">	expand();				//若有必要扩容,expand（）函数已包含判断是否扩容语句。</span><br><span class="line">	for(int i=_size;i&gt;r;i--)</span><br><span class="line">	&#123;</span><br><span class="line">		_elem[i]=_elem[i-1];</span><br><span class="line">	&#125;</span><br><span class="line">	_elem[r]=e;</span><br><span class="line">	_size++;</span><br><span class="line">	return r;				//返回插入元素的秩</span><br><span class="line">	/*我：按位置插入，增添位置插入片段</span><br><span class="line">	if(r&gt;_size||r&lt;1)return;</span><br><span class="line">	for(int i=_size;i&gt;=r;i--)</span><br><span class="line">	&#123;</span><br><span class="line">		_elem[i]=_elem[i-1];</span><br><span class="line">	&#125;</span><br><span class="line">	_elem[r-1]=e;</span><br><span class="line">	_size++;</span><br><span class="line">	*/</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">int Vector&lt;T&gt;::insert(T const&amp; e)//默认作为末元素插入</span><br><span class="line">&#123;</span><br><span class="line">	return insert(_size,e);</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::sort(int lo,int hi) 	//对[lo，hi)排序</span><br><span class="line">&#123;</span><br><span class="line">	merge(lo,hi);</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::sort()	//整体排序</span><br><span class="line">&#123;</span><br><span class="line">	sort(0,_size);</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::unsort(int lo,int hi) 	//对[lo，hi）置乱</span><br><span class="line">&#123;</span><br><span class="line">	T *V=_elem+lo;						//将置乱区间向量看成另一向量V[0,hi-lo)</span><br><span class="line">	for(int i=hi-lo;i&gt;0;i--)			//rand()%n:表示从0到n-1个数里取随机数,因为从0开始，所以要取逆序。</span><br><span class="line">	&#123;</span><br><span class="line">		swap(V[i-1],V[rand()%i]);			</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::unsort()	//整体置乱</span><br><span class="line">&#123;</span><br><span class="line">	unsort(0,size());</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">int Vector&lt;T&gt;::deduplicate() 	//无序去重</span><br><span class="line">&#123;</span><br><span class="line">	int old_size=_size;</span><br><span class="line">	int i=1;					//重复是在第二个元素开始</span><br><span class="line">	while (i&lt;_size)</span><br><span class="line">	&#123;</span><br><span class="line">		(find(_elem[i],0,i)&lt;0)?i++:remove(i);	//remove里已更新规模，此处不用。</span><br><span class="line">	&#125;</span><br><span class="line">	return old_size-_size;		//返回重复元素个数。</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">int Vector&lt;T&gt;::uniquify() 	//有序去重</span><br><span class="line">&#123;</span><br><span class="line">	int i=j=0;</span><br><span class="line">	while (++j&lt;_size)</span><br><span class="line">	&#123;</span><br><span class="line">		if(_elem[i]!=_elem[j])		//跳过重复元素，根据重复有序元素相邻的特性</span><br><span class="line">		_elem[++i]=_elem[j];</span><br><span class="line">	&#125;</span><br><span class="line">	_size=++i;						//更新规模</span><br><span class="line">	shrink();						//若有必要缩容</span><br><span class="line">	return j-i;						//返回删除元素个数</span><br><span class="line">&#125;</span><br><span class="line">//遍历</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::traverse(void(*visit)(T&amp;)) //遍历（使用函数指针,只读或局部性修改）</span><br><span class="line">&#123;</span><br><span class="line">	for(int i=0;i&lt;_size;i++)visit(_elem[i]);</span><br><span class="line">&#125;</span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line">void Vector&lt;T&gt;::display()</span><br><span class="line">&#123;</span><br><span class="line">	for(int i=0;i&lt;_size;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cout&lt;&lt;_elem[i]&lt;&lt;&quot; &quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;endl;</span><br><span class="line">&#125;</span><br><span class="line">/*template&lt;typename VST&gt;void Vector&lt;VST&gt;::traverse(VST&amp;) //遍历（使用函数对象，可全局性修改）</span><br><span class="line">&#123;</span><br><span class="line">	for(int i=0;i&lt;_size;i++)visit(_elem[i]);</span><br><span class="line">&#125;*/</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/05/26/c++/详解STL里的Vector底层代码/" data-id="ckib6fit9007qg4tpxivq94x3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/C/">C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2019/05/26/c++/详解STL里的List底层代码/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          详解STL里的List底层代码
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2019/05/26/数据结构与算法/哈希查找HashSearch/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">哈希查找HashSearch</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

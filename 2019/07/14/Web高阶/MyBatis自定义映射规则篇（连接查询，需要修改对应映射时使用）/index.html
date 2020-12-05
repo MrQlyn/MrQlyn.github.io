@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>MyBatis自定义映射规则篇（连接查询，需要修改对应映射时使用） | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="自定义映射规则：即自己定义数据库与Bean对象的映射规则，不再使用默认Bean对象与记录同名规则，即每个数据库  的属性都可以决定它映射到哪个类的哪个属性， 所以操作标签（如）的resultType属性不再使  ** 用，改用resultMap属性，二者不能同时使用。**  分步查询使用：在Bean对象包含其它表Bean对象或List&amp;lt;其它表Bean对象&amp;gt;情况使用  目录  一、">
+<meta name="keywords" content="Web高阶">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis自定义映射规则篇（连接查询，需要修改对应映射时使用）">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/Web高阶/MyBatis自定义映射规则篇（连接查询，需要修改对应映射时使用）/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="自定义映射规则：即自己定义数据库与Bean对象的映射规则，不再使用默认Bean对象与记录同名规则，即每个数据库  的属性都可以决定它映射到哪个类的哪个属性， 所以操作标签（如）的resultType属性不再使  ** 用，改用resultMap属性，二者不能同时使用。**  分步查询使用：在Bean对象包含其它表Bean对象或List&amp;lt;其它表Bean对象&amp;gt;情况使用  目录  一、">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:09:18.718Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MyBatis自定义映射规则篇（连接查询，需要修改对应映射时使用）">
+<meta name="twitter:description" content="自定义映射规则：即自己定义数据库与Bean对象的映射规则，不再使用默认Bean对象与记录同名规则，即每个数据库  的属性都可以决定它映射到哪个类的哪个属性， 所以操作标签（如）的resultType属性不再使  ** 用，改用resultMap属性，二者不能同时使用。**  分步查询使用：在Bean对象包含其它表Bean对象或List&amp;lt;其它表Bean对象&amp;gt;情况使用  目录  一、">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Web高阶/MyBatis自定义映射规则篇（连接查询，需要修改对应映射时使用）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/07/14/Web高阶/MyBatis自定义映射规则篇（连接查询，需要修改对应映射时使用）/" class="article-date">
+  <time datetime="2019-07-14T03:00:32.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      MyBatis自定义映射规则篇（连接查询，需要修改对应映射时使用）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   自定义映射规则：即自己定义数据库与Bean对象的映射规则，不再使用默认Bean对象与记录同名规则，即每个数据库</p>
+<p> 的属性都可以决定它映射到哪个类的哪个属性， 所以<strong>操作标签（如<select>）的resultType属性不再使</select></strong></p>
+<p> ** 用，改用resultMap属性，二者不能同时使用。**</p>
+<p> 分步查询使用：在Bean对象包含其它表Bean对象或List&lt;其它表Bean对象&gt;情况使用</p>
+<p> <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%E3%80%81%E6%94%B9%E5%8F%98Bean%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%E5%90%8D%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B1%9E%E6%80%A7%E5%90%8D%E4%B8%8D%E4%B8%80%E8%87%B4%E9%9C%80%E8%A6%81%E6%94%B9%E5%8F%98%E6%98%A0%E5%B0%84%E8%A7%84%E5%88%99">一、改变Bean对象属性名与数据库属性名不一致需要改变映射规则</a></p>
+<p> <a href="#%E4%BA%8C%E3%80%81%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2%E7%BB%8F%E5%B8%B8%E4%BD%BF%E7%94%A8%E5%88%B0%E7%9A%84%E6%83%85%E5%86%B5%EF%BC%9ABean%E5%AF%B9%E8%B1%A1%E5%8C%85%E5%90%AB%E4%BA%86%E5%85%B6%E5%AE%83%E8%A1%A8%E7%9A%84%E4%B8%BB%E9%94%AEID%E6%89%80%E4%BB%A5%E9%80%9A%E5%B8%B8%E4%BC%9A%E5%9C%A8B%E8%A1%A8%E5%AD%98%E6%94%BE">二、连接查询经常使用到的情况：Bean对象包含了其它表的主键ID所以通常会在B表存放</a><a href="#A%E8%A1%A8%E7%9A%84%E4%B8%BB%E9%94%AEID%EF%BC%88%E6%88%96%E5%AD%98%E6%94%BEA%E8%A1%A8%E7%9A%84bean%E5%AF%B9%E8%B1%A1%EF%BC%89%EF%BC%8C%E6%9F%A5%E8%AF%A2%E6%97%B6%E5%80%99%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8%E5%88%B0%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2%EF%BC%8C%E9%9C%80%E8%A6%81%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%A0">A表的主键ID（或存放A表的bean对象），查询时候需要使用到连接查询，需要自定义映</a><a href="#%E5%B0%84%E5%88%B0%E5%85%B6%E5%AE%83%E8%A1%A8%E7%9A%84%E4%B8%BB%E9%94%AEID%E6%88%96Bean%E5%AF%B9%E8%B1%A1%E5%B1%9E%E6%80%A7%EF%BC%8C%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E4%BF%A9%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AE%9E%E7%8E%B0%E3%80%82">射到其它表的主键ID或Bean对象属性，可以使用俩种方法实现。</a></p>
+<p> <a href="#%E4%B8%89%E3%80%81%E5%88%86%E6%AD%A5%E6%9F%A5%E8%AF%A2%3Cassociation%3E%EF%BC%9A%E5%85%88%E6%89%A7%E8%A1%8Csql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84%E4%B8%80%E5%8F%A5sql%E8%AF%AD%E5%8F%A5%EF%BC%8C%E5%9C%A8%E8%8E%B7%E5%8F%96%E6%9F%90%E4%B8%AA%E5%85%B6%E5%AE%83%E8%A1%A8Bean%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%E5%B1%9E%E6%80%A7(%E5%A6%82getXxx())%E6%97%B6%E5%86%8D%E6%89%A7%E8%A1%8C%E5%8F%A6%E4%B8%80sql%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%9A%84sql%E8%AF%AD%E5%8F%A5%EF%BC%8C%E7%B1%BB%E4%BC%BC%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0sql%E9%87%8C%E7%9A%84%E5%B5%8C%E5%A5%97%E6%9F%A5%E8%AF%A2%EF%BC%8C%E6%AF%8F%E4%B8%AA%E6%9F%A5%E8%AF%A2%E8%AF%AD%E5%8F%A5%E5%8F%AA%E6%93%8D%E4%BD%9C%E4%B8%80%E5%BC%A0%E8%A1%A8%E6%9D%A5%E8%8A%82%E7%9C%81%E8%B5%84%E6%BA%90%E3%80%82">三、分步查询：先执行sql配置文件的一句sql语句，在获取某个其它表Bean属性(如getXxx())时再执行另一sql配置文件的sql语句，类似sql里的嵌套查询，每个查询语句只操作一张表来节省资源。</a></p>
+<p> <a href="#%E5%9B%9B%E3%80%81Bean%E5%AF%B9%E8%B1%A1%E5%8C%85%E5%90%AB%E4%B8%80%E4%B8%AAList%E6%80%8E%E4%B9%88%E8%87%AA%E5%AE%9A%E4%B9%89%E6%98%A0%E5%B0%84%E8%A7%84%E5%88%99%3Ccollection%3E">四、Bean对象包含一个List怎么自定义映射规则</a></p>
+<hr>
+<h3 id="一、改变Bean对象属性名与数据库属性名不一致需要改变映射规则"><a href="#一、改变Bean对象属性名与数据库属性名不一致需要改变映射规则" class="headerlink" title="一、改变Bean对象属性名与数据库属性名不一致需要改变映射规则"></a>一、改变Bean对象属性名与数据库属性名不一致需要改变映射规则</h3><p> <resultmap>：在sql映射文件<mapper>标签下的自定义映射规则，<select>标签的<strong>resultMap属性</strong>用来设置当前</select></mapper></resultmap></p>
+<p> 查询的自定义规则id（即<resultmap>的id属性值）</resultmap></p>
+<p> 注意：未指定的列自动根据Bean对象映射规则进行映射</p>
+<p> type：指定要修改的映射Bean对象全类名<br> id :自定义映射规则的名字（别名）  </p>
+<p> <id>：指定主键的映射标签<br> column：被修改的列名（数据库的列名）<br> property：修改后的列名（Bean对象的列名）  </id></p>
+<p> <result>: 指定普通列的映射标签，也可以映射主键。<br> column：被修改的列名（数据库的列名）<br> property：修改后的列名（Bean对象的列名）  </result></p>
+<p> 模板：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> &lt;mapper namespace=&quot;绑定的接口全类名&quot;&gt;</span><br><span class="line">    &lt;!--映射规则的制订--&gt;</span><br><span class="line">    &lt;resultMap type=&quot;Bean对象全类名&quot; id=&quot;规则名&quot;&gt;</span><br><span class="line">        &lt;id column=&quot;数据库下的主键名&quot; property=&quot;Bean对象的属性名&quot;/&gt;</span><br><span class="line">        &lt;result column=&quot;数据库下的列名&quot; property=&quot;Bean对象的属性名&quot;/&gt;</span><br><span class="line">    &lt;/resultMap&gt;</span><br><span class="line">    &lt;select id=&quot;接口方法&quot; resultMap=&quot;规则名&quot;&gt;</span><br><span class="line">         .....</span><br><span class="line">    &lt;/select&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二、连接查询经常使用到的情况：Bean对象包含了其它表的主键ID所以通常会在B表存放"><a href="#二、连接查询经常使用到的情况：Bean对象包含了其它表的主键ID所以通常会在B表存放" class="headerlink" title="二、连接查询经常使用到的情况：Bean对象包含了其它表的主键ID所以通常会在B表存放"></a>二、连接查询经常使用到的情况：Bean对象包含了其它表的主键ID所以通常会在B表存放</h3><h3 id="A表的主键ID（或存放A表的bean对象），查询时候需要使用到连接查询，需要自定义映"><a href="#A表的主键ID（或存放A表的bean对象），查询时候需要使用到连接查询，需要自定义映" class="headerlink" title="A表的主键ID（或存放A表的bean对象），查询时候需要使用到连接查询，需要自定义映"></a>A表的主键ID（或存放A表的bean对象），查询时候需要使用到连接查询，需要自定义映</h3><h3 id="射到其它表的主键ID或Bean对象属性，可以使用俩种方法实现。"><a href="#射到其它表的主键ID或Bean对象属性，可以使用俩种方法实现。" class="headerlink" title="射到其它表的主键ID或Bean对象属性，可以使用俩种方法实现。"></a>射到其它表的主键ID或Bean对象属性，可以使用俩种方法实现。</h3><p> 第一种：同样使用<strong><result></result></strong>标签，当Bean对象包含了另一个Bean对象时， 可以使用在<strong>属性名(该属性为自定义类)**</strong>.属性名**</p>
+<p> 来指定映射的属性。</p>
+<p> <result>: 指定普通列的映射标签，也可以映射主键。<br> column：被修改的列名（数据库的列名）<br> property：修改后的列名（Bean对象的属性名.属性名）</result></p>
+<p> 例如：Employee表有一个dept<strong>自定义类属性</strong></p>
+<p> dept.id来指定数据库映射到dept属性的id属性。例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> &lt;resultMap type=&quot;mybatis.bean.Employee&quot; id=&quot;myEmp&quot;&gt;</span><br><span class="line">    &lt;!-Employee表中现有一个属性dept（该属性为一个自定义类）-&gt;</span><br><span class="line">    &lt;result column=&quot;d_id&quot; property=&quot;dept.id&quot;/&gt;</span><br><span class="line">    &lt;result column=&quot;dept_name&quot; property=&quot;dept.dname&quot;/&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 第二种：在<resultmap>里使用<strong><association></association></strong>标签：当Bean对象包含了其他表Bean对象时，可以使用如下属性自定义映射</resultmap></p>
+<p> javaType：其它表Bean<strong>全类名</strong>（自定义类的全类名）</p>
+<p> property：其它表Bean类在当前表Bean类的<strong>属性名</strong>（自定义类属性名，注意不是类名）。</p>
+<p> <strong><id>和<result>指定的都是其它表Bean类的列映射规则</result></id></strong></p>
+<p> <result>: 指定普通列的映射标签，也可以映射主键。<br> column：被修改的列名（数据库的列名）<br> property：修改后的列名（Bean对象的列名）</result></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> &lt;resultMap type=&quot;mybatis.bean.Employee&quot; id=&quot;myemp&quot;&gt;</span><br><span class="line">    &lt;association property=&quot;dept&quot; javaType=&quot;mybatis.bean.Department&quot;&gt;</span><br><span class="line">     &lt;result column=&quot;id&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">     &lt;result column=&quot;dept_name&quot; property=&quot;dname&quot;/&gt;</span><br><span class="line">    &lt;/association&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="三、分步查询：先执行sql配置文件的一句sql语句，在获取某个其它表Bean-属性-如getXxx-时再执行另一sql配置文件的sql语句，类似-sql里的嵌套查询，每个查询语句只操作一张表来节省资源。"><a href="#三、分步查询：先执行sql配置文件的一句sql语句，在获取某个其它表Bean-属性-如getXxx-时再执行另一sql配置文件的sql语句，类似-sql里的嵌套查询，每个查询语句只操作一张表来节省资源。" class="headerlink" title="三、分步查询：先执行sql配置文件的一句sql语句，在获取某个其它表Bean 属性(如getXxx())时再执行另一sql配置文件的sql语句，类似 sql里的嵌套查询，每个查询语句只操作一张表来节省资源。"></a>三、分步查询<strong><association></association></strong>：先执行sql配置文件的一句sql语句，在获取某个其它表Bean 属性(如getXxx())时再执行另一sql配置文件的sql语句，类似 sql里的嵌套查询，每个查询语句只操作一张表来节省资源。</h3><p> 同样在<resultmap>里使用<strong><association></association></strong>标签</resultmap></p>
+<p> column：数据库的列名，设置要传入返回的哪一列作参数给其它sql语句调用</p>
+<p> property：需要使用分步查询的属性（即查询到该属性时分俩步查询），一般为其它表Bean类属性名</p>
+<p> select：sql配置文件同名接口全类名.方法名，要给哪个方法使用，即给绑定sql配置文件中的sql语句使用。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> &lt;resultMap type=&quot;mybatis.bean.Employee&quot; id=&quot;ruleOne&quot;&gt;</span><br><span class="line">    &lt;id column=&quot;id&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">    &lt;result column=&quot;last_name&quot; property=&quot;lastName&quot;/&gt;</span><br><span class="line">    &lt;association property=&quot;自定义类属性名&quot; select=&quot;接口全类名.方法名（即其它sql配置文件的语句）&quot; </span><br><span class="line">                 column=&quot;列名（即传入查到的哪一列作为其它sql语句需要传入的参数值）&quot;&gt;</span><br><span class="line">    &lt;/association&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 不需要在<strong><association></association></strong>里设置<result>标签原因：此处一个Select即sql语句只操作一张表，无法映射其它表的Bean对象</result></p>
+<p> 还需要在全局配置文件中<configuration>下添加如下配置实现延迟加载：</configuration></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">	&lt;settings&gt;</span><br><span class="line">    &lt;setting name=&quot;lazyLoadingEnabled&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">    &lt;setting name=&quot;aggressiveLazyLoading&quot; value=&quot;false&quot;/&gt;</span><br><span class="line">&lt;/settings&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="四、Bean对象包含一个List怎么自定义映射规则"><a href="#四、Bean对象包含一个List怎么自定义映射规则" class="headerlink" title="四、Bean对象包含一个List怎么自定义映射规则"></a>四、Bean对象包含一个List怎么自定义映射规则<strong><collection></collection></strong></h3><p> 在<resultmap>里使用<strong><collection></collection></strong>标签</resultmap></p>
+<p> ofType ：List里的类的全类名 </p>
+<p> property：自定义List属性名 </p>
+<p> <strong><id>和<result>指定的都是List里的类的映射规则，而且<collection>里的每个列都需要手动指定映射</collection></result></id></strong></p>
+<p> <id>：指定主键的映射标签<br> column：被修改的列名（数据库的列名）<br> property：修改后的列名（Bean对象的列名） </id></p>
+<p> <result>: 指定普通列的映射标签，也可以映射主键。<br> column：被修改的列名（数据库的列名）<br> property：修改后的列名（Bean对象的列名）</result></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> &lt;resultMap type=&quot;Bean对象全类名&quot; id=&quot;规则名&quot;&gt;</span><br><span class="line">    &lt;result column=&quot;id&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">    &lt;result column=&quot;dept_name&quot; property=&quot;dname&quot;/&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;collection property=&quot;List属性名&quot; ofType=&quot;List里的类的全类名&quot;&gt;</span><br><span class="line">        &lt;id column=&quot;数据库主键名&quot; property=&quot;List里的类的属性名&quot;/&gt;</span><br><span class="line">        &lt;result column=&quot;数据库列名&quot; property=&quot;List里的类的属性名&quot;/&gt;</span><br><span class="line">    &lt;/collection&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 使用分步查询：</p>
+<p> column：数据库的列名，设置要传入返回的哪一列作参数给其它sql语句调用</p>
+<p> property：要使用分步查询的List属性，即自定义List属性名</p>
+<p> select：sql配置文件同名接口全类名.方法名，要给哪个方法使用，即给绑定sql配置文件中的sql语句使用。</p>
+<p> <id>：指定主键的映射标签<br> column：被修改的列名（数据库的列名）<br> property：修改后的列名（Bean对象的列名） </id></p>
+<p> <result>: 指定普通列的映射标签，也可以映射主键。<br> column：被修改的列名（数据库的列名）<br> property：修改后的列名（Bean对象的列名）</result></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> &lt;resultMap type=&quot;Bean对象全类名&quot; id=&quot;规则名&quot;&gt;</span><br><span class="line">    &lt;result column=&quot;id&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">    &lt;result column=&quot;dept_name&quot; property=&quot;dname&quot;/&gt;</span><br><span class="line">    &lt;!-- List部分分步查询映射 --&gt;</span><br><span class="line">    &lt;collection property=&quot;List属性名&quot;         </span><br><span class="line">        select=&quot;接口全类名.方法名&quot; column=&quot;要传入下个查询语句的列名&quot;&gt;</span><br><span class="line">        &lt;id column=&quot;id&quot; property=&quot;id&quot;/&gt;</span><br><span class="line">        &lt;result column=&quot;last_name&quot; property=&quot;lastName&quot;/&gt;</span><br><span class="line">        &lt;result column=&quot;gender&quot; property=&quot;gender&quot;/&gt;</span><br><span class="line">        &lt;result column=&quot;email&quot; property=&quot;email&quot;/&gt;</span><br><span class="line">    &lt;/collection&gt;</span><br><span class="line">&lt;/resultMap&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 当传入的参数值有多个时，column应使用如下格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">column=&quot;&#123;占位符名=列名,占位符名=列名,....&#125;&quot;</span><br></pre></td></tr></table></figure>
+
+<p> sql映射文件的占位符名应与column的占位符名一致：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from tb1_employee where d_id = #&#123;占位符名&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/Web高阶/MyBatis自定义映射规则篇（连接查询，需要修改对应映射时使用）/" data-id="ckib6fit2007gg4tpj6nkqp9s" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2019/07/14/Web高阶/Mybatis动态拼接SQL语句篇/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Mybatis动态拼接SQL语句篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2019/07/14/数据库/JDBCTool（JDBCTools的更新版，cp30版本）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JDBCTool（JDBCTools的更新版，cp30版本）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

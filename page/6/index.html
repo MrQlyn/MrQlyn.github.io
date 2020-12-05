@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="シェンキンリンのブログ">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/page/6/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="シェンキンリンのブログ">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Git/Git的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/01/19/Git/Git的使用/" class="article-date">
+  <time datetime="2019-01-19T06:10:02.000Z" itemprop="datePublished">2019-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2019/01/19/Git/Git的使用/">Git的使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   Git：一款版本控制工具，与Linux同一个作者，命令与Linux命令相似。</p>
+<p> Git的提交步骤：工作区—&gt;暂存区—&gt;版本库（分支）</p>
+<p> 一、</p>
+<p> 1、配置身份：识别是当前操作用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> git config --global user.name &quot;用户名&quot;</span><br><span class="line">git config --global user.email &quot;邮箱&quot;</span><br></pre></td></tr></table></figure>
+
+<p> 查看当前配置用户是否成功，只需要去掉相应的”用户名”，”邮箱”</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> git config --global user.name </span><br><span class="line">git config --global user.email</span><br></pre></td></tr></table></figure>
+
+<p> 2、创建代码仓库：使用** ”cd f:/文件名/….“ **进入文件目录，使用如下命令创建代码仓库，同时会在文件下创建一个.git的</p>
+<p> 隐藏文件夹来保存本地的git操作，该文件夹就是Git的本地库（版本库）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+
+<p> 3、查看所有文件夹（可用来查看版本库）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -al</span><br></pre></td></tr></table></figure>
+
+<p> 4、添加文件至暂存区</p>
+<p> 添加单个文件：提交文件夹可不用后缀</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add 文件名.后缀</span><br></pre></td></tr></table></figure>
+
+<p> 添加所有文件：将文件名改为 ”.“ 即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 5、提交暂存区所有文件至版本库：一定要通过-m参数来加上描述信息，否则提交不合法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;描述信息&quot;</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 二、</p>
+<p> 1、查看已提交文件修改内容：当我们把项目提交至版本库后，git会自动帮我们记录修改的文件及修改的内容</p>
+<p> 查看修改的文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<p> 通过运行结果可以看到 ”src/com/example/activitylifecycle/MainActivity.java“文件发送了改动</p>
+<p> <img src="https://img-blog.csdn.net/20181005144744209?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p> 查看某个文件修改内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff 路径/文件名.后缀</span><br></pre></td></tr></table></figure>
+
+<p> 通过运行结果可以看到该文件具体修改的内容</p>
+<p> <img src="https://img-blog.csdn.net/20181005145133530?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p> 2、还原工作区（未添加至暂存区）的文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 路径/文件名.后缀</span><br></pre></td></tr></table></figure>
+
+<p> 通过git status 可以看到没有文件修改，就知道已经文件已经还原。</p>
+<p> <img src="https://img-blog.csdn.net/20181005150253253?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p> 3、还原已添加至暂存区的文件</p>
+<p> 准备工作：</p>
+<p> 先随意改动MainActivity.java的任意一处</p>
+<p> 随后添加至暂存区，通过git status可以看到modified行字体变绿知道文件已提交至暂存区</p>
+<p> <img src="https://img-blog.csdn.net/20181005150735827?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p> <img src="https://img-blog.csdn.net/20181005150750415?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p> 还原需要俩步：先重置文件回工作区，接着使用git check还原未添加至暂存区的文件</p>
+<p> 还原至工作区：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD 路径/文件名.后缀</span><br></pre></td></tr></table></figure>
+
+<p> 还原工作区修改文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 路径/文件名.后缀</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdn.net/20181005151725275?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p> <img src="https://img-blog.csdn.net/20181005151746651?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p> 4、查看提交记录</p>
+<p> 查看所有提交记录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdn.net/20181005152343535?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt> </p>
+<p> 查看一条提交记录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log id值 -1</span><br></pre></td></tr></table></figure>
+
+<p> 查看一条提交记录具体修改内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log id值 -1 -p</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdn.net/20181005152719413?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p> 三、</p>
+<p> 分支（branch）：在现有代码上开辟一个分支，使得代码可在不同的分支上进行同时开发，提升工作效率。各分支之间</p>
+<p> 互不干扰，但可以合并分支。</p>
+<p> 使用场景 ：第一个版本已经发布，当软件开发第二个版本时发现第一个 版本有重大bug，可开发已经至第二个版本</p>
+<p> ，已经还原不了第一个版本。如果使用分支，可将第一个版本发布前开辟一个一版本分支，在这个分支</p>
+<p> 上继续开发一版本修复已有bug，再把分支修复bug合并至主分支修复二版本bug</p>
+<p> 1、查看版本库分支：只有提交成功后才会显示默认master分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+
+<p> 现在只存在master这一条主分支： </p>
+<p> <img src="https://img-blog.csdn.net/20181006135609793?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p> 2 、创建分支：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch 分支名</span><br></pre></td></tr></table></figure>
+
+<p> *表示当前使用的分支</p>
+<p> <img src="https://img-blog.csdn.net/20181006135851109?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p> 3、切换分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 分支名</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdn.net/20181006140052776?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p> 4、合并分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge 要合并的分支名</span><br></pre></td></tr></table></figure>
+
+<p> 在此次可以看到：我们合并了一版本的分支，有一处改动。这时候可能会出现代码冲突，这需要自己找出并解决，git</p>
+<p> 不会帮忙</p>
+<p> <img src="https://img-blog.csdn.net/20181006141745458?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt> </p>
+<p> 5、删除分支 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -D 分支名</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdn.net/20181006142906726?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p> 四、</p>
+<p> GitHub：代码远程托管版本库。直接看官方介绍，明确描述了GitHub的优点：GitHub is a code hosting platform for</p>
+<p> version control and collaboration.It lets you and others work together on projects from anywhere.</p>
+<p> 以下操作需要：SSH绑定</p>
+<p> 1、下载远程库代码：克隆完某个项目后,至少可以看到一个名为** origin **的远程库,Git 默认使用这个名字来标识你所克隆</p>
+<p> 的<strong>原始仓库</strong></p>
+<p> 使用代码下载，再将下载文件解压复制到项目路径下，也可使用pull指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/MrQlyn/ActivityLife.git</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdn.net/20181006175751337?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+<p> 2、提交代码从本地库至GitHub版本库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push 远程版本库名(origin) 远程版本库的分支(master)</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdn.net/20181006200558213?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt> </p>
+<p> 3、下载代码从GitHub版本库至本地库</p>
+<p> 第一种方法：下载分支并合并至主分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull 远程版本库名(origin) 远程版本库的分支(master)</span><br></pre></td></tr></table></figure>
+
+<p> 特殊情况（覆盖本地代码）： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull --rebase origin master</span><br></pre></td></tr></table></figure>
+
+<p> <img src="https://img-blog.csdn.net/20181006200533674?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt> </p>
+<p> 第二种方法：下载分支，自己决定合并至哪个分支</p>
+<p> 下载分支并存放至origin/master分支上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin master</span><br></pre></td></tr></table></figure>
+
+<p> 合并分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge origin/master</span><br></pre></td></tr></table></figure>
+
+<p> 4、关联远程版本库：给GitHub远程版本库指定一个别名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add 远程版本库名 ssh地址</span><br></pre></td></tr></table></figure>
+
+<p> 5、取消关联远程版本库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote remove 远程版本库名(origin)</span><br></pre></td></tr></table></figure>
+
+<p> 6、查看当前已关联的远程版本库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/19/Git/Git的使用/" data-id="ckib6fit0007cg4tpzolaiwyh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Git/">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/JavaWeb的Response、Request" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/01/19/Web/JavaWeb的Response、Request/" class="article-date">
+  <time datetime="2019-01-19T06:09:33.000Z" itemprop="datePublished">2019-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2019/01/19/Web/JavaWeb的Response、Request/">JavaWeb的Response、Request</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81948544" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81948544</a>   </p>
+<h3 id="HttpServletResponse：在客户端发出每个请求时，服务器都会创建一个HttpServletResponse对象，用来对客户端进行响应。"><a href="#HttpServletResponse：在客户端发出每个请求时，服务器都会创建一个HttpServletResponse对象，用来对客户端进行响应。" class="headerlink" title="HttpServletResponse：在客户端发出每个请求时，服务器都会创建一个HttpServletResponse对象，用来对客户端进行响应。"></a>HttpServletResponse：在客户端发出每个请求时，服务器都会创建一个HttpServletResponse对象，用来对客户端进行响应。</h3><p> HttpServletResponse对象的功能（方法）：</p>
+<h3 id="一、发送状态码：200表示成功、302表示重定向、404表示客户端错（访问的资源不存在）、500表示服务器端错"><a href="#一、发送状态码：200表示成功、302表示重定向、404表示客户端错（访问的资源不存在）、500表示服务器端错" class="headerlink" title="一、发送状态码：200表示成功、302表示重定向、404表示客户端错（访问的资源不存在）、500表示服务器端错"></a>一、发送状态码：200表示成功、302表示重定向、404表示客户端错（访问的资源不存在）、500表示服务器端错</h3><blockquote>
+<p>sendError(int sc) –&gt; 发送错误状态码，例如404、500<br>sendError(int sc, String msg) –&gt; 也是发送错误状态码，还可以带一个错误信息！<br>setStatus(int sc) –&gt; 发送成功的状态码，可以用来发送302</p>
+</blockquote>
+<h3 id="二、设置响应头（即响应类型）：即设置响应各种信息的键值对，有Content-Type、Refresh、Location等等"><a href="#二、设置响应头（即响应类型）：即设置响应各种信息的键值对，有Content-Type、Refresh、Location等等" class="headerlink" title="二、设置响应头（即响应类型）：即设置响应各种信息的键值对，有Content-Type、Refresh、Location等等"></a>二、设置响应头（即响应类型）：即设置响应各种信息的键值对，有Content-Type、Refresh、Location等等</h3><blockquote>
+<p>addHeader(String name, String value)：适用于多值的响应头<br> 例：response.addHeader(“aaa”, “A”);<br> response.addHeader(“aaa”, “AA”);<br> response.addHeader(“aaa”, “AAA”);<br>setIntHeader(String name, int value)：适用于单值的int类型的响应头<br> response.setIntHeader(“Content-Length”, 888);<br>addIntHeader(String name, int value)：适用于多值的int类型的响应头<br>setDateHeader(String name, long value)：适用于单值的毫秒类型的响应头<br> response.setDateHeader(“expires”, 1000 * 60 * 60 * 24);<br>addDateHeader(String name, long value)：适用于多值的毫秒类型的响应头</p>
+</blockquote>
+<p> Http常见的响应头</p>
+<blockquote>
+<p>Location：服务器通过这个头告诉浏览器去访问哪个页面，这个头通常配合302状态码使用</p>
+<p> server: 服务器通过这个头，告诉浏览器服务器类型</p>
+<p> Content-Encoding: 服务器通过这个头告诉浏览器，回送的数据采用的压缩格式</p>
+<p> Content-Length: 服务器通过这个头告诉浏览器，回送的数据的大小长度</p>
+<p> Content-Type: 服务器通过这个头告诉浏览器，回送数据的类型</p>
+<p> Last-Modified: 服务器通过这个头告诉浏览器，缓存资源的最后修改时间</p>
+<p> Refresh：服务器通过这个头告诉浏览器，定时刷新网页</p>
+<p> 例：设置Content-Type: text/html;设置charset:utf-8; 其中text/html为文件类型</p>
+</blockquote>
+<p> 常见的文件类型如下：</p>
+<blockquote>
+<blockquote>
+<ul>
+<li>text/html ： HTML格式 </li>
+<li>text/plain ：纯文本格式  </li>
+<li>text/xml ： XML格式 </li>
+<li>image/gif ：gif图片格式  </li>
+<li>image/jpeg ：jpg图片格式 </li>
+<li>image/png：png图片格式 </li>
+<li>以application开头的媒体格式类型：</li>
+</ul>
+</blockquote>
+<ul>
+<li>application/xhtml+xml ：XHTML格式 </li>
+<li>application/xml ： XML数据格式 </li>
+<li>application/atom+xml ：Atom XML聚合格式  </li>
+<li>application/json ： JSON数据格式 </li>
+<li>application/pdf ：pdf格式  </li>
+<li>application/msword ： Word文档格式 </li>
+<li>application/octet-stream ： 二进制流数据（如常见的文件下载） </li>
+<li>application/x-www-form-urlencoded ： <form enctype="””">中默认的encType，form表单数据被编码为key/value格式发送到服务器（表单默认的提交数据的格式） </form></li>
+<li>另外一种常见的媒体格式是上传文件之时使用的：</li>
+</ul>
+<ul>
+<li>multipart/form-data ： 需要在表单中进行文件上传时，就需要使用该格式 </li>
+</ul>
+</blockquote>
+<h3 id="三、设置响应正文："><a href="#三、设置响应正文：" class="headerlink" title="三、设置响应正文："></a>三、设置响应正文：</h3><ol>
+<li>PrintWriter out = response.getWriter()：获取字符流； </li>
+<li>ServletOutputStream out = response.getOutputStream()：获取字节流； <blockquote>
+<p>响应正文内容为字符：使用response.getWriter()</p>
+<p> 响应内容是字节（例如下载时）：使用response.getOutputStream()</p>
+<p>注意：在一个请求中，不能同时使用这两个流repsonse.getWriter()和response.getOutputStream()，会抛出异常。</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="四、重定向：即发起俩次请求，使得访问A网页，同时快速再次请求访问B网页（如登录）"><a href="#四、重定向：即发起俩次请求，使得访问A网页，同时快速再次请求访问B网页（如登录）" class="headerlink" title="四、重定向：即发起俩次请求，使得访问A网页，同时快速再次请求访问B网页（如登录）"></a>四、重定向：即发起俩次请求，使得访问A网页，同时快速再次请求访问B网页（如登录）</h3><p> 普通方法：</p>
+<blockquote>
+<p>response.sendStatus(302);<br>repsonse.setHeader(“Location”, “<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>);</p>
+</blockquote>
+<p> 快捷方法：</p>
+<blockquote>
+<p>response.sendRedirect(“<a href="http://www.baidu.com&quot;" target="_blank" rel="noopener">http://www.baidu.com&quot;</a>);</p>
+</blockquote>
+<p> 例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    //重定向到百度网页：需要完整地址</span><br><span class="line">response.sendRedirect(&quot;http://www.baidu.com&quot;);</span><br><span class="line">   //也可重定向项目里的任何一个包下文件，路径：/项目名+url-pattern值</span><br><span class="line">response.sendRedirect(&quot;/UseServlet/firstServlet&quot;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h3 id="HttpServletRequest：在客户端发出每个请求时，服务器都会创建一个request对象，并把请求数据封装到request中。"><a href="#HttpServletRequest：在客户端发出每个请求时，服务器都会创建一个request对象，并把请求数据封装到request中。" class="headerlink" title="HttpServletRequest：在客户端发出每个请求时，服务器都会创建一个request对象，并把请求数据封装到request中。"></a>HttpServletRequest：在客户端发出每个请求时，服务器都会创建一个request对象，并把请求数据封装到request中。</h3><p> HttpServletRequest对象的功能（方法）：</p>
+<p> 一、获取请求头，请求信息</p>
+<ul>
+<li><p>获取常用信息  </p>
+<blockquote>
+<p>获取客户端IP，案例：封IP。request.getRemoteAddr()<br>请求方式，request.getMethod()，可能是POST也可能是GET</p>
+</blockquote>
+</li>
+<li><p>获取请求URL<br>URI地址：<a href="http://localhost:8080/day10_2/AServlet?username=xxx&amp;password=yyy" target="_blank" rel="noopener">http://localhost:8080/day10_2/AServlet?username=xxx&amp;password=yyy</a>  </p>
+<blockquote>
+<p>String getScheme()：获取协议，http<br>String getServerName()：获取服务器名，localhost<br>String getServerPort()：获取服务器端口，8080<br>*****String getContextPath()：获取项目名，/day10_2<br>String getServletPath()：获取Servlet路径，/AServlet<br>String getQueryString()：获取参数部分，即问号后面的部分。username=xxx&amp;password=yyy<br>String getRequestURI()：获取请求URI，等于项目名+Servlet路径。/day10_2/AServlet<br>String getRequestURL()：获取请求URL，等于不包含参数的整个请求路径。<a href="http://localhost:8080/day10_2/AServlet" target="_blank" rel="noopener">http://localhost:8080/day10_2/AServlet</a></p>
+</blockquote>
+</li>
+<li><p>获取HTTP请求头  </p>
+<blockquote>
+<p>*****String getHeader(String name)，适用于单值头<br>int getIntHeader(String name)，适用于单值int类型的请求头<br>long getDateHeader(String name)，适用于单值毫秒类型的请求头<br>Enumeration<string> getHeaders(String name)，适用于多值请求头 </string></p>
+</blockquote>
+<blockquote>
+<p>可以通过<strong>User-Agent</strong>请求头识别用户浏览器类型<br>防盗链：如果请求不是通过本站的超链接发出的，发送错误状态码404。可以通过<strong>Referer</strong>这个请求头，表示请求的来</p>
+</blockquote>
+<p>源（即上一访问当前网页的地址）！</p>
+<p>二、获取请求参数：请求参数是由客户端发送给服务器的！<strong>有可能是在请求体中（POST），也可能是在URL之后（GET）</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>请求参数：有一个参数一个值的，还有一个参数多个值！  </p>
+<blockquote>
+<p>String getParameter(String name)：获取指定名称的请求参数值，适用于单值请求参数<br>String[] getParameterValues(String name)：获取指定名称的请求参数值，适用于多值请求参数<br>Enumeration<string> getParameterNames()：获取所有请求参数名称<br>Map&lt;String,String[]&gt; getParameterMap()：获取所有请求参数，其中key为参数名，value为参数值。</string></p>
+</blockquote>
+<p> 三、请求转发</p>
+</blockquote>
+<p> //使用request获取RequestDispatcher对象，方法 的参数是被转发或包含的Servlet的Servlet路径</p>
+<blockquote>
+<p>RequestDispatcher rd = request.getRequestDispatcher(“/MyServlet”); </p>
+<p> 请求转发：rd.forward(request,response);</p>
+<p> 请求包含：rd.include(request,response);</p>
+<p> 有时一个请求需要多个Servlet协作才能完成，所以需要在一个Servlet跳到另一个Servlet！<br><strong>一个请求</strong>跨多个Servlet，需要使用转发和包含。<br>请求转发：由下一个Servlet完成响应体！当前Servlet可以设置响应头，设置响应体，转发的Servlet设置则不起作用。<br>请求转发还使用同一个request和response！</p>
+</blockquote>
+<p> △△△请求转发和重定向的区别  </p>
+<blockquote>
+<p>请求转发是一个请求<strong>一次响应</strong>，而重定向是两次请求<strong>两次响应</strong><br>请求转发地址栏<strong>不变化</strong>，而重定向会<strong>显示后一个请求的地址</strong><br>请求转发只能<strong>转发到本项目其他Servlet</strong>，而重定向不只能重定向到本项目的其他Servlet，还能<strong>定向到其他项目</strong><br>请求转发是服务器端行为，只需给出转发的Servlet路径，而重定向需要给出requestURI，即<strong>包含项目名</strong>！<br>请求转发比重定向效率高，因为是一个请求。<br> &lt;&gt; 需要地址栏发生变化，那么必须使用重定向！<br> &lt;&gt; 需要在下一个Servlet中获取request域中的数据，必须要使用转发。</p>
+</blockquote>
+<p> 四、Servlet三大域对象之一</p>
+<p> Servlet中三大域对象：request、session、application，都有如下三个方法：</p>
+<blockquote>
+<p>setAttribute(String name,Object Key)：使用键值对方式存入数据对象</p>
+<p> getAttribute(String name)：通过键名取出数据对象</p>
+<p> removeAttribute(String name)：通过键名删除已存入的数据对象</p>
+<p> request可以使用其在请求转发、请求包含里传递数据,即使用相同request域对象的Servlet都可以使用其传递数据。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/19/Web/JavaWeb的Response、Request/" data-id="ckib6fit1007eg4tpt4ebfzqc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java基础/Java基本功：容器Map" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/01/16/java基础/Java基本功：容器Map/" class="article-date">
+  <time datetime="2019-01-16T08:27:57.000Z" itemprop="datePublished">2019-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2019/01/16/java基础/Java基本功：容器Map/">Java基本功：容器Map</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   <strong>目录</strong></p>
+<p> <a href="#Map%EF%BC%9A%E4%B8%80%E4%B8%AA%E9%94%AE%E5%80%BC%EF%BC%88key%EF%BC%89%E5%AF%B9%E5%BA%94%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%EF%BC%88value%EF%BC%89%E7%9A%84%E5%AE%B9%E5%99%A8%E6%8E%A5%E5%8F%A3%EF%BC%8C%E5%B9%B6%E4%B8%94%E6%B2%A1%E6%9C%89%E6%8E%92%E5%BA%8F">Map：一个键值（key）对应一个对象（value）的容器接口，并且没有排序</a></p>
+<p> <a href="#Map%E7%9A%84%E4%B8%89%E7%A7%8D%E9%81%8D%E5%8E%86">Map的三种遍历</a></p>
+<p> <a href="#Entry%E5%AF%B9%E8%B1%A1%EF%BC%88%E9%94%AE%E5%80%BC%E5%AF%B9%E5%AF%B9%E8%B1%A1%EF%BC%89%EF%BC%9A%E5%9C%A8%E8%8E%B7%E5%BE%97entrySet()%E8%BF%94%E5%9B%9E%E7%9A%84Set%E5%AF%B9%E8%B1%A1%E5%BF%85%E9%A1%BB%E5%A3%B0%E6%98%8EEntry%3CKey%2CValue%3E%E7%B1%BB%E5%9E%8B">Entry对象（键值对对象）：在获得entrySet()返回的Set对象必须声明Entry类型,value&gt;</a></p>
+<p> <a href="#HashMap%EF%BC%9A%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95%20%EF%BC%8C%E5%90%8C%E6%A0%B7%E9%9C%80%E8%A6%81%E5%AE%9E%E7%8E%B0HashCode()%E5%92%8Cequals()%E6%96%B9%E6%B3%95">HashMap：哈希算法 ，同样需要实现HashCode()和equals()方法</a></p>
+<p> <a href="#TreeMap%EF%BC%9A%E5%92%8CTreeSet%E7%B1%BB%E4%BC%BC%EF%BC%8C%E7%BA%A2%E9%BB%91%E6%A0%91%E7%BB%93%E6%9E%84%EF%BC%8C%E5%90%8C%E6%A0%B7%E8%BF%9B%E8%A1%8C%E6%8E%92%E5%BA%8F%EF%BC%88%E6%AC%A1%E5%BA%8F%E7%94%B1%E5%AD%98%E5%85%A5TreeMap%E7%9A%84%E7%B1%BB%E7%9A%84compare()%E6%88%96compareTo()%E6%96%B9%E6%B3%95%E5%86%B3%E5%AE%9A%EF%BC%8C%E4%B9%9F%E5%B0%B1%E6%98%AF%E8%AF%B4%E8%A3%85%E5%85%A5TreeMap%E7%9A%84%E7%B1%BB%E5%BF%85%E9%A1%BB%E5%AE%9E%E7%8E%B0HashCode()%EF%BC%8Cequals()%EF%BC%8Ccompare()%E4%B8%89%E4%B8%AA%E6%96%B9%E6%B3%95%EF%BC%89%EF%BC%8C%E5%90%8C%E6%97%B6TreeMap%E8%BF%98%E6%9C%89%E4%B8%80%E4%B8%AAsubMap()%E7%94%A8%E6%9D%A5%E8%BF%94%E5%9B%9E%E5%AD%90%E6%A0%91%E3%80%82">TreeMap：和TreeSet类似，红黑树结构，同样进行排序（次序由存入TreeMap的类的compare()或compareTo()方法决定，也就是说装入TreeMap的类必须实现HashCode()，equals()，compare()三个方法），同时TreeMap还有一个subMap()用来返回子树。</a></p>
+<hr>
+<h3 id="Map：一个键值（key）对应一个对象（value）的容器接口，并且没有排序"><a href="#Map：一个键值（key）对应一个对象（value）的容器接口，并且没有排序" class="headerlink" title="Map：一个键值（key）对应一个对象（value）的容器接口，并且没有排序"></a>Map：一个键值（key）对应一个对象（value）的容器接口，并且没有排序</h3><p> <img src="https://img-blog.csdnimg.cn/20190116162552107.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<h3 id="Map的三种遍历"><a href="#Map的三种遍历" class="headerlink" title="Map的三种遍历"></a>Map的三种遍历</h3><p> <img src="https://img-blog.csdnimg.cn/20190116162622473.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">	//遍历方式：由于Map没有提供iterator()函数，而是用keySet(),values()和entrySet()三个方法取代</span><br><span class="line">//方法一</span><br><span class="line">Collection&lt;String&gt; c=m.values();</span><br><span class="line">for(Iterator&lt;String&gt; it=c.iterator();it.hasNext();) &#123;</span><br><span class="line">	System.out.print(it.next()+&quot; &quot;);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println();</span><br><span class="line">//方法二</span><br><span class="line">Set&lt;Integer&gt; s=m.keySet();</span><br><span class="line">for(Iterator&lt;Integer&gt; it=s.iterator();it.hasNext();) &#123;</span><br><span class="line">	System.out.print(it.next()+&quot; &quot;);</span><br><span class="line">&#125;</span><br><span class="line">System.out.println();</span><br><span class="line">//方法三</span><br><span class="line">/*</span><br><span class="line"> * Entry对象:把键值当成一个对象，用来转换Map与其它容器（Set）容器的参数不匹配问题</span><br><span class="line"> * 也提供了获取键，值，以及设置值的方法</span><br><span class="line"> * getKey():获取当前键值对里的键</span><br><span class="line"> * getValue():获取当前键值对里的值</span><br><span class="line"> * setValue(V):重新设置当前键值对里的值</span><br><span class="line"> */</span><br><span class="line">Set&lt;Entry&lt;Integer,String&gt;&gt; set=m.entrySet();</span><br><span class="line">for(Iterator&lt;Entry&lt;Integer,String&gt;&gt;it=set.iterator();it.hasNext();) &#123;</span><br><span class="line">	/*Entry&lt;Integer,String&gt; e=it.next();</span><br><span class="line">	System.out.print(e.getKey()+&quot;----&gt;&quot;+e.getValue()+&quot;  &quot;);*/</span><br><span class="line">	System.out.println(it.next()+&quot; &quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="Entry对象（键值对对象）：在获得entrySet-返回的Set对象必须声明Entry-lt-Key-Value-gt-类型"><a href="#Entry对象（键值对对象）：在获得entrySet-返回的Set对象必须声明Entry-lt-Key-Value-gt-类型" class="headerlink" title="Entry对象（键值对对象）：在获得entrySet()返回的Set对象必须声明Entry&lt;Key,Value&gt;类型"></a>Entry对象（键值对对象）：在获得entrySet()返回的Set对象必须声明Entry&lt;Key,Value&gt;类型</h3><p> <img src="https://img-blog.csdnimg.cn/20190116162734977.png" alt></p>
+<h3 id="HashMap：哈希算法-，同样需要实现HashCode-和equals-方法"><a href="#HashMap：哈希算法-，同样需要实现HashCode-和equals-方法" class="headerlink" title="HashMap：哈希算法 ，同样需要实现HashCode()和equals()方法"></a>HashMap：哈希算法 ，同样需要实现HashCode()和equals()方法</h3><h3 id="TreeMap：和TreeSet类似，红黑树结构，同样进行排序（次序由存入TreeMap的类的compare-或compareTo-方法决定，也就是说装入TreeMap的类必须实现HashCode-，equals-，compare-三个方法），同时TreeMap还有一个subMap-用来返回子树。"><a href="#TreeMap：和TreeSet类似，红黑树结构，同样进行排序（次序由存入TreeMap的类的compare-或compareTo-方法决定，也就是说装入TreeMap的类必须实现HashCode-，equals-，compare-三个方法），同时TreeMap还有一个subMap-用来返回子树。" class="headerlink" title="TreeMap：和TreeSet类似，红黑树结构，同样进行排序（次序由存入TreeMap的类的compare()或compareTo()方法决定，也就是说装入TreeMap的类必须实现HashCode()，equals()，compare()三个方法），同时TreeMap还有一个subMap()用来返回子树。"></a>TreeMap：和TreeSet类似，红黑树结构，同样进行排序（次序由存入TreeMap的类的compare()或compareTo()方法决定，也就是说装入TreeMap的类必须实现HashCode()，equals()，compare()三个方法），同时TreeMap还有一个subMap()用来返回子树。</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/16/java基础/Java基本功：容器Map/" data-id="ckib6fipr003qg4tpd8qp8kpf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java基础/Java基本功：容器Collection" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/01/16/java基础/Java基本功：容器Collection/" class="article-date">
+  <time datetime="2019-01-16T07:32:07.000Z" itemprop="datePublished">2019-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2019/01/16/java基础/Java基本功：容器Collection/">Java基本功：容器Collection</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   <strong>目录</strong></p>
+<p> <a href="#Collection%E5%AE%B9%E5%99%A8%EF%BC%9A%E4%B8%8EMap%E5%90%8C%E7%BA%A7%EF%BC%8C%E5%AD%90%E7%B1%BB%E6%9C%89List%E3%80%81Set%E3%80%82%E6%8F%90%E4%BE%9B%E4%BA%86%E4%B8%80%E7%B3%BB%E5%88%97%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%EF%BC%8C%E9%9D%9E%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%E3%80%82">Collection容器：与Map同级，子类有List、Set。提供了一系列静态方法，非静态方法。</a></p>
+<p> <a href="#List%EF%BC%9A%E7%BA%BF%E6%80%A7%E7%BB%93%E6%9E%84%EF%BC%8C%E5%AF%B9Collection%E7%9A%84%E8%A1%A5%E5%85%85%E6%9B%B4%E6%96%B0">List：线性结构，对Collection的补充更新</a></p>
+<p> <a href="#ArrayList%EF%BC%9A%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9A%84%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84%E7%BA%BF%E6%80%A7%E8%A1%A8%EF%BC%8C%E7%BB%A7%E6%89%BF%E4%BA%8EList%EF%BC%8C%E5%AE%9E%E7%8E%B0%E4%BA%86List%E7%9A%84%E6%89%80%E6%9C%89%E6%96%B9%E6%B3%95%E3%80%82">ArrayList：动态规划的顺序结构线性表，继承于List，实现了List的所有方法。</a></p>
+<p> <a href="#LinkedList%EF%BC%9A%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8%E7%BB%93%E6%9E%84%E7%9A%84%E7%BA%BF%E6%80%A7%E8%A1%A8">LinkedList：双向链表结构的线性表</a></p>
+<p> <a href="#Set%EF%BC%9A%E5%AD%98%E6%94%BE%E7%9A%84%E5%85%83%E7%B4%A0%E5%85%B7%E6%9C%89%E5%94%AF%E4%B8%80%E6%80%A7%EF%BC%8C%E5%8D%B3%E4%B8%8D%E8%83%BD%E7%9B%B8%E5%90%8C%E3%80%82%E5%AD%90%E7%B1%BB%E6%9C%89HashSet%E3%80%81TreeSet%E3%80%81LinkedHashSet">Set：存放的元素具有唯一性，即不能相同。子类有HashSet、TreeSet、LinkedHashSet</a></p>
+<p> <a href="#%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%E4%B8%80%E8%88%AC%E6%8E%A8%E8%8D%90%E4%BD%BF%E7%94%A8HashSet%EF%BC%8C%E5%BD%93%E9%9C%80%E8%A6%81%E6%8E%92%E5%88%97%E9%A1%BA%E5%BA%8F%E6%97%B6%E4%BD%BF%E7%94%A8TreeSet%E3%80%81%E6%8F%92%E5%85%A5%E9%A1%BA%E5%BA%8F%E6%97%B6%E4%BD%BF%E7%94%A8LinkedSet"> 一般推荐使用HashSet，当需要排列顺序时使用TreeSet、插入顺序时使用LinkedSet</a></p>
+<p> <a href="#HashSet%EF%BC%9A%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95%E5%92%8C%E5%8D%81%E5%AD%97%E9%93%BE%E8%A1%A8%E6%B3%95%E5%AE%9E%E7%8E%B0%E3%80%82%E8%A3%85%E5%85%A5HashSet%E7%9A%84%E7%B1%BB%E5%BF%85%E9%A1%BB%E9%87%8D%E5%86%99HashCode()">HashSet：哈希算法和十字链表法实现。装入HashSet的类必须重写HashCode()</a></p>
+<p> <a href="#%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%E5%92%8Cequals()%EF%BC%8C%E5%9C%A8%E8%A3%85%E5%85%A5%E5%85%83%E7%B4%A0%E8%BF%87%E7%A8%8B%E4%B8%AD%EF%BC%8C%C2%A0HashCode()%E4%BC%9A%E8%A2%AB%E8%87%AA%E5%8A%A8%E8%B0%83%E7%94%A8%E8%AE%A1%E7%AE%97%E5%BD%93%E5%89%8D"> 和equals()，在装入元素过程中， HashCode()会被自动调用计算当前</a></p>
+<p> <a href="#%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%E7%B1%BB%E5%AD%98%E6%94%BE%E5%9C%A8%E6%95%B0%E7%BB%84%E7%9A%84%E4%BD%8D%E7%BD%AE%EF%BC%8Cequals()%E5%86%8D%E8%A2%AB%E8%B0%83%E7%94%A8%E6%9D%A5%E5%88%A4%E6%96%AD%E6%94%BE%E5%85%A5%E7%9A%84%E9%93%BE%E8%A1%A8%E9%87%8C%E6%98%AF%E5%90%A6%E6%9C%89%E5%85%83"> 类存放在数组的位置，equals()再被调用来判断放入的链表里是否有元</a></p>
+<p> <a href="#%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%E7%B4%A0%E4%B8%8E%E5%BD%93%E5%89%8D%E7%B1%BB%E7%9B%B8%E5%90%8C%E3%80%82"> 素与当前类相同。</a></p>
+<p> <a href="#TreeSet%EF%BC%9A%E7%BA%A2%E9%BB%91%E6%A0%91%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91%EF%BC%9A%E4%B8%AD%E5%BA%8F%EF%BC%88%E5%B7%A6%E4%B8%AD%E5%8F%B3%EF%BC%89%E9%81%8D%E5%8E%86%E5%90%8E%E4%B8%BA%E5%8D%87%E5%BA%8F%E6%8E%92%E5%88%97%EF%BC%89%EF%BC%8C%E6%B7%BB%E5%8A%A0">TreeSet：红黑树结构（二叉排序树：中序（左中右）遍历后为升序排列），添加</a></p>
+<p> <a href="#%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%E5%88%A0%E9%99%A4%E6%AF%94HashSet%E6%85%A2%EF%BC%8C%E4%BD%86%E6%9C%89%E7%82%B9%E6%98%AF%E5%85%83%E7%B4%A0%E5%A7%8B%E7%BB%88%E5%A4%84%E4%BA%8E%E6%9C%89%E5%BA%8F%E7%8A%B6%E6%80%81%E3%80%82"> 删除比HashSet慢，但有点是元素始终处于有序状态。</a></p>
+<p> <a href="#LinkedHashSet%EF%BC%9AHashSet%E7%9A%84%E5%AD%90%E7%B1%BB%EF%BC%8C%E5%8F%AF%E6%8C%89%E6%8F%92%E5%85%A5%E9%A1%BA%E5%BA%8F%E9%81%8D%E5%8E%86%E3%80%82%E2%80%8B">LinkedHashSet：HashSet的子类，可按插入顺序遍历。</a></p>
+<hr>
+<h3 id="容器：Java里提供存放各种对象的集合，内部结构各有不同，使用到了泛型技术"><a href="#容器：Java里提供存放各种对象的集合，内部结构各有不同，使用到了泛型技术" class="headerlink" title="容器：Java里提供存放各种对象的集合，内部结构各有不同，使用到了泛型技术"></a>容器：Java里提供存放各种对象的集合，内部结构各有不同，使用到了泛型技术</h3><h3 id="容器关系图："><a href="#容器关系图：" class="headerlink" title="容器关系图："></a>容器关系图：</h3><p> <img src="https://img-blog.csdnimg.cn/20190116150533702.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<h3 id="泛型定义接口方法、和容器使用："><a href="#泛型定义接口方法、和容器使用：" class="headerlink" title="泛型定义接口方法、和容器使用："></a>泛型定义接口方法、和容器使用：</h3><p> <img src="https://img-blog.csdnimg.cn/20190116150853187.png" alt></p>
+<h3 id="遍历Collection容器的方法"><a href="#遍历Collection容器的方法" class="headerlink" title="遍历Collection容器的方法"></a>遍历Collection容器的方法</h3><p> 迭代器:容器指针<br> 格式:Iterator&lt;实例化类型&gt;来定义指针<br> 容器（Collection）：<br> iterator():返回迭代器值(Iterator)<br> 迭代器（Iterator）：<br> next():第一次指向首个元素，依次指向下一元素。<br> hasNext():判断是否还有下个next值(即下个元素)</p>
+<p> <img src="https://img-blog.csdnimg.cn/20190116151017909.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<h3 id="Collection容器：与Map同级，子类有List、Set。提供了一系列静态方法，非静态方法。"><a href="#Collection容器：与Map同级，子类有List、Set。提供了一系列静态方法，非静态方法。" class="headerlink" title="Collection容器：与Map同级，子类有List、Set。提供了一系列静态方法，非静态方法。"></a>Collection容器：与Map同级，子类有List、Set。提供了一系列静态方法，非静态方法。</h3><p> <strong>静态方法：</strong></p>
+<p> <img src="https://img-blog.csdnimg.cn/20190116151413459.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<p> <strong>非静态方法：</strong></p>
+<p> <img src="https://img-blog.csdnimg.cn/20190116151449316.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<h3 id="List：线性结构，对Collection的补充更新"><a href="#List：线性结构，对Collection的补充更新" class="headerlink" title="List：线性结构，对Collection的补充更新"></a>List：线性结构，对Collection的补充更新</h3><p> <img src="https://img-blog.csdnimg.cn/20190116151547267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<h3 id="ArrayList：动态规划的顺序结构线性表，继承于List，实现了List的所有方法。"><a href="#ArrayList：动态规划的顺序结构线性表，继承于List，实现了List的所有方法。" class="headerlink" title="ArrayList：动态规划的顺序结构线性表，继承于List，实现了List的所有方法。"></a>ArrayList：动态规划的顺序结构线性表，继承于List，实现了List的所有方法。</h3><p> <img src="https://img-blog.csdnimg.cn/20190116151826608.png" alt></p>
+<p> <img src="https://img-blog.csdnimg.cn/20190116151547267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<h3 id="LinkedList：双向链表结构的线性表"><a href="#LinkedList：双向链表结构的线性表" class="headerlink" title="LinkedList：双向链表结构的线性表"></a>LinkedList：双向链表结构的线性表</h3><p> <img src="https://img-blog.csdnimg.cn/20190116151955302.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<h3 id="Set：存放的元素具有唯一性，即不能相同。子类有HashSet、TreeSet、LinkedHashSet"><a href="#Set：存放的元素具有唯一性，即不能相同。子类有HashSet、TreeSet、LinkedHashSet" class="headerlink" title="Set：存放的元素具有唯一性，即不能相同。子类有HashSet、TreeSet、LinkedHashSet"></a>Set：存放的元素具有唯一性，即不能相同。子类有HashSet、TreeSet、LinkedHashSet</h3><h3 id="一般推荐使用HashSet，当需要排列顺序时使用TreeSet、插入顺序时使用LinkedSet"><a href="#一般推荐使用HashSet，当需要排列顺序时使用TreeSet、插入顺序时使用LinkedSet" class="headerlink" title="一般推荐使用HashSet，当需要排列顺序时使用TreeSet、插入顺序时使用LinkedSet"></a>一般推荐使用HashSet，当需要排列顺序时使用TreeSet、插入顺序时使用LinkedSet</h3><h3 id="HashSet：哈希算法和十字链表法实现。装入HashSet的类必须重写HashCode"><a href="#HashSet：哈希算法和十字链表法实现。装入HashSet的类必须重写HashCode" class="headerlink" title="HashSet：哈希算法和十字链表法实现。装入HashSet的类必须重写HashCode()"></a>HashSet：哈希算法和十字链表法实现。装入HashSet的类必须重写HashCode()</h3><h3 id="和equals-，在装入元素过程中，-HashCode-会被自动调用计算当前"><a href="#和equals-，在装入元素过程中，-HashCode-会被自动调用计算当前" class="headerlink" title="和equals()，在装入元素过程中， HashCode()会被自动调用计算当前"></a>和equals()，在装入元素过程中， HashCode()会被自动调用计算当前</h3><h3 id="类存放在数组的位置，equals-再被调用来判断放入的链表里是否有元"><a href="#类存放在数组的位置，equals-再被调用来判断放入的链表里是否有元" class="headerlink" title="类存放在数组的位置，equals()再被调用来判断放入的链表里是否有元"></a>类存放在数组的位置，equals()再被调用来判断放入的链表里是否有元</h3><h3 id="素与当前类相同。"><a href="#素与当前类相同。" class="headerlink" title="素与当前类相同。"></a>素与当前类相同。</h3><p> <img src="https://img-blog.csdnimg.cn/20190116152420101.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<p> <img src="https://img-blog.csdnimg.cn/20190116151449316.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<h3 id="TreeSet：红黑树结构（二叉排序树：中序（左中右）遍历后为升序排列），添加"><a href="#TreeSet：红黑树结构（二叉排序树：中序（左中右）遍历后为升序排列），添加" class="headerlink" title="TreeSet：红黑树结构（二叉排序树：中序（左中右）遍历后为升序排列），添加"></a>TreeSet：红黑树结构（二叉排序树：中序（左中右）遍历后为升序排列），添加</h3><h3 id="删除比HashSet慢，但有点是元素始终处于有序状态。"><a href="#删除比HashSet慢，但有点是元素始终处于有序状态。" class="headerlink" title="删除比HashSet慢，但有点是元素始终处于有序状态。"></a>删除比HashSet慢，但有点是元素始终处于有序状态。</h3><p> <img src="https://img-blog.csdnimg.cn/20190116151449316.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<h3 id="LinkedHashSet：HashSet的子类，可按插入顺序遍历。"><a href="#LinkedHashSet：HashSet的子类，可按插入顺序遍历。" class="headerlink" title="LinkedHashSet：HashSet的子类，可按插入顺序遍历。"></a>LinkedHashSet：HashSet的子类，可按<strong>插入顺序</strong>遍历。</h3><p> <img src="https://img-blog.csdnimg.cn/20190116151449316.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/16/java基础/Java基本功：容器Collection/" data-id="ckib6fita007sg4tp758o9abt" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java基础/Java基本功：常见类及其方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/01/16/java基础/Java基本功：常见类及其方法/" class="article-date">
+  <time datetime="2019-01-16T07:02:54.000Z" itemprop="datePublished">2019-01-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2019/01/16/java基础/Java基本功：常见类及其方法/">Java基本功：常见类及其方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   <strong>目录</strong></p>
+<p> <a href="#Arrays%E7%B1%BB%EF%BC%9A%E5%85%A8%E6%98%AF%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%EF%BC%8C%E5%9C%A8java.util%E5%8C%85">Arrays类：全是静态方法，在java.util包</a></p>
+<p> <a href="#Random%E7%B1%BB%EF%BC%9A%E5%9C%A8java.util%E5%8C%85">Random类：在java.util包</a></p>
+<p> <a href="#Math%E7%B1%BB%EF%BC%9A%E5%85%A8%E6%98%AF%E9%9D%99%E6%80%81%E6%96%B9%E6%B3%95%20%EF%BC%8C%E5%9C%A8java.lang%E5%8C%85">Math类：全是静态方法 ，在java.lang包</a></p>
+<p> <a href="#System%E7%B1%BB%EF%BC%9A%C2%A0%E5%9C%A8java.lang%E5%8C%85">System类： 在java.lang包</a></p>
+<hr>
+<h3 id="Arrays类：全是静态方法，在java-util包"><a href="#Arrays类：全是静态方法，在java-util包" class="headerlink" title="Arrays类：全是静态方法，在java.util包"></a>Arrays类：全是静态方法，在java.util包</h3><blockquote>
+<p>copyOf()：将一个数组复制到新数组中</p>
+<p> sort()：将一个数组进行排序，默认为升序。改变排序规则需要重新存放子元素类的comprare方法或compareTo方法</p>
+<p> binSearch()：在已排好序数组中查找特定值</p>
+<p> equals()：判断俩数组是否相等</p>
+<p> asList()：将数组重构为容器（集合）</p>
+</blockquote>
+<h3 id="Random类：在java-util包"><a href="#Random类：在java-util包" class="headerlink" title="Random类：在java.util包"></a>Random类：在java.util包</h3><blockquote>
+<p>Random()：生成随机数</p>
+<p> Random(long)：带种子的伪随机数（相同种子时生成伪随即数，不设置种子生成随机数）</p>
+<p> int nextInt(int score)：随机生成一个0~score之间的int数</p>
+<p> nextDouble()：生成0~1直接的double数</p>
+<p> nextFloat()：生成0~1直接的float数</p>
+<p> nextInt()：生成0~1直接的int数</p>
+<p> nextLong()：生成0~1直接的long数</p>
+</blockquote>
+<h3 id="Math类：全是静态方法-，在java-lang包"><a href="#Math类：全是静态方法-，在java-lang包" class="headerlink" title="Math类：全是静态方法 ，在java.lang包"></a>Math类：全是静态方法 ，在java.lang包</h3><blockquote>
+<p>PI：Π(3.1415926)，double型</p>
+<p> sin()：sin值</p>
+<p> cos()：cos值</p>
+<p> sqrt()：平方根</p>
+<p> min()：最小值</p>
+<p> max()：最大值</p>
+<p> abs()：绝对值</p>
+<p> random()：返回[0,1]之间随机数，用法：a+Math.random()*b生成[a,a+b]之间随机数</p>
+<p> (int)(Math.random()*a)生成[0,a]之间随机数</p>
+</blockquote>
+<h3 id="System类：-在java-lang包"><a href="#System类：-在java-lang包" class="headerlink" title="System类： 在java.lang包"></a>System类： 在java.lang包</h3><blockquote>
+<p>long gc()：垃圾回收</p>
+<p> long currentTimeMillis()：返回以毫秒为单位的时间</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/16/java基础/Java基本功：常见类及其方法/" data-id="ckib6fipt003rg4tpk08x63je" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据结构与算法/数据结构：图（邻接矩阵法）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/01/12/数据结构与算法/数据结构：图（邻接矩阵法）/" class="article-date">
+  <time datetime="2019-01-12T07:30:40.000Z" itemprop="datePublished">2019-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2019/01/12/数据结构与算法/数据结构：图（邻接矩阵法）/">数据结构：图（邻接矩阵法）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"> package Graph;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.Queue;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">class GraphNode&#123;</span><br><span class="line">	int data;</span><br><span class="line">&#125;</span><br><span class="line">public class Graph &#123;</span><br><span class="line">	GraphNode vexs[]=new GraphNode[100];	//图的结点表</span><br><span class="line">	int[][] arcs=new int[100][100];			//邻接矩阵（0为无边，1为有边）</span><br><span class="line">	int vexnum,arcnum;		//顶点数和边数</span><br><span class="line">	Graph() &#123;</span><br><span class="line">		//对象数组出现空指针异常：必须逐个初始化</span><br><span class="line">		for (int i = 0; i &lt; vexs.length; i++) &#123;</span><br><span class="line">			vexs[i]=new GraphNode();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public void create() &#123;		//创建图</span><br><span class="line">		System.out.println(&quot;请输入点数和边数（输入一个换一行）&quot;);</span><br><span class="line">		Scanner sc=new Scanner(System.in);</span><br><span class="line">		vexnum=sc.nextInt();</span><br><span class="line">		arcnum=sc.nextInt();</span><br><span class="line">		System.out.println(&quot;请依次输入结点的数据（请记住每个结点的序号）,用一行相邻字符输入:&quot;);</span><br><span class="line">		for (int i = 0; i &lt; vexnum; i++) &#123;</span><br><span class="line">			try &#123;</span><br><span class="line">				vexs[i].data=(char)System.in.read();</span><br><span class="line">			&#125; catch (IOException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(&quot;请输入每条边相连俩个结点的序号&quot;);</span><br><span class="line">		for (int i = 0; i &lt; arcnum; i++) &#123;</span><br><span class="line">			int x=sc.nextInt();</span><br><span class="line">			int y=sc.nextInt();</span><br><span class="line">			arcs[x-1][y-1]=1;	//构建邻接矩阵（序号=索引+1）</span><br><span class="line">			arcs[y-1][x-1]=1;	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	/*</span><br><span class="line">	 * 非递归比递归节省时间，此递归相当于每个结点都用for走了一遍</span><br><span class="line">	 */</span><br><span class="line">	//图非递归深搜</span><br><span class="line">	public void DFSOne(int v) &#123;</span><br><span class="line">		OrderStack stack = new OrderStack(vexnum*vexnum);</span><br><span class="line">		int judge[]=new int[vexnum];	//判断结点是否被访问（0未访问，1已访问）</span><br><span class="line">		int size=0;	//计数（已访问结点）</span><br><span class="line">		int t=-1;	//临时变量</span><br><span class="line">		while (size!=vexnum) &#123;</span><br><span class="line">			if (v==t) &#123;		//当前结点没有相连且未访问结点</span><br><span class="line">				stack.pull();			//退出该结点</span><br><span class="line">				v=(int) stack.getTop();	//返回上一结点	</span><br><span class="line">			&#125;else &#123;			//当前结点有相连且未访问结点</span><br><span class="line">				char c[]=new char[]&#123;(char) vexs[v].data&#125;;</span><br><span class="line">				System.out.println(new String(c));</span><br><span class="line">				stack.push(v); //入栈</span><br><span class="line">				judge[v]=1;</span><br><span class="line">				size++;</span><br><span class="line">			&#125;</span><br><span class="line">			t=v;		//不论是刚退栈的结点v，还是处在深搜的结点v都需要进行如下t的检验</span><br><span class="line">			for (int i = 0; i &lt; vexnum; i++) &#123;</span><br><span class="line">				if (arcs[v][i]!=0&amp;&amp;judge[i]!=1) &#123;	//找到第一个未访问且相连结点</span><br><span class="line">					v=i;</span><br><span class="line">					break;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//图的递归深搜</span><br><span class="line">	int judge[]=new int[100];	//判断当前结点是否被访问，因为是递归方法，</span><br><span class="line">								//所以需要在方法外部建立数组</span><br><span class="line">	public void DFSTwo(int v) &#123;</span><br><span class="line">		if (judge[v]!=1) &#123;</span><br><span class="line">			char c[]=new char[]&#123;(char) vexs[v].data&#125;;</span><br><span class="line">			System.out.println(new String(c));</span><br><span class="line">			judge[v]=1;</span><br><span class="line">		&#125;</span><br><span class="line">		for (int i = 0; i &lt; vexnum; i++) &#123;</span><br><span class="line">			if (arcs[v][i]==1&amp;&amp;judge[i]==0) &#123;	//连通且未访问结点</span><br><span class="line">				DFSTwo(i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//图的广度搜索</span><br><span class="line">	public void BFS(int v) &#123;</span><br><span class="line">		int judge[]=new int[vexnum];	//判断结点是否被访问（0未访问，1已访问）</span><br><span class="line">		OrderQueue oq=new OrderQueue(vexnum);</span><br><span class="line">		oq.entry(v);</span><br><span class="line">		while (oq.getStart()!=null) &#123;</span><br><span class="line">			v=(int) oq.exit();</span><br><span class="line">			char c[]=new char[]&#123;(char) vexs[v].data&#125;;</span><br><span class="line">			System.out.println(new String(c));</span><br><span class="line">			judge[v]=1;</span><br><span class="line">			for (int i = 0; i &lt; vexnum; i++) &#123;</span><br><span class="line">				if(arcs[v][i]==1&amp;&amp;judge[i]!=1) &#123;</span><br><span class="line">					oq.entry(i);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"> package Graph;</span><br><span class="line">/*</span><br><span class="line"> * 测试数据：</span><br><span class="line">第一组：</span><br><span class="line">	5</span><br><span class="line">	7</span><br><span class="line">	abcde</span><br><span class="line">	1 2</span><br><span class="line">	1 3</span><br><span class="line">	1 4</span><br><span class="line">	2 3</span><br><span class="line">	2 5</span><br><span class="line">	3 5</span><br><span class="line">	4 5</span><br><span class="line">第二组：</span><br><span class="line">	5</span><br><span class="line">	4</span><br><span class="line">	12345</span><br><span class="line">	1 3</span><br><span class="line">	2 3</span><br><span class="line">	3 5</span><br><span class="line">	5 4</span><br><span class="line"> */</span><br><span class="line">public class test &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Graph graph=new Graph();</span><br><span class="line">		graph.create();</span><br><span class="line">		for(int i=0;i&lt;graph.vexnum;i++) &#123;</span><br><span class="line">			for(int j=0;j&lt;graph.vexnum;j++) &#123;</span><br><span class="line">				System.out.print(graph.arcs[i][j]+&quot; &quot;);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">		graph.DFSOne(2);</span><br><span class="line">		graph.DFSTwo(2);</span><br><span class="line">		graph.BFS(3);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/12/数据结构与算法/数据结构：图（邻接矩阵法）/" data-id="ckib6firl005mg4tp1oqyvz4l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据结构与算法/数据结构：二叉树" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/01/12/数据结构与算法/数据结构：二叉树/" class="article-date">
+  <time datetime="2019-01-12T07:27:57.000Z" itemprop="datePublished">2019-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2019/01/12/数据结构与算法/数据结构：二叉树/">数据结构：二叉树</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%BB%93%E7%82%B9">二叉树结点</a></p>
+<p> <a href="#%E4%BA%8C%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9E%84%E9%80%A0%E5%8F%8A%E9%81%8D%E5%8E%86%EF%BC%88%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8%E9%98%9F%E5%88%97%EF%BC%89">二叉树的构造及遍历（层次遍历需要使用队列）</a></p>
+<hr>
+<h3 id="二叉树结点"><a href="#二叉树结点" class="headerlink" title="二叉树结点"></a>二叉树结点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> package Tree;</span><br><span class="line"></span><br><span class="line">public class TreeNode &#123;</span><br><span class="line">	char data;</span><br><span class="line">	TreeNode left;</span><br><span class="line">	TreeNode right;</span><br><span class="line">	public void setLeft(TreeNode left) &#123;</span><br><span class="line">		this.left = left;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setRight(TreeNode right) &#123;</span><br><span class="line">		this.right = right;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二叉树的构造及遍历（层次遍历需要使用队列）"><a href="#二叉树的构造及遍历（层次遍历需要使用队列）" class="headerlink" title="二叉树的构造及遍历（层次遍历需要使用队列）"></a>二叉树的构造及遍历（层次遍历需要使用队列）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"> package Tree;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class TreeTool &#123;</span><br><span class="line">	//构造树（先序法）</span><br><span class="line">	public static TreeNode CreateTree(TreeNode tree) &#123;	</span><br><span class="line">		//逐行读取单个字符方式</span><br><span class="line">		/*Scanner sc=new Scanner(System.in);</span><br><span class="line">		char c=sc.next().charAt(0);*/</span><br><span class="line">		</span><br><span class="line">		//一行逐个读取单个字符方式(字符必须相邻)</span><br><span class="line">		char c = 0;</span><br><span class="line">		try &#123;</span><br><span class="line">			c = (char)System.in.read();</span><br><span class="line">		&#125; catch (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		if (c==&apos;#&apos;) &#123;		//递归结束标志:&apos;#&apos;字符</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		else&#123;</span><br><span class="line">			//tree=new TreeNode();	//引用方式，此句会让tree指向新的内存空间，原内存空间</span><br><span class="line">									//并未改变,尽管原内存指向为null，这里再new同样会指向</span><br><span class="line">									//新内存空间。</span><br><span class="line">			tree.data=c;</span><br><span class="line">			tree.setLeft(CreateTree(new TreeNode()));</span><br><span class="line">			tree.setRight(CreateTree(new TreeNode()));</span><br><span class="line">			return tree;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//先序遍历树</span><br><span class="line">	public static void pre(TreeNode T) &#123;	</span><br><span class="line">		if (T!=null) &#123;		//当T==null是递归结束标志</span><br><span class="line">			System.out.println(T.data);</span><br><span class="line">			pre(T.left);</span><br><span class="line">			pre(T.right);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//中序遍历树</span><br><span class="line">	public static void now(TreeNode T) &#123;	</span><br><span class="line">		if (T!=null) &#123;		//当T==null是递归结束标志</span><br><span class="line">			now(T.left);</span><br><span class="line">			System.out.println(T.data);</span><br><span class="line">			now(T.right);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//后序遍历树</span><br><span class="line">	public static void after(TreeNode T) &#123;	</span><br><span class="line">		if (T!=null) &#123;		//当T==null是递归结束标志</span><br><span class="line">			after(T.left);</span><br><span class="line">			after(T.right);</span><br><span class="line">			System.out.println(T.data);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//层次遍历</span><br><span class="line">	public static void level(TreeNode T) &#123;</span><br><span class="line">		OrderQueue queue=new OrderQueue();</span><br><span class="line">		if (T!=null) &#123;</span><br><span class="line">			queue.entry(T); 	//根结点入队</span><br><span class="line">			while (queue.getStart()!=null) &#123;	//当队列未空时</span><br><span class="line">				TreeNode treeNode=(TreeNode) queue.exit();</span><br><span class="line">				System.out.println(treeNode.data);</span><br><span class="line">				if (treeNode.left!=null) &#123;</span><br><span class="line">					queue.entry(treeNode.left);</span><br><span class="line">				&#125;</span><br><span class="line">				if (treeNode.right!=null) &#123;</span><br><span class="line">					queue.entry(treeNode.right);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"> 		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/12/数据结构与算法/数据结构：二叉树/" data-id="ckib6firh005ig4tpbo67324j" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据结构与算法/数据结构：队" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/01/12/数据结构与算法/数据结构：队/" class="article-date">
+  <time datetime="2019-01-12T07:25:15.000Z" itemprop="datePublished">2019-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2019/01/12/数据结构与算法/数据结构：队/">数据结构：队</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%E3%80%81%E9%98%9F%E5%88%97%E7%BB%93%E7%82%B9">一、队列结点</a></p>
+<p> <a href="#%E4%BA%8C%E3%80%81%E9%A1%BA%E5%BA%8F%E9%98%9F">二、顺序队</a></p>
+<p> <a href="#%E4%B8%89%E3%80%81%E9%93%BE%E9%98%9F">三、链队</a></p>
+<hr>
+<h3 id="一、队列结点"><a href="#一、队列结点" class="headerlink" title="一、队列结点"></a>一、队列结点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"> package Queue;</span><br><span class="line">class multipleNode&#123;		//多项式结点</span><br><span class="line">	multipleNode()&#123;</span><br><span class="line">		next=null;</span><br><span class="line">	&#125;</span><br><span class="line">	multipleNode(int c,int e)&#123;</span><br><span class="line">		coef=c;</span><br><span class="line">		exp=e;</span><br><span class="line">		next=null;</span><br><span class="line">	&#125;</span><br><span class="line">	int coef;	//系数</span><br><span class="line">	int exp;	//指数</span><br><span class="line">	multipleNode next;	</span><br><span class="line">&#125;</span><br><span class="line">public class Node&#123;</span><br><span class="line">	Node(char data)&#123;</span><br><span class="line">		this.data=data;</span><br><span class="line">		next=null;</span><br><span class="line">		pre=null;</span><br><span class="line">	&#125;</span><br><span class="line">	Node()&#123;</span><br><span class="line">		next=null;</span><br><span class="line">		pre=null;</span><br><span class="line">	&#125;</span><br><span class="line">	char data;</span><br><span class="line">	Node next;</span><br><span class="line">	Node pre;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二、顺序队"><a href="#二、顺序队" class="headerlink" title="二、顺序队"></a>二、顺序队</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"> package Queue;</span><br><span class="line">/*</span><br><span class="line"> * 顺序队：使用循环队列实现</span><br><span class="line"> * 思想：flag(true:end指向下一元素时（start和end指向同一元素时），置为true表示队满)</span><br><span class="line"> * 		   (flase:start指向下一元素时（start和end指向同一元素时），置为false表示队空)</span><br><span class="line"> *      start:指向下一个要出队的元素(已入队)</span><br><span class="line"> *      end：指向下一个要入队的元素的位置(未入队)</span><br><span class="line"> */</span><br><span class="line">public class OrderQueue &#123;</span><br><span class="line">	Object[] objects;	</span><br><span class="line">	int max;		//数组空间的大小</span><br><span class="line">	int start=0;	//队首</span><br><span class="line">	int end=0;		//队尾</span><br><span class="line">	boolean flag=false;	//标志位：协助区分判断队空或队满（true为满，false为空）</span><br><span class="line">	OrderQueue() &#123;	//默认空间大小为4</span><br><span class="line">		max=4;</span><br><span class="line">		objects=new Object[max];</span><br><span class="line">	&#125;</span><br><span class="line">	OrderQueue(int max) &#123;	//自己设置空间大小</span><br><span class="line">		this.max=max;</span><br><span class="line">		objects=new Object[max];</span><br><span class="line">	&#125;</span><br><span class="line">	public void entry(Object o) &#123;	//入队</span><br><span class="line">		if (end==start&amp;&amp;flag==true) &#123;	//假如不带flag会导致一开始就出现start==end无法入队</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		if((end+1)%max==start) &#123;</span><br><span class="line">			flag=true;					//此处不返回return原因：当前start还有元素，只是</span><br><span class="line">										//下一个元素与end重合时队才为空</span><br><span class="line">		&#125;</span><br><span class="line">		objects[end]=o;</span><br><span class="line">		end=(end+1)%max;</span><br><span class="line">	&#125;</span><br><span class="line">	public Object exit() &#123;			//出队</span><br><span class="line">		if (start==end&amp;&amp;flag==false) &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		if((start+1)%max==end) &#123;</span><br><span class="line">			flag=false;</span><br><span class="line">		&#125;</span><br><span class="line">		Object temp=objects[start];</span><br><span class="line">		objects[start]=null;</span><br><span class="line">		start=(start+1)%max;</span><br><span class="line">		return temp;</span><br><span class="line">	&#125;</span><br><span class="line">	public Object getStart() &#123;	//取队首元素</span><br><span class="line">		if (start==end&amp;&amp;flag==false) &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		return objects[start];	//start指向的是已入队最开始的元素，直接返回</span><br><span class="line">	&#125;</span><br><span class="line">	public Object getEnd() &#123;	//取队尾元素</span><br><span class="line">		if (start==end&amp;&amp;flag==false) &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		return objects[(end+max-1)%max];	//end指向的是即将入队的元素位置，需要退一个位置</span><br><span class="line">											//防止出现减1后为索引为-1情况需要先加max</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="三、链队"><a href="#三、链队" class="headerlink" title="三、链队"></a>三、链队</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"> package Queue;</span><br><span class="line">/*</span><br><span class="line"> * 链队</span><br><span class="line"> * 补充知识点（Java值传递与引用传递）</span><br><span class="line"> * 1.对象作为函数的参数传递过去的时候，是以原对象的引用的方式传递的，更改参数对象的值，会影响原来的对象。</span><br><span class="line"> * 2.对象作为函数的返回值的时候，传递过来的也是一个引用传递，更改传递过来的对象的时候，会影响原来的对象 </span><br><span class="line"> * 3.对象A给另一个对象B赋值的时候（无论B是否经过了new 开辟新空间），此时的B是对A对象的一个引用，更改B会影响A</span><br><span class="line"> * 总结：传基本数据类型是值传递，传对象是引用传递（传的是对象的拷贝，若接收参数开辟新空间new对象后，则不再指向传入参数空间。）</span><br><span class="line"> */</span><br><span class="line">public class ChainQueue &#123;</span><br><span class="line">	Node head;	//队头直接用头结点指针判断</span><br><span class="line">	Node end;</span><br><span class="line">	ChainQueue() &#123;</span><br><span class="line">		head=new Node();</span><br><span class="line">		head.next=null;</span><br><span class="line">		end=head;</span><br><span class="line">	&#125;</span><br><span class="line">	public void entry(char c) &#123;</span><br><span class="line">		if(head.next==null) &#123;	//当队空时（正在进行时：队空后再次入队时进行判断）</span><br><span class="line">			end=head;	</span><br><span class="line">		&#125;</span><br><span class="line">		Node t=new Node();</span><br><span class="line">		t.data=c;</span><br><span class="line">		t.next=end.next;</span><br><span class="line">		end.next=t;</span><br><span class="line">		end=t;</span><br><span class="line">	&#125;</span><br><span class="line">	public char exit() &#123;</span><br><span class="line">		if (head.next==null) &#123;	//队空(当队空后再次出队时进行判断)</span><br><span class="line">			return &apos; &apos;;</span><br><span class="line">		&#125;</span><br><span class="line">		Node t=head.next;</span><br><span class="line">		char c=t.data;</span><br><span class="line">		head.next=t.next;</span><br><span class="line">		t=null;</span><br><span class="line">		return c;</span><br><span class="line">	&#125;</span><br><span class="line">	public char getStart() &#123;	//取队首元素</span><br><span class="line">		if (head.next==null) &#123;</span><br><span class="line">			return &apos; &apos;;</span><br><span class="line">		&#125;</span><br><span class="line">		return head.next.data;</span><br><span class="line">	&#125;</span><br><span class="line">	public char getEnd() &#123;		//取队尾元素</span><br><span class="line">		if (head==end) &#123;</span><br><span class="line">			return &apos; &apos;;</span><br><span class="line">		&#125;</span><br><span class="line">		return end.data;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/12/数据结构与算法/数据结构：队/" data-id="ckib6firr005ug4tpifctk60e" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据结构与算法/数据结构：栈" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/01/12/数据结构与算法/数据结构：栈/" class="article-date">
+  <time datetime="2019-01-12T07:22:58.000Z" itemprop="datePublished">2019-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2019/01/12/数据结构与算法/数据结构：栈/">数据结构（栈）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%E3%80%81%E6%A0%88%E7%BB%93%E7%82%B9">一、栈结点</a></p>
+<p> <a href="#%E4%BA%8C%E3%80%81%E9%A1%BA%E5%BA%8F%E6%A0%88">二、顺序栈</a></p>
+<p> <a href="#%E4%B8%89%E3%80%81%E9%93%BE%E6%A0%88">三、链栈</a></p>
+<hr>
+<h3 id="一、栈结点"><a href="#一、栈结点" class="headerlink" title="一、栈结点"></a>一、栈结点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"> package Stack;</span><br><span class="line">class multipleNode&#123;		//多项式结点</span><br><span class="line">	multipleNode()&#123;</span><br><span class="line">		next=null;</span><br><span class="line">	&#125;</span><br><span class="line">	multipleNode(int c,int e)&#123;</span><br><span class="line">		coef=c;</span><br><span class="line">		exp=e;</span><br><span class="line">		next=null;</span><br><span class="line">	&#125;</span><br><span class="line">	int coef;	//系数</span><br><span class="line">	int exp;	//指数</span><br><span class="line">	multipleNode next;	</span><br><span class="line">&#125;</span><br><span class="line">public class Node &#123;</span><br><span class="line">	Node(char data)&#123;</span><br><span class="line">		this.data=data;</span><br><span class="line">		next=null;</span><br><span class="line">		pre=null;</span><br><span class="line">	&#125;</span><br><span class="line">	Node()&#123;</span><br><span class="line">		next=null;</span><br><span class="line">		pre=null;</span><br><span class="line">	&#125;</span><br><span class="line">	char data;</span><br><span class="line">	Node next;</span><br><span class="line">	Node pre;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二、顺序栈"><a href="#二、顺序栈" class="headerlink" title="二、顺序栈"></a>二、顺序栈</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"> package Stack;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 顺序栈</span><br><span class="line"> */</span><br><span class="line">public class OrderStack &#123;</span><br><span class="line">	int max;	//栈初始大小</span><br><span class="line">	int size=0;	//栈规模大小，同时也是栈顶指针</span><br><span class="line">	Object[] objects;</span><br><span class="line">	OrderStack() &#123;	//栈默认为100</span><br><span class="line">		max=100;</span><br><span class="line">		objects=new Object[max];</span><br><span class="line">	&#125;</span><br><span class="line">	OrderStack(int max) &#123;	//自己设置栈大小</span><br><span class="line">		this.max=max;</span><br><span class="line">		objects=new Object[max];</span><br><span class="line">	&#125;</span><br><span class="line">	//入栈</span><br><span class="line">	public void push(Object o) &#123;</span><br><span class="line">		//判断空间是否足够</span><br><span class="line">		if(size==max) &#123;</span><br><span class="line">			expand();	//调用扩容方法</span><br><span class="line">		&#125;</span><br><span class="line">		objects[size]=o;</span><br><span class="line">		size++;</span><br><span class="line">	&#125;</span><br><span class="line">	//扩容（补充：实现深度复制方法（即不是取别名方法）：实现Cloneable接口，重写clone()方法）</span><br><span class="line">	private void expand() &#123;</span><br><span class="line">		Object[] o =new Object[max];</span><br><span class="line">		for(int i=0;i&lt;objects.length;i++) &#123;</span><br><span class="line">			o[i]=objects[i];</span><br><span class="line">		&#125;//以上可用浅复制，即取别名方法代替Object[] o=obj.clone();</span><br><span class="line">		max=max*2;</span><br><span class="line">		objects=new Object[max];</span><br><span class="line">		for (int i = 0; i &lt; o.length; i++) &#123;</span><br><span class="line">			objects[i]=o[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//出栈</span><br><span class="line">	public Object pull() &#123;</span><br><span class="line">		if (size==0) &#123;		//栈空</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		int i=--size;</span><br><span class="line">		Object temp=objects[i];</span><br><span class="line">		objects[i]=null;</span><br><span class="line">		return temp;</span><br><span class="line">	&#125;</span><br><span class="line">	//获得栈顶元素</span><br><span class="line">	public Object getTop() &#123;</span><br><span class="line">		if (size==0) &#123;		//栈空</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		int temp=size-1;</span><br><span class="line">		return objects[temp];</span><br><span class="line">	&#125;</span><br><span class="line">	//将元素逐个出栈</span><br><span class="line">	public void traverse() &#123;</span><br><span class="line">		while (size!=0) &#123;</span><br><span class="line">			System.out.println(objects[--size]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="三、链栈"><a href="#三、链栈" class="headerlink" title="三、链栈"></a>三、链栈</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"> package Stack;</span><br><span class="line">/*</span><br><span class="line"> * 链栈</span><br><span class="line"> */</span><br><span class="line">public class ChainStack &#123;</span><br><span class="line">	Node head;</span><br><span class="line">	ChainStack() &#123;</span><br><span class="line">		head=new Node();</span><br><span class="line">		head.next=null;</span><br><span class="line">	&#125;</span><br><span class="line">	public void push(char c) &#123;</span><br><span class="line">		Node t =new Node();</span><br><span class="line">		t.data=c;</span><br><span class="line">		t.next=head.next;</span><br><span class="line">		head.next=t;</span><br><span class="line">	&#125;</span><br><span class="line">	public char pop() &#123;</span><br><span class="line">		if (head.next==null) &#123;</span><br><span class="line">			return &apos; &apos;;</span><br><span class="line">		&#125;</span><br><span class="line">		Node t=head.next;</span><br><span class="line">		head.next=t.next;</span><br><span class="line">		return t.data;</span><br><span class="line">	&#125;</span><br><span class="line">	public char getTop() &#123;</span><br><span class="line">		if (head.next==null) &#123;</span><br><span class="line">			return &apos; &apos;;</span><br><span class="line">		&#125;</span><br><span class="line">		return head.next.data;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/12/数据结构与算法/数据结构：栈/" data-id="ckib6firm005ng4tppj2jemeo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据结构与算法/数据结构：约瑟夫问题（链式结构）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（链式结构）/" class="article-date">
+  <time datetime="2019-01-12T07:18:17.000Z" itemprop="datePublished">2019-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（链式结构）/">数据结构：约瑟夫问题（链式结构）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"> package Linear;</span><br><span class="line">/*</span><br><span class="line"> * (链式结构)</span><br><span class="line"> * 约瑟夫问题：n个人围坐在一张桌子上，从第s个人开始数，数第m个人，该人出局。</span><br><span class="line"> * 			    从下一个人开始数，数第m个人，该人出局。。。循环往复直至所有人出局</span><br><span class="line"> */</span><br><span class="line">public class K &#123;</span><br><span class="line">	public static void yuesefuTwo(Node h,int n,int s,int m) &#123;</span><br><span class="line">		int i=0;</span><br><span class="line">		Node p =h;</span><br><span class="line">		Node pre=h;		//pre永远指向p的前一结点</span><br><span class="line">		while (i&lt;s) &#123;</span><br><span class="line">			p=p.next;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">		while (pre.next!=p) &#123;</span><br><span class="line">			pre=pre.next;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(p.data);</span><br><span class="line">		while (n!=0) &#123;</span><br><span class="line">			i=0;</span><br><span class="line">			while (i&lt;m-1) &#123;</span><br><span class="line">				p=p.next;</span><br><span class="line">				pre=pre.next;</span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line">			if (n!=1) &#123;		//删除p结点</span><br><span class="line">				pre.next=p.next;</span><br><span class="line">				System.out.println(p.data);</span><br><span class="line">				p=null;</span><br><span class="line">				p=pre.next;</span><br><span class="line">				n--;</span><br><span class="line">			&#125;else &#123;			//当n==1（即只有最后一个结点时，p和pre指向同一结点）:删除最后一个结点</span><br><span class="line">				System.out.println(p.data);</span><br><span class="line">				p=null;</span><br><span class="line">				pre=null;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Node h =NodeTool.CreateNodeList(&quot;12345&quot;);</span><br><span class="line">		Node p =h;</span><br><span class="line">		while (p.next!=null) &#123;</span><br><span class="line">			p=p.next;</span><br><span class="line">		&#125;</span><br><span class="line">		p.next=h.next;</span><br><span class="line">		yuesefuTwo(h, 5, 3, 2);</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（链式结构）/" data-id="ckib6firn005qg4tpizueyc0d" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/Blog/master/page/5/">&laquo; 上一页</a><a class="page-number" href="/Blog/master/">1</a><span class="space">&hellip;</span><a class="page-number" href="/Blog/master/page/4/">4</a><a class="page-number" href="/Blog/master/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/Blog/master/page/7/">7</a><a class="page-number" href="/Blog/master/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/Blog/master/page/14/">14</a><a class="extend next" rel="next" href="/Blog/master/page/7/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Cookie和Session | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/82494512   一、Cookie  Cookie：是客户端在发送请求时服务器缓存在浏览器的数据，一般和request域配合转发使用，转发使用相同request能够将  Cookie在不同页面上保存获取  1、Servlet（JSP里&amp;lt;%%&amp;g">
+<meta name="keywords" content="Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cookie和Session">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/07/Web/Cookie和Session/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/82494512   一、Cookie  Cookie：是客户端在发送请求时服务器缓存在浏览器的数据，一般和request域配合转发使用，转发使用相同request能够将  Cookie在不同页面上保存获取  1、Servlet（JSP里&amp;lt;%%&amp;g">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:06:44.321Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cookie和Session">
+<meta name="twitter:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/82494512   一、Cookie  Cookie：是客户端在发送请求时服务器缓存在浏览器的数据，一般和request域配合转发使用，转发使用相同request能够将  Cookie在不同页面上保存获取  1、Servlet（JSP里&amp;lt;%%&amp;g">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Web/Cookie和Session" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/07/Web/Cookie和Session/" class="article-date">
+  <time datetime="2018-09-07T03:55:46.000Z" itemprop="datePublished">2018-09-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Cookie和Session
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82494512" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82494512</a><br>   一、Cookie</p>
+<p> Cookie：是客户端在发送请求时服务器缓存在浏览器的数据，一般和request域配合转发使用，转发使用相同request能够将</p>
+<p> Cookie在不同页面上保存获取</p>
+<p> 1、Servlet（JSP里&lt;%%&gt;）中发送Cookie给客户端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">  Cookie cookie = new Cookie(&quot;data&quot;, &quot;abcdefg&quot;);</span><br><span class="line"> response.addCookie(cookie);</span><br></pre></td></tr></table></figure>
+
+<p> 2、 Servlet（JSP里&lt;%%&gt;）中接收客户端发来的Cookie</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookie = request.getCookies();</span><br><span class="line"> if(cookie != null) &#123;</span><br><span class="line">    for(Cookie c : cookie) &#123;</span><br><span class="line">      System.out.println(c.getName() + &quot;=&quot; + c.getValue());</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 3、Cookie的生命周期：全都由setMaxAge()方法决定，默认为退出浏览器（会话结束）Cookie消失</p>
+<blockquote>
+<blockquote>
+<p>0：保存在浏览器的时间，单位为秒</p>
+</blockquote>
+<p> =0：删掉浏览器已存在的同名Cookie</p>
+<p> &lt;0：默认值，退出Cookie消失</p>
+<p> 4、Cookie的路径：由setPath()方法决定，当访问路径包含Cookie路径时缓存该Cookie</p>
+</blockquote>
+<p> 5、Cookie中保存中文：Cookie的name和value都是不能保存中文的，但可以先把中文转换成URL编码，然后在</p>
+<p> 保存到Cookie的name和value中，获取Cookie时，再使用URL解码即可。</p>
+<p> <strong>**</strong>保存中文Cookie</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> String name = &quot;姓名&quot;;</span><br><span class="line">String value = &quot;张三&quot;;</span><br><span class="line">name = URLEncoder.encode(name, &quot;utf-8&quot;);</span><br><span class="line">value = URLEncoder.encode(value, &quot;utf-8&quot;);</span><br><span class="line"></span><br><span class="line">Cookie c = new Cookie(name, value);</span><br><span class="line">response.addCookie(c);</span><br></pre></td></tr></table></figure>
+
+<p> <strong>**</strong>取出中文Cookie</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> Cookie[] cs = request.getCookies();</span><br><span class="line">if(cs != null) &#123;</span><br><span class="line">  for(Cookie c : cs) &#123;</span><br><span class="line">    String name = URLDecoder.decode(c.getName(), &quot;utf-8&quot;);</span><br><span class="line">    String value = URLDecoder.decode(c.getValue(), &quot;utf-8&quot;);</span><br><span class="line">    System.out.println(name + &quot;=&quot; + value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<hr>
+<p> 二、HttpSession：Session是一个域对象，用来跟踪会话（即在打开浏览器至结束传输数据，JSP有内置对象Session，</p>
+<p> 可直接使用，与response，request同理）</p>
+<p> ***与request域对象、ServletContext域对象区别：在于生命周期不同。request是一次请求（可使用转发延长），</p>
+<p> ServletContext是服务器关闭时，Session是浏览器关闭时。</p>
+<p> ***与Cookie不同：Cookie保存在浏览器端，Session保存在服务器端，相同点在于都是由request对象获得。</p>
+<ol>
+<li>获取HttpSession：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpSession session = request.getSession();</span><br></pre></td></tr></table></figure>
+
+<p> 2、Session域拥有方法：</p>
+<blockquote>
+<p>setAttribute(String name,Object Key)：使用键值对方式存入数据对象</p>
+<p> getAttribute(String name)：通过键名取出数据对象</p>
+<p> removeAttribute(String name)：通过键名删除已存入的数据对象</p>
+<p> 3、Session其它常用方法：</p>
+</blockquote>
+<blockquote>
+<p>String getId()：获取sessionId，涉及Session原理</p>
+<p> int getMaxInactiveInterval()：获取Session最大不活动保存时间（单位为秒），默认为30分钟。</p>
+<p> void invalidate()：结束Session</p>
+<p> boolean isNew()：判断Session是否为第一次创建</p>
+<p> 4、设置session超时时间，在web.xml文件中配置：  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;session-config&gt;</span><br><span class="line">        &lt;session-timeout&gt;30&lt;/session-timeout&gt;</span><br><span class="line">    &lt;/session-config&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 5、Session的原理<br> Session是依赖Cookie实现的。<br> Session是服务器端对象<br> 当用户第一次使用Session时（表示第一次请求服务器），服务器会创建Session，并创建一个Cookie，在Cookie中</p>
+<p> 保存了Session的id，发送给客户端。这样客户端就有了自己Session的id了。但这个Cookie只在浏览器内存中存在，</p>
+<p> 也就是说，在关闭浏览器窗口后，Cookie就会丢失，也就丢失了SessionId。当用户第二次访问服务器时，会在请求</p>
+<p> 中把保存了SessionId的Cookie发送给服务器，服务器通过SessionId查找Session对象，然后给使用。也就是说，只</p>
+<p> 要浏览器容器不关闭，无论访问服务器多少次，使用的都是同一个Session对象。这样也就可以让多个请求共享同一个Session了。<br> 当用户关闭了浏览器窗口后，再打开浏览器访问服务器，这时请求中没有了SessionId，那么服务器会创建一个Session，再把SessionId通过Cookie保存到浏览器中，也是一个新的会话开始了。原来的session会因为长时间无法访问而失效。<br> 当用户打开某个服务器页面长时间没动作时，这样Session会超时失效，当用户再有活动时，服务器通过用户提供的sessionId已经找不到Session对象了，那么服务器还是会创建一个新的sessionSession，再把新的SessionId保存到客户端。这也是一个新的会话开始了。 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/07/Web/Cookie和Session/" data-id="ckib6fino0013g4tp8wlr87fj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2018/09/07/Web/JSTL/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JSTL
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2018/09/07/Web/EL表达式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">EL表达式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Android的数据存储 | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81052603   Android的数据存储推荐俩种方式：SharedPreferences存储（非重要数据）和SQLite关系数据库存储。 一、SharedPreferences存储存储位置：data/data//shared-prefs/目录   存">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android的数据存储">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/13/Android/Android的数据存储/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81052603   Android的数据存储推荐俩种方式：SharedPreferences存储（非重要数据）和SQLite关系数据库存储。 一、SharedPreferences存储存储位置：data/data//shared-prefs/目录   存">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:03:13.644Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android的数据存储">
+<meta name="twitter:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81052603   Android的数据存储推荐俩种方式：SharedPreferences存储（非重要数据）和SQLite关系数据库存储。 一、SharedPreferences存储存储位置：data/data//shared-prefs/目录   存">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android/Android的数据存储" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/07/13/Android/Android的数据存储/" class="article-date">
+  <time datetime="2019-07-13T15:09:40.000Z" itemprop="datePublished">2019-07-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android的数据存储
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81052603" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81052603</a><br>   Android的数据存储推荐俩种方式：SharedPreferences存储（非重要数据）和SQLite关系数据库存储。</p>
+<h3 id="一、SharedPreferences存储"><a href="#一、SharedPreferences存储" class="headerlink" title="一、SharedPreferences存储"></a>一、SharedPreferences存储</h3><p>存储位置：data/data/<package name>/shared-prefs/目录  </package></p>
+<h5 id="存：SharedPreferences-Editor类"><a href="#存：SharedPreferences-Editor类" class="headerlink" title="存：SharedPreferences.Editor类"></a>存：SharedPreferences.Editor类</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">getSharedPreferences（文件名,MODE_PRIVATE或MODE_MULTI_PROCESS）.edit():获得SharedPreferences.Editor类，</span><br><span class="line">                   MODE_PRIVATE为默认操作模式， 与传入0相同效果，表示只有当前应用程序可操作这个文件。</span><br><span class="line">                   MODE_MULTI_PROCESS为共享模式，可有多个进程对文件操作</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        putXxx(String key,Xxx value):以键值对方式对数据进行存储</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        commit():提交存储。</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h5 id="取：SharedPreferences类"><a href="#取：SharedPreferences类" class="headerlink" title="取：SharedPreferences类"></a>取：SharedPreferences类</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">getSharedPreferences（文件名,MODE_PRIVATE或MODE_MULTI_PROCESS）：获得SharedPreferences类</span><br><span class="line"></span><br><span class="line">      MODE_PRIVATE为默认操作模式，与传入0相同效果，表示只有当前应用程序可操作这个文件。</span><br><span class="line"></span><br><span class="line">      MODE_MULTI_PROCESS为共享模式，可有多个进程对文件操作</span><br><span class="line"></span><br><span class="line">getXxx(String key,Xxx default):第一个参数为键，第二个参数为找不到对应键时的返回值</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="二、SQLite关系数据库存储"><a href="#二、SQLite关系数据库存储" class="headerlink" title="二、SQLite关系数据库存储"></a>二、SQLite关系数据库存储</h3><p>SQLite：内嵌在Android的一个关系数据库，支持sql语句。  </p>
+<p>涉及相关类：SQLiteOpenHelper和SQLiteDatabase和Cursor  </p>
+<h5 id="1、SQLiteOpenHelper是一个抽象类，用于数据库的创建，版本升级，获得SQLiteDatabase对象等"><a href="#1、SQLiteOpenHelper是一个抽象类，用于数据库的创建，版本升级，获得SQLiteDatabase对象等" class="headerlink" title="1、SQLiteOpenHelper是一个抽象类，用于数据库的创建，版本升级，获得SQLiteDatabase对象等"></a>1、SQLiteOpenHelper是一个抽象类，用于数据库的创建，版本升级，获得SQLiteDatabase对象等</h5><p><strong>PartOne:以下为自定义类（MyHelper）继承于SQLiteOpenHelper要定义的变量，和重写方法</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static String Xxx=&quot;........&quot;:自定义的建表sql语句，在onCreate()里调用来创建表，public static可在外部随时修改</span><br><span class="line"></span><br><span class="line">SQLiteOpenHelper():调用super(X,X,X,X)传入获得的四个参数即可</span><br><span class="line"></span><br><span class="line">onCreate(SQLiteDatabase db):创建数据库时调用的方法,可执行sql语句创建表</span><br><span class="line"></span><br><span class="line">onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) :构建传入版本号高于当前数据库版本号时调用方法，可用来升级数据库。</span><br><span class="line">用switch(oldVersion)对oldVersion已存在数据库版本号进行判断，再执行相应的升级数据库的sql语句，switch()不加break可让数据库动升级至最新。</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>PartTwo:外部调用方法（即提供给外部方法）：</strong>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">SQLiteOpenHelper(Context,String name,CursorFactory factory,int version):构建方法，context一般传入当前活动this即</span><br><span class="line"></span><br><span class="line">                               可,name为数据库名.db,factory一般传入null，version传入数据库的版本号（当传入版本号高于已创建版本</span><br><span class="line"></span><br><span class="line">                               号时，会调用onUpgrade()方法,未创建数据库时会调用onCreate()方法）</span><br><span class="line"></span><br><span class="line">getReadableDatabase(): 创建或打开数据库（不存在时创建，已存在数据库则打开），获得可读可写的SQLiteDatabase对象，</span><br><span class="line"></span><br><span class="line">                                        在存储空间满时获得一个只读SQLiteDatabase对象                             </span><br><span class="line"></span><br><span class="line">getWritableDatabase():  创建或打开数据库（不存在时创建，已存在数据库则打开），获得可读可写的SQLiteDatabase对象，</span><br><span class="line"></span><br><span class="line">                                        在存储空间满时出现异常。</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2、SQLiteDatabase对象：通过getReadableDatabase-或getWritableDatabase-获得，用来执行SQL语句"><a href="#2、SQLiteDatabase对象：通过getReadableDatabase-或getWritableDatabase-获得，用来执行SQL语句" class="headerlink" title="2、SQLiteDatabase对象：通过getReadableDatabase()或getWritableDatabase()获得，用来执行SQL语句"></a>2、SQLiteDatabase对象：通过getReadableDatabase()或getWritableDatabase()获得，用来执行SQL语句</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">execSQL(String SQL,new String[]&#123;&quot;参数1&quot;,&quot;参数2&quot;....&#125;):执行insert,delete,updata的SQL语句，SQL为执行语句，SQL语句</span><br><span class="line">           </span><br><span class="line">                                                     里可设置未知参数为?,在第二个参数String数组里设置，参数必须</span><br><span class="line"></span><br><span class="line">                                                     都设置为String类型.也可不设置未知参数，第二个参数直接传入null</span><br><span class="line"></span><br><span class="line">rawQuery(String SQL,new String[]&#123;&quot;参数1&quot;,&quot;参数2&quot;....&#125;):与execSQL同理，返回一个Cursor对象</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3、Cursor对象：查询SQL语句返回的数据表（结果集）"><a href="#3、Cursor对象：查询SQL语句返回的数据表（结果集）" class="headerlink" title="3、Cursor对象：查询SQL语句返回的数据表（结果集）"></a>3、Cursor对象：查询SQL语句返回的数据表（结果集）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">         moveToFirst():将行指针移动到数据表第一行，空则返回null</span><br><span class="line"></span><br><span class="line">moveToNext():将行指针移动到数据表下一行</span><br><span class="line"></span><br><span class="line">moveToLast():将行指针移动到数据表第一行</span><br><span class="line"></span><br><span class="line">moveToPosition(int position)：将行指针移动到指定行</span><br><span class="line"></span><br><span class="line">getXxx(int Index):根据列索引值取出Xxx类型数据，索引值从0开始，与ResultSet不同</span><br><span class="line"></span><br><span class="line">getColumnIndex(String name):根据列名获得列索引值</span><br><span class="line"></span><br><span class="line">getColumnName(int Index):根据列索引值获得列名</span><br><span class="line"></span><br><span class="line">close():关闭数据表(结果集)</span><br><span class="line"></span><br><span class="line"> public abstract boolean isFirst()：判断结果集指针是否指在第一行</span><br><span class="line"></span><br><span class="line"> public abstract boolean isLast()：判断结果集指针是否指在最后一行</span><br></pre></td></tr></table></figure>
+
+
+<p> 使用完Cursor一定要调用close()关闭数据表  </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/13/Android/Android的数据存储/" data-id="ckib6fin6000gg4tpz7gfvmkf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2019/07/14/Web/图文自动生产类/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          图文自动生产类
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2019/07/12/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

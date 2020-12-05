@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="シェンキンリンのブログ">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/page/9/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="シェンキンリンのブログ">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Web/Web的XML文件解析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/15/Web/Web的XML文件解析/" class="article-date">
+  <time datetime="2018-09-15T07:10:57.000Z" itemprop="datePublished">2018-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/15/Web/Web的XML文件解析/">Web的XML文件解析</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82713927" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82713927</a><br>   这里使用dom4j方式</p>
+<p> 准备工作：导入dom4j-1.6.1.jar、jaxen-1.1-beta-6.jar俩个包</p>
+<p> 1、解析成字符串，用逗号分隔发送给客户端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">	public void doGet(HttpServletRequest request, HttpServletResponse response)</span><br><span class="line">		throws ServletException, IOException &#123;</span><br><span class="line">	response.setContentType(&quot;text/html;charset=utf-8&quot;);</span><br><span class="line">	/*</span><br><span class="line">	 * 1、解析xml文件，使用dom4j方式</span><br><span class="line">	 * 2、返回至response的响应输出流</span><br><span class="line">	 */</span><br><span class="line">	//读取src目录下的资源文件获得流</span><br><span class="line">	InputStream input =this.getClass().getResourceAsStream(&quot;/china.xml&quot;);</span><br><span class="line">	</span><br><span class="line">	// 创建saxReader对象  </span><br><span class="line">               SAXReader reader = new SAXReader();    </span><br><span class="line">               try &#123;</span><br><span class="line">       	// 通过read方法读取一个流， 转换成Document对象</span><br><span class="line">		Document document = reader.read(input);</span><br><span class="line">		//选取根元素China下的所有province元素下的name属性,返回一个List列表</span><br><span class="line">		List&lt;Attribute&gt; list=document.selectNodes(&quot;//province/@name&quot;);</span><br><span class="line">		</span><br><span class="line">		StringBuffer sbBuffer=new StringBuffer();</span><br><span class="line">		for(int i=0;i&lt;list.size();i++)&#123;//将name属性Attribute集合的值转为String，同时添加,作为分割</span><br><span class="line">			sbBuffer.append(list.get(i).getValue());</span><br><span class="line">			if(i&lt;list.size()-1)&#123;</span><br><span class="line">				sbBuffer.append(&quot;,&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		response.getWriter().print(sbBuffer);</span><br><span class="line">	&#125; catch (Exception e) &#123;</span><br><span class="line">		throw new RuntimeException(e);</span><br><span class="line">	&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 同样的jsp页面使用Ajax获取String时也需要使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var text=xmlHttp.responseText;</span><br></pre></td></tr></table></figure>
+
+<p> 在JSP页面操作返回的String值使用split(“,”)获得需要的数据数组，可使用其它符号作为分隔标识符（在解析时设置）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> var str=text.split(&quot;,&quot;);</span><br><span class="line">//遍历获得的数据</span><br><span class="line">for(var i=0;i&lt;str.length;i++)&#123;</span><br><span class="line">    alert(str[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 2、解析成String类型但为XML格式，发送给客户端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">	public void doPost(HttpServletRequest request, HttpServletResponse response)</span><br><span class="line">		throws ServletException, IOException &#123;</span><br><span class="line">	request.setCharacterEncoding(&quot;utf-8&quot;);</span><br><span class="line">	response.setContentType(&quot;text/xml;charset=utf-8&quot;);</span><br><span class="line">	InputStream input =this.getClass().getResourceAsStream(&quot;/china.xml&quot;);</span><br><span class="line">	String province =request.getParameter(&quot;province&quot;);</span><br><span class="line">       SAXReader reader = new SAXReader();    </span><br><span class="line">       try &#123;</span><br><span class="line">		Document document = reader.read(input);</span><br><span class="line">		//获取省份为name的province标签元素</span><br><span class="line">		Element element=(Element) document.selectSingleNode(&quot;//province[@name=&apos;&quot;+province+&quot;&apos;]&quot;);</span><br><span class="line">		//将标签对象转为String类型的xml</span><br><span class="line">		String cityString= element.asXML();</span><br><span class="line">		</span><br><span class="line">		response.getWriter().print(cityString);</span><br><span class="line">	&#125; catch (Exception e) &#123;</span><br><span class="line">		throw new RuntimeException(e);</span><br><span class="line">	&#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 此时jsp页面使用Ajax获取String时也需要使用,document对象与JavaScript的DOM的方法基本一致  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var doc = xmlHttp.responseXML;</span><br></pre></td></tr></table></figure>
+
+<p> Ajax获取XML标签里的内容：</p>
+<ol>
+<li><p>getElementsByTagName(“标签名”)-&gt;获取Elements数组 </p>
+</li>
+<li><p>Elemen[i].textContent或者Elemen[i].text-&gt;获取标签元素的内容，i为索引值，textContent为火狐等浏览器使用，text 为IE等浏览器使用</p>
+<p>例：</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">		// 获取服务器的响应内容</span><br><span class="line">var doc = xmlHttp.responseXML;</span><br><span class="line">// 得到所有名为city的元素</span><br><span class="line">var cityEleList = doc.getElementsByTagName(&quot;city&quot;);</span><br><span class="line">// 循环遍历每个city元素</span><br><span class="line">for(var i = 0; i &lt; cityEleList.length; i++) &#123;</span><br><span class="line">	var cityEle = cityEleList[i];//得到每个city元素</span><br><span class="line">	var cityName;</span><br><span class="line">	// 获取市名称</span><br><span class="line">	if(window.addEventListener) &#123;//处理浏览器的差异</span><br><span class="line">		cityName = cityEle.textContent;//支持FireFox等浏览器</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		cityName = cityEle.text;//支持IE</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	// 使用市名称创建option元素，添加到&lt;select name=&quot;city&quot;&gt;中</span><br><span class="line">	var op = document.createElement(&quot;option&quot;);</span><br><span class="line">	op.value = cityName;</span><br><span class="line">	// 创建文本节点</span><br><span class="line">	var textNode = document.createTextNode(cityName);</span><br><span class="line">	op.appendChild(textNode);//把文本节点追加到op元素中</span><br><span class="line">	</span><br><span class="line">	//把op添加到&lt;select&gt;元素中</span><br><span class="line">	citySelect.appendChild(op);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/15/Web/Web的XML文件解析/" data-id="ckib6fiod001wg4tpjsxruddm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/Ajax" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/14/Web/Ajax/" class="article-date">
+  <time datetime="2018-09-14T07:30:49.000Z" itemprop="datePublished">2018-09-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/14/Web/Ajax/">Ajax</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82703233" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82703233</a><br>   Ajax：一种提升用户体验，使用<strong>异步</strong>操作使得无需重新加载整个网页的情况下，能够更新部分网页的技术。</p>
+<p> 使用案例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">   function createXMLHttpRequest() &#123;</span><br><span class="line">	      try &#123;</span><br><span class="line">	          return new XMLHttpRequest();</span><br><span class="line">	      &#125; catch(e) &#123;</span><br><span class="line">	          try &#123;</span><br><span class="line">	          return new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);</span><br><span class="line">	      &#125; catch(e) &#123;</span><br><span class="line">	          try &#123;</span><br><span class="line">	              return new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</span><br><span class="line">	          &#125; catch(e) &#123;</span><br><span class="line">	              alert(&quot;哥们儿，你用的是什么浏览器啊？&quot;);</span><br><span class="line">	              throw e;</span><br><span class="line">	          &#125;</span><br><span class="line">	      &#125;</span><br><span class="line">	      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">window.οnlοad=function()&#123;	//从文档加载完执行函数</span><br><span class="line">  	//获取XMLHttpRequest对象</span><br><span class="line">  	var xmlHttp=createXMLHttpRequest();</span><br><span class="line">  	xmlHttp.open(&quot;GET&quot;,&quot;&lt;c:url value=&apos;/provinceServlet&apos;/&gt;&quot;,true);</span><br><span class="line">  	xmlHttp.send(null);</span><br><span class="line">  	xmlHttp.onreadystatechange=function()&#123;</span><br><span class="line">	    //标准请求：当readyState为4时表示服务器请求完成，status是状元码：如200、404、405</span><br><span class="line">	    if(xmlHttp.readyState==4 &amp;&amp; xmlHttp.status==200)&#123;</span><br><span class="line">            // 获取服务器的响应内容</span><br><span class="line">            var text = xmlHttp.responseText;</span><br><span class="line">            alert(text);</span><br><span class="line">            //获取XML格式的响应内容</span><br><span class="line">            var xml=xmlHttp.responseXML;</span><br><span class="line">        &#125;</span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<ul>
+<li>使用步骤： 1、获取XMLHttpRequest对象，以下为在javascript中获取XMLHttpRequest对象方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> function createXMLHttpRequest() &#123;</span><br><span class="line">      try &#123;</span><br><span class="line">          return new XMLHttpRequest();</span><br><span class="line">      &#125; catch(e) &#123;</span><br><span class="line">          try &#123;</span><br><span class="line">          return new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);</span><br><span class="line">      &#125; catch(e) &#123;</span><br><span class="line">          try &#123;</span><br><span class="line">              return new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</span><br><span class="line">          &#125; catch(e) &#123;</span><br><span class="line">              alert(&quot;哥们儿，你用的是什么浏览器啊？&quot;);</span><br><span class="line">              throw e;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">window.οnlοad=function()&#123;	//从文档加载完执行函数</span><br><span class="line">  	//获取XMLHttpRequest对象</span><br><span class="line">  	var xmlHttp=createXMLHttpRequest();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 2、连接服务器并设置参数</p>
+<blockquote>
+<p>请求方式：GET或POST<br>请求的URL：指定服务器端资源，例如；/day23_1/AServlet<br>请求是否为异步：如果为true表示发送异步请求，否则同步请求！</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlHttp.open(&quot;GET&quot;, &quot;&lt;c:url value=&apos;/AServlet&apos;/&gt;&quot;, true)</span><br></pre></td></tr></table></figure>
+
+<p> 3、发送请求给服务器，服务器返回网页的部分更新数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlHttp.send(null);//当为Get请求时将null改为请求的参数(&quot;username=xxx&amp;password=123&quot;)</span><br></pre></td></tr></table></figure>
+
+<p> 4、注册监听函数，当状态值改变时触发</p>
+<ul>
+<li>xmlHttp对象一共有5个状态：  <blockquote>
+<p>0状态：刚创建，还没有调用open()方法;<br>1状态：请求开始：调用了open()方法，但还没有调用send()方法<br>2状态：调用完了send()方法了；<br>3状态：服务器已经开始响应，但不表示响应结束了！<br>4状态：服务器响应结束！（通常我们只关心这个状态！！！）  </p>
+</blockquote>
+</li>
+<li>得到xmlHttp对象的状态：  <blockquote>
+<p>var state = xmlHttp.readyState;//可能是0、1、2、3、4  </p>
+</blockquote>
+</li>
+<li>得到服务器响应的状态码  <blockquote>
+<p>var status = xmlHttp.status;//例如为200、404、500  </p>
+</blockquote>
+</li>
+<li>得到服务器响应的内容  <blockquote>
+<p>var content = xmlHttp.responseText;//得到服务器的响应的文本格式的内容<br>var content = xmlHttp.responseXML;//得到服务器的响应的xml响应的内容，它是Document对象了！</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> //给异步对象注册监听器，当状态值改变时触发</span><br><span class="line">xmlHttp.onreadystatechange=function()&#123;</span><br><span class="line">	    //标准请求：当readyState为4时表示服务器请求完成，status是状元码：如200、404、405</span><br><span class="line">	    if(xmlHttp.readyState==4 &amp;&amp; xmlHttp.status==200)&#123;</span><br><span class="line">  		  // 获取服务器的响应内容</span><br><span class="line">	          var text = xmlHttp.responseText;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>当发送POST请求时：在ajax里一般Get请求不带参数（如果有参数，则直接放在url中发送），ajax一般 设置Post请求带有参数。</p>
+<p>添加一步：设置Content-Type请求头，必须放在open方法后面：  </p>
+<blockquote>
+<p>xmlHttp.setRequestHeader(“Content-Type”, “application/x-www-form-urlencoded”);</p>
+</blockquote>
+<p>改动以下俩处：</p>
+<ul>
+<li>open：xmlHttp.open(“POST” ….);  </li>
+<li>send：xmlHttp.send(“username=zhangSan&amp;password=123”);//发送请求时指定请求体（即请求参数）</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/14/Web/Ajax/" data-id="ckib6fink000wg4tptq7cjsdl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/JavaMail" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/13/Web/JavaMail/" class="article-date">
+  <time datetime="2018-09-13T07:12:44.000Z" itemprop="datePublished">2018-09-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/13/Web/JavaMail/">JavaMail</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82688496" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82688496</a><br>   学习使用java代码发邮件，首先需要在qq邮箱或其它邮箱开启POP3/SMTP服务（qq邮箱开启方法：设置-&gt;账户-&gt;</p>
+<p> 开启POP3/SMTP服务）。</p>
+<p> 准备工作：导入activation.jar，mail.jar，MailUtil.jar（此包为自己制作的jar包）</p>
+<p> 使用方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"> import java.io.File;</span><br><span class="line">import java.io.IOException;</span><br><span class="line"></span><br><span class="line">import javax.mail.MessagingException;</span><br><span class="line">import javax.mail.Session;</span><br><span class="line"></span><br><span class="line">import Mails.AttachBean;</span><br><span class="line">import Mails.Mail;</span><br><span class="line">import Mails.MailUtils;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class MailTest &#123;</span><br><span class="line">	public static void main(String[] args) throws MessagingException, IOException &#123;</span><br><span class="line">		System.out.println(&quot;已发送&quot;);</span><br><span class="line">		//设置qq邮箱stmp协议服务器，邮箱登录名，密码（密码是qq邮箱给的授权码不是登录密码）</span><br><span class="line">		Session session = MailUtils.createSession(&quot;smtp.qq.com&quot;, </span><br><span class="line">				&quot;1392825484@qq.com&quot;, &quot;授权码&quot;);</span><br><span class="line">		/*</span><br><span class="line">		 * 创建邮件对象，设置发件人，收件人，标题，内容</span><br><span class="line">		 */</span><br><span class="line">		Mail mail = new Mail(&quot;1392825484@qq.com&quot;,</span><br><span class="line">				&quot;2983482850@qq.com&quot;,</span><br><span class="line">				&quot;您好？&quot;, &quot;zz&quot;);</span><br><span class="line">		</span><br><span class="line">		/*</span><br><span class="line">		 * 创建附件对象</span><br><span class="line">		 */</span><br><span class="line">		AttachBean ab = new AttachBean(new File(&quot;D:/音乐/韩红-天路.mp3&quot;), &quot;很有力量的歌.mp3&quot;);</span><br><span class="line">		</span><br><span class="line">		// 添加到mail中</span><br><span class="line">		mail.addAttach(ab);</span><br><span class="line">		</span><br><span class="line">		/*</span><br><span class="line">		 * 发送</span><br><span class="line">		 */</span><br><span class="line">		MailUtils.send(session, mail);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/13/Web/JavaMail/" data-id="ckib6fio1001hg4tptrx1omjx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/Web的文件下载" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/13/Web/Web的文件下载/" class="article-date">
+  <time datetime="2018-09-13T05:38:14.000Z" itemprop="datePublished">2018-09-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/13/Web/Web的文件下载/">Web的文件下载</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82686645" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82686645</a><br>   下载文件需要设置response的俩个响应头及输出流  </p>
+<ul>
+<li><p>两个头一个流  </p>
+</li>
+<li><ol>
+<li>Content-Type：设置下载资源类型（MIME类型）  </li>
+</ol>
+</li>
+<li><ol start="2">
+<li>Content-Disposition：下载框及下载文件名  </li>
+</ol>
+</li>
+<li><ol start="3">
+<li>流：下载文件的数据，文件流</li>
+</ol>
+<p>准备工作：需要导入 commons-io.jar包</p>
+<p>为了解决下载框弹出文件名的乱码问题，一般需要导入如下方法：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">	// 用来对下载的文件名称进行编码的！</span><br><span class="line">public static String filenameEncoding(String filename, HttpServletRequest request) throws IOException &#123;</span><br><span class="line">	String agent = request.getHeader(&quot;User-Agent&quot;); //获取浏览器</span><br><span class="line">	if (agent.contains(&quot;Firefox&quot;)) &#123;</span><br><span class="line">		BASE64Encoder base64Encoder = new BASE64Encoder();</span><br><span class="line">		filename = &quot;=?utf-8?B?&quot;</span><br><span class="line">				+ base64Encoder.encode(filename.getBytes(&quot;utf-8&quot;))</span><br><span class="line">				+ &quot;?=&quot;;</span><br><span class="line">	&#125; else if(agent.contains(&quot;MSIE&quot;)) &#123;</span><br><span class="line">		filename = URLEncoder.encode(filename, &quot;utf-8&quot;);</span><br><span class="line">	&#125; else &#123;</span><br><span class="line">		filename = URLEncoder.encode(filename, &quot;utf-8&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	return filename;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 文件下载的具体步骤设置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">	public void doGet(HttpServletRequest request, HttpServletResponse response)</span><br><span class="line">		throws ServletException, IOException &#123;</span><br><span class="line">	response.setContentType(&quot;text/html;charset=utf-8&quot;);</span><br><span class="line">	/*</span><br><span class="line">	 * 两个头一个流</span><br><span class="line">	 * 1. Content-Type:下载资源类型</span><br><span class="line">	 * 2. Content-Disposition：下载框及下载文件名</span><br><span class="line">	 * 3. 流：下载文件的数据，文件流</span><br><span class="line">	 */</span><br><span class="line">	</span><br><span class="line">	String filename = &quot;D:/音乐/韩红-天路.mp3&quot;;</span><br><span class="line">	</span><br><span class="line">	// 为了使下载框中下载文件名显示中文文件名称不出乱码！</span><br><span class="line">	String framename = filenameEncoding(&quot;流光%飞舞.mp3&quot;, request);</span><br><span class="line">	</span><br><span class="line">	//通过文件名称获取MIME类型</span><br><span class="line">	String contentType = this.getServletContext().getMimeType(filename);</span><br><span class="line">	</span><br><span class="line">	//设置下载框</span><br><span class="line">	String contentDisposition = &quot;attachment;filename=&quot; + framename;</span><br><span class="line">	</span><br><span class="line">	// 文件流</span><br><span class="line">	FileInputStream input = new FileInputStream(filename);</span><br><span class="line">	</span><br><span class="line">	//设置头</span><br><span class="line">	response.setHeader(&quot;Content-Type&quot;, contentType);</span><br><span class="line">	response.setHeader(&quot;Content-Disposition&quot;, contentDisposition);</span><br><span class="line">	</span><br><span class="line">	// 获取绑定了响应端的流</span><br><span class="line">	ServletOutputStream output = response.getOutputStream();</span><br><span class="line">	</span><br><span class="line">	IOUtils.copy(input, output);//把输入流中的数据写入到输出流中。</span><br><span class="line">	</span><br><span class="line">	input.close();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/13/Web/Web的文件下载/" data-id="ckib6fiof0020g4tpeakn1dw7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/Web的文件上传" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/13/Web/Web的文件上传/" class="article-date">
+  <time datetime="2018-09-13T04:46:03.000Z" itemprop="datePublished">2018-09-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/13/Web/Web的文件上传/">Web的文件上传</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82686159" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82686159</a><br>   一、上传</p>
+<p> 1、上传一般都是使用表单，需要添加以下部分  </p>
+<ul>
+<li>method=”post”  </li>
+<li>enctype=”multipart/form-data”  </li>
+<li>表单中需要添加文件表单项：<input type="file" name="xxx"></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> &lt;form action=&quot;xxx&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">  用户名；&lt;input type=&quot;text&quot; name=&quot;username&quot;/&gt;&lt;br/&gt;</span><br><span class="line">  照　片：&lt;input type=&quot;file&quot; name=&quot;zhaoPian&quot;/&gt;&lt;br/&gt;</span><br><span class="line">  &lt;input type=&quot;submit&quot; value=&quot;上传&quot;/&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 2、上传会让request.getParametere(“xxx”)方法失效，此时将上传表单项分为普通表单项和文件表单项。</p>
+<p> 普通表单项：  </p>
+<blockquote>
+<p>1个头：Content-Disposition：包含name=”xxxx”，即表单项名称。<br>体就是表单项的值<br> 文件表单项：<br>2个头：  </p>
+<ul>
+<li>Content-Disposition：包含name=”xxxx”，即表单项名称；还有一个filename=”xxx”，表示上传文件的名称  </li>
+<li>Content-Type：它是上传文件的MIME类型，</li>
+</ul>
+</blockquote>
+<p> 例如：image/pjpeg，表示上传的是图片，图上中jpg扩展名的图片。  </p>
+<blockquote>
+<p>体就是上传文件的内容。</p>
+</blockquote>
+<p> 3、上传步骤</p>
+<p> 准备工作：导入commons-fileupload.jar， commons-io.jar俩个包</p>
+<p> 1). 创建工厂：DiskFileItemFactory factory = new DiskFileItemFactory();<br> 2). 创建解析器：ServletFileUpload sfu = new ServletFileUpload(factory);<br> 3). 使用解析器来解析request，得到FileItem集合：List<fileitem> fileItemList = sfu.parseRequest(request);</fileitem></p>
+<p> 注意：List的顺序与表单项从上到下的顺序一致。</p>
+<p> FileItem常用的方法：  </p>
+<ul>
+<li>boolean isFormField()：是否为普通表单项！返回true为普通表单项，如果为false即文件表单项！  </li>
+<li>String getFieldName()：返回当前表单项的名称；  </li>
+<li>String getString(String charset)：传入编码，返回表单项的值；  </li>
+<li>String getName()：返回上传的文件名称  </li>
+<li>long getSize()：返回上传文件的字节数  </li>
+<li>InputStream getInputStream()：返回上传文件对应的输入流  </li>
+<li>String getContentType()：获取上传文件类型  </li>
+<li>void write(File destFile)：把上传的文件内容保存到指定的文件中。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	//创建将要保存文件的文件流</span><br><span class="line">       File file=new File(&quot;C:/Users/13928/Desktop/图标.jpg&quot;);	</span><br><span class="line">item2.write(file);	//将文件流写入服务器</span><br></pre></td></tr></table></figure>
+
+<p> 4、上传文件的大小限制</p>
+<ul>
+<li>单个文件大小限制 &gt; sfu.setFileSizeMax(100*1024)：限制单个文件大小为100KB，必须在解析开始之前调用！  <blockquote>
+<p>如果上传的文件超出限制，在parseRequest()方法执行时，会抛出异常！FileUploadBase.FileSizeLimitExceededException</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>整个请求所有数据大小限制 &gt; sfu.setSizeMax(1024 * 1024)：限制整个表单大小为1M，必须在解析开始之前调用！  </p>
+<blockquote>
+<p>如果上传的文件超出限制，在parseRequest()方法执行时，会抛出异常！FileUploadBase.SizeLimitExceededException</p>
+</blockquote>
+<p>5、缓存大小与临时目录  </p>
+<ul>
+<li>缓存大小：上传文件超出多大，才向硬盘保存！默认为10KB  </li>
+<li>临时目录：向硬盘的什么目录保存<br>设置缓存大小与临时目录：new DiskFileItemFactory(20*1024, new File(“E:/temp”))；</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/13/Web/Web的文件上传/" data-id="ckib6fioe001yg4tpav5x7fyw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/JavaWeb的三大组件之过滤器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/12/Web/JavaWeb的三大组件之过滤器/" class="article-date">
+  <time datetime="2018-09-12T04:29:35.000Z" itemprop="datePublished">2018-09-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/12/Web/JavaWeb的三大组件之过滤器/">JavaWeb的三大组件之过滤器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82659394" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82659394</a>   </p>
+<h1 id="JavaWeb过滤器"><a href="#JavaWeb过滤器" class="headerlink" title="JavaWeb过滤器"></a>JavaWeb过滤器</h1><p> 过滤器可以让请求得到目标资源，也可以不让请求达到！  </p>
+<ul>
+<li><p>过滤器有拦截请求的能力，且过滤器是单例模式！</p>
+<p>过滤器的实现方法：</p>
+</li>
+</ul>
+<ol>
+<li>写一个类实现Filter接口（注意导入的是：javax.servlet.Filter接口）  </li>
+<li>在web.xml中进行配置，以下为具体配置格式</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> &lt;filter&gt;</span><br><span class="line">	&lt;filter-name&gt;helloFilter&lt;/filter-name&gt;</span><br><span class="line">	&lt;filter-class&gt;包名.类名&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">	&lt;filter-name&gt;helloFilter&lt;/filter-name&gt;</span><br><span class="line">	&lt;url-pattern&gt;/要过滤的资源（/*时为过滤所有资源）&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
+
+<p> Filter接口的方法：</p>
+<p> void init(FilterConfig)：创建Filter后执行，在服务器启动时创建</p>
+<ul>
+<li><p>FilterConfig参数–&gt;与ServletConfig相似  </p>
+</li>
+<li><p>获取初始化参数：getInitParameter()  </p>
+</li>
+<li><p>获取过滤器名称：getFilterName()  </p>
+</li>
+<li><p>获取appliction：getServletContext()<br>void destory()：过滤器销毁之前执行！在服务器关闭时销毁<br>void doFilter(ServletRequest,ServletResponse,FilterChain)：每次过滤时都会执行，判断是否通过过滤器</p>
+</li>
+<li><p>FilterChain参数  </p>
+</li>
+<li><p>doFilter(ServletRequest, ServletResponse)：通过当前过滤器，若有多个过滤器则到达下一过滤器。</p>
+<p>过滤器的过滤顺序：根据web.xml的<filter-mapping>的位置从上到下过滤，与过滤资源无关（即与<url-pattern>值无关）。</url-pattern></filter-mapping></p>
+<p>过滤器的四种过滤方式：需要在<filter-mapping>里配置以下标签，四种过滤方式可以随意搭配使用来面对不同的情况</filter-mapping></p>
+</li>
+</ul>
+<blockquote>
+<p><dispatcher>REQUEST</dispatcher>：过滤请求，没有设置时的默认方式，当设置了其它过滤方式时会</p>
+<p> 使用其它过滤方式，默认过滤方式消失。</p>
+<p> <dispatcher>FORWARD</dispatcher>：过滤转发</p>
+<p> <dispatcher>INCLUDE</dispatcher>：过滤包含</p>
+<p> <dispatcher>ERROR</dispatcher>： 过滤错误</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/12/Web/JavaWeb的三大组件之过滤器/" data-id="ckib6fio8001qg4tpuy0t0ft3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/JavaWeb的三大组件之事件监听组件（Listener）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/11/Web/JavaWeb的三大组件之事件监听组件（Listener）/" class="article-date">
+  <time datetime="2018-09-11T12:38:36.000Z" itemprop="datePublished">2018-09-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/11/Web/JavaWeb的三大组件之事件监听组件（Listener）/">JavaWeb的三大组件之事件监听组件（Listener）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82632169" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82632169</a>   </p>
+<h2 id="JavaWeb监听器"><a href="#JavaWeb监听器" class="headerlink" title="JavaWeb监听器"></a>JavaWeb监听器</h2><p> 三大组件：</p>
+<ol>
+<li>Servlet </li>
+<li>Listener </li>
+<li>Filter 监听器：</li>
+</ol>
+<ol>
+<li><p>它是一个接口，内容由我们来实现； </p>
+</li>
+<li><p>它需要注册，例如注册在按钮上！ </p>
+</li>
+<li><p>监听器中的方法，会在特殊事件发生时被调用！ </p>
+<p>JavaWeb中的监听器</p>
+<p>一、生命周期监听与属性监听</p>
+<p>ServletContext</p>
+<p>生命周期监听：ServletContextListener，它有两个方法，一个在创建时调用，一个在销毁时调用；</p>
+</li>
+</ol>
+<ul>
+<li><p>void <strong>contextInitialized</strong>(<a href>ServletContextEvent</a> sce)：创建Servletcontext时 </p>
+</li>
+<li><p>void <strong>contextDestroyed</strong>(<a href>ServletContextEvent</a> sce)：销毁Servletcontext时 属性监听：ServletContextAttributeListener，它有三个方法，一个在添加属性时调用，一个在替换属性时调用，</p>
+<p>最后一个是在移除属性时调用。</p>
+</li>
+</ul>
+<ul>
+<li><p>void <strong>attributeAdded</strong>(<a href>ServletContextAttributeEvent</a> event)：添加属性时； </p>
+</li>
+<li><p>void <strong>attributeReplaced</strong>(<a href>ServletContextAttributeEvent</a> event)：替换属性时； </p>
+</li>
+<li><p>void <strong>attributeRemoved</strong>(<a href>ServletContextAttributeEvent</a> event)：移除属性时； HttpSession</p>
+<p>生命周期监听：HttpSessionListener，它有两个方法，一个在创建时调用，一个在销毁时调用；</p>
+</li>
+</ul>
+<ul>
+<li><p>void <strong>sessionCreated</strong>(<a href>HttpSessionEvent</a> se)：创建session时 </p>
+</li>
+<li><p>void <strong>sessionDestroyed</strong>(<a href>HttpSessionEvent</a> se)：销毁session时 属性监听：HttpSessioniAttributeListener，它有三个方法，一个在添加属性时调用，一个在替换属性时调用，</p>
+<p>最后一个是在移除属性时调用。</p>
+</li>
+</ul>
+<ul>
+<li><p>void <strong>attributeAdded</strong>(<a href>HttpSessionBindingEvent</a> event)：添加属性时； </p>
+</li>
+<li><p>void <strong>attributeReplaced</strong>(<a href>HttpSessionBindingEvent</a> event)：替换属性时 </p>
+</li>
+<li><p>void <strong>attributeRemoved</strong>(<a href>HttpSessionBindingEvent</a> event)：移除属性时 ServletRequest</p>
+<p>生命周期监听：ServletRequestListener，它有两个方法，一个在创建时调用，一个在销毁时调用；</p>
+</li>
+</ul>
+<ul>
+<li><p>void <strong>requestInitialized</strong>(<a href>ServletRequestEvent</a> sre)：创建request时 </p>
+</li>
+<li><p>void <strong>requestDestroyed</strong>(<a href>ServletRequestEvent</a> sre)：销毁request时 属性监听：ServletRequestAttributeListener，它有三个方法，一个在添加属性时调用，一个在替换属性时调用，</p>
+<p>最后一个是在移除属性时调用。</p>
+</li>
+</ul>
+<ul>
+<li>void <strong>attributeAdded</strong>(<a href>ServletRequestAttributeEvent</a> srae)：添加属性时 </li>
+<li>void <strong>attributeReplaced</strong>(<a href>ServletRequestAttributeEvent</a> srae)：替换属性时 </li>
+<li>void <strong>attributeRemoved</strong>(<a href>ServletRequestAttributeEvent</a> srae)：移除属性时 </li>
+</ul>
+<ol>
+<li>javaWeb中完成编写监听器： </li>
+</ol>
+<ul>
+<li>写一个监听器类：要求必须去实现某个监听器接口； </li>
+<li>注册，是在web.xml中配置来完成注册！ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;listener&gt;</span><br><span class="line">   &lt;listener-class&gt;包名.类名&lt;/listener-class&gt;</span><br><span class="line">&lt;/listener&gt;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+<ol>
+<li>事件对象： </li>
+</ol>
+<ul>
+<li><p>ServletContextEvent：ServletContext getServletContext() </p>
+</li>
+<li><p>HttpSessionEvent：HttpSession getSession() </p>
+</li>
+<li><p>ServletRequest： </p>
+</li>
+<li><p>ServletContext getServletContext()； </p>
+</li>
+<li><p>ServletReques getServletRequest()； </p>
+</li>
+<li><p>ServletContextAttributeEvent： </p>
+</li>
+<li><p>ServletContext getServletContext()； </p>
+</li>
+<li><p>String getName()：获取属性名 </p>
+</li>
+<li><p>Object getValue()：获取属性值 </p>
+</li>
+<li><p><a href>HttpSessionBindingEvent</a>：略 </p>
+</li>
+<li><p><a href>ServletRequestAttributeEvent</a> ：略 </p>
+<p>二、感知监听（都与HttpSession相关）</p>
+</li>
+</ul>
+<ul>
+<li><p>它用来添加到JavaBean上，而不是添加到三大域上！ </p>
+</li>
+<li><p>这两个监听器都不需要在web.xml中注册！ 1、JavaBean中继承HttpSessionBindingListener接口：感知Bean对象是否存放到Session（存放触发，删除触发）</p>
+<p>2、JavaBean中继承HttpSessionActivationListener,java.io.Serializable接口：Bean对象是否跟随Session钝化（钝化触发，</p>
+<p>活化触发）Serializable接口用来序列化</p>
+<p>Session的钝化：即会话在一定时间内没有操作，Session信息自动保存至硬盘中以节省内存空间的技术</p>
+<p>——–具体操作：Tomcat7/conf/context.xml添加以下代码，就会将session</p>
+<p>保存至Tomcat7\work\Catalina\localhost\项目名\mysession中，如果保存属性有Bean对象</p>
+<p>，要将Bean对象实现序列化（即继承java.io.Serializable接口）。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">   &lt;Manager className=&quot;org.apache.catalina.session.PersistentManager&quot; maxIdleSwap=&quot;1&quot;&gt;</span><br><span class="line">&lt;Store className=&quot;org.apache.catalina.session.FileStore&quot; directory=&quot;mysession&quot;/&gt;</span><br><span class="line">  &lt;/Manager&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 总结：看视频说Session钝化后保存至硬盘，Session的活化可在浏览器重新打开（即一个会话关闭后）再次取出对象信息；</p>
+<p> 但实际经验是Session的生命周期只有一个会话，或许是我Tomcat的问题，在会话关闭后重新打开时虽然有保存Session</p>
+<p> 信息到磁盘，但此时取不出Session信息。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/11/Web/JavaWeb的三大组件之事件监听组件（Listener）/" data-id="ckib6fio6001og4tprascq3xy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/CommonUtils工具类" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/09/Web/CommonUtils工具类/" class="article-date">
+  <time datetime="2018-09-09T03:03:07.000Z" itemprop="datePublished">2018-09-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/09/Web/CommonUtils工具类/">CommonUtils工具类</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82556638" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82556638</a><br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> package Tool;</span><br><span class="line"></span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.UUID;</span><br><span class="line"></span><br><span class="line">import javax.swing.text.StyledEditorKit.ForegroundAction;</span><br><span class="line"></span><br><span class="line">import org.apache.commons.beanutils.BeanUtils;</span><br><span class="line"></span><br><span class="line">public class commonUtils &#123;</span><br><span class="line">	//生成不重复的32位长的大写字符串</span><br><span class="line">	public static String uuid() &#123;</span><br><span class="line">		return UUID.randomUUID().toString().replace(&quot;-&quot;, &quot;&quot;).toUpperCase();</span><br><span class="line">	&#125;</span><br><span class="line">	// 把map转换成指定类型的javaBean对象</span><br><span class="line">	public static &lt;T&gt; T toBean(Map map, Class&lt;T&gt; clazz) &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			/*</span><br><span class="line">			 * 1. 创建指定类型的javabean对象</span><br><span class="line">			 */</span><br><span class="line">			T bean = clazz.newInstance();</span><br><span class="line">			/*</span><br><span class="line">			 * 2. 把数据封装到javabean中</span><br><span class="line">			 */</span><br><span class="line">			BeanUtils.populate(bean, map);</span><br><span class="line">			/*</span><br><span class="line">			 * 3. 返回javabean对象</span><br><span class="line">			 */</span><br><span class="line">			return bean;</span><br><span class="line">		&#125; catch(Exception e) &#123;</span><br><span class="line">			throw new RuntimeException(e);		//如果想让用户调用时不用try-catch，使用throw new RuntimeException(e)来抛出运行异常</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/09/Web/CommonUtils工具类/" data-id="ckib6finn0011g4tprx8t0uwk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java基础/Java代码生成不重复的32位长的大写字符串" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/09/java基础/Java代码生成不重复的32位长的大写字符串/" class="article-date">
+  <time datetime="2018-09-09T02:19:21.000Z" itemprop="datePublished">2018-09-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/09/java基础/Java代码生成不重复的32位长的大写字符串/">Java代码生成不重复的32位长的大写字符串</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   public static String uuid() {<br> return UUID.randomUUID().toString().replace(“-“, “”).toUpperCase();<br> }</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/09/java基础/Java代码生成不重复的32位长的大写字符串/" data-id="ckib6fipk003ig4tpa4in3pdl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/" class="article-date">
+  <time datetime="2018-09-09T02:19:21.000Z" itemprop="datePublished">2018-09-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/">Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   <strong>目录</strong></p>
+<p>一、String、StringBuffer/StringBuilder、基本类型包装类（如：Float、Double）、<br>Byte[ ]、char[ ]转换图<br>二、String：字符串，==比较的是引用是否相同，equals比较的是内容是否相同。<br>三、StringBuffer/StringBuilder：可修改字符串，java.lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。</p>
+<hr>
+<h3 id="一、String、StringBuffer-StringBuilder、基本类型包装类（如：Float、Double）、Byte-、char-转换图"><a href="#一、String、StringBuffer-StringBuilder、基本类型包装类（如：Float、Double）、Byte-、char-转换图" class="headerlink" title="一、String、StringBuffer/StringBuilder、基本类型包装类（如：Float、Double）、Byte[ ]、char[ ]转换图"></a>一、String、StringBuffer/StringBuilder、基本类型包装类（如：Float、Double）、Byte[ ]、char[ ]转换图</h3><p>Float和float区别：一个类、一个是基本类型关键字  </p>
+<p> <img src="https://img-blog.csdnimg.cn/20190113182149961.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<p>总结：转大包容小。</p>
+<blockquote>
+<pre><code>StringBuffer,等级比String高，用构造函数包含即可
+转回String用:toString()
+String等级比字节数组、字符数组高，转换成String用构造函数包含即可
+转回字节数组用：getByte() 转回字符数组用:toCharArray()
+String转换成基本数据类型，包装类用:Integer.parseXxx()方法 
+基本数据类型，包装类转换成String用:String.ValueOF(int)方法</code></pre></blockquote>
+<h3 id="二、String：字符串，-比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意-的使用，比较的是引用"><a href="#二、String：字符串，-比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意-的使用，比较的是引用" class="headerlink" title="二、String：字符串，==比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意==的使用，比较的是引用"></a>二、String：字符串，==比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意==的使用，比较的是引用</h3><blockquote>
+<pre><code>String str1=&quot;abc&quot;;                //直接在字符串常量池里引用
+String str2=new String(&quot;abc&quot;);    //new一定会新建一个对象，存放字符串。
+System.out.println(str1==str2);          //false
+System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
+<blockquote>
+<p>char charAt(int index)：返回索引为index的字符<br>int length()：返回字符串长度<br>int indexOf(String str)：返回字符串中第一次出现的索引值<br>String replace(char old , char new)：替换所有old字符为new字符<br>String substring(int begin)：抓取索引为begin开始至结束的字符串<br>String substring(int begin , int end)：抓取从索引begin开始至end的字符串<br>String trim()：删除起始和结束俩段空格<br>String[] spilt(String str)：分割str字符串为若干子串<br>String toUpperCase()：转化大写<br>String toLowerCase()：转化小写<br>boolean equals(String str)：判断与str字符串内容是否一致<br>boolean startsWith(String str)：判断是否已str字符串开始<br>boolean endsWith(String str)：判断是否已str字符串结束</p>
+</blockquote>
+<h3 id="三、StringBuffer-StringBuilder：可修改字符串，java-lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。"><a href="#三、StringBuffer-StringBuilder：可修改字符串，java-lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。" class="headerlink" title="三、StringBuffer/StringBuilder：可修改字符串，java.lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。"></a>三、StringBuffer/StringBuilder：可修改字符串，java.lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。</h3><blockquote>
+<p>StringBuffer append(char c)：追加字符c<br>StringBuffer insert(int index , String str)：在索引index处插入字符串str<br>StringBuffer delete(int start , int end)：删除索引从start至end字符串<br>StringBuffer delete(int index)：删除索引为index字符<br>StringBuffer setCharAt(int index , char c)：设置索引为index字符为c<br>StringBuffer reverse()：反转字符串<br>String toString()：转化为String类型</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/" data-id="ckib6fipp003ng4tpqe3yzbnf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/Blog/master/page/8/">&laquo; 上一页</a><a class="page-number" href="/Blog/master/">1</a><span class="space">&hellip;</span><a class="page-number" href="/Blog/master/page/7/">7</a><a class="page-number" href="/Blog/master/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/Blog/master/page/10/">10</a><a class="page-number" href="/Blog/master/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/Blog/master/page/14/">14</a><a class="extend next" rel="next" href="/Blog/master/page/10/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

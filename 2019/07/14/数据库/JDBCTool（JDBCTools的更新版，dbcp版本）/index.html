@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>JDBCTool（JDBCTools的更新版，dbcp版本） | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDBCTool（JDBCTools的更新版，dbcp版本）">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/数据库/JDBCTool（JDBCTools的更新版，dbcp版本）/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:20:34.826Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JDBCTool（JDBCTools的更新版，dbcp版本）">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-数据库/JDBCTool（JDBCTools的更新版，dbcp版本）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/07/14/数据库/JDBCTool（JDBCTools的更新版，dbcp版本）/" class="article-date">
+  <time datetime="2019-07-14T02:59:18.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JDBCTool（JDBCTools的更新版，dbcp版本）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br></pre></td><td class="code"><pre><span class="line"> package Part;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStream;</span><br><span class="line">import java.lang.reflect.InvocationTargetException;</span><br><span class="line">import java.sql.*;</span><br><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">import org.apache.commons.dbcp.BasicDataSource;</span><br><span class="line">import org.apache.commons.dbcp.BasicDataSourceFactory;</span><br><span class="line"></span><br><span class="line">import javax.sql.DataSource;</span><br><span class="line"></span><br><span class="line">import org.apache.commons.beanutils.BeanUtils;</span><br><span class="line"></span><br><span class="line">import Part.ReflectionUtils;</span><br><span class="line">/*</span><br><span class="line"> * 与JDBCTools不同点：少了很多注释，少了很多落后的方法(Statement)，更新和查询操作使用了连接池技术，优化了速度。</span><br><span class="line"> * 同时因为连接池技术，不用频繁关闭连接,但仍然提供了关闭连接的方法</span><br><span class="line"> */</span><br><span class="line">public class JDBCTool &#123;</span><br><span class="line">	//开始事务</span><br><span class="line">	public static void begin(Connection connection) throws SQLException &#123;</span><br><span class="line">		connection.setAutoCommit(false);</span><br><span class="line">	&#125;</span><br><span class="line">	//提交事务</span><br><span class="line">	public static void commit(Connection connection) throws SQLException &#123;</span><br><span class="line">		connection.commit();</span><br><span class="line">	&#125;</span><br><span class="line">	//回滚事务</span><br><span class="line">	public static void rollback(Connection connection) throws SQLException &#123;</span><br><span class="line">		connection.rollback();</span><br><span class="line">	&#125;</span><br><span class="line">	//获取连接方法（从连接池里获取连接）</span><br><span class="line">	public static Connection getConnection() throws Exception &#123;</span><br><span class="line">		//读取配置文件</span><br><span class="line">		Properties properties=new Properties();</span><br><span class="line">		InputStream in=JDBCTools.class.getClassLoader().getResourceAsStream(&quot;dbcp.properties&quot;);</span><br><span class="line">		properties.load(in);</span><br><span class="line">		</span><br><span class="line">		//配置文件传入连接池</span><br><span class="line">		DataSource dataSource=BasicDataSourceFactory.createDataSource(properties);</span><br><span class="line">		return dataSource.getConnection();</span><br><span class="line">	&#125;</span><br><span class="line">	//关闭连接方法</span><br><span class="line">	//关闭俩个对象方法</span><br><span class="line">	public static void release(Connection connection,Statement statement) throws SQLException &#123;</span><br><span class="line">		if(connection!=null) &#123;</span><br><span class="line">			connection.close();</span><br><span class="line">		&#125;</span><br><span class="line">		if(statement!=null) &#123;</span><br><span class="line">			statement.close();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//关闭三个对象方法</span><br><span class="line">	public static void release(Connection connection,Statement statement,ResultSet resultset) throws SQLException &#123;</span><br><span class="line">		if(connection!=null) &#123;</span><br><span class="line">			connection.close();</span><br><span class="line">		&#125;</span><br><span class="line">		if(statement!=null) &#123;</span><br><span class="line">			statement.close();</span><br><span class="line">		&#125;</span><br><span class="line">		if(resultset!=null) &#123;</span><br><span class="line">			resultset.close();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//执行sql插入、删除或更新的通用方法(利用PreparedStatement)</span><br><span class="line">	public static void Update(String sql,Object ... obj) throws Exception &#123;//Object ... agrs表示一个参数列表(Object数组)，</span><br><span class="line">																			//可以为任意类型，任意个数</span><br><span class="line">		Connection connection=getConnection();</span><br><span class="line">		PreparedStatement preparedstatement=connection.prepareStatement(sql);</span><br><span class="line">		for(int i=0;i&lt;obj.length;i++) &#123;</span><br><span class="line">			preparedstatement.setObject(i+1,obj[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		preparedstatement.executeUpdate();</span><br><span class="line">	&#125;</span><br><span class="line">	//执行sql查询的通用方法(利用PreparedStatement)</span><br><span class="line">	public static ResultSet Select(String sql,Object ...obj) throws Exception &#123;</span><br><span class="line">		Connection connection=getConnection();</span><br><span class="line">		PreparedStatement preparedstatement=connection.prepareStatement(sql);</span><br><span class="line">		for(int i=0;i&lt;obj.length;i++) &#123;</span><br><span class="line">			preparedstatement.setObject(i+1,obj[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		return preparedstatement.executeQuery();</span><br><span class="line">	&#125;</span><br><span class="line">	//查询一条记录</span><br><span class="line">	//传入SQL查询语句和类，返回一个与其一一对应属性的类</span><br><span class="line">	//即返回一个记录类</span><br><span class="line">	public static &lt;T&gt; T get(Class&lt;T&gt; clazz,String sql,Object ...obj) throws Exception &#123;</span><br><span class="line">		T Record=null;</span><br><span class="line">		ResultSet resultset=Select(sql,obj);</span><br><span class="line">		if(resultset.next()) &#123;	//如果查询结果不为空</span><br><span class="line">			Record=clazz.newInstance();	//实例化对象</span><br><span class="line">			ResultSetMetaData resultsetmetadata=resultset.getMetaData();</span><br><span class="line">			Map&lt;String,Object&gt;map=new HashMap&lt;&gt;();</span><br><span class="line">			for(int i=0;i&lt;resultsetmetadata.getColumnCount();i++) &#123;</span><br><span class="line">				map.put(resultsetmetadata.getColumnName(i+1),resultset.getObject(i+1));</span><br><span class="line">			&#125;</span><br><span class="line">			for(Map.Entry&lt;String,Object&gt; entry:map.entrySet()) &#123;	//取出map里每条记录entry(Key-Value)</span><br><span class="line">				ReflectionUtils.setFieldValue(Record, entry.getKey(),entry.getValue());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return Record;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	//查询多条记录，返回记录对象的列表</span><br><span class="line">	public static &lt;T&gt; List&lt;T&gt; getList(Class&lt;T&gt; clazz,String sql,Object ...obj) throws Exception&#123;</span><br><span class="line">		ResultSet resultset=Select(sql,obj);</span><br><span class="line">		List&lt;T&gt; list=ListMap_To_List(clazz,Result_To_ListMap(resultset));</span><br><span class="line">		return list;</span><br><span class="line">	&#125;</span><br><span class="line">	//传入ResultSet得到一个记录对象列表(List&lt;Map&lt;String,Object&gt;&gt;类型,Map的键为列名，值为列值)</span><br><span class="line">	public static List&lt;Map&lt;String, Object&gt;&gt; Result_To_ListMap(ResultSet resultset)throws SQLException &#123;</span><br><span class="line">		List&lt;Map&lt;String,Object&gt;&gt; list=null;</span><br><span class="line">		ResultSetMetaData resultsetmetadata=resultset.getMetaData();</span><br><span class="line">		int columnCount=resultsetmetadata.getColumnCount();</span><br><span class="line">		ArrayList&lt;String&gt;columnName=new ArrayList&lt;String&gt;();</span><br><span class="line">		for(int i=0;i&lt;columnCount;i++) &#123;</span><br><span class="line">			columnName.add(resultsetmetadata.getColumnName(i+1));</span><br><span class="line">		&#125;</span><br><span class="line">		list=new ArrayList&lt;&gt;();</span><br><span class="line">		while(resultset.next()) &#123;</span><br><span class="line">			Map&lt;String,Object&gt;map=new HashMap&lt;&gt;();</span><br><span class="line">			for(int i=0;i&lt;columnCount;i++) &#123;</span><br><span class="line">				map.put(columnName.get(i),resultset.getObject(i+1));</span><br><span class="line">			&#125;</span><br><span class="line">			list.add(map);</span><br><span class="line">			&#125;</span><br><span class="line">		return list;</span><br><span class="line">	&#125;</span><br><span class="line">	//传入一个ListMap和记录对象类型获得一个对象列表List</span><br><span class="line">	public static &lt;T&gt; List&lt;T&gt; ListMap_To_List(Class&lt;T&gt; clazz, List&lt;Map&lt;String, Object&gt;&gt; listMap)</span><br><span class="line">			throws InstantiationException, IllegalAccessException, InvocationTargetException &#123;</span><br><span class="line">		List&lt;T&gt; list=null;</span><br><span class="line">		T Record=null;</span><br><span class="line">		if(listMap.size()&gt;0) &#123;</span><br><span class="line">			list=new ArrayList&lt;&gt;();</span><br><span class="line">			for(Map&lt;String,Object&gt;map:listMap) &#123;	//取出listMap里每个map对象</span><br><span class="line">				Record=clazz.newInstance();</span><br><span class="line">				for(Map.Entry&lt;String,Object&gt;entry:map.entrySet()) &#123;//取出map里的每个记录(entry:Key-Value)对象</span><br><span class="line">					ReflectionUtils.setFieldValue(Record,entry.getKey(),entry.getValue());</span><br><span class="line">				&#125;</span><br><span class="line">				list.add(Record);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return list;</span><br><span class="line">	&#125;</span><br><span class="line">	//返回某条记录的某一字段的值或一个统计的值（一共有多少条记录等）</span><br><span class="line">	public static &lt;E&gt; E getForValue(String sql,Object ...obj) throws Exception &#123;</span><br><span class="line">		ResultSet resultset=Select(sql,obj);</span><br><span class="line">		resultset.next();</span><br><span class="line">		return (E) resultset.getObject(1);</span><br><span class="line">	&#125;</span><br><span class="line">	//批量处理SQL语句</span><br><span class="line">	public static void BatchSQL(String sql,int count,Object ...obj) throws Exception&#123;</span><br><span class="line">		Connection connection=getConnection();</span><br><span class="line">		try &#123;</span><br><span class="line">			begin(connection);</span><br><span class="line">			PreparedStatement preparedstatement=connection.prepareStatement(sql);</span><br><span class="line">			for(int i=0;i&lt;obj.length;i++) &#123;</span><br><span class="line">				preparedstatement.setObject(i+1,obj[i]);</span><br><span class="line">			&#125;</span><br><span class="line">			for(int i=0;i&lt;count;i++) &#123;</span><br><span class="line">				preparedstatement.addBatch();	//积攒sql语句</span><br><span class="line">			&#125;</span><br><span class="line">			preparedstatement.executeBatch();	//发送sql语句</span><br><span class="line">			preparedstatement.clearBatch();     //清空sql语句</span><br><span class="line">			commit(connection);</span><br><span class="line">		&#125;catch(Exception e) &#123;</span><br><span class="line">			rollback(connection);</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/数据库/JDBCTool（JDBCTools的更新版，dbcp版本）/" data-id="ckib6fiq9004cg4tp2hfibd5o" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2019/07/14/数据库/JDBCTools类/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JDBCTools类
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2019/07/14/java基础/ReflectionUtils/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ReflectionUtils</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Java容器代码 | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="目录  Array：  Collection：  Set和Iterator：  Map：  泛型：  Array：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859 package Container;import java.">
+<meta name="keywords" content="Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java容器代码">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/java基础/Java容器代码/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="目录  Array：  Collection：  Set和Iterator：  Map：  泛型：  Array：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859 package Container;import java.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T06:15:13.748Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java容器代码">
+<meta name="twitter:description" content="目录  Array：  Collection：  Set和Iterator：  Map：  泛型：  Array：1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859 package Container;import java.">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java基础/Java容器代码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/07/14/java基础/Java容器代码/" class="article-date">
+  <time datetime="2019-07-14T02:55:30.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Java容器代码
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   <strong>目录</strong></p>
+<p> <a href="#Array%EF%BC%9A">Array：</a></p>
+<p> <a href="#Collection%EF%BC%9A">Collection：</a></p>
+<p> <a href="#Set%E5%92%8CIterator%EF%BC%9A">Set和Iterator：</a></p>
+<p> <a href="#Map%EF%BC%9A">Map：</a></p>
+<p> <a href="#%E6%B3%9B%E5%9E%8B%EF%BC%9A">泛型：</a></p>
+<hr>
+<h3 id="Array："><a href="#Array：" class="headerlink" title="Array："></a>Array：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"> package Container;</span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.Comparator;</span><br><span class="line">/*</span><br><span class="line"> * Arrays类常用方法：</span><br><span class="line"> * copyOF（）：将一个数组中的值复制到新的数组中</span><br><span class="line"> * sort（）：将一个数组中的值进行排序，默认为升序排列</span><br><span class="line"> * binarySearch（）：在已排好序的数组中查找特定值</span><br><span class="line"> * equals（）：判断两个数组是否相等</span><br><span class="line"> * asList（）：将数组重构为集合</span><br><span class="line"> * </span><br><span class="line"> * 使用Arrays.sort()可以为数组排序，当数组元素是对象时，判断其大小排序</span><br><span class="line"> * 可以使用java.util.Comparator里的Comparator接口，接口中只有一个compare()方法供其它类实现，（友元函数形式）</span><br><span class="line"> * 也可以使用java.lang.Comparator里的Comparable接口，接口中只有一个compareTo()方法供其它类实现。（成员函数形式）</span><br><span class="line"> * 推荐使用compare()，因为其不改变当前对象的数据。</span><br><span class="line"> */</span><br><span class="line">public class Arrays_ &#123;</span><br><span class="line">	public class employee implements Comparator</span><br><span class="line">	&#123;</span><br><span class="line">		int age;		</span><br><span class="line">		String name;</span><br><span class="line">		float salary;	</span><br><span class="line">		@Override</span><br><span class="line">		public int compare(Object o1,Object o2) &#123;	//大于，等于和小于分别返回正整数，0和负整数</span><br><span class="line">			//职员根据年龄比较</span><br><span class="line">			/*employee e1=(employee)o1,e2=(employee)o2;</span><br><span class="line">			return e1.age-e2.age;*/</span><br><span class="line">			//职员根据工资比较</span><br><span class="line">			employee e1=(employee)o1,e2=(employee)o2;</span><br><span class="line">			float judge=(int)(e1.salary-e2.salary);	//当e1.salary-e2.salary为0-1之间时，转为int会变为0</span><br><span class="line">			if(judge&gt;0)</span><br><span class="line">			return 1;</span><br><span class="line">			else if(judge==0)return 0;</span><br><span class="line">			else return -1;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String agrs[])</span><br><span class="line">	&#123;</span><br><span class="line">		//数组复制</span><br><span class="line">		int a[]=new int[10];</span><br><span class="line">		for(int i=0;i&lt;10;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			a[i]=10-i;</span><br><span class="line">		&#125;</span><br><span class="line">		int b[]=Arrays.copyOf(a, a.length);</span><br><span class="line">		for(int i=0;i&lt;10;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			System.out.print(b[i]+&quot; &quot;);</span><br><span class="line">		&#125; </span><br><span class="line">		</span><br><span class="line">		//数组排序</span><br><span class="line">		Arrays.sort(a);</span><br><span class="line">		System.out.println(&quot;&quot;);</span><br><span class="line">		for(int i=0;i&lt;10;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			System.out.print(a[i]+&quot; &quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Collection："><a href="#Collection：" class="headerlink" title="Collection："></a>Collection：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"> package Container;</span><br><span class="line"></span><br><span class="line">import java.util.*;</span><br><span class="line">/*</span><br><span class="line"> * Collection（类集）接口:所有实现Collection接口以及Collection子接口的类都能使用迭代器</span><br><span class="line"> * 方法:</span><br><span class="line"> * add():添加一个元素</span><br><span class="line"> * addAll():将其它容器所有元素添加至本容器</span><br><span class="line"> * clear():清空本容器</span><br><span class="line"> * contains():判断容器中是否存在本元素</span><br><span class="line"> * containsAll():判断另一容器是否本容器子容器</span><br><span class="line"> * equals():判断两容器是否相等</span><br><span class="line"> * isEmpty():判断容器是否为空</span><br><span class="line"> * remove():删除一个元素</span><br><span class="line"> * size():返回元素数量（规模）</span><br><span class="line"> * toArray():转化成数组并返回数组引用</span><br><span class="line"> * iterator():迭代器</span><br><span class="line"> * </span><br><span class="line"> * List:继承于Collection并新增了以下方法</span><br><span class="line"> * add():指定位置添加元素</span><br><span class="line"> * get(indexOf):获得索引处元素</span><br><span class="line"> * set():重设指定元素值</span><br><span class="line"> * indexOf():获取元素索引（位置）</span><br><span class="line"> * lastIndexOf():返回元素最后一次出现位置</span><br><span class="line"> * subList():截取列表的子列表，需给出起始位置和终止位置</span><br><span class="line"> * listIterator():列表迭代器</span><br><span class="line"> * </span><br><span class="line"> * ArrayList:动态数组，随机存取，会自动增大容量</span><br><span class="line"> * 构造方法：</span><br><span class="line"> * ArrayList():默认构造一个空表</span><br><span class="line"> * ArrayList(int):构造一个已知大小的表</span><br><span class="line"> * ArrayList(ArrayList):复制构造一个已有表</span><br><span class="line"> *  </span><br><span class="line"> * LinkedList:链表，插入删除快速，也可以自动增大容量</span><br><span class="line"> * 实现方法</span><br><span class="line"> * addFirst():首部添加元素</span><br><span class="line"> * addLast():尾部添加元素</span><br><span class="line"> * getFirst():获得表头元素</span><br><span class="line"> * getLast():获得表尾元素</span><br><span class="line"> * removeFirst():删除首部元素</span><br><span class="line"> * removeLast():删除尾部元素</span><br><span class="line"> */</span><br><span class="line">public class Collection_and_List &#123;</span><br><span class="line">	//利用LinkedList构造一个栈结构以及队列结构</span><br><span class="line">	static class Stack</span><br><span class="line">	&#123;</span><br><span class="line">		private LinkedList l;</span><br><span class="line">		Stack()&#123;l=new LinkedList();&#125;</span><br><span class="line">		public void push(Object o)	//入栈</span><br><span class="line">		&#123;</span><br><span class="line">			l.addFirst(o);	//头插法，头元素为最新插入元素</span><br><span class="line">		&#125;</span><br><span class="line">		public void pop()			//出栈</span><br><span class="line">		&#123;</span><br><span class="line">			l.removeFirst();</span><br><span class="line">		&#125;</span><br><span class="line">		public Object top()			//返回栈顶元素</span><br><span class="line">		&#123;</span><br><span class="line">			return l.getFirst();</span><br><span class="line">		&#125;</span><br><span class="line">		public int size() &#123;return l.size();&#125;	//返回栈的规模</span><br><span class="line">		public void clear() &#123;l.clear();&#125;		//清空栈</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	static class Queue</span><br><span class="line">	&#123;</span><br><span class="line">		private LinkedList l;</span><br><span class="line">		Queue()&#123;l=new LinkedList();&#125;</span><br><span class="line">		public void enter(Object o)		//入队</span><br><span class="line">		&#123;</span><br><span class="line">			l.addFirst(o);</span><br><span class="line">		&#125;</span><br><span class="line">		public void leave()			//出队</span><br><span class="line">		&#123;</span><br><span class="line">			l.removeLast();</span><br><span class="line">		&#125;</span><br><span class="line">		public Object head() &#123;return l.getLast();&#125;//取队首元素</span><br><span class="line">		public Object end() &#123;return l.getFirst();&#125;//取队尾元素</span><br><span class="line">		public int size() &#123;return l.size();&#125;	//返回队列规模</span><br><span class="line">		public void clear() &#123;l.clear();&#125;		//清空队列</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">	//测试ArrayList的功能	</span><br><span class="line">		ArrayList a=new ArrayList();</span><br><span class="line">		a.add(&quot;Animal&quot;);</span><br><span class="line">		a.add(&quot;Dog&quot;);</span><br><span class="line">		a.add(&quot;Cat&quot;);</span><br><span class="line">		a.remove(0);</span><br><span class="line">		for(int i=0;i&lt;a.size();i++)System.out.println(&quot;动物:&quot;+a.get(i));</span><br><span class="line">	//测试创建的栈和队列</span><br><span class="line">		Stack s=new Stack();</span><br><span class="line">		for(int i=0;i&lt;5;i++)//输入元素</span><br><span class="line">		&#123;</span><br><span class="line">			s.push(i);</span><br><span class="line">		&#125;</span><br><span class="line">		while(s.size()!=0)	//输出容器元素并清空</span><br><span class="line">		&#123;</span><br><span class="line">			System.out.print(s.top()+&quot; &quot;);</span><br><span class="line">			s.pop();</span><br><span class="line">		&#125;</span><br><span class="line">		Queue q=new Queue();</span><br><span class="line">		for(int i=0;i&lt;5;i++)//输入元素</span><br><span class="line">		&#123;</span><br><span class="line">			q.enter(i);</span><br><span class="line">		&#125;</span><br><span class="line">		for(int i=0;i&lt;5;i++)//输入容器元素</span><br><span class="line">		&#123;</span><br><span class="line">			q.enter(i);</span><br><span class="line">		&#125;</span><br><span class="line">		q.clear(); 			//清空容器</span><br><span class="line">		if(s.size()==q.size())</span><br><span class="line">		&#123;</span><br><span class="line">			System.out.println(&quot;栈和队列都已空&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Set和Iterator："><a href="#Set和Iterator：" class="headerlink" title="Set和Iterator："></a>Set和Iterator：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"> package Container;</span><br><span class="line">import java.util.*;</span><br><span class="line">/*</span><br><span class="line"> * 迭代器:容器指针</span><br><span class="line"> * 格式:Iterator&lt;实例化类型&gt;来定义指针</span><br><span class="line"> * 容器（Collection）：</span><br><span class="line"> * iterator():返回迭代器值(Iterator)</span><br><span class="line"> * 迭代器（Iterator）：</span><br><span class="line"> * next():第一次指向首个元素，依次指向下一元素。</span><br><span class="line"> * hasNext():判断是否还有下个next值(即下个元素)</span><br><span class="line"> * </span><br><span class="line"> * Set接口：实现类有HashSet、TreeSet、LinkedSet</span><br><span class="line"> * 俩个特点：不能有重复元素，并且元素没有顺序之分</span><br><span class="line"> * </span><br><span class="line"> * HashSet:哈希表，是一种顺序加链式结构,通过除以散列因子求余判断当前在数组中位置(hashCode())，定位具体链表后再通过比较判断</span><br><span class="line"> * 元素是否与链表中的值 相等(equals())。</span><br><span class="line"> * TreeSet:实现二叉排序树表(红黑树)后得到的Set，插入和删除比HashSet慢，但优势是元素根据排序规则保持有序</span><br><span class="line"> * 二叉排序树(红黑树)特点：左小右大，中序遍历（左中右）后得到一个有序数组</span><br><span class="line"> * LinkedHashSet:是HashSet的子类,插入元素用链表串起来，可以按元素插入顺序排序</span><br><span class="line"> */</span><br><span class="line">public class Set_and_Iterator &#123;</span><br><span class="line">	static class employee&#123;</span><br><span class="line">		int id;</span><br><span class="line">		employee(int id)&#123;this.id=id;&#125;</span><br><span class="line">		public int hashCode() &#123;		//原返回余数的函数，现通过id判断是否为同一对象,即散列码为id</span><br><span class="line">			return this.id;</span><br><span class="line">		&#125;</span><br><span class="line">		public boolean equals(Object o) &#123;	//判断相等函数，原相同余数的函数在此函数判断链表是否有同一元素，现直接判断id</span><br><span class="line">											//是否相等</span><br><span class="line">			employee e=(employee) o;</span><br><span class="line">			if(id==e.id)return true;	//相等，已存在相同id对象</span><br><span class="line">			else return false;			//不相等，不存在相同id对象</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Set&lt;Integer&gt; s=new HashSet&lt;Integer&gt;();</span><br><span class="line">		//添加0-100里除以6的余数(即范围为0-6的数)</span><br><span class="line">		for(int i=0;i&lt;100;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			s.add(i%6);</span><br><span class="line">		&#125;</span><br><span class="line">		for(Iterator&lt;Integer&gt; it=s.iterator();it.hasNext();)</span><br><span class="line">		&#123;</span><br><span class="line">			System.out.print(it.next()+&quot; &quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">		//当容器添加的不是常规对象（int,float,String等）类型时，需重写hashCode()函数和equals()函数</span><br><span class="line">		s.clear();</span><br><span class="line">		Set&lt;employee&gt; set=new HashSet&lt;employee&gt;();</span><br><span class="line">		set.add(new employee(1));</span><br><span class="line">		set.add(new employee(1));</span><br><span class="line">		set.add(new employee(1));</span><br><span class="line">		for(Iterator&lt;employee&gt; it=set.iterator();it.hasNext();)</span><br><span class="line">		&#123;</span><br><span class="line">			System.out.print(it.next().id+&quot; &quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">		HashSet&lt;Integer&gt; hashset=new HashSet&lt;Integer&gt;();</span><br><span class="line">		TreeSet&lt;Integer&gt; treeset=new TreeSet&lt;Integer&gt;();</span><br><span class="line">		LinkedHashSet&lt;Integer&gt; linkedhashset=new LinkedHashSet&lt;Integer&gt;();</span><br><span class="line">		for(int i=0;i&lt;5;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			int temp=(int)(Math.random()*100);</span><br><span class="line">			Integer t=new Integer(temp);</span><br><span class="line">			hashset.add(t);</span><br><span class="line">			treeset.add(t);</span><br><span class="line">			linkedhashset.add(t);</span><br><span class="line">			System.out.println(&quot;第&quot;+i+&quot;次随机数为:&quot;+t);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(&quot;HashSet:&quot;+hashset);</span><br><span class="line">		System.out.println(&quot;TreeSet:&quot;+treeset);</span><br><span class="line">		System.out.println(&quot;LinkedHashSet:&quot;+linkedhashset);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="Map："><a href="#Map：" class="headerlink" title="Map："></a>Map：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"> package Container;</span><br><span class="line">import java.util.*;</span><br><span class="line">import java.util.Map.Entry;</span><br><span class="line">/*</span><br><span class="line"> * Map:一个键值（key）对应一个对象（value）的容器，并且没有排序</span><br><span class="line"> * 提供以下接口：</span><br><span class="line"> * put(K,V):增添一对键值，若已存在键，则替换值</span><br><span class="line"> * putAll(Map):复制容器Map</span><br><span class="line"> * clear():清空容器键值对</span><br><span class="line"> * remove(Object):删除某个指定键值</span><br><span class="line"> * get(Object):通过键，查找值，找不到返回null</span><br><span class="line"> * size():返回键值对个数</span><br><span class="line"> * isEmpty():判断容器是否为空</span><br><span class="line"> * keySet():返回容器所有键的Set视图</span><br><span class="line"> * values():返回容器所有值得Collection视图</span><br><span class="line"> * entrySet():返回容器所有键值的Set视图</span><br><span class="line"> * containsKey(Object):判断是否包含键</span><br><span class="line"> * containsValue(Object):判断是否包含值</span><br><span class="line"> */</span><br><span class="line">public class Map_ &#123;</span><br><span class="line">	public static void main(String args[])</span><br><span class="line">	&#123;</span><br><span class="line">		Map&lt;Integer,String&gt;m=new HashMap&lt;Integer,String&gt;();</span><br><span class="line">		m.put(1,&quot;yellow&quot;);</span><br><span class="line">		m.put(2,&quot;red&quot;);</span><br><span class="line">		m.put(3,&quot;color&quot;);</span><br><span class="line">		m.put(3,&quot;green&quot;);	//测试当已存在键时是否替代值</span><br><span class="line">		System.out.println(&quot;Map:&quot;+m);</span><br><span class="line">		m.remove(2);		//删除指定键的键值对</span><br><span class="line">		System.out.println(&quot;Map:&quot;+m);</span><br><span class="line">		m.put(2,&quot;red&quot;);</span><br><span class="line">		</span><br><span class="line">		//遍历方式：由于Map没有提供iterator()函数，而是用keySet(),values()和entrySet()三个方法取代</span><br><span class="line">		//方法一</span><br><span class="line">		Collection&lt;String&gt; c=m.values();</span><br><span class="line">		for(Iterator&lt;String&gt; it=c.iterator();it.hasNext();) &#123;</span><br><span class="line">			System.out.print(it.next()+&quot; &quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">		//方法二</span><br><span class="line">		Set&lt;Integer&gt; s=m.keySet();</span><br><span class="line">		for(Iterator&lt;Integer&gt; it=s.iterator();it.hasNext();) &#123;</span><br><span class="line">			System.out.print(it.next()+&quot; &quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">		//方法三</span><br><span class="line">		/*</span><br><span class="line">		 * Entry对象:把键值当成一个对象，用来转换Map与其它容器（Set）容器的参数不匹配问题</span><br><span class="line">		 * 也提供了获取键，值，以及设置值的方法</span><br><span class="line">		 * getKey():获取当前键值对里的键</span><br><span class="line">		 * getValue():获取当前键值对里的值</span><br><span class="line">		 * setValue(V):重新设置当前键值对里的值</span><br><span class="line">		 */</span><br><span class="line">		Set&lt;Entry&lt;Integer,String&gt;&gt; set=m.entrySet();</span><br><span class="line">		for(Iterator&lt;Entry&lt;Integer,String&gt;&gt;it=set.iterator();it.hasNext();) &#123;</span><br><span class="line">			/*Entry&lt;Integer,String&gt; e=it.next();</span><br><span class="line">			System.out.print(e.getKey()+&quot;----&gt;&quot;+e.getValue()+&quot;  &quot;);*/</span><br><span class="line">			System.out.println(it.next()+&quot; &quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="泛型："><a href="#泛型：" class="headerlink" title="泛型："></a>泛型：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"> package Container;</span><br><span class="line">import java.util.*;</span><br><span class="line">/*</span><br><span class="line"> * 泛型：一般与容器搭配使用,使用泛型后容器会明确所装元素类型</span><br><span class="line"> * 三种使用方法：</span><br><span class="line"> * 容器实例化使用：所有容器名后+&lt;实例化类型&gt;</span><br><span class="line"> * 定义方法：权限后+&lt;T&gt;,统一变量用T定义</span><br><span class="line"> * 定义接口（纯抽象类）:类名后+&lt;T&gt;</span><br><span class="line"> */</span><br><span class="line">//利用LinkedList类+泛型知识构造一个对任何类型都能使用的栈结构</span><br><span class="line"></span><br><span class="line">public class wide_type &#123;</span><br><span class="line">	static class Stack&lt;T&gt;			//已经泛型化的接口（类）所有方法不必再一次泛型</span><br><span class="line">	&#123;</span><br><span class="line">		private LinkedList&lt;T&gt; l;</span><br><span class="line">		Stack()&#123;l=new LinkedList&lt;T&gt;();&#125;</span><br><span class="line">		public void push(T e)</span><br><span class="line">		&#123;</span><br><span class="line">			l.addFirst(e);</span><br><span class="line">		&#125;</span><br><span class="line">		public T top()</span><br><span class="line">		&#123;</span><br><span class="line">			return l.getFirst();</span><br><span class="line">		&#125;</span><br><span class="line">		public void pop()</span><br><span class="line">		&#123;</span><br><span class="line">			l.removeFirst();</span><br><span class="line">		&#125;</span><br><span class="line">		public int size() &#123;return l.size();&#125;</span><br><span class="line">		public void clear() &#123;l.clear();&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//利用LinkedList类+泛型知识构造一个对任何类型都能使用的队列结构</span><br><span class="line">	static class Queue&lt;T&gt;&#123;</span><br><span class="line">		private LinkedList&lt;T&gt; l;		//因为所有容器都是泛型化的，所以只能把他们实例化为T类型</span><br><span class="line">		Queue()&#123;l=new LinkedList&lt;T&gt;();&#125;</span><br><span class="line">		public void enter(T e) &#123;	//入队</span><br><span class="line">			l.addFirst(e);</span><br><span class="line">		&#125;</span><br><span class="line">		public void leave() &#123;		//出队</span><br><span class="line">			l.removeLast();</span><br><span class="line">		&#125;</span><br><span class="line">		public T head() &#123;			//返回队首元素</span><br><span class="line">			return l.getLast();</span><br><span class="line">		&#125;</span><br><span class="line">		public T end() &#123;			//返回队尾元素</span><br><span class="line">			return l.getFirst();</span><br><span class="line">		&#125;</span><br><span class="line">		public int size() &#123;			//返回队列规模</span><br><span class="line">			return l.size();</span><br><span class="line">		&#125;</span><br><span class="line">		public void clear() &#123;l.clear();&#125;	//清空队列</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String agrs[])</span><br><span class="line">	&#123;</span><br><span class="line">		List a=new ArrayList();</span><br><span class="line">		a.add(&quot;Dog&quot;);</span><br><span class="line">		//String str=a.get(0);	//错误：Object转换成String必须使用(String)强制转换</span><br><span class="line">		//使用泛型后容器会明确所装元素类型</span><br><span class="line">		List&lt;String&gt; l=new ArrayList&lt;String&gt;();</span><br><span class="line">		l.add(&quot;Dog&quot;);</span><br><span class="line">		String str=l.get(0);</span><br><span class="line">		</span><br><span class="line">		//java容器装对象(String)等，数组装基础类型Array</span><br><span class="line">		//错误示例：Stack&lt;int&gt; s=new Stack&lt;int&gt;();</span><br><span class="line">		Stack&lt;String&gt; s=new Stack&lt;String&gt;();</span><br><span class="line">		s.push(&quot;狗吠&quot;);</span><br><span class="line">		s.push(&quot;猫叫&quot;);</span><br><span class="line">		s.push(&quot;狼嚎&quot;);</span><br><span class="line">		System.out.println(&quot;栈顶:&quot;+s.top());</span><br><span class="line">		s.clear();</span><br><span class="line">		Queue&lt;String&gt; q=new Queue&lt;String&gt;();</span><br><span class="line">		q.enter(&quot;狗吠&quot;);</span><br><span class="line">		q.enter(&quot;猫叫&quot;);</span><br><span class="line">		q.enter(&quot;狼嚎&quot;);</span><br><span class="line">		System.out.println(&quot;队首:&quot;+q.head()+&quot;  队尾:&quot;+q.end());</span><br><span class="line">		q.clear();</span><br><span class="line">		System.out.println(&quot;栈规模:&quot;+s.size()+&quot;队列规模:&quot;+q.size());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/java基础/Java容器代码/" data-id="ckib6fitc007ug4tppdql97u9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2019/07/14/java基础/Java基本功：重要知识点/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java基本功：重要知识点
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2019/07/14/java基础/Java多线程代码/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java多线程代码</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>JDBC学习笔记（SQL语句的执行） | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/80135309   在获得数据库连接后，紧接着就是执行SQL语句。这里用到俩个类：Statement和PreparedStatement 一、Statment Statement提供了以下方法用来执行SQL语句：  ** * executeQuery(">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDBC学习笔记（SQL语句的执行）">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/80135309   在获得数据库连接后，紧接着就是执行SQL语句。这里用到俩个类：Statement和PreparedStatement 一、Statment Statement提供了以下方法用来执行SQL语句：  ** * executeQuery(">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:20:53.287Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JDBC学习笔记（SQL语句的执行）">
+<meta name="twitter:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/80135309   在获得数据库连接后，紧接着就是执行SQL语句。这里用到俩个类：Statement和PreparedStatement 一、Statment Statement提供了以下方法用来执行SQL语句：  ** * executeQuery(">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-数据库/JDBC学习笔记（SQL语句的执行）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/" class="article-date">
+  <time datetime="2018-04-28T07:40:06.000Z" itemprop="datePublished">2018-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JDBC学习笔记（SQL语句的执行）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/80135309" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/80135309</a><br>   在获得数据库连接后，紧接着就是执行SQL语句。这里用到俩个类：Statement和PreparedStatement</p>
+<h3 id="一、Statment"><a href="#一、Statment" class="headerlink" title="一、Statment"></a>一、Statment</h3><p> <strong>Statement提供了以下方法用来执行SQL语句：</strong></p>
+<blockquote>
+<p>** * executeQuery(String sql):执行一条SQL查询语句，返回查询结果对象（ResultSet）  </p>
+<ul>
+<li>executeUpdate(String sql):执行一条SQL更新，插入，删除操作语句。**</li>
+</ul>
+<p> ** * execute(String sql):执行一条SQL语句**</p>
+<p> ** <em>close():关闭Statement。和Connection一样，Statement使用后也需要关闭。*</em></p>
+</blockquote>
+<p> *注意：Statement通过connection的createStatement方法获得。</p>
+<p> 以下为执行SQL语句示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">     Statement statement=connection.createStatement();</span><br><span class="line">String sql=&quot;insert into table_01 values(&apos;呵呵&apos;,1,&apos;男&apos;),(&apos;哈哈&apos;,2,&apos;女&apos;),(&apos;嘿嘿&apos;,3,&apos;男&apos;)&quot;;</span><br><span class="line">statement.executeUpdate(sql);</span><br><span class="line">sql=&quot;delete from table_01 where id=3&quot;;</span><br><span class="line">statement.executeUpdate(sql);</span><br><span class="line">sql=&quot;update table_01 set id=3,name=&apos;hh&apos; where id=2&quot;;</span><br><span class="line">statement.executeUpdate(sql);</span><br><span class="line"></span><br><span class="line">//使用后一定要关闭</span><br><span class="line">connection.close();</span><br><span class="line">statement.close();</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二、PreparedStatement"><a href="#二、PreparedStatement" class="headerlink" title="二、PreparedStatement"></a>二、PreparedStatement</h3><p> ProparedStatement:是Statement的子接口，同样用来执行SQL语句，比Statement书写方便<br> ProparedStatement的优点：  </p>
+<ul>
+<li><p>1、书写方便，先写好SQL语句再设置参数。如：INSERT INTO table VALUES(?,?,?…)，不用拼写SQL语句</p>
+</li>
+<li><p>2、防止SQL注入（这点很重要）</p>
+</li>
+<li><p>注意：在开始就赋入sql语句（此时的sql语句可以设置未知参数，通过？设置），后通过SetObject(int index,Object obj)设置sql语句里的参数，索引从1开始</p>
+</li>
+</ul>
+<p> <strong>PreparedStatement提供了三个方法：</strong></p>
+<blockquote>
+<p>** setXxx():设置SQL语句里的参数,Xxx为参数的类型**</p>
+<p> ** executeUpdate():参数设置完毕后，执行插入、删除、更新的sql语句。**</p>
+<p> ** executeQuery():参数设置完毕后，执行查询的sql语句，返回结果对象（ResultSet）**</p>
+</blockquote>
+<p> 以下为使用示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> String sql=&quot;insert into table_01 values(?,?,?)&quot;;</span><br><span class="line">PreparedStatement preparedstatement=connection.prepareStatement(sql); //需要提前设置好SQL语句</span><br><span class="line">//设置SQL里的参数(索引从1开始)</span><br><span class="line">preparedstatement.setString(1,&quot;张天笑&quot;);</span><br><span class="line">preparedstatement.setInt(2,2);</span><br><span class="line">preparedstatement.setString(3,&quot;女&quot;);</span><br><span class="line">//直接executeUpdate()方法，不用传入SQL语句</span><br><span class="line"></span><br><span class="line">preparedstatement.executeUpdate();</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 不要求掌握知识：即在插入时获得主键</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> //获得主键</span><br><span class="line">String sql=&quot;INSERT INTO table_01(name,sex) VALUES(?,?)&quot;;</span><br><span class="line">Connection connection=JDBCTools.getConnection();</span><br><span class="line">//设置好PreparedStatement是返回主键类型</span><br><span class="line"></span><br><span class="line">PreparedStatement preparedstatement=</span><br><span class="line"></span><br><span class="line">                connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);</span><br><span class="line"></span><br><span class="line">preparedstatement.setObject(1,&quot;王富贵&quot;);</span><br><span class="line">preparedstatement.setObject(2, &quot;男&quot;);</span><br><span class="line">preparedstatement.executeUpdate();</span><br><span class="line"></span><br><span class="line">ResultSet resultset=preparedstatement.getGeneratedKeys();</span><br><span class="line">ResultSetMetaData resultsetmetadata=resultset.getMetaData();</span><br><span class="line">System.out.println(resultsetmetadata.getColumnName(1));</span><br><span class="line">while(resultset.next()) &#123;</span><br><span class="line">System.out.println(resultset.getObject(1));</span><br><span class="line">&#125;</span><br><span class="line">JDBCTools.release(connection, preparedstatement,resultset);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/" data-id="ckib6fiqh004ig4tpm3zmlgee" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2018/04/28/数据库/JDBC学习笔记（查询SQL语句得到的结果对象）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JDBC学习笔记（查询SQL语句得到的结果对象）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JDBC学习笔记（获取数据库连接的俩种方式）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

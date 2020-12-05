@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="シェンキンリンのブログ">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/page/10/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="シェンキンリンのブログ">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Web/JNDI和Local" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/08/Web/JNDI和Local/" class="article-date">
+  <time datetime="2018-09-08T09:32:53.000Z" itemprop="datePublished">2018-09-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/08/Web/JNDI和Local/">JNDI和Local</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82530854" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82530854</a><br>   JNDI：在服务器上配置资源，然后通过统一的方式来获取配置的资源。</p>
+<p> 配置：Tomcat7\conf\Catalina\localhost目录下新建一个与项目名同名为xml文件（注意编码要为”UTF-8”），name属性可自定义，</p>
+<p> type和factory为固定值，其余为CP30数据库连接池配置属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> &lt;Context&gt;  </span><br><span class="line">  &lt;Resource 	name=&quot;jdbc/dataSource&quot; </span><br><span class="line">		type=&quot;com.mchange.v2.c3p0.ComboPooledDataSource&quot;</span><br><span class="line">		factory=&quot;org.apache.naming.factory.BeanFactory&quot;</span><br><span class="line"></span><br><span class="line">		driverClass=&quot;com.mysql.jdbc.Driver&quot;    </span><br><span class="line">		jdbcUrl=&quot;jdbc:mysql://localhost:3306/test&quot;</span><br><span class="line">		user=&quot;root&quot; </span><br><span class="line">		password=&quot;123456&quot; </span><br><span class="line">		maxPoolSize=&quot;20&quot;</span><br><span class="line">		minPoolSize =&quot;5&quot;</span><br><span class="line">		initialPoolSize=&quot;10&quot;</span><br><span class="line">		acquireIncrement=&quot;2&quot;/&gt;</span><br><span class="line">&lt;/Context&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 在项目里任意Servlet里获取数据库连接池方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> //需要导入的包</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.sql.Connection;</span><br><span class="line">import java.sql.SQLException;</span><br><span class="line"></span><br><span class="line">import javax.naming.Context;</span><br><span class="line">import javax.naming.InitialContext;</span><br><span class="line">import javax.naming.NamingException;</span><br><span class="line">import javax.servlet.ServletException;</span><br><span class="line">import javax.servlet.http.HttpServlet;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line">import javax.sql.DataSource;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  //获取连接方法（在xml文件里的name属性必须写在java:/comp/env/后）</span><br><span class="line"> Context context = (Context) new InitialContext();</span><br><span class="line">Connection con =((DataSource)context.lookup(&quot;java:/comp/env/jdbc/dataSource&quot;)).getConnection();</span><br><span class="line">System.out.println(con);</span><br></pre></td></tr></table></figure>
+
+<p> ThreadLocal：防止异步操作，用来存取数据，每个线程只能取当前线程存的数据</p>
+<blockquote>
+<p>void set(T value)：保存值；</p>
+<p> T get()：获取值；</p>
+<p> void remove()：移除值。</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/08/Web/JNDI和Local/" data-id="ckib6fint0017g4tpbxydx1f6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据库/JDBC学习笔记(cp30数据库连接池)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/08/数据库/JDBC学习笔记(cp30数据库连接池)/" class="article-date">
+  <time datetime="2018-09-08T07:22:24.000Z" itemprop="datePublished">2018-09-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/08/数据库/JDBC学习笔记(cp30数据库连接池)/">JDBC学习笔记(cp30数据库连接池)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82529821" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82529821</a>   </p>
+<h3 id="c3p0数据库连接池"><a href="#c3p0数据库连接池" class="headerlink" title="c3p0数据库连接池"></a>c3p0数据库连接池</h3><p> <strong>使用前必须导入：mysql-connector-java-5.1.7-bin.jar，c3p0-0.9.2-pre1.jar和</strong></p>
+<p> ** mchange-commons-0.2.jar 三个jar包， **</p>
+<p> ** c3p0-oracle-thin-extras-0.9.2-pre1.jar（使用oracle需要导入）**</p>
+<p> 1、代码配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">	//代码配置</span><br><span class="line">ComboPooledDataSource ds = new ComboPooledDataSource();</span><br><span class="line">ds.setDriverClass(&quot;com.mysql.jdbc.Driver&quot;);</span><br><span class="line">ds.setJdbcUrl(&quot;jdbc:mysql://localhost:3306/test&quot;);	</span><br><span class="line">ds.setUser(&quot;root&quot;);</span><br><span class="line">ds.setPassword(&quot;123456&quot;);</span><br><span class="line"></span><br><span class="line">//设置连接每次增量为5		</span><br><span class="line">ds.setAcquireIncrement(5) ;</span><br><span class="line"></span><br><span class="line">//设置初始化连接数量20</span><br><span class="line">ds.setInitialPoolSize(20) ;</span><br><span class="line"></span><br><span class="line">//设置最小连接数2</span><br><span class="line">ds.setMinPoolSize(2) ;</span><br><span class="line"></span><br><span class="line">//设置最大连接数50</span><br><span class="line">ds.setMaxPoolSize(50) ;</span><br><span class="line">		</span><br><span class="line">Connection con = ds.getConnection();</span><br><span class="line">System.out.println(con);</span><br></pre></td></tr></table></figure>
+
+<p> 2、配置文件配置</p>
+<p> 配置文件要求：</p>
+<p> c3p0-config.xml配置文件如下图所示： </p>
+<ul>
+<li><p>文件名称：必须叫c3p0-config.xml </p>
+</li>
+<li><p>文件位置：必须在src下 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;c3p0-config&gt;</span><br><span class="line">	&lt;!-- 默认配置，当使用ComboPooledDataSource无参构造器时，使用的就是这个配置 --&gt;</span><br><span class="line">	&lt;default-config&gt;</span><br><span class="line">		&lt;!-- 基本配置 --&gt;</span><br><span class="line">		&lt;property name=&quot;jdbcUrl&quot;&gt;jdbc:mysql://localhost:3306/mydb1&lt;/property&gt;</span><br><span class="line">		&lt;property name=&quot;driverClass&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;</span><br><span class="line">		&lt;property name=&quot;user&quot;&gt;root&lt;/property&gt;</span><br><span class="line">		&lt;property name=&quot;password&quot;&gt;123&lt;/property&gt;</span><br><span class="line">		&lt;!-- 每次增量，当需要创建Connection对象时，一次创建几个 --&gt;</span><br><span class="line">		&lt;property name=&quot;acquireIncrement&quot;&gt;3&lt;/property&gt;</span><br><span class="line">		&lt;!-- 当创建池对象后，池中应该有几个Connection对象 --&gt;</span><br><span class="line">		&lt;property name=&quot;initialPoolSize&quot;&gt;10&lt;/property&gt;</span><br><span class="line">		&lt;!-- 池中最少Connection个数，如果少于这个值，就会创建Connection --&gt;</span><br><span class="line">		&lt;property name=&quot;minPoolSize&quot;&gt;2&lt;/property&gt;</span><br><span class="line">		&lt;!-- 池中最大连接个数 --&gt;</span><br><span class="line">		&lt;property name=&quot;maxPoolSize&quot;&gt;10&lt;/property&gt;</span><br><span class="line">	&lt;/default-config&gt;</span><br><span class="line">	&lt;!-- 命名配置，new ComboPooledDataSource(&quot;oralce-config&quot;)时，使用的就是这个配置 --&gt;</span><br><span class="line">	&lt;named-config name=&quot;oracle-config&quot;&gt;</span><br><span class="line">		&lt;property name=&quot;jdbcUrl&quot;&gt;jdbc:mysql://localhost:3306/mydb1&lt;/property&gt;</span><br><span class="line">		&lt;property name=&quot;driverClass&quot;&gt;com.mysql.jdbc.Driver&lt;/property&gt;</span><br><span class="line">		&lt;property name=&quot;user&quot;&gt;root&lt;/property&gt;</span><br><span class="line">		&lt;property name=&quot;password&quot;&gt;123&lt;/property&gt;</span><br><span class="line">		&lt;property name=&quot;acquireIncrement&quot;&gt;3&lt;/property&gt;</span><br><span class="line">		&lt;property name=&quot;initialPoolSize&quot;&gt;10&lt;/property&gt;</span><br><span class="line">		&lt;property name=&quot;minPoolSize&quot;&gt;2&lt;/property&gt;</span><br><span class="line">		&lt;property name=&quot;maxPoolSize&quot;&gt;10&lt;/property&gt;</span><br><span class="line">	&lt;/named-config&gt;</span><br><span class="line">&lt;/c3p0-config&gt;</span><br></pre></td></tr></table></figure>
+
+<p>只用三行代码就可获取连接</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">	//配置文件配置</span><br><span class="line">ComboPooledDataSource ds = new ComboPooledDataSource();</span><br><span class="line">Connection connection=ds.getConnection();</span><br><span class="line">System.out.println(connection);</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/08/数据库/JDBC学习笔记(cp30数据库连接池)/" data-id="ckib6fiqb004eg4tpxlx91s4o" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/Web项目里的各种路径" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/07/Web/Web项目里的各种路径/" class="article-date">
+  <time datetime="2018-09-07T08:37:21.000Z" itemprop="datePublished">2018-09-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/07/Web/Web项目里的各种路径/">Web项目里的各种路径</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82498943" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82498943</a><br>   访问路径:<br> <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> + /项目名/Servlet路径、 /JSP路径</p>
+<p> Servlet路径：在web.xml里的url-pattern里配置</p>
+<p> JSP路径：以WebRoot为根路径，不需要项目名</p>
+<p> 重定向可访问其它项目路径，所以路径必需要项目名，包括JSP路径。<br> 转发只能访问本项目，所以路径不用项目名</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/07/Web/Web项目里的各种路径/" data-id="ckib6fioh0022g4tp4vinfkmt" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/JSTL" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/07/Web/JSTL/" class="article-date">
+  <time datetime="2018-09-07T08:12:22.000Z" itemprop="datePublished">2018-09-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/07/Web/JSTL/">JSTL</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82495402" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82495402</a>   </p>
+<h2 id="core标签库"><a href="#core标签库" class="headerlink" title="core标签库"></a>core标签库</h2><p> 使用前需要导入：&lt;%@ taglib prefix=”c” uri=”<a href="http://java.sun.com/jstl/core_rt&quot;%&gt;" target="_blank" rel="noopener">http://java.sun.com/jstl/core_rt&quot;%&gt;</a></p>
+<p> 提供的标签：</p>
+<p> 1、&lt;c:set&gt; ：创建域属性</p>
+<blockquote>
+<p>var：变量名<br>value：变量值，可以是EL表达式<br>scope：域，默认为page，可选值：page、request、session、application</p>
+</blockquote>
+<p> 2、<remove>：删除域变量  </remove></p>
+<blockquote>
+<p>var：变量名<br>scope：如果不给出scope，表示删除所有域中的该名称的变量；如果指定了域，那么只删除该域的变量。</p>
+</blockquote>
+<p> 3、&lt;c:out&gt;：输出字符串常量，或EL表达式所选值  </p>
+<blockquote>
+<p>value：可以是字符串常量，也可以是EL表达式<br>default：当要输出的内容为null时，会输出default指定的值<br>escapeXml：默认值为true，会将输出值进行转义！</p>
+</blockquote>
+<p> 4、&lt;c:url&gt;：指定一个路径！它会在路径前面自动添加项目名。</p>
+<blockquote>
+<p>value：填写指定路径</p>
+</blockquote>
+<blockquote>
+<p>&lt;c:param&gt;：子标签，用来给url后面添加参数</p>
+</blockquote>
+<blockquote>
+<p>name：参数名</p>
+</blockquote>
+<blockquote>
+<p>value：参数值。</p>
+</blockquote>
+<blockquote>
+<p>var：指定变量名，一旦添加了这个属性，那么url标签就不会再输出到页面，而是把生成url保存到域中。<br>scope：它与var一起使用，用来保存url。如：page，request</p>
+</blockquote>
+<p> 例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line"></span><br><span class="line">&lt;c:set&gt; </span><br><span class="line">* &lt;c:set var=&quot;a&quot; value=&quot;hello&quot;/&gt; 创建名为a,值为hello的域属性，范围：page</span><br><span class="line">* &lt;c:set var=&quot;a&quot; value=&quot;hello&quot; scope=&quot;session&quot;/&gt; 范围为session</span><br><span class="line"></span><br><span class="line">&lt;c:out&gt;</span><br><span class="line">* &lt;c:out value=&quot;aaa&quot;/&gt; 输出字符串aaa</span><br><span class="line">* &lt;c:out value=&quot;$&#123;aaa&quot;/&gt; 输出域属性aaa，其中与$&#123;aaa&#125;相同</span><br><span class="line">* &lt;c:out value=&quot;$&#123;aaa&#125;&quot; default=&quot;xxx&quot;/&gt;如果$&#123;aaa&#125;不存在，那么输出xxx字符串</span><br><span class="line">* &lt;c:out value=&quot;$&#123;aaa&#125;&quot; escapeXml=&quot;true&quot;/&gt;如果$&#123;aaa&#125;中包含特殊字符，那么转义它。这可以防止javascript攻击</span><br><span class="line"></span><br><span class="line">&lt;c:remove&gt;</span><br><span class="line">* &lt;c:remove var=&quot;a&quot;/&gt; 删除名为a的域属性</span><br><span class="line">* &lt;c:remove var=&quot;a&quot; scope=&quot;page&quot;/&gt; 删除page域中名为a的域属性</span><br><span class="line"></span><br><span class="line">&lt;c:url&gt;</span><br><span class="line">* &lt;c:url value=&quot;/AServlet&quot;/&gt; 输出URL：/项目名/AServlet</span><br><span class="line">* &lt;c:url value=&quot;/AServlet&quot; var=&quot;url&quot; scope=&quot;page&quot;/&gt; 把生成的url保存到page域中，而不会输出</span><br><span class="line">* &lt;c:url value=&quot;/AServlet&quot;&gt;：输出URL：/项目名/AServlet?username=%xx%xx%xx%xx%xx%xx，其中张三会被URL编码</span><br><span class="line">   &lt;c:param name=&quot;username&quot; value=&quot;张三&quot;/&gt;</span><br><span class="line">  &lt;/c:url/&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 5、&lt;c:if&gt;：相当于java语句的if</p>
+<p> &lt;c:if test=”${条件}”&gt; 当条件为true时执行标签体内容<br> <strong>….</strong><br> </p>
+<p> 6、&lt;c:choose&gt;:相当于java语句的choose</p>
+<p> &lt;c:choose&gt;<br> &lt;c:when test=””&gt;…<br> &lt;c:when test=””&gt;…<br> &lt;c:when test=””&gt;…</p>
+<p> <strong>….</strong><br> &lt;c:otherwise&gt; …<br> </p>
+<p> 7、&lt;c:forEach&gt;:相当于java语句的foreach循环，可用来执行普通循环，遍历数组、集合。</p>
+<p> 普通循环： </p>
+<blockquote>
+<p>属性：  </p>
+<ul>
+<li>var：循环变量  </li>
+<li>begin：设置循环变量从几开始。  </li>
+<li>end：设置循环变量到几结束。  </li>
+<li>step：设置步长！等同与java中的i++，或i+=2。step默认为1</li>
+</ul>
+<p> for(int i = 1; i &lt;= 10; i++) {<br> …<br> }</p>
+</blockquote>
+<p> &lt;c:forEach var=”i” begin=”1” end=”10”&gt;<br> ${i}<br> </p>
+<p> 遍历数组、集合：</p>
+<blockquote>
+<p>属性：</p>
+<ul>
+<li>items：指定循环数组或集合  </li>
+<li>var：正在循环的变量</li>
+</ul>
+<p> &lt;c:forEach items=”${strs }” var=”str”&gt;<br> ${str }<br><br> </p>
+</blockquote>
+<p> 等同于</p>
+<p> for(String str : strs) {<br> …<br> }</p>
+<p> 循环状态：</p>
+<blockquote>
+<p>属性：</p>
+<p> varStatus：循环状态名</p>
+<p> 循环状态属性：</p>
+<ul>
+<li>count：循环元素的个数  </li>
+<li>index：循环元素的下标  </li>
+<li>first：是否为第一个元素  </li>
+<li>last：是否为最后一个元素  </li>
+<li>current：当前元素</li>
+</ul>
+<p> &lt;c:forEach items=”${list }” var=”ele” varStatus=”vs”&gt;<br> ${vs.index} ${vs.count } ${vs.first } ${vs.last } ${vs.current }<br><br>  </p>
+</blockquote>
+<h2 id="fmt标签库"><a href="#fmt标签库" class="headerlink" title="fmt标签库"></a>fmt标签库</h2><p> 使用前需要导入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ taglib prefix=&quot;fmt&quot; uri=&quot;http://java.sun.com/jsp/jstl/fmt&quot; %&gt;</span><br></pre></td></tr></table></figure>
+
+<p> &lt;fmt:formatDate value=”” pattern=””&gt;</p>
+<p> value：指定一个Date类型的变量<br> pattern：用来指定输出的模板！例如：yyyy-MM-dd HH:mm:ss</p>
+<hr>
+<p> &lt;fmt:formatNumber value=”${num1}” pattern=”0.00”&gt;<br> 保留小数点后2位，它会四舍五入！如果不足2位，以0补位！</p>
+<p> &lt;fmt:formatNumber value=”${num1}” pattern=”#.##”&gt;<br> 保留小数点后2位，它会四舍五入！如果不足2位，不补位！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/07/Web/JSTL/" data-id="ckib6finy001cg4tp86wypbml" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/Cookie和Session" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/07/Web/Cookie和Session/" class="article-date">
+  <time datetime="2018-09-07T03:55:46.000Z" itemprop="datePublished">2018-09-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/07/Web/Cookie和Session/">Cookie和Session</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82494512" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82494512</a><br>   一、Cookie</p>
+<p> Cookie：是客户端在发送请求时服务器缓存在浏览器的数据，一般和request域配合转发使用，转发使用相同request能够将</p>
+<p> Cookie在不同页面上保存获取</p>
+<p> 1、Servlet（JSP里&lt;%%&gt;）中发送Cookie给客户端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">  Cookie cookie = new Cookie(&quot;data&quot;, &quot;abcdefg&quot;);</span><br><span class="line"> response.addCookie(cookie);</span><br></pre></td></tr></table></figure>
+
+<p> 2、 Servlet（JSP里&lt;%%&gt;）中接收客户端发来的Cookie</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Cookie[] cookie = request.getCookies();</span><br><span class="line"> if(cookie != null) &#123;</span><br><span class="line">    for(Cookie c : cookie) &#123;</span><br><span class="line">      System.out.println(c.getName() + &quot;=&quot; + c.getValue());</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 3、Cookie的生命周期：全都由setMaxAge()方法决定，默认为退出浏览器（会话结束）Cookie消失</p>
+<blockquote>
+<blockquote>
+<p>0：保存在浏览器的时间，单位为秒</p>
+</blockquote>
+<p> =0：删掉浏览器已存在的同名Cookie</p>
+<p> &lt;0：默认值，退出Cookie消失</p>
+<p> 4、Cookie的路径：由setPath()方法决定，当访问路径包含Cookie路径时缓存该Cookie</p>
+</blockquote>
+<p> 5、Cookie中保存中文：Cookie的name和value都是不能保存中文的，但可以先把中文转换成URL编码，然后在</p>
+<p> 保存到Cookie的name和value中，获取Cookie时，再使用URL解码即可。</p>
+<p> <strong>**</strong>保存中文Cookie</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> String name = &quot;姓名&quot;;</span><br><span class="line">String value = &quot;张三&quot;;</span><br><span class="line">name = URLEncoder.encode(name, &quot;utf-8&quot;);</span><br><span class="line">value = URLEncoder.encode(value, &quot;utf-8&quot;);</span><br><span class="line"></span><br><span class="line">Cookie c = new Cookie(name, value);</span><br><span class="line">response.addCookie(c);</span><br></pre></td></tr></table></figure>
+
+<p> <strong>**</strong>取出中文Cookie</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> Cookie[] cs = request.getCookies();</span><br><span class="line">if(cs != null) &#123;</span><br><span class="line">  for(Cookie c : cs) &#123;</span><br><span class="line">    String name = URLDecoder.decode(c.getName(), &quot;utf-8&quot;);</span><br><span class="line">    String value = URLDecoder.decode(c.getValue(), &quot;utf-8&quot;);</span><br><span class="line">    System.out.println(name + &quot;=&quot; + value);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<hr>
+<p> 二、HttpSession：Session是一个域对象，用来跟踪会话（即在打开浏览器至结束传输数据，JSP有内置对象Session，</p>
+<p> 可直接使用，与response，request同理）</p>
+<p> ***与request域对象、ServletContext域对象区别：在于生命周期不同。request是一次请求（可使用转发延长），</p>
+<p> ServletContext是服务器关闭时，Session是浏览器关闭时。</p>
+<p> ***与Cookie不同：Cookie保存在浏览器端，Session保存在服务器端，相同点在于都是由request对象获得。</p>
+<ol>
+<li>获取HttpSession：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpSession session = request.getSession();</span><br></pre></td></tr></table></figure>
+
+<p> 2、Session域拥有方法：</p>
+<blockquote>
+<p>setAttribute(String name,Object Key)：使用键值对方式存入数据对象</p>
+<p> getAttribute(String name)：通过键名取出数据对象</p>
+<p> removeAttribute(String name)：通过键名删除已存入的数据对象</p>
+<p> 3、Session其它常用方法：</p>
+</blockquote>
+<blockquote>
+<p>String getId()：获取sessionId，涉及Session原理</p>
+<p> int getMaxInactiveInterval()：获取Session最大不活动保存时间（单位为秒），默认为30分钟。</p>
+<p> void invalidate()：结束Session</p>
+<p> boolean isNew()：判断Session是否为第一次创建</p>
+<p> 4、设置session超时时间，在web.xml文件中配置：  </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;session-config&gt;</span><br><span class="line">        &lt;session-timeout&gt;30&lt;/session-timeout&gt;</span><br><span class="line">    &lt;/session-config&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 5、Session的原理<br> Session是依赖Cookie实现的。<br> Session是服务器端对象<br> 当用户第一次使用Session时（表示第一次请求服务器），服务器会创建Session，并创建一个Cookie，在Cookie中</p>
+<p> 保存了Session的id，发送给客户端。这样客户端就有了自己Session的id了。但这个Cookie只在浏览器内存中存在，</p>
+<p> 也就是说，在关闭浏览器窗口后，Cookie就会丢失，也就丢失了SessionId。当用户第二次访问服务器时，会在请求</p>
+<p> 中把保存了SessionId的Cookie发送给服务器，服务器通过SessionId查找Session对象，然后给使用。也就是说，只</p>
+<p> 要浏览器容器不关闭，无论访问服务器多少次，使用的都是同一个Session对象。这样也就可以让多个请求共享同一个Session了。<br> 当用户关闭了浏览器窗口后，再打开浏览器访问服务器，这时请求中没有了SessionId，那么服务器会创建一个Session，再把SessionId通过Cookie保存到浏览器中，也是一个新的会话开始了。原来的session会因为长时间无法访问而失效。<br> 当用户打开某个服务器页面长时间没动作时，这样Session会超时失效，当用户再有活动时，服务器通过用户提供的sessionId已经找不到Session对象了，那么服务器还是会创建一个新的sessionSession，再把新的SessionId保存到客户端。这也是一个新的会话开始了。 </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/07/Web/Cookie和Session/" data-id="ckib6fino0013g4tp8wlr87fj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/EL表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/07/Web/EL表达式/" class="article-date">
+  <time datetime="2018-09-07T03:53:30.000Z" itemprop="datePublished">2018-09-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/07/Web/EL表达式/">EL表达式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82494057" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82494057</a><br>   EL表达式：它是可以在JSP页面中直接使用的标签语言！</p>
+<p> 1、EL表达式中的查找并输出：</p>
+<p> 全域查找：从小域往大域查找，pageContext-&gt;request-&gt;session-&gt;application</p>
+<blockquote>
+<p>${xxx}，全域查找名为xxx的属性，如果不存在，输出空字符串。<br> ${pageScope.xxx}、${requestScope.xxx}、${sessionScope.xxx}、${applicationScope.xxx}:指定域获取属性！</p>
+<p> 例：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> $&#123;pageScope.user&#125;：输出pageContext.getAttribute(&quot;user&quot;)</span><br><span class="line">$&#123;requestScope.user&#125;：输出request.getAttribute(&quot;user&quot;);</span><br><span class="line">$&#123;sessionScope.user&#125;：输出session.getAttribute(&quot;user&quot;);</span><br><span class="line">$&#123;applicationScope.user&#125;：输出application.getAttribute(&quot;user&quot;);</span><br></pre></td></tr></table></figure>
+
+<p> 2、EL表达式与JavaBean的结合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> &lt;%</span><br><span class="line">    	Employee employee=new Employee();</span><br><span class="line">    	employee.setName(&quot;张三&quot;);</span><br><span class="line">    	employee.setSalary(20);</span><br><span class="line">    	request.setAttribute(&quot;employee&quot;, employee);</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">$&#123;requestScope.employee.name&#125;</span><br><span class="line">$&#123;requestScope.employee.salary&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 3、EL函数库</p>
+<p> 使用前需要导入标签库：&lt;%@taglib prefix=”fn” uri=”<a href="http://java.sun.com/jsp/jstl/functions&quot;" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/functions&quot;</a> %&gt;</p>
+<blockquote>
+<p>String toUpperCase(String input)：把参数转换成大写<br> String toLowerCase(String input)：把参数转换成小写<br> int indexOf(String input, String substring)：从大串，输出小串的位置！<br> boolean contains(String input, String substring)：查看大串中是否包含小串<br> boolean containsIgnoreCase(String input, String substring)：忽略大小写的，是否包含<br> boolean startsWith(String input, String substring)：是否以小串为前缀<br> boolean endsWith(String input, String substring)：是否以小串为后缀<br> String substring(String input, int beginIndex, int endIndex)：截取子串<br> String substringAfter(String input, String substring)：获取大串中，小串所在位置后面的字符串<br> substringBefore(String input, String substring)：获取大串中，小串所在位置前面的字符串<br> String escapeXml(String input)：把input中“&lt;”、”&gt;”、”&amp;”、”‘“、”””，进行转义<br> String trim(String input)：去除前后空格<br> String replace(String input, String substringBefore, String substringAfter)：替换<br> String[] split(String input, String delimiters)：分割字符串，得到字符串数组<br> int length(Object obj)：可以获取字符串、数组、各种集合的长度！<br> String join(String array[], String separator)：联合字符串数组！</p>
+<p> 使用格式：${前缀名:函数}，前缀名为导入标签库语句的prefix属性值，此时为fn</p>
+</blockquote>
+<p> 例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;fn:length(arr) &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 4、EL表达式的运算符</p>
+<pre><code>符号   | 常规            | 在EL表达式里使用 | 1 | 2 | 3 | 4 | 5 | 6
+---- | ------------- | --------- | - | - | - | - | - | - 
+等于   | eq   或者  ==   |           |   |   |   |   |   |  
+不等于  | ne   或者 !=    |           |   |   |   |   |   |  
+大于   | gt   或者 &amp;gt;  |           |   |   |   |   |   |  
+小于   | lt   或者 &amp;lt;  |           |   |   |   |   |   |  
+大于等于 | ge   或者 &amp;gt;= |           |   |   |   |   |   |  
+小于等于 | le   或者 &amp;lt;= |           |   |   |   |   |   |  </code></pre><p>值为空格式： ${empty requestScope.键名}</p>
+<p> 值不为空格式： ${! empty requestScope.键名}</p>
+<p> 正则表达式：${ requestScope.键名==0 ? ‘值1’：’值2’}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/07/Web/EL表达式/" data-id="ckib6fins0016g4tpz3htlgn3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/JavaBean及BeanUtils的使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/06/Web/JavaBean及BeanUtils的使用/" class="article-date">
+  <time datetime="2018-09-06T12:09:56.000Z" itemprop="datePublished">2018-09-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/06/Web/JavaBean及BeanUtils的使用/">JavaBean及BeanUtils的使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82467140" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82467140</a><br>   一、javaBean类的规范：  </p>
+<ol>
+<li><p>必须要有一个默认构造器（无参构造器）  </p>
+</li>
+<li><p>提供get/set方法，如果只有get方法，那么这个属性是只读属性！  </p>
+</li>
+<li><p>方法名称满足一定的规范，那么它就是属性！boolean类型的属性，它的读方法可以是is开头，也可以是get开头！  </p>
+</li>
+<li><p>属性：有get/set方法的成员，还可以没有成员，只有get/set方法。即：</p>
+<p>真正决定是否存在属性（与成员变量不同）的是<strong>是否存在get/set方法</strong>，</p>
+<p>而不是是否存在成员变量。</p>
+</li>
+</ol>
+<p> 二、BeanUtils的使用：</p>
+<p> 准备工作：导入俩个包commons-beanutils.jar、commons-logging.jar</p>
+<p> 根据反射获取实例对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">​​​​       Class&lt;Bean&gt; clazz = Bean.class;</span><br><span class="line">      Object bean = clazz.newInstance();</span><br></pre></td></tr></table></figure>
+
+<p> BeanUtils所拥有方法：</p>
+<blockquote>
+<p>BeanUtils.getProperty(Object bean, String propertyName)：根据get方法后面首字母小写英文</p>
+<p> 获取属性<br> BeanUtils.setProperty(Object bean, String propertyName, String propertyValue)：根据set方法</p>
+<p> 后面首字母小写英文设置属性<br> BeanUtils.populate(Map map, Object bean)：将Map数据封装到JavaBean对象中</p>
+<p> CommontUtils.toBean(Map map, Class class)：补充的工具类方法，以下为工具类</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> package Tool;</span><br><span class="line"></span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.UUID;</span><br><span class="line"></span><br><span class="line">import javax.swing.text.StyledEditorKit.ForegroundAction;</span><br><span class="line"></span><br><span class="line">import org.apache.commons.beanutils.BeanUtils;</span><br><span class="line"></span><br><span class="line">public class commonUtils &#123;</span><br><span class="line">	//生成不重复的32位长的大写字符串</span><br><span class="line">	public static String uuid() &#123;</span><br><span class="line">		return UUID.randomUUID().toString().replace(&quot;-&quot;, &quot;&quot;).toUpperCase();</span><br><span class="line">	&#125;</span><br><span class="line">	// 把map转换成指定类型的javaBean对象</span><br><span class="line">	public static &lt;T&gt; T toBean(Map map, Class&lt;T&gt; clazz) &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			/*</span><br><span class="line">			 * 1. 创建指定类型的javabean对象</span><br><span class="line">			 */</span><br><span class="line">			T bean = clazz.newInstance();</span><br><span class="line">			/*</span><br><span class="line">			 * 2. 把数据封装到javabean中</span><br><span class="line">			 */</span><br><span class="line">			BeanUtils.populate(bean, map);</span><br><span class="line">			/*</span><br><span class="line">			 * 3. 返回javabean对象</span><br><span class="line">			 */</span><br><span class="line">			return bean;</span><br><span class="line">		&#125; catch(Exception e) &#123;</span><br><span class="line">			throw new RuntimeException(e);		//如果想让用户调用时不用try-catch，使用throw new RuntimeException(e)来抛出运行异常</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/06/Web/JavaBean及BeanUtils的使用/" data-id="ckib6fio0001fg4tpx5nywisq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/JavaWeb的JSP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/05/Web/JavaWeb的JSP/" class="article-date">
+  <time datetime="2018-09-05T12:58:20.000Z" itemprop="datePublished">2018-09-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/09/05/Web/JavaWeb的JSP/">JavaWeb的JSP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82429903" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82429903</a><br>   一、JSP：是一种JavaWeb的动态资源，能与html结合生成动态网页。JSP = html + java脚本 + jsp动作标签(包含EL表达式)。</p>
+<p> 1、 JSP中java脚本：</p>
+<blockquote>
+<blockquote>
+<p> &lt;% … %&gt;：写代码段，Java语句。</p>
+</blockquote>
+<p> &lt;%= … %&gt;：写输出语句，与&lt;% out.print(…..)；%&gt;效果相同。</p>
+<p> &lt;%! … %&gt;：定义成员变量，成员方法（需要在&lt;%%&gt;里调用）。</p>
+<p> 2、JSP的本质：一个<strong>Servlet类</strong>，</p>
+</blockquote>
+<p> 其中含有九大内置对象：</p>
+<p> request：HttpServletequest</p>
+<p> response：HttpServletResponse</p>
+<p> session：HttpSession</p>
+<p> application：ServletContext</p>
+<p> out：输出流</p>
+<p> pagecontext：全局对象，可获取其它八大大对象任意一个</p>
+<blockquote>
+<p>代理其他域：pageContext.setAttribute(“xxx”, “XXX”, PageContext.SESSION_SCOPE);<br>全域查找：pageContext.findAttribute(“xxx”);从小到大，依赖查找！<br>获取其他8个内置对象：</p>
+</blockquote>
+<p> config：ServletConfig</p>
+<p> page：当前jsp对象（Object page=this）</p>
+<p> exception：Throwable</p>
+<p> 3、 JSP 的注释：&lt;%– –%&gt;</p>
+<p> 4、JSP中导Java类与导标签库</p>
+<p> 导Java类：&lt;%@ page import=”包名.类名” %&gt;</p>
+<p> 导标签库：&lt;%@ tablib prefix=”前缀名（自取）” uri=”（标签库路径）”%&gt;</p>
+<hr>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/05/Web/JavaWeb的JSP/" data-id="ckib6fio3001kg4tpd43q5wcx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/myeclipse新建项目设置编码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/08/25/Web/myeclipse新建项目设置编码/" class="article-date">
+  <time datetime="2018-08-25T06:15:20.000Z" itemprop="datePublished">2018-08-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/08/25/Web/myeclipse新建项目设置编码/">myeclipse新建项目设置编码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="版权声明：转载请说明去处，文章仅供学习参考-https-blog-csdn-net-qq-38487155-article-details-82051040"><a href="#版权声明：转载请说明去处，文章仅供学习参考-https-blog-csdn-net-qq-38487155-article-details-82051040" class="headerlink" title=" 版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/82051040   "></a> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82051040" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82051040</a>   </h2><p> 最新处理项目编码问题：</p>
+<p> 1、在web.xml里添加以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> &lt;filter&gt;</span><br><span class="line">    &lt;display-name&gt;EncodeFilter&lt;/display-name&gt;</span><br><span class="line">    &lt;filter-name&gt;EncodeFilter&lt;/filter-name&gt;</span><br><span class="line">    &lt;filter-class&gt;Encode.EncodeFilter&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">    &lt;filter-name&gt;EncodeFilter&lt;/filter-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 2、导入：EncodeFilter.java，EncodeRequest.java俩类处理请求</p>
+<p> EncodeFilter.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"> package Encode;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import javax.servlet.Filter;</span><br><span class="line">import javax.servlet.FilterChain;</span><br><span class="line">import javax.servlet.FilterConfig;</span><br><span class="line">import javax.servlet.ServletException;</span><br><span class="line">import javax.servlet.ServletRequest;</span><br><span class="line">import javax.servlet.ServletResponse;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Servlet Filter implementation class EncodeFilter</span><br><span class="line"> */</span><br><span class="line">public class EncodeFilter implements Filter &#123;</span><br><span class="line">	public void destroy() &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException &#123;</span><br><span class="line">		HttpServletRequest req=(HttpServletRequest) request;</span><br><span class="line">		/*</span><br><span class="line">		 * 调包request</span><br><span class="line">		 * 1. 写一个request的装饰类</span><br><span class="line">		 * 2. 在放行(通过过滤器时)，使用我们自己的request</span><br><span class="line">		 */</span><br><span class="line">		if(req.getMethod().equals(&quot;GET&quot;)) &#123;</span><br><span class="line">			EncodeRequest ER = new EncodeRequest(req);</span><br><span class="line">			chain.doFilter(ER, response);</span><br><span class="line">		&#125; else if(req.getMethod().equals(&quot;POST&quot;)) &#123;</span><br><span class="line">			// 处理post请求编码问题</span><br><span class="line">			request.setCharacterEncoding(&quot;utf-8&quot;);</span><br><span class="line">			chain.doFilter(request, response);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public void init(FilterConfig fConfig) throws ServletException &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> EncodeRequest.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> package Encode;</span><br><span class="line"></span><br><span class="line">import java.io.UnsupportedEncodingException;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletRequestWrapper;</span><br><span class="line"></span><br><span class="line">public class EncodeRequest extends HttpServletRequestWrapper &#123;</span><br><span class="line">	private HttpServletRequest req;</span><br><span class="line">	</span><br><span class="line">	public EncodeRequest(HttpServletRequest request) &#123;</span><br><span class="line">		super(request);</span><br><span class="line">		this.req = request;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public String getParameter(String name) &#123;</span><br><span class="line">		String value = req.getParameter(name);</span><br><span class="line">		// 处理编码问题</span><br><span class="line">		try &#123;</span><br><span class="line">			value = new String(value.getBytes(&quot;iso-8859-1&quot;), &quot;utf-8&quot;);</span><br><span class="line">		&#125; catch (UnsupportedEncodingException e) &#123;</span><br><span class="line">			throw new RuntimeException(e);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		return value;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 3、在doGet和doPost里设置response编码（添加如下代码）：</p>
+<blockquote>
+<p>response.setContentType(“text/html;charset=utf-8”);</p>
+</blockquote>
+<hr>
+<p> 编码<br> 常见字符编码：iso-8859-1(不支持中文)、gb2312、gbk、gb18030(系统默认编码，中国的国标码)、utf-8(万国码，支持全世界的编码，所以我们使用这个)</p>
+<ol>
+<li>响应编码(Response，即页面显示数据)  </li>
+</ol>
+<ul>
+<li>当使用response.getWriter()来向客户端发送字符数据时，如果在之前没有设置编码，那么默认使用iso，因为iso不支持中文，一定乱码  </li>
+<li>在使用response.getWriter()之前可以使用response.setCharaceterEncoding()来设置字符流的编码为gbk或utf-8，当然我们通常会选择utf-8。这样使用response.getWriter()发送的字符就是使用utf-8编码的。但还是会出现乱码！因为浏览器并不知道服务器发送过来的是什么编码的数据！这时浏览器会使用gbk来解码，所以乱码！  </li>
+<li>在使用response.getWriter()之前可以使用response.setHeader(“Content-type”,”text/html;charset=utf-8”)来设置响应头，通知浏览器服务器这边使用的是utf-8编码，而且在调用setHeader()后，还会自动执行setCharacterEncding()方法。这样浏览器会使用utf-8解码，所以就不会乱码了！  </li>
+<li>setHeader(“Content-Type”, “text/html;charset=utf-8”)的快捷方法是：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">           response.setContentType(&quot;text/html;charset=utf-8&quot;);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>请求编码（Request，即向服务器请求数据）  </li>
+</ol>
+<ul>
+<li>客户端发送给服务器的请求参数是什么编码：<br>客户端首先要打开一个页面，然后在页面中提交表单或点击超链接！在请求这个页面时，服务器响应的编码是什么，那么客户端发送请求时的编码就是什么。  </li>
+<li>服务器端默认使用什么编码来解码参数：<br>服务器端默认使用ISO-8859-1来解码！所以这一定会出现乱码的！因为iso不支持中文！  </li>
+<li>请求编码处理分为两种：GET和POST：GET请求参数不在请求体中，而POST请求参数在请求体中，所以它们的处理方式是不同的！</li>
+</ul>
+<blockquote>
+<blockquote>
+<ul>
+<li>GET请求编码处理：<br>String username = new String(request.getParameter(“iso-8859-1”), “utf-8”);  </li>
+<li>POST请求编码处理：<br>在获取参数之前调用request.setCharacterEncoding(“utf-8”);</li>
+</ul>
+</blockquote>
+<ol start="3">
+<li>URL编码<br>表单的类型：Content-Type: application/x-www-form-urlencoded，就是把中文转换成%后面跟随两位的16进制。<br>为什么要用它：在客户端和服务器之间传递中文时需要把它转换成网络适合的方式。</li>
+</ol>
+</blockquote>
+<ul>
+<li><p>它不是字符编码！  </p>
+</li>
+<li><p>它是用来在客户端与服务器之间传递参数用的一种方式！  </p>
+</li>
+<li><p>URL编码需要先指定一种字符编码，把字符串解码后，得到byte[]，然后把小于0的字节+256，再转换成16进制。前面再添加一个%。  </p>
+</li>
+<li><p>POST请求默认就使用URL编码！tomcat会自动使用URL解码！  </p>
+</li>
+<li><p>URL编码：String username = URLEncoder.encode(username, “utf-8”);  </p>
+</li>
+<li><p>URL解码：String username = URLDecoder.decode(username, “utf-8”);</p>
+<p>我们需要把链接中的中文参数，使用url来编码！今天不行，html中不能给出java代码，jsp就可以。</p>
+<p>路径  </p>
+</li>
+<li><p>web.xml中<url-pattern>路径，（叫它Servlet路径！）  </url-pattern></p>
+<blockquote>
+<p>要么以“*”开关，要么为“/”开头  </p>
+</blockquote>
+</li>
+<li><p>转发和包含路径  </p>
+<blockquote>
+<p>*****以“/”开头：相对当前项目路径，例如：<a href="http://localhost:8080/项目名/" target="_blank" rel="noopener">http://localhost:8080/项目名/</a> request.getRequestdispacher(“/BServlet”).for…();<br>不以“/”开头：相对当前Servlet路径。 request.getRequestdispacher(“/BServlet”).for…();，假如当前Servlet是：<a href="http://localhost:8080/项目名/servlet/AServlet，" target="_blank" rel="noopener">http://localhost:8080/项目名/servlet/AServlet，</a> 就是<a href="http://localhost:8080/项目名/servlet/BServlet" target="_blank" rel="noopener">http://localhost:8080/项目名/servlet/BServlet</a>  </p>
+</blockquote>
+</li>
+<li><p>重定向路径（客户端路径）  </p>
+<blockquote>
+<p>以“/”开头：相对当前主机，例如：<a href="http://localhost:8080/，" target="_blank" rel="noopener">http://localhost:8080/，</a> 所以需要自己手动添加项目名，例如；response.sendRedirect(“/day10_1/Bservlet”);  </p>
+</blockquote>
+</li>
+<li><p>页面中超链接和表单路径  </p>
+<blockquote>
+<p>与重定向相同，都是客户端路径！需要添加项目名</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<p> myeclipse新建项目设置编码</p>
+<p> 按以下操作设置：</p>
+<ol>
+<li>General –&gt; Workspace –&gt; UTF-8  </li>
+<li>General –&gt; Editors –&gt; Associations –&gt; JSP –&gt; MyEclipse JSP Editor  </li>
+<li>搜索jsp –&gt; UTF-8  </li>
+<li>Java –&gt; Installed JREs –&gt; 添加  </li>
+<li>Tomcat  </li>
+<li>去除MyEclise自带tomcat  </li>
+<li>General –&gt; Startup and Shutdown –&gt; MyEclipse Derby</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/08/25/Web/myeclipse新建项目设置编码/" data-id="ckib6fiok0026g4tpvoesxmdv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Web/JavaWeb的Servlet、ServletContext" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/08/22/Web/JavaWeb的Servlet、ServletContext/" class="article-date">
+  <time datetime="2018-08-21T17:05:58.000Z" itemprop="datePublished">2018-08-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/08/22/Web/JavaWeb的Servlet、ServletContext/">JavaWeb的Servlet、ServletContext</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81911306" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81911306</a><br>   一、Servlet是什么？他是一个处理网页请求或者提交数据的处理容器，每个Servlet是独特的，用来处理不同的网页请求方式，同</p>
+<p> 时Servlet容器内部又是单例多线程的，对多个网页的同一请求采取多线程方式快速处理，在使用时要注意线程安全问题。</p>
+<p> 二、自定义Servlet需要的步骤：</p>
+<p> 1、自定义Servlet继承于HttpServlet，重写doGet()和doPost()</p>
+<p> 2、在WebRoot的WEB-INF的web.xml下配置Servlet</p>
+<p> 以下为配置格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;servlet&gt;</span><br><span class="line">   &lt;servlet-name&gt;别名（任取，但需与以下servlet-mapping的别名一致）&lt;/servlet-name&gt;</span><br><span class="line">   &lt;servlet-class&gt;com.firstServlet&lt;/servlet-class&gt;    &lt;!--（项目工程src下的类路径）--&gt;</span><br><span class="line"> &lt;/servlet&gt;</span><br><span class="line"></span><br><span class="line"> &lt;servlet-mapping&gt;</span><br><span class="line">   &lt;servlet-name&gt;别名&lt;/servlet-name&gt;</span><br><span class="line">   &lt;url-pattern&gt;/firstServlet&lt;/url-pattern&gt;	        &lt;!--设置浏览器访问的路径--&gt;</span><br><span class="line">   &lt;!--真正浏览器的访问路径还得在前面加上项目名即http:localhost:8080/项目名/此处路径--&gt;</span><br><span class="line"> &lt;/servlet-mapping&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 1、 若想设置Servlet在服务器启动时就创建只需在<servlet>里添加：<load-on-startup>0</load-on-startup>即可，此处0为启动</servlet></p>
+<p> 优先级，Servlet启动顺序按优先级从小到大依次启动（优先级必须为非负整数）。</p>
+<p> 2、 配置Servlet初始化参数方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">     &lt;servlet&gt;</span><br><span class="line"></span><br><span class="line">    .......</span><br><span class="line"></span><br><span class="line">     &lt;init-param&gt;</span><br><span class="line"></span><br><span class="line">     &lt;param-name&gt;paramName&lt;/param-name&gt;</span><br><span class="line"></span><br><span class="line">     &lt;param-value&gt;paramValue&lt;/param-value&gt;</span><br><span class="line"></span><br><span class="line">     &lt;/init-param&gt;</span><br><span class="line"></span><br><span class="line">     &lt;/servlet&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 三、Servlet生命周期</p>
+<p> <strong>init() :</strong>进行初始化工作</p>
+<p> <strong>service():</strong>提供服务响应请求，自动判断调用doGet或者doPost方法</p>
+<p> <strong>destory():</strong>Servlet被销毁的时候调用</p>
+<p> 调用顺序:构造器-&gt;init()-&gt;service()-&gt;destory()</p>
+<p> 四、Servlet的常用方法：</p>
+<blockquote>
+<p>doGet(HttpServletRequest request, HttpServletResponse response)：处理get请求，默认启动方</p>
+<p> doPost(HttpServletRequest request, HttpServletResponse response)：处理post请求</p>
+<p> getServletConetext():获取ServletContext对象</p>
+<p> 五、ServletContext对象（上下文对象）</p>
+</blockquote>
+<p> 服务器会为每个web项目创建一个ServletContext对象，该对象在服务器启动时创建，在服务器关闭时销毁。</p>
+<p> 作用：进行Servlet之间的数据传递</p>
+<p> ServletContext对象拥有的方法：</p>
+<blockquote>
+<p>setAttribute(String name,Object Key)：使用键值对方式存入数据对象</p>
+<p> getAttribute(String name)：通过键名取出数据对象</p>
+<p> removeAttribute(String name)：通过键名删除已存入的数据对象</p>
+<p> getAttributeNames()：取出所有键名</p>
+<p> getInitParameter(String name)：通过键名取出全局初始化参数值（ServletConfig里同样方法获得当前Servlet</p>
+<p> 初始化参数）</p>
+<p> 全局初始化参数配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;      &lt;web-app&gt;</span><br><span class="line">        &lt;context-param&gt;</span><br><span class="line">            &lt;param-name&gt;cluster&lt;/param-name&gt;</span><br><span class="line">            &lt;param-value&gt;false&lt;/param-value&gt;</span><br><span class="line">        &lt;/context-param&gt;</span><br><span class="line">        .......</span><br><span class="line">    &lt;/web-app&gt;</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p> getRealPath(String path)：通过文件名获取文件的绝对路径</p>
+<p> getResourceAsStream(String path)：通过文件名获取文件的输入流对象（InputStream）</p>
+<p> getResource(String path)：通过文件名获取文件的网址URL对象</p>
+<p> getResourcePaths(String path)：通过文件名获取当前文件名目录下的所有资源的路径的Set集合</p>
+</blockquote>
+<p> 六、获取src路径（类路径WEB-INF\classes）下的资源：所有src下的文件都会在映射在WEB-INF\classes里</p>
+<blockquote>
+<p>第一种：getClass().getClassLoader().getResourceAsStream是从src路径（即classes路径）开始的，同时路径不用”/“开头</p>
+</blockquote>
+<blockquote>
+<p>第二种：getClass().getResourceAsStream是分俩种情况：<br> <strong>“/“开头</strong>是从src路径（即classes路径）开始的，<br> <strong>不用”/“开头</strong>是从当前包路径下开始的</p>
+<p> 若想返回上级路径使用../</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/08/22/Web/JavaWeb的Servlet、ServletContext/" data-id="ckib6fio5001mg4tpfeznthki" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/Blog/master/page/9/">&laquo; 上一页</a><a class="page-number" href="/Blog/master/">1</a><span class="space">&hellip;</span><a class="page-number" href="/Blog/master/page/8/">8</a><a class="page-number" href="/Blog/master/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/Blog/master/page/11/">11</a><a class="page-number" href="/Blog/master/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/Blog/master/page/14/">14</a><a class="extend next" rel="next" href="/Blog/master/page/11/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

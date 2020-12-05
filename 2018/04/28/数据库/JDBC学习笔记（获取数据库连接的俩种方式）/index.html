@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>JDBC学习笔记（获取数据库连接的俩种方式） | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/80134941   发出疑问：JDBC是什么？  JDBC是java操纵数据库的一种方法的总称。  在介绍俩种连接数据库方式之前，还有一项必须进行的操作，即加入mysql驱动  *** 加入mysql驱动方法：    1、解压mysql-connecto">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JDBC学习笔记（获取数据库连接的俩种方式）">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/80134941   发出疑问：JDBC是什么？  JDBC是java操纵数据库的一种方法的总称。  在介绍俩种连接数据库方式之前，还有一项必须进行的操作，即加入mysql驱动  *** 加入mysql驱动方法：    1、解压mysql-connecto">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:51:23.249Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JDBC学习笔记（获取数据库连接的俩种方式）">
+<meta name="twitter:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/80134941   发出疑问：JDBC是什么？  JDBC是java操纵数据库的一种方法的总称。  在介绍俩种连接数据库方式之前，还有一项必须进行的操作，即加入mysql驱动  *** 加入mysql驱动方法：    1、解压mysql-connecto">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-数据库/JDBC学习笔记（获取数据库连接的俩种方式）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/" class="article-date">
+  <time datetime="2018-04-28T07:08:50.000Z" itemprop="datePublished">2018-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JDBC学习笔记（获取数据库连接的俩种方式）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/80134941" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/80134941</a><br>   发出疑问：JDBC是什么？</p>
+<p> JDBC是java操纵数据库的一种方法的总称。</p>
+<p> 在介绍俩种连接数据库方式之前，还有一项必须进行的操作，即加入mysql驱动</p>
+<blockquote>
+<p>*** 加入mysql驱动方法：  </p>
+<ul>
+<li><p>1、解压mysql-connector-java-5.1.7.zip  </p>
+</li>
+<li><p>2、在当前项目下新建lib文件(目录)  </p>
+</li>
+<li><p>3、把mysql-connector-java-5.1.7-bin.jar复制到lib目录下**</p>
+</li>
+<li><ul>
+<li><ul>
+<li>4、右键mysql-connector-java-5.1.7-bin.jar点击build-path，add to BuildPath加入到类路径下.s**</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3 id="获取连接的俩种方法："><a href="#获取连接的俩种方法：" class="headerlink" title="获取连接的俩种方法："></a>获取连接的俩种方法：</h3><p> 要知道我们操纵数据库，必须获取到数据库的许可，即设置用户，密码，url等信息。所以我们首先必须要做的就是获取数据库的连接。</p>
+<p> 获得数据库连接的类：Connection（也就是我们接下来操纵数据库的基础）</p>
+<p> 有俩个方法：</p>
+<blockquote>
+<p>createStatement() : 获取Statement对象</p>
+<p> prepareStatement(SQL) : 获取PreparedStatement对象</p>
+<p> close() : 关闭数据库连接，在获取数据库连接后必须要关闭。</p>
+</blockquote>
+<p> 第一种方式：直接设置数据库的连接信息（不推荐这种方法）</p>
+<p> Driver：是一个接口，有数据厂商实现，能从其中获取数据库连接</p>
+<p> //1、 创建一个Driver实现类对象<br> Driver driver=new com.mysql.jdbc.Driver();  </p>
+<p> //2、准备连接数据库的基本信息:<br> //url(String类型，确定连接的IP端口号和数据库),<br> //info(Properties类型，设置user,password)。<br> String url=”jdbc:mysql://localhost:3306/test”;<br> Properties info=new Properties();<br> info.put(“user”,”root”); //设置数据库使用者<br> info.put(“password”,”123456”); //设置数据库密码  </p>
+<p> //3、调用Driver 接口的connect(url,info)获取数据库连接<br> Connection connection=driver.connect(url,info);</p>
+<p> System.out.println(connection);</p>
+<p> 第二种方式：在配置文件里设置好连接数据库的基本信息，通过读取配置文件获得连接。（此方法较为通用）</p>
+<p> 如何编写一个通用的获取数据库连接方法?</p>
+<p> 在类同目录下添加一个配置文件,将url,user,password放入一个配置文件，通过修改配置文件达到不同数据库的连接实现</p>
+<p> 首先在scr目录下（注意：一定要是src目录下）创建一个配置文件（配置文件以.properties结尾）</p>
+<p> 在配置文件下设置以下信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> driver=com.mysql.jdbc.Driver</span><br><span class="line">jdbcUrl=jdbc:mysql://localhost:3306/test</span><br><span class="line">user=root</span><br><span class="line"></span><br><span class="line">password=123456</span><br></pre></td></tr></table></figure>
+
+<p> 回到获取连接方法： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">       String drivername=null;</span><br><span class="line">String url=null;</span><br><span class="line">String user=null;</span><br><span class="line">String password=null;</span><br><span class="line"></span><br><span class="line">//1、读取配置文件</span><br><span class="line">InputStream in=get_Connection.class.getClassLoader().getResourceAsStream(&quot;jdbc.properties&quot;);</span><br><span class="line">Properties properties=new Properties(); //创建读取配置文件对象(properties)</span><br><span class="line">properties.load(in); //逐行读取配置文件</span><br><span class="line">drivername=properties.getProperty(&quot;driver&quot;);</span><br><span class="line">url=properties.getProperty(&quot;jdbcUrl&quot;);</span><br><span class="line">user=properties.getProperty(&quot;user&quot;);</span><br><span class="line">password=properties.getProperty(&quot;password&quot;);</span><br><span class="line"></span><br><span class="line">//2、注册驱动(用DriverManager,因为DriverManager已经内置静态代码块，所以只需一句话)</span><br><span class="line">Class.forName(drivername);</span><br><span class="line"></span><br><span class="line">//3、通过DriverManager.getConnection(url,user,password)连接数据库</span><br><span class="line"></span><br><span class="line">Connection connection=DriverManager.getConnection(url,user,password);</span><br></pre></td></tr></table></figure>
+
+
+
+<p> <strong>补充知识：</strong></p>
+<p> /*<br> 1.与普通程序不同的是，Java程序（class文件）并不是本地的可执行程序。当运行Java程序时，首先运行JVM（Java虚拟机），<br> 然后再把Java class加载到JVM里头运行，负责加载Java class的这部分就叫做Class Loader。中文叫做类加载器。<br> Java虚拟机中可以安装多个类加载器，系统默认三个主要类加载器，每个类负责加载特定位置的类：BootStrap,ExtClassLoader,AppClassLoader  </p>
+<p> 类加载器也是Java类，因为其他是java类的类加载器本身也要被类加载器加载，显然必须有第一个类加载器不是不是java类，这正是BootStrap。  </p>
+<p> Java虚拟机中的所有类装载器采用具有父子关系的树形结构进行组织，在实例化每个类装载器对象时，需要为其指定一个父级类装载器对象或者默认采用系统类装载器为其父级类加载。  </p>
+<p> 2.类加载指的是将类的class文件读入内存,并为之创建一个java.lang.Class对象,而系统中所有的类,它们实际上也是对象,称为类对象,<br> 它们都是java.lang.Class的实例,虚拟机为每种类型管理一个独一无二的Class对象,也就是说,每个类(型)都有一个Class对象.  </p>
+<ol start="3">
+<li>java中class.forName和classLoader都可用来对类进行加载。properties一般放配置信息的,存放的是键值对格式.如userName=root 这样便于管理!<br>jdbcUtil.class 得到的是class JdbcUtil ,class对象是java.lang.Class<t>这个类生成的对象,每个类都有一个class对象<br>getResourceAsStream(),返回的是InputStream 对象,<br>Properties类是用来操作properties文件的<br>props.load(in) ,加载进来,进行一行一行的读取<br>类加载器属于动态的载入,可以提高读写效率.<br>还可以用java.util.ResourceBundle的类来读取properties文件.ResourceBundle.getBundle(“文件名”).getString(“键”);*/</t></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/" data-id="ckib6fiqu004og4tpk7ebld5i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JDBC学习笔记（SQL语句的执行）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2018/04/18/前端/JQuery笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JQuery笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>JavaScript笔记 | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/79888711   一、JavaScipt的简介 是基于对象的事件驱动的语言，应用于客服端    二、javascript与HTML的结合方式 第一种：使用标签 1&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript笔记">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/11/前端/JavaScript笔记/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/79888711   一、JavaScipt的简介 是基于对象的事件驱动的语言，应用于客服端    二、javascript与HTML的结合方式 第一种：使用标签 1&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T07:31:30.193Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript笔记">
+<meta name="twitter:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/79888711   一、JavaScipt的简介 是基于对象的事件驱动的语言，应用于客服端    二、javascript与HTML的结合方式 第一种：使用标签 1&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-前端/JavaScript笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/04/11/前端/JavaScript笔记/" class="article-date">
+  <time datetime="2018-04-11T04:19:59.000Z" itemprop="datePublished">2018-04-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      JavaScript笔记
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79888711" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79888711</a><br>   一、JavaScipt的简介<br> 是基于对象的事件驱动的语言，应用于客服端  </p>
+<p> 二、javascript与HTML的结合方式<br> 第一种：使用标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;js代码;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 第二种：使用script标签，引入一个外部的js文件<br> 1、创建一个js文件，写js代码<br> 2、<script type="text/script" src="js文件路径"></script><br> 注意：使用第二种方式时，不会执行script标签里的代码  </p>
+<p> 三、js的语法规则<br> 1、javascript里的变量类型<br> 重点：javascript里定义变量，对象都用var<br> 五个原始类型：<br> string:字符串类型<br> var str=”abc”;<br> number:数字类型<br> var num=123;<br> boolean:布尔类型<br> var b=true;<br> null:对象引用为空<br> var date=null;<br> undifined:定义的变量未赋值<br> var u;<br> typeof():获取当前变量类型  </p>
+<p> 2、javascript里的语句<br> 选择语句：if,switch(在java里1.7版本后才支持，javascrpit一直支持)<br> 循环语句：while,do while,for<br> 自增语句：i++，++i  </p>
+<p> 3、javascript里的运算符<br> （1）js里不区分整数和小数<br> var a=123;<br> //alert(a/1000*1000);//java里为0，由于不区分小数整数，JavaScript为123  </p>
+<p> （2）js里的字符串相加是连接操作，相减时候执行减法运算操作<br> var str=”123”;<br> //alert(str+4);//执行字符串连接操作<br> //alert(str-4);//执行算术减法操作  </p>
+<p> （3）boolean类型，执行运算符操作时，false为0，true为1.<br> var b1=true;<br> var b2=false;<br> alert(b1+1);<br> alert(b2+1);<br> （4）==和===区别：==比较的是值，===比较的是值和类型。<br> var b=”5”;<br> if(b===5){ //当值为5，但类型不一致时不相等<br> alert(5);<br> }<br> else{<br> alert(“other”);<br> }<br> 引入知识：直接在页面输出语句,可输出变量，值，html标签：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document.wirte(“......”);</span><br></pre></td></tr></table></figure>
+
+<p> document.wirte(“123”);<br> document.write(a);<br> document.write(“<hr>“);  </p>
+<p> 5、javascript的数组<br> 注意：1、广义上的数组不规定一定要为某一类型<br> 2、数组有个属性length,记录数组长度<br> 第一种：var arr=[1,2,3]; var arr=[true,1,”a”];<br> 第二种：使用Array对象<br> var arr=new Array(5);//创建一个长度为5的数组<br> var arr=new Array(1,2,3);//创建赋初值的数组，长度为3  </p>
+<p> 6、javascript的函数<br> 需要返回值的函数只需写return句子，参数表不需要写参数类型，只需要写参数名<br> 第一种：function 函数名(参数列表){<br> 函数体<br> 返回值<br> }<br> 第二种：匿名函数<br> var 函数名=function(参数列表){<br> 函数体<br> 返回值<br> }  </p>
+<p> 7、全局变量和局部变量<br> 全局变量：定义在<script>内，可以在所有js代码(即script里使用)里使用（作用域为整个js代码块）<br> 局部变量：定义在函数内，只能在函数内使用。（作用域为定义函数）  </p>
+<p> 8、Script标签放置位置：一般放在</body>后面，当需要获取input标签里的值时，不会出现错误  </p>
+<p> 10、JavaScript里的常用对象<br> String对象 定义方式：var str="abc";<br> 属性：length<br> 方法：<br> （1）与HTML相关方法<br> bold():加粗<br> fontcolor():设置字体颜色<br> fontsize():设置字体大小<br> link("src"):将字符串设置为超链接，src为链接的地址<br> sub()和sup():下标和上标<br> （2）与java相似方法：<br> concat(str1,str2):连接俩个字符串<br> charAt(index):返回指定位置字符串<br> indexOf(str):返回字符串索引值<br> split(","):根据符号(默认为,)将字符串切割为字符串数组<br> replace(s1,s2):替代字符串(s2替代s1)<br> substr(n):返回从起始位置开始指定数目字符串<br> substring(begin,end):返回从begin到end的字符串<br> Array对象<br> 属性：length<br> 方法：<br> concat():连接两个或更多的数组，并返回结果。<br> join():把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔。<br> push():向数组的末尾添加一个或更多元素，并返回新的长度。<br> pop():删除并返回数组的最后一个元素<br> reverse():扭转数组顺序<br> sort():对数组进行排序<br> shift():删除并返回数组的第一个元素<br> Date对象<br> 创建一个Date对象默认为当前时间对象<br> 方法：<br> Date()：返回当日的日期和时间。(默认格式)<br> toLocaleString()：根据本地时间格式，把 Date 对象转换为字符串。<br> getFullYear()：获得当前对象的年。<br> getMonth()：获得当前对象的月(0 ~ 11)，此时需加1。<br> getDate()：获得当前对象的日 (1 ~ 31)。<br> getDay()：获得当前对象的周(0 ~ 6)。<br> getHours() 返回 Date 对象的小时 (0 ~ 23)。<br> getMinutes() 返回 Date 对象的分钟 (0 ~ 59)。<br> getSeconds() 返回 Date 对象的秒数 (0 ~ 59)。   </p>
+<p> getTime() 返回 1970 年 1 月 1 日至今的毫秒数。(实时更新)<br> 应用场景：使用毫秒数处理缓存效果（不有缓存）<br> <a href="http://www.baidu.com?毫秒数">http://www.baidu.com?毫秒数</a><br> Math对象<br> 和java一样，都是静态方法，使用方法：Math.方法名()<br> 方法：<br> ceil(x) 对数进行上舍入。<br> floor(x) 对数进行下舍入。<br> round(x)：四舍五入。<br> random() 返回 0 ~ 1 之间的随机数（伪随机数）。<br> 得到0-9随机数Math.floor(Math.random()*10)。  </p>
+<p> 11、javascript的全局函数<br> eval(string):用来执行js代码,string为要执行的代码。<br> encodeURI()：对字符串进行编码。<br> decodeURI()；对字符串进行解码。<br> isNaN() 检查某个值是否是数字。<br> Number() 把对象的值转换为数字。<br> parseFloat() 解析一个字符串并返回一个浮点数。<br> parseInt() 解析一个字符串并返回一个整数。<br> String() 把对象的值转换为字符串。   </p>
+<p> 12、javascript里的模拟重载<br> js里存在重载吗？<br> 不存在，会自动调用最后一个函数。<br> 但可以通过arguments数组模拟重载  </p>
+<p> arguments：保存了函数的参数列表里的参数  </p>
+<p> 四、javascript的BOM对象  </p>
+<p> window对象：顶层对象，所有DOM对象都可以用window.对象名.属性（方法）来使用，如window.loaction.href<br> 方法:<br> alert():弹出一个框，显示内容<br> confirm():确认框，显示内容,并返回一个值（确定返回true ，取消返回false）<br> prompt(text,defaulttext):输入时的对话框,text为显示内容，defaulttext为对话框默认内容<br> open():打开一个新浏览器窗口<br> open("新窗口的地址url",",","窗口信息(如width=200,height=100)")<br> close():关闭窗口(浏览器兼容性较差)  </p>
+<p> 定时器方法:<br> setInterval("js代码",毫秒数):每过指定毫秒数执行一次js代码,返回一个对象<br> 1秒=1000毫秒<br> window.setInterval("alert(123)",3000);//表示每三秒执行一次alert方法，执行次数无穷  </p>
+<p> setTimeout("js代码"，毫秒数)：过了指定毫秒数执行一次js代码，返回一个对象<br> window.setTimeout("alert(123)",3000);//表示在三秒后执行一次alert方法，执行次数为1  </p>
+<p> clearInterval("对象名"):通过对象名清除setInterval()设置的定时器<br> clearTimeout("对象名"):清楚setTimeout()设置的定时器  </p>
+<p> 案例：通过俩个按钮触发关闭设置定时器<br> 案例：实现一个实时的时间显示器  </p>
+<p> navigator对象：获取客户机信息（浏览器信息）<br> navigator.appName():返回浏览器的名称<br> screen:获取屏幕信息<br> screen.width:屏幕的宽<br> location:包含有关当前 URL 的信息<br> href：设置或返回完整的 URL<br> hictory:包含访问过的url<br> back() 加载 history 列表中的前一个 URL。<br> forward() 加载 history 列表中的下一个 URL。</p>
+</script></p>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/11/前端/JavaScript笔记/" data-id="ckib6fith0080g4tpglvf7kqf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/前端/">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2018/04/11/前端/CSS笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          CSS笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2018/03/30/数据库/修改mysql默认密码方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">修改mysql默认密码方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

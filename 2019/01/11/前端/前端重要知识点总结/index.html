@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>前端重要知识点总结 | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/86298199   目录  一、引入js文件和css文件：  二、设置UTF-8编码  三、常见的css属性及其功能   四、常见CSS功能和JS功能  五、iframe标签：实现页面局部刷新  一、引入js文件和css文件：在里添加以下语句，js代码">
+<meta name="keywords" content="前端">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端重要知识点总结">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/11/前端/前端重要知识点总结/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/86298199   目录  一、引入js文件和css文件：  二、设置UTF-8编码  三、常见的css属性及其功能   四、常见CSS功能和JS功能  五、iframe标签：实现页面局部刷新  一、引入js文件和css文件：在里添加以下语句，js代码">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T07:31:42.209Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端重要知识点总结">
+<meta name="twitter:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/86298199   目录  一、引入js文件和css文件：  二、设置UTF-8编码  三、常见的css属性及其功能   四、常见CSS功能和JS功能  五、iframe标签：实现页面局部刷新  一、引入js文件和css文件：在里添加以下语句，js代码">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-前端/前端重要知识点总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/01/11/前端/前端重要知识点总结/" class="article-date">
+  <time datetime="2019-01-11T06:17:19.000Z" itemprop="datePublished">2019-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      前端重要知识点总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/86298199" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/86298199</a><br>   <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%E3%80%81%E5%BC%95%E5%85%A5js%E6%96%87%E4%BB%B6%E5%92%8Ccss%E6%96%87%E4%BB%B6%EF%BC%9A%E5%9C%A8%3Chead%3E%E9%87%8C%E6%B7%BB%E5%8A%A0%E4%BB%A5%E4%B8%8B%E8%AF%AD%E5%8F%A5%EF%BC%8Cjs%E4%BB%A3%E7%A0%81%E5%92%8Ccss%E4%BB%A3%E7%A0%81%E5%86%99%E5%9C%A8js%E6%96%87%E4%BB%B6%E9%87%8C%E3%80%81">一、引入js文件和css文件：</a></p>
+<p> <a href="#%E4%BA%8C%E3%80%81%E8%AE%BE%E7%BD%AEUTF-8%E7%BC%96%E7%A0%81">二、设置UTF-8编码</a></p>
+<p> <a href="#%E4%B8%89%E3%80%81%E5%B8%B8%E8%A7%81%E7%9A%84css%E5%B1%9E%E6%80%A7%E5%8F%8A%E5%85%B6%E5%8A%9F%E8%83%BD%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0%20%C2%A0">三、常见的css属性及其功能 </a></p>
+<p> <a href="#%E5%9B%9B%E3%80%81%E5%B8%B8%E8%A7%81CSS%E5%8A%9F%E8%83%BD%E5%92%8CJS%E5%8A%9F%E8%83%BD">四、常见CSS功能和JS功能</a></p>
+<p> <a href="#%E4%BA%94%E3%80%81iframe%E6%A0%87%E7%AD%BE%EF%BC%9A%E5%AE%9E%E7%8E%B0%E9%A1%B5%E9%9D%A2%E5%B1%80%E9%83%A8%E5%88%B7%E6%96%B0">五、iframe标签：实现页面局部刷新</a></p>
+<hr>
+<h3 id="一、引入js文件和css文件：在里添加以下语句，js代码和css代码写在js文件里、"><a href="#一、引入js文件和css文件：在里添加以下语句，js代码和css代码写在js文件里、" class="headerlink" title="一、引入js文件和css文件：在里添加以下语句，js代码和css代码写在js文件里、"></a>一、引入js文件和css文件：在<head><meta name="generator" content="Hexo 3.9.0">里添加以下语句，js代码和css代码写在js文件里、</head></h3><h3 id="css文件里，js文件和css文件不用在包含和"><a href="#css文件里，js文件和css文件不用在包含和" class="headerlink" title="css文件里，js文件和css文件不用在包含和"></a>css文件里，js文件和css文件不用在包含<style>和<script></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">	&lt;script type=&quot;text/javascript&quot; src=&quot;js文件路径&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;css文件路径&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二、设置UTF-8编码"><a href="#二、设置UTF-8编码" class="headerlink" title="二、设置UTF-8编码"></a>二、设置UTF-8编码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">	&lt;!--设置UTF编码--&gt;</span><br><span class="line">&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="三、常见的css属性及其功能"><a href="#三、常见的css属性及其功能" class="headerlink" title="三、常见的css属性及其功能"></a>三、常见的css属性及其功能</h3><blockquote>
+<p>width/height：设置元素宽度，高度</p>
+<p> color：字体颜色</p>
+<p> text-align:字体位置，居中为center</p>
+<p> font-size：字体大小</p>
+<p> font-family：字体种类，可为“华文楷体”等等</p>
+<p> margin-top、bottom、left、right：设置离外包含元素距离</p>
+<p> padding-top、bottom、left、right：设置离内包含元素距离，可设置内部字体形状等</p>
+<p> background-color：设置背景颜色</p>
+<p> position：可设置为relative或absolute，紧接着在下面设置top、bottom、left、right移动元素 </p>
+<p> text-decoration: none; 去除下划线</p>
+<p> border-radius:100%; overflow:hidden; 设置圆角图片 </p>
+</blockquote>
+<h3 id="四、常见CSS功能和JS功能"><a href="#四、常见CSS功能和JS功能" class="headerlink" title="四、常见CSS功能和JS功能"></a>四、常见CSS功能和JS功能</h3><p> CSS功能：</p>
+<p> <strong>（**</strong>1<strong>**）图片悬停放大效果</strong></p>
+<p> #p3:hover{</p>
+<p> transform: scale(1.18); /<em>设置图片悬停放大倍数</em>/</p>
+<p> }</p>
+<p> #p3{</p>
+<p> margin-left: 10%;</p>
+<p> transition: all 0.6s; /<em>设置图片悬停放大时间</em>/</p>
+<p> }</p>
+<p> <strong>（**</strong>2<strong>**）实现菜单项的悬停下拉</strong></p>
+<p> .dropdown:hover .dropdown-menu { /<em>实现悬停下拉效果，hover为悬停后css样式</em>/</p>
+<p> display: block; /<em>block为显示，none不显示</em>/</p>
+<p> background: #90EE90;</p>
+<p> }</p>
+<p> <strong>（**</strong>3<strong>**）点击按钮回到顶部，设置锚点</strong></p>
+ <!--头部,同时定义锚点id为header-->
+
+ <div id="header" class="container-fluid bg-primary ">
+
+<p> ** …..**</p>
+<p> <strong></</strong>div** >**</p>
+<p> #goTop{ /<em>回到顶部css</em>/</p>
+<p> position: fixed; /<em>fix格式：固定在浏览器窗口上</em>/</p>
+<p> bottom: 100px;</p>
+<p> left: 96%;</p>
+<p> }</p>
+<p> <strong>（**</strong>4<strong>**）小说页里的分页效果，悬停显示手指，同时字体变红</strong></p>
+<p> .page a,span{ </p>
+<p> text-decoration: none; </p>
+<p> border:1px solid #f9d52b; </p>
+<p> padding: 5px 7px; </p>
+<p> color: #767675;</p>
+<p> cursor: pointer; /<em>鼠标放在元素上变为手指</em>/ </p>
+<p> }</p>
+<p> .page a:hover,.page span:hover{ /<em>鼠标放在元素上的效果</em>/</p>
+<p> color: red; </p>
+<p> }</p>
+<p> <strong>（**</strong>5<strong>**）背景图像问题，铺满整个屏幕</strong></p>
+<p> body{</p>
+<p> margin: 0 auto;</p>
+<p> background-repeat:no-repeat ; /<em>背景图像铺满屏幕</em>/</p>
+<p> background-size:100% 100%; </p>
+<p> background-attachment: fixed;</p>
+<p> }</p>
+<p> <strong>（**</strong>6<strong><strong>）</strong></strong>span<strong>**标签无法设置长宽效果</strong></p>
+<p> #already span{</p>
+<p> display: inline-block; /<em>span标签必须设置display:inline-block才能设置长度和宽度</em>/</p>
+<p> width: 8%;</p>
+<p> height: 5%;</p>
+<p> border-top: 1px solid ;</p>
+<p> border-left: 1px solid ;</p>
+<p> border-right: 1px solid;</p>
+<p> text-align: center;</p>
+<p> font-size: 16px;</p>
+<p> padding-top: 12px;</p>
+<p> margin-top: 10px;</p>
+<p> background-color: gainsboro;</p>
+<p> }</p>
+<p> JS功能：</p>
+<p> <strong>（**</strong>1<strong><strong>）随机改变网页背景：点击按钮触发事件，获取随机数来改变网页背景颜色的</strong></strong>js<strong>**代码</strong></p>
+<p> //获取n位随机数</p>
+<p> var char=["#DC143C","#D8BFD8","#6A5ACD","#4169E1","#1E90FF","#40E0D0","#90EE90","#FFDEAD",</p>
+<p> "#FF0000","#A9A9A9","black"];</p>
+<p> function generateMixed() {</p>
+<p> var res = "";</p>
+<p> var id = Math.floor(Math.random() * 10);</p>
+<p> res += char[id];</p>
+<p> return res;</p>
+<p> }</p>
+<p> function changeColor(){</p>
+<p> var background=document.getElementById("main");</p>
+<p> //获取n位随机数,随机来源chars</p>
+<p> var color = generateMixed();</p>
+<p> background.style.backgroundColor=color;</p>
+<p> }</p>
+<p> <strong>（**</strong>2<strong><strong>）时钟显示器：在网页上显示时间，通过</strong></strong>jq<strong><strong>操作</strong></strong>css<strong>**属性来显示不同的图片实现时钟效果</strong></p>
+<p> function add(i) { //设置函数，如果获取到的时间<10,就在它前面加上字符“0”，比如获取到的小时为5，那么输出就是“05”</p>
+<p> if(i<10)</p>
+<p> return '0'+i;</p>
+<p> else</p>
+<p> return ''+i;</p>
+<p> }</p>
+<p> window.onload=function () {</p>
+<p> setInterval(function(){</p>
+<p> var time = new Date();</p>
+<p> var hour = time.getHours(), //获取当前小时数字</p>
+<p> min = time.getMinutes(), //获取当前分钟数字</p>
+<p> sec = time.getSeconds(); //获取当前秒数数字</p>
+<p> hour=add(hour); //应用转化函数</p>
+<p> min=add(min); //应用转化函数</p>
+<p> sec=add(sec); //应用转化函数</p>
+<p> var Img=document.getElementsByClassName('clockI') //获取图片，此时获取到是数组</p>
+<p> var array=hour+min+sec; //将当前时间连接在一起</p>
+<p> for(var i=0;i<Img.length;i++){</p>
+<p> Img[i].src='images/num'+array.charAt(i)+'.png'; //charAt(i)获取某字符串的第i个字符</p>
+<p> }</p>
+<p> },1000) //设置定时器，每隔一秒刷新页面</p>
+<p> }</p>
+<p> <strong>（**</strong>3<strong>**）删除元素：点击删除按钮隐藏元素</strong></p>
+<p> window.onload=function(){</p>
+<p> $(document).ready(function(){</p>
+<p> $("#btn1").click(function(){</p>
+<p> $("#btn1").parent().hide();</p>
+<p> })</p>
+<p> $("#btn2").click(function(){</p>
+<p> $("#btn2").parent().hide();</p>
+<p> })</p>
+<p> $("#btn3").click(function(){</p>
+<p> $("#btn3").parent().hide();</p>
+<p> })</p>
+<p> });</p>
+<p> }</p>
+<p> <strong>（**</strong>4<strong>**）二级菜单：悬停一级菜单时显示二级菜单，移出一级菜单范围时隐藏二级菜单。二级菜单可点击</strong></p>
+<p> /<em>二级菜单效果</em>/</p>
+<p> $("#e1").hide();</p>
+<p> $("#e2").hide();</p>
+<p> $("#e3").hide();</p>
+<p> var judge1=1; //判断从组移出时是移至外部还是移至标签（0代表一直标签，1代表移至外部）</p>
+<p> var judge2=1;</p>
+<p> var judge3=1;</p>
+<p> $("#p1").mouseover(function(){</p>
+<p> $("#p1").css('backgroundColor','yellowgreen');</p>
+<p> $("#e1").show();</p>
+<p> })</p>
+<p> $("#p1").mouseout(function(){</p>
+<p> $("#p1").css('backgroundColor','green');</p>
+<p> if(judge1==1)$("#e1").hide();</p>
+<p> })</p>
+<p> $("#e1").mouseover(function(){</p>
+<p> $("#e1").show();</p>
+<p> judge1=0;</p>
+<p> })</p>
+<p> $("#e1").mouseout(function(){</p>
+<p> $("#e1").hide();</p>
+<p> judge1=1;</p>
+<p> })</p>
+<p> $("#p2").mouseover(function(){</p>
+<p> $("#p2").css('backgroundColor','yellowgreen');</p>
+<p> $("#e2").show();</p>
+<p> })</p>
+<p> $("#p2").mouseout(function(){</p>
+<p> $("#p2").css('backgroundColor','green');</p>
+<p> if(judge2==1)$("#e2").hide();</p>
+<p> })</p>
+<p> $("#e2").mouseover(function(){</p>
+<p> $("#e2").show();</p>
+<p> judge2=0;</p>
+<p> })</p>
+<p> $("#e2").mouseout(function(){</p>
+<p> $("#e2").hide();</p>
+<p> judge2=1;</p>
+<p> })</p>
+<p> $("#p3").mouseover(function(){</p>
+<p> $("#p3").css('backgroundColor','yellowgreen');</p>
+<p> $("#e3").show();</p>
+<p> })</p>
+<p> $("#p3").mouseout(function(){</p>
+<p> $("#p3").css('backgroundColor','green');</p>
+<p> if(judge3==1)$("#e3").hide();</p>
+<p> })</p>
+<p> $("#e3").mouseover(function(){</p>
+<p> $("#e3").show();</p>
+<p> judge3=0;</p>
+<p> })</p>
+<p> $("#e3").mouseout(function(){</p>
+<p> $("#e3").hide();</p>
+<p> judge3=1;</p>
+<p> })</p>
+<p> <strong>（**</strong>5<strong><strong>）使用</strong></strong>iframe<strong><strong>嵌套页面：使用</strong></strong>jq<strong><strong>操纵</strong></strong>iframe<strong><strong>标签的</strong></strong>src<strong>**属性达到页面局部切换效果。</strong></p>
+<p> $("#deleteGG").click(function(){</p>
+<p> $("#ifr").attr('src','deleteGG.html');</p>
+<p> })</p>
+<p> $("#manageGG").click(function(){</p>
+<p> $("#ifr").attr('src','manageGG.html');</p>
+<p> })</p>
+<p> $("#deleteNovel").click(function(){</p>
+<p> $("#ifr").attr('src','deleteNovel.html');</p>
+<p> })</p>
+<h3 id="五、iframe标签：实现页面局部刷新"><a href="#五、iframe标签：实现页面局部刷新" class="headerlink" title="五、iframe标签：实现页面局部刷新"></a>五、iframe标签：实现页面局部刷新</h3><p> /*<br> iframe:<br> 第一种:让菜单项每个超链接都与iframe绑定<br> <a href="指向跳转链接" target="iframe标签的name属性"><br> <iframe name=""><br> 第二种：通过jq或js设置iframe的src属性（该属性设置iframe的显示页）来切换不同的菜单项<br> $("#manageGG").click(function(){<br> $("#ifr").attr('src','manageGG.html');<br> })<br> */  </p>
+</style></h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/01/11/前端/前端重要知识点总结/" data-id="ckib6fiti0082g4tp41lha9pq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/前端/">前端</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2019/01/11/数据结构与算法/单链表逆置/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          单链表逆置
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2019/01/10/前端/Javascript的DOM对象/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Javascript的DOM对象</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

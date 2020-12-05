@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Android里的网络以及XML，JSON文件的解析 | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="涉及到Android里的网络编程都需要添加权限 1&amp;lt;uses-permission android:name=&amp;quot;android.permission.INTERNET&amp;quot; /&amp;gt;   一、WebView：是应用程序打开web网页的UI控件  前台： 12345678910111213141516 &amp;lt;RelativeLayout xmlns:android=&amp;">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android里的网络以及XML，JSON文件的解析">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/Android/Android里的网络以及XML，JSON文件的解析/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="涉及到Android里的网络编程都需要添加权限 1&amp;lt;uses-permission android:name=&amp;quot;android.permission.INTERNET&amp;quot; /&amp;gt;   一、WebView：是应用程序打开web网页的UI控件  前台： 12345678910111213141516 &amp;lt;RelativeLayout xmlns:android=&amp;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T07:37:05.251Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android里的网络以及XML，JSON文件的解析">
+<meta name="twitter:description" content="涉及到Android里的网络编程都需要添加权限 1&amp;lt;uses-permission android:name=&amp;quot;android.permission.INTERNET&amp;quot; /&amp;gt;   一、WebView：是应用程序打开web网页的UI控件  前台： 12345678910111213141516 &amp;lt;RelativeLayout xmlns:android=&amp;">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android/Android里的网络以及XML，JSON文件的解析" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/07/14/Android/Android里的网络以及XML，JSON文件的解析/" class="article-date">
+  <time datetime="2019-07-14T02:51:10.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android里的网络以及XML，JSON文件的解析
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   涉及到Android里的网络编程都需要添加权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;uses-permission android:name=&quot;android.permission.INTERNET&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 一、WebView：是应用程序打开web网页的UI控件</p>
+<p> 前台：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> &lt;RelativeLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:paddingBottom=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">    android:paddingLeft=&quot;@dimen/activity_horizontal_margin&quot;</span><br><span class="line">    android:paddingRight=&quot;@dimen/activity_horizontal_margin&quot;</span><br><span class="line">    android:paddingTop=&quot;@dimen/activity_vertical_margin&quot;</span><br><span class="line">    tools:context=&quot;com.example.webtest.WebViewActivity&quot; &gt;</span><br><span class="line"></span><br><span class="line">    &lt;WebView</span><br><span class="line">        android:id=&quot;@+id/webView&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;/RelativeLayout&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 后端： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"> public class WebViewActivity extends Activity &#123;</span><br><span class="line">	private WebView webView;</span><br><span class="line">	@Override</span><br><span class="line">	protected void onCreate(Bundle savedInstanceState) &#123;</span><br><span class="line">		super.onCreate(savedInstanceState);</span><br><span class="line">		setContentView(R.layout.webview);</span><br><span class="line">		webView=(WebView)findViewById(R.id.webView);</span><br><span class="line">		//getSettings()：设置浏览器一些属性</span><br><span class="line">		//setJavaScriptEnabled():设置WebView支持javascript脚本</span><br><span class="line">		webView.getSettings().setJavaScriptEnabled(true);</span><br><span class="line">		//setWebViewClient(new WebViewClient()):让从一个网页跳转到另一个网页时仍在当前WebView显示</span><br><span class="line">		webView.setWebViewClient(new WebViewClient());</span><br><span class="line">		//loadUrl(String):设置打开的网址</span><br><span class="line">		webView.loadUrl(&quot;http://www.baidu.com&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 二、Http协议：客户端提交数据给服务端和从服务端获得数据，像WebView也是向百度的服务端发出一条Http请求，服务端返回HTML页面，客户端（浏览器）解析后展示出页面。</p>
+<p> 提交数据和获得数据的方式有很多，这里介绍一种，使用HttpURLConnection来向服务器提交数据或者获得数据。</p>
+<p> 获得数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">	//传入网址，获得请求网页数据（XML文件数据或JSON文件数据）</span><br><span class="line">public static String sendHttpRequest(String address) &#123;</span><br><span class="line">	HttpURLConnection connection=null;</span><br><span class="line">	try &#123;</span><br><span class="line">		URL url=new URL(address);</span><br><span class="line">		connection=(HttpURLConnection)url.openConnection();</span><br><span class="line">		//设置请求方式：GET为从服务器获得数据，POST为提交数据</span><br><span class="line">		connection.setRequestMethod(&quot;GET&quot;);</span><br><span class="line">		//设置连接最长超时时间(单位毫秒)</span><br><span class="line">		connection.setConnectTimeout(8000);</span><br><span class="line">		//设置读取最长超时时间(单位毫秒)</span><br><span class="line">		connection.setReadTimeout(8000);</span><br><span class="line">		connection.setDoInput(true);</span><br><span class="line">		connection.setDoOutput(true);</span><br><span class="line">		//获取到的数据输入流（InputStream为抽象类）</span><br><span class="line">		InputStream in=connection.getInputStream();</span><br><span class="line">		//对输入流进行读取</span><br><span class="line">		BufferedReader reader=new BufferedReader(new InputStreamReader(in));</span><br><span class="line">		StringBuffer response = new StringBuffer();</span><br><span class="line">		String line;</span><br><span class="line">		while((line=reader.readLine()) != null) &#123;</span><br><span class="line">			response.append(line);</span><br><span class="line">		&#125;</span><br><span class="line">		return response.toString();</span><br><span class="line">		</span><br><span class="line">	&#125; catch (Exception e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">		return e.getMessage();</span><br><span class="line">	&#125;finally &#123;</span><br><span class="line">		if(connection!=null) &#123;</span><br><span class="line">			connection.disconnect();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 提交数据： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">	public static void submit(String address) &#123;</span><br><span class="line">	HttpURLConnection connection=null;</span><br><span class="line">	try &#123;</span><br><span class="line">		//设置为提交模式</span><br><span class="line">		connection.setRequestMethod(&quot;POST&quot;);</span><br><span class="line">		DataOutputStream out=new DataOutputStream(connection.getOutputStream());</span><br><span class="line">		out.writeBytes(&quot;username=admin&amp;password=123456&quot;);//数据与数据之间用&amp;分割</span><br><span class="line">	&#125;catch (Exception e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;finally &#123;</span><br><span class="line">		if(connection!=null) &#123;</span><br><span class="line">			connection.disconnect();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 三、解析获得的网页数据（XML文件或JSON文件）</p>
+<p> 1、解析XML：使用Pull方式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">需要导入jar包：xmlpull-xpp3-1.1.4c.jar</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">	//Pull解析XML文件</span><br><span class="line">private void parseXMLWithPull(String xml_data) &#123;</span><br><span class="line">       try &#123;</span><br><span class="line">           XmlPullParserFactory factory = XmlPullParserFactory.newInstance();</span><br><span class="line">           XmlPullParser xmlPullParser = factory.newPullParser();</span><br><span class="line">           xmlPullParser.setInput(new StringReader(xml_data));</span><br><span class="line">           int eventType=xmlPullParser.getEventType();</span><br><span class="line">           String id = &quot;&quot;;</span><br><span class="line">           String name = &quot;&quot;;</span><br><span class="line">           String version = &quot;&quot;;</span><br><span class="line">           while (XmlPullParser.END_DOCUMENT != eventType) &#123;</span><br><span class="line">               String nodeName = xmlPullParser.getName();</span><br><span class="line">               switch (eventType) &#123;</span><br><span class="line">               	//解析时的判断逻辑</span><br><span class="line">                   case XmlPullParser.START_TAG:</span><br><span class="line">                       if (&quot;id&quot;.equals(nodeName)) &#123;</span><br><span class="line">                           id = xmlPullParser.nextText();</span><br><span class="line">                       &#125; else if (&quot;name&quot;.equals(nodeName)) &#123;</span><br><span class="line">                           name = xmlPullParser.nextText();</span><br><span class="line">                       &#125; else if (&quot;version&quot;.equals(nodeName)) &#123;</span><br><span class="line">                           version = xmlPullParser.nextText();</span><br><span class="line">                       &#125;</span><br><span class="line">                       break;</span><br><span class="line">                   //完成解析某个结点</span><br><span class="line">                   case XmlPullParser.END_TAG:</span><br><span class="line">                       if (&quot;app&quot;.equals(nodeName)) &#123;</span><br><span class="line">                           Log.d(&quot;id is &quot;,id);</span><br><span class="line">                           Log.d(&quot; name is &quot;,name);</span><br><span class="line">                           Log.d(&quot; version is &quot;,version);</span><br><span class="line">                       &#125;</span><br><span class="line">                       break;</span><br><span class="line">                   default:</span><br><span class="line">                       break;</span><br><span class="line">               &#125;</span><br><span class="line">               eventType = xmlPullParser.next();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; catch (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 2、解析JSON有俩种方式：JSONObject和GSON </p>
+<p> JSONObject：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">	//JSONObject解析JSON文件</span><br><span class="line">private void parseJSONWithJSONObject(String json_data) &#123;</span><br><span class="line">	try &#123;</span><br><span class="line">		JSONArray jsonArray=new JSONArray(json_data);</span><br><span class="line">		for(int i=0;i&lt;jsonArray.length();i++) &#123;</span><br><span class="line">			JSONObject jsonObject=jsonArray.getJSONObject(i);</span><br><span class="line">			String id=jsonObject.getString(&quot;id&quot;);</span><br><span class="line">			String name=jsonObject.getString(&quot;name&quot;);</span><br><span class="line">			String version=jsonObject.getString(&quot;version&quot;);</span><br><span class="line">			Log.d(&quot;MainActivity&quot;, &quot;id is&quot;+id);</span><br><span class="line">			Log.d(&quot;MainActivity&quot;, &quot;name is&quot;+name);</span><br><span class="line">			Log.d(&quot;MainActivity&quot;, &quot;version is&quot;+version);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;catch(Exception e) &#123;</span><br><span class="line">		e.printStackTrace();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> GSON ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">需要导入jar包：gson-2.0.jar，log4j-1.2.17.jar，slf4j-api-1.7.10.jar，slf4j-log4j12-1.7.10.jar</span><br></pre></td></tr></table></figure>
+
+<p> 还需要自定义与JSON文件相对应的对象 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"> class App&#123;</span><br><span class="line">	private String id;</span><br><span class="line">	private String name;</span><br><span class="line">	private String version;</span><br><span class="line">	public String getId() &#123;</span><br><span class="line">		return id;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setId(String id) &#123;</span><br><span class="line">		this.id = id;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getName() &#123;</span><br><span class="line">		return name;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setName(String name) &#123;</span><br><span class="line">		this.name = name;</span><br><span class="line">	&#125;</span><br><span class="line">	public String getVersion() &#123;</span><br><span class="line">		return version;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setVersion(String version) &#123;</span><br><span class="line">		this.version = version;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 最后对传入JSON数据（String形式）进行解析</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">	//GSON解析JSON文件方法</span><br><span class="line">private void parseJSONWithGSON(String json_data) &#123;</span><br><span class="line">	Gson gson=new Gson();</span><br><span class="line">	List&lt;App&gt; appList=gson.fromJson(json_data, new TypeToken&lt;List&lt;App&gt;&gt;() &#123;&#125;.getType());</span><br><span class="line">	for(App app:appList) &#123;</span><br><span class="line">		Log.d(&quot;MainActivity&quot;, &quot;id is&quot;+app.getId());</span><br><span class="line">		Log.d(&quot;MainActivity&quot;, &quot;name is&quot;+app.getName());</span><br><span class="line">		Log.d(&quot;MainActivity&quot;, &quot;version is&quot;+app.getVersion());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/Android/Android里的网络以及XML，JSON文件的解析/" data-id="ckib6fine000og4tpwngsr857" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2019/07/14/Android/SQLite/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SQLite
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2019/07/14/Android/Android框架之OKHttpUtils/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android框架之OKHttpUtils</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

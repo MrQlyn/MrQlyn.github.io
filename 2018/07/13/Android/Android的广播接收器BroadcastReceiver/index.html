@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Android的广播接收器BroadcastReceiver | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81024098    注意:广播的注册最好不要在监听方法内，容易造成onReceiver()方法调用多次 一、广播分为标准广播，有序广播，本地广播****。Android内置了很多系统广播，我们可以监听这些广播来得到系统信息，如开机完成后的广播，电池电">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android的广播接收器BroadcastReceiver">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2018/07/13/Android/Android的广播接收器BroadcastReceiver/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81024098    注意:广播的注册最好不要在监听方法内，容易造成onReceiver()方法调用多次 一、广播分为标准广播，有序广播，本地广播****。Android内置了很多系统广播，我们可以监听这些广播来得到系统信息，如开机完成后的广播，电池电">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T07:35:53.504Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android的广播接收器BroadcastReceiver">
+<meta name="twitter:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81024098    注意:广播的注册最好不要在监听方法内，容易造成onReceiver()方法调用多次 一、广播分为标准广播，有序广播，本地广播****。Android内置了很多系统广播，我们可以监听这些广播来得到系统信息，如开机完成后的广播，电池电">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android/Android的广播接收器BroadcastReceiver" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/07/13/Android/Android的广播接收器BroadcastReceiver/" class="article-date">
+  <time datetime="2018-07-12T16:56:24.000Z" itemprop="datePublished">2018-07-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android的广播接收器BroadcastReceiver
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81024098" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81024098</a>   </p>
+<h3 id="注意-广播的注册最好不要在监听方法内，容易造成onReceiver-方法调用多次"><a href="#注意-广播的注册最好不要在监听方法内，容易造成onReceiver-方法调用多次" class="headerlink" title="注意:广播的注册最好不要在监听方法内，容易造成onReceiver()方法调用多次"></a>注意:广播的注册最好不要在监听方法内，容易造成onReceiver()方法调用多次</h3><p> 一、广播分为<strong>标准广播</strong>，<strong>有序广播，</strong>本地广播****。Android内置了很多系统广播，我们可以监听这些广播来得到系统信息，如开机完成后的广播，电池电量变化广播等等。</p>
+<p> <strong>标准广播：系统内广播，任何应用几乎同时收到</strong></p>
+<p> ** 有序广播（一般静态注册）：系统内广播，应用按优先级分先后<strong>收到，先收到的广播接收器可切断该广播继续往下传播**</strong></p>
+<p> ** 本地广播（只能动态注册）：应用内广播，只能在应用内传播，安全性高，推荐使用**</p>
+<p> 二、广播的俩种注册方式： 静态注册，动态注册，注册后必须在onDestroy()里取消注册广播接收器</p>
+<p> 不管是动态注册还是静态注册，若涉及到系统关键信息都需要在XML注册文件添加权限</p>
+<p> 如： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//监听开机广播权限</span><br><span class="line"></span><br><span class="line">        &lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        对应的系统广播：android.intent.action.BOOT_COMPLETED</span><br><span class="line"></span><br><span class="line">        //查询系统网络状态权限</span><br><span class="line"></span><br><span class="line">        &lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot;/&gt;      </span><br><span class="line"></span><br><span class="line">        对应的系统广播：android.net.conn.CONNECTIVITY_CHANGE</span><br></pre></td></tr></table></figure>
+
+<p> <strong>静态注册：在XML注册文件里注册广播接收器和发送的广播，后定义广播接收类继承于BroadcastReceiver,重写</strong></p>
+<p> ** onReceive(Context context, Intent intent)**</p>
+<p> 格式： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">          &lt;receiver</span><br><span class="line">            android:name=&quot;.广播接收器类名&quot;&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=&quot;自定义广播或系统广播&quot; /&gt;</span><br><span class="line">            &lt;/intent-filter&gt;</span><br><span class="line">         &lt;/receiver&gt;</span><br><span class="line"></span><br><span class="line">        public class MyBroadcastReceiver extends BroadcastReceiver &#123;</span><br><span class="line">                public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">                        Toast.makeText(context, &quot;接收到标准广播&quot;,Toast.LENGTH_SHORT).show();</span><br><span class="line">                        abortBroadcast();</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br></pre></td></tr></table></figure>
+
+<p> ** 动态注册：直接在Activity类里调用registerReceiver(BroadcastReceive,IntentFilter)方法发送广播，后定义广播接收**</p>
+<p> ** 类继承于BroadcastReceiver,重写onReceive(Context context,Intent intent)**</p>
+<p> Activity补充方法 ： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> registerReceiver(BroadcastReceive,IntentFilter)：注册广播接收器</span><br><span class="line"></span><br><span class="line">unregisterReceiver( BroadcastReceive)：取消注册广播接收器</span><br><span class="line"></span><br><span class="line">sendBroadcast(Intent):发送标准广播</span><br><span class="line"></span><br><span class="line">sendOrderedBroadcast(Intent,null):发送有序广播，有序广播在intent-filter标签的android:priority    </span><br><span class="line">                                  属性设置优先级，采用静态注册方式。</span><br><span class="line"></span><br><span class="line">abortBroadcast():在onReceive()里调用，用来截断有序广播</span><br></pre></td></tr></table></figure>
+
+<p> Intent补充知识： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> ​</span><br><span class="line">Intent(String):String为被启动活动的XML文件里的&lt;intent-filter&gt;里的&lt;action&gt;里的android:name属性</span><br><span class="line">值，在发送广播时String为系统广播或自定义广播，也就是&lt;receiver&gt;里的&lt;intent-filter&gt;里的&lt;action&gt; 里</span><br><span class="line">的android:name属性值</span><br><span class="line"></span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+
+<p> IntentFilter类：通过Intent的 <action>标签的android:name属性过滤掉不对应的广播</action></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">    方法：addAction(String):String为系统广播或自定义广播</span><br></pre></td></tr></table></figure>
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   动态提醒网络变化例子(记得添加权限和在Activity里注册广播接收器)：</span><br><span class="line"></span><br><span class="line">public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line"></span><br><span class="line">           Connectivity ManagerconnctivityManager=</span><br><span class="line"></span><br><span class="line">                     (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);</span><br><span class="line"></span><br><span class="line">           NetworkInfo networkInfo=connctivityManager.getActiveNetworkInfo();</span><br><span class="line">           if(networkInfo!=null&amp;&amp;networkInfo.isAvailable()) &#123;</span><br><span class="line">               Toast.makeText(context, &quot;网络可用&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">           &#125;else &#123;</span><br><span class="line">                Toast.makeText(context, &quot;网络不可用&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">           &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 三、本地广播发送<strong>(接收不到系统广播,即接收不到标准广播和有序广播，只能接收自己发送的自定义本地广播)</strong></p>
+<p> ** 1、 需要导入android-support-v4.jar包**</p>
+<p> Eclipse导入方法：<br> Project &gt;&gt; Properties &gt;&gt; Java Build Path &gt;&gt; Libraries &gt;&gt; Add External JARs<br> 找到之前下载好的android-support-v4.jar，打开后可以看到已经添加进去列表中了，此时还需要点击 Order and Export，勾 选android-support-v4.jar 这一项，然后点击OK即可。<br> 此时回到代码界面，按快捷键ctrl + shift + O即可自动导入LocalBroadcastManager。<br> 也可以手动导入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import android.support.v4.content.LocalBroadcastManager;</span><br></pre></td></tr></table></figure>
+
+<p> 完成后LocalBroadcastManager 不再报错，ctrl + S保存并刷新MainActivity.java。 </p>
+<p> 程序即可正常运行。</p>
+<p> ** 2、与动态注册一样接收使用IntentFilter类和自定义广播接收类接收广播，不同点在于注册广播，发送广播，取消注册广播 都使用LocalReceiverManager类，不使用Activity类，但仍需写在Activity里.** </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  LocalBroadcastManager类用来发送广播有以下方法：</span><br><span class="line"></span><br><span class="line">        LocalBroadcastManager.getInstance(this):静态方法，构建一个LocalBroadcastManager类实例</span><br><span class="line"></span><br><span class="line">        registerReceiver(BroadcastReceive,IntentFilter)：注册广播接收器</span><br><span class="line"></span><br><span class="line">        unregisterReceiver( BroadcastReceive)：取消注册广播接收器</span><br><span class="line"></span><br><span class="line">        sendBroadcast(Intent):发送标准广播</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/07/13/Android/Android的广播接收器BroadcastReceiver/" data-id="ckib6fin0000bg4tpxqgi0dxb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2018/07/20/Android/Android里的多媒体/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Android里的多媒体
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2018/07/12/Android/Android的基类Context和View/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android的基类Context和View</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

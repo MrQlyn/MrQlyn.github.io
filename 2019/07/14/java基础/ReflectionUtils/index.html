@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>ReflectionUtils | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110">
+<meta name="keywords" content="Java基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReflectionUtils">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/java基础/ReflectionUtils/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T03:22:29.474Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ReflectionUtils">
+<meta name="twitter:description" content="12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697989910010110">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java基础/ReflectionUtils" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/07/14/java基础/ReflectionUtils/" class="article-date">
+  <time datetime="2019-07-14T02:58:46.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ReflectionUtils
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br></pre></td><td class="code"><pre><span class="line"> package Part;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.Field;</span><br><span class="line">import java.lang.reflect.InvocationTargetException;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line">import java.lang.reflect.Modifier;</span><br><span class="line">import java.lang.reflect.ParameterizedType;</span><br><span class="line">import java.lang.reflect.Type;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 反射的 Utils 函数集合</span><br><span class="line"> * 提供访问私有变量, 获取泛型类型 Class, 提取集合中元素属性等 Utils 函数</span><br><span class="line"> * @author Administrator</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">public class ReflectionUtils &#123;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * 将反射时的 &quot;检查异常&quot; 转换为 &quot;运行时异常&quot;</span><br><span class="line">	 * @return</span><br><span class="line">	 */</span><br><span class="line">	public static IllegalArgumentException convertToUncheckedException(Exception ex)&#123;</span><br><span class="line">		if(ex instanceof IllegalAccessException || ex instanceof IllegalArgumentException</span><br><span class="line">				|| ex instanceof NoSuchMethodException)&#123;</span><br><span class="line">			throw new IllegalArgumentException(&quot;反射异常&quot;, ex);</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			throw new IllegalArgumentException(ex);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * 通过反射, 获得定义 Class 时声明的父类的泛型参数的类型</span><br><span class="line">	 * 如: public EmployeeDao extends BaseDao&lt;Employee, String&gt;</span><br><span class="line">	 * @param clazz</span><br><span class="line">	 * @param index</span><br><span class="line">	 * @return</span><br><span class="line">	 */</span><br><span class="line">	@SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">	public static Class getSuperClassGenricType(Class clazz, int index)&#123;</span><br><span class="line">		Type genType = clazz.getGenericSuperclass();</span><br><span class="line">		</span><br><span class="line">		if(!(genType instanceof ParameterizedType))&#123;</span><br><span class="line">			return Object.class;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		Type [] params = ((ParameterizedType)genType).getActualTypeArguments();</span><br><span class="line">		</span><br><span class="line">		if(index &gt;= params.length || index &lt; 0)&#123;</span><br><span class="line">			return Object.class;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		if(!(params[index] instanceof Class))&#123;</span><br><span class="line">			return Object.class;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		return (Class) params[index];</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * 通过反射, 获得 Class 定义中声明的父类的泛型参数类型</span><br><span class="line">	 * 如: public EmployeeDao extends BaseDao&lt;Employee, String&gt;</span><br><span class="line">	 * @param &lt;T&gt;</span><br><span class="line">	 * @param clazz</span><br><span class="line">	 * @return</span><br><span class="line">	 */</span><br><span class="line">	@SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">	public static&lt;T&gt; Class&lt;T&gt; getSuperGenericType(Class clazz)&#123;</span><br><span class="line">		return getSuperClassGenricType(clazz, 0);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * 循环向上转型, 获取对象的 DeclaredMethod</span><br><span class="line">	 * @param object</span><br><span class="line">	 * @param methodName</span><br><span class="line">	 * @param parameterTypes</span><br><span class="line">	 * @return</span><br><span class="line">	 */</span><br><span class="line">	public static Method getDeclaredMethod(Object object, String methodName, Class&lt;?&gt;[] parameterTypes)&#123;</span><br><span class="line">		</span><br><span class="line">		for(Class&lt;?&gt; superClass = object.getClass(); superClass != Object.class; superClass = superClass.getSuperclass())&#123;</span><br><span class="line">			try &#123;</span><br><span class="line">				//superClass.getMethod(methodName, parameterTypes);</span><br><span class="line">				return superClass.getDeclaredMethod(methodName, parameterTypes);</span><br><span class="line">			&#125; catch (NoSuchMethodException e) &#123;</span><br><span class="line">				//Method 不在当前类定义, 继续向上转型</span><br><span class="line">			&#125;</span><br><span class="line">			//..</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * 使 filed 变为可访问</span><br><span class="line">	 * @param field</span><br><span class="line">	 */</span><br><span class="line">	public static void makeAccessible(Field field)&#123;</span><br><span class="line">		if(!Modifier.isPublic(field.getModifiers()))&#123;</span><br><span class="line">			field.setAccessible(true);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * 循环向上转型, 获取对象的 DeclaredField</span><br><span class="line">	 * @param object</span><br><span class="line">	 * @param filedName</span><br><span class="line">	 * @return</span><br><span class="line">	 */</span><br><span class="line">	public static Field getDeclaredField(Object object, String filedName)&#123;</span><br><span class="line">		</span><br><span class="line">		for(Class&lt;?&gt; superClass = object.getClass(); superClass != Object.class; superClass = superClass.getSuperclass())&#123;</span><br><span class="line">			try &#123;</span><br><span class="line">				return superClass.getDeclaredField(filedName);</span><br><span class="line">			&#125; catch (NoSuchFieldException e) &#123;</span><br><span class="line">				//Field 不在当前类定义, 继续向上转型</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * 直接调用对象方法, 而忽略修饰符(private, protected)</span><br><span class="line">	 * @param object</span><br><span class="line">	 * @param methodName</span><br><span class="line">	 * @param parameterTypes</span><br><span class="line">	 * @param parameters</span><br><span class="line">	 * @return</span><br><span class="line">	 * @throws InvocationTargetException </span><br><span class="line">	 * @throws IllegalArgumentException </span><br><span class="line">	 */</span><br><span class="line">	public static Object invokeMethod(Object object, String methodName, Class&lt;?&gt; [] parameterTypes,</span><br><span class="line">			Object [] parameters) throws InvocationTargetException&#123;</span><br><span class="line">		</span><br><span class="line">		Method method = getDeclaredMethod(object, methodName, parameterTypes);</span><br><span class="line">		</span><br><span class="line">		if(method == null)&#123;</span><br><span class="line">			throw new IllegalArgumentException(&quot;Could not find method [&quot; + methodName + &quot;] on target [&quot; + object + &quot;]&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		method.setAccessible(true);</span><br><span class="line">		</span><br><span class="line">		try &#123;</span><br><span class="line">			return method.invoke(object, parameters);</span><br><span class="line">		&#125; catch(IllegalAccessException e) &#123;&#125; </span><br><span class="line">		</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * 直接设置对象属性值, 忽略 private/protected 修饰符, 也不经过 setter</span><br><span class="line">	 * @param object</span><br><span class="line">	 * @param fieldName</span><br><span class="line">	 * @param value</span><br><span class="line">	 */</span><br><span class="line">	public static void setFieldValue(Object object, String fieldName, Object value)&#123;</span><br><span class="line">		Field field = getDeclaredField(object, fieldName);</span><br><span class="line">		</span><br><span class="line">		if (field == null)</span><br><span class="line">			throw new IllegalArgumentException(&quot;Could not find field [&quot; + fieldName + &quot;] on target [&quot; + object + &quot;]&quot;);</span><br><span class="line">		</span><br><span class="line">		makeAccessible(field);</span><br><span class="line">		</span><br><span class="line">		try &#123;</span><br><span class="line">			field.set(object, value);</span><br><span class="line">		&#125; catch (IllegalAccessException e) &#123;&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	/**</span><br><span class="line">	 * 直接读取对象的属性值, 忽略 private/protected 修饰符, 也不经过 getter</span><br><span class="line">	 * @param object</span><br><span class="line">	 * @param fieldName</span><br><span class="line">	 * @return</span><br><span class="line">	 */</span><br><span class="line">	public static Object getFieldValue(Object object, String fieldName)&#123;</span><br><span class="line">		Field field = getDeclaredField(object, fieldName);</span><br><span class="line">		</span><br><span class="line">		if (field == null)</span><br><span class="line">			throw new IllegalArgumentException(&quot;Could not find field [&quot; + fieldName + &quot;] on target [&quot; + object + &quot;]&quot;);</span><br><span class="line">		</span><br><span class="line">		makeAccessible(field);</span><br><span class="line">		</span><br><span class="line">		Object result = null;</span><br><span class="line">		</span><br><span class="line">		try &#123;</span><br><span class="line">			result = field.get(object);</span><br><span class="line">		&#125; catch (IllegalAccessException e) &#123;&#125;</span><br><span class="line">		</span><br><span class="line">		return result;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/java基础/ReflectionUtils/" data-id="ckib6fipv003vg4tpqlae6629" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2019/07/14/数据库/JDBCTool（JDBCTools的更新版，dbcp版本）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JDBCTool（JDBCTools的更新版，dbcp版本）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2019/07/14/java基础/Java文件IO代码/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Java文件IO代码</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

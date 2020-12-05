@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Android的活动Activity | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81004729   AndroidManifest.xml：所有四大组件都需要在这里注册  活动（Activity类）：活动即每个界面的后台逻辑，前端界面为layout的xml文件。所有的活动都要继承于Activity类。 一、活动的注册1234567">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android的活动Activity">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2018/07/11/Android/Android的活动Activity/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81004729   AndroidManifest.xml：所有四大组件都需要在这里注册  活动（Activity类）：活动即每个界面的后台逻辑，前端界面为layout的xml文件。所有的活动都要继承于Activity类。 一、活动的注册1234567">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdn.net/2018071118094329?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2019-07-14T07:35:58.533Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android的活动Activity">
+<meta name="twitter:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/81004729   AndroidManifest.xml：所有四大组件都需要在这里注册  活动（Activity类）：活动即每个界面的后台逻辑，前端界面为layout的xml文件。所有的活动都要继承于Activity类。 一、活动的注册1234567">
+<meta name="twitter:image" content="https://img-blog.csdn.net/2018071118094329?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Android/Android的活动Activity" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/07/11/Android/Android的活动Activity/" class="article-date">
+  <time datetime="2018-07-11T11:01:45.000Z" itemprop="datePublished">2018-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Android的活动Activity
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81004729" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81004729</a><br>   AndroidManifest.xml：所有四大组件都需要在这里注册</p>
+<p> 活动（Activity类）：活动即每个界面的后台逻辑，前端界面为layout的xml文件。所有的活动都要继承于Activity类。</p>
+<h3 id="一、活动的注册"><a href="#一、活动的注册" class="headerlink" title="一、活动的注册"></a>一、活动的注册</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;application</span><br><span class="line">        android:allowBackup=&quot;true&quot;</span><br><span class="line">        android:icon=&quot;@drawable/ic_launcher&quot;</span><br><span class="line">        android:label=&quot;@string/app_name&quot;</span><br><span class="line">        android:theme=&quot;@style/AppTheme&quot;&gt;</span><br><span class="line">        &lt;activity</span><br><span class="line">            android:name=&quot;.当前活动类名&quot;</span><br><span class="line">            android:label=&quot;标题栏内容&quot;</span><br><span class="line">            android:icon=&quot;引用图片名(即设置应用图标)&quot;</span><br><span class="line">            android:launchMode=&quot;启动类型&quot;&gt;</span><br><span class="line">            &lt;intent-filter&gt;    //此标签可复制设置主活动</span><br><span class="line">                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;</span><br><span class="line">                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;</span><br><span class="line">            &lt;/intent-filter&gt;</span><br><span class="line">        &lt;/activity&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/application&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二、活动的启动类型"><a href="#二、活动的启动类型" class="headerlink" title="二、活动的启动类型"></a>二、活动的启动类型</h3><blockquote>
+<p>standard(默认)：每次启动活动都创建一个新的实例</p>
+<p> singleTop:当栈顶活动为该活动时不会创建新的示例</p>
+<p> <strong>singleTask(推荐)：当栈里有该活动时，不会创建新的实例，将该活动之上的活动都出栈</strong></p>
+<p> singleInstance:在有其它应用想使用是使用（即共享活动）</p>
+<p> 创建一个单独的栈来管理活动</p>
+<p> <img src="https://img-blog.csdn.net/2018071118094329?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+</blockquote>
+<h3 id="三、活动类经常使用的方法"><a href="#三、活动类经常使用的方法" class="headerlink" title="三、活动类经常使用的方法"></a>三、活动类经常使用的方法</h3><blockquote>
+<p>super.onCreate(Bundle):创建活动时加载临时数据</p>
+<p> requestWindowFeature(Window.FEATURE_NO_TITLE):取消标题栏，必须在setContentView()前执行，不然报错</p>
+<p> setContentView(R.layout.布局名):给活动加载布局</p>
+<p> startActivity(Intent):通过Intent启动活动</p>
+<p> startActivityForResult(Intent,int):通过Intent启动活动，int为请求码(自己设定)，被启动活动销毁后会返回数据给上一活动，</p>
+<p> 上一活动会自调用onActivityResult()方法 会自动调用onActivityResult()方法</p>
+<p> setResult(Result,Intent):Result为Result_OK或Result_CANCELED用来向上一活动返回处理结果，Intent用来装返回数据</p>
+<p> getIntent():获取启动当前活动的Intent</p>
+<p> findViewById(R.id.id名):获取在布局文件中的元素，如：控件</p>
+</blockquote>
+<h3 id="四、活动类可重写的方法"><a href="#四、活动类可重写的方法" class="headerlink" title="四、活动类可重写的方法"></a>四、活动类可重写的方法</h3><blockquote>
+<p>** 活动的状态函数：onXXX()，如:onCreate(),重写时必须在第一行调用super.onXXX(),如：super.onCreate(Bundle);**</p>
+</blockquote>
+<blockquote>
+<p>onActivityResult(int requestCode,int result,Intent data): requestCode为请求吗,result为Result为Result_OK或</p>
+<p> Result_CANCELED,data为被启动活动返回数据</p>
+<p> onSaveInstanceState(Bundle):保存临时数据，必须调用super.onSaveInstanceState(Bundle),方法在活动在回收之前调用，</p>
+<p> 将数据保存至Bundle里，该Bundle即onCreate(Bundle)里的Bundle</p>
+<p> onBackPressed():当手机按下Back键触发的方法，可用来解决Back键的活动之间返回数据不成功等问题</p>
+</blockquote>
+<h3 id="五、数据传输保存类和消息提示类（Intent-Bundle，Toast）"><a href="#五、数据传输保存类和消息提示类（Intent-Bundle，Toast）" class="headerlink" title="五、数据传输保存类和消息提示类（Intent,Bundle，Toast）"></a>五、数据传输保存类和消息提示类（Intent,Bundle，Toast）</h3><blockquote>
+<p><strong>保存数据有俩个类：Intent和Bundle,消息提示类:Toast</strong></p>
+<p> <strong>Intent：被用于不同组件传输数据，可用来启动活动，启动服务，发送广播等</strong></p>
+</blockquote>
+<p> 有以下方法：</p>
+<blockquote>
+<p>Intent(启动活动.this,被启动活动.class):配合startActivity(Intent)或startActivityForResult(Intent,int)作为显示启动方法</p>
+<p> Intent(String):String为被启动活动的XML文件里的<intent-filter>里的<action>里的android:name属性值。</action></intent-filter></p>
+<p> addCategory(String):String为除默认Category外的category，方法给Intent指定<category>里的的android:name属性值</category></p>
+<p> 注意：1、当活动与Intent里的<action>里的android:name和<category>里的android:name都一致时为隐式启动</category></action></p>
+<p> 活动方法</p>
+<p> 2、一个Intent可以指定一个action，多个category</p>
+<p> 3、android.intent.category.DEFAULT是默认category,Intent无需指定</p>
+<p> putExtra(String Key,String Value):用键值对方式往Intent里放入数据</p>
+<p> getXxxExtra(String Key):通过Key取出数据Value（Xxx可为String等数据类型）</p>
+</blockquote>
+<p> <strong>Bundle：长用来保存临时数据，super.onCreate(Bundle)和onSaveInstance(Bundle)配合使用</strong></p>
+<p> 有以下方法：</p>
+<blockquote>
+<p>putXxx(String Key,String Value):以键值对方式往Bundle放入数据（Xxx可为String等数据类型）</p>
+<p> getXxx(String Key):通过Key得到Value（Xxx可为String等数据类型</p>
+<p> <strong>Toast:在屏幕底部弹出小黑框消息</strong></p>
+</blockquote>
+<blockquote>
+<p>格式:Toast.makeText(显示活动.this,String content,Toast.LENGTH):Toast.LENGTH 可为Toast.LENGTH.LONG</p>
+<p> 或Toast.LENGTH.SHORT用来设置显示时间长短</p>
+<p> content为显示内容</p>
+</blockquote>
+<h3 id="六、活动的小技巧"><a href="#六、活动的小技巧" class="headerlink" title="六、活动的小技巧"></a>六、活动的小技巧</h3><blockquote>
+<p>小技巧One: 知晓当前活动的类名<br> 1、写一个基类BaseActivity<br> 2、让所有类继承于BaseActivity<br> 3、在BaseActivity的onCreate(Bundle)方法上写入<br> Log.d(“BaseActivity”,getClass().getSimpleName());</p>
+<p> 小技巧Two:瞬间退出程序<br> 1、创建活动管理类ActivityCollector<br> 2、写一个基类BaseActivity,当活动onCreate()时添加至ActivityCollector里，onDestroy()时删除该<br> 活动<br> 3、让所有类继承于BaseActivity</p>
+</blockquote>
+<h3 id="1、创建活动管理类ActivityCollector"><a href="#1、创建活动管理类ActivityCollector" class="headerlink" title="** 1、创建活动管理类ActivityCollector**"></a>** 1、创建活动管理类ActivityCollector**</h3><p> ** 2、写一个基类BaseActivity,当活动onCreate()时添加至ActivityCollector里，onDestroy()时删除该活动**</p>
+<p> ** 3、让所有类继承于BaseActivity**</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/07/11/Android/Android的活动Activity/" data-id="ckib6fin8000ig4tp67zdo58l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2018/07/12/Android/Android里的前端界面/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Android里的前端界面
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2018/07/11/Android/Android基础入门/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Android基础入门</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

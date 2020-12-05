@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Ajax | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/82703233   Ajax：一种提升用户体验，使用异步操作使得无需重新加载整个网页的情况下，能够更新部分网页的技术。  使用案例 1234567891011121314151617181920212223242526272829303132   fu">
+<meta name="keywords" content="Web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/14/Web/Ajax/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/82703233   Ajax：一种提升用户体验，使用异步操作使得无需重新加载整个网页的情况下，能够更新部分网页的技术。  使用案例 1234567891011121314151617181920212223242526272829303132   fu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:06:24.336Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ajax">
+<meta name="twitter:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/82703233   Ajax：一种提升用户体验，使用异步操作使得无需重新加载整个网页的情况下，能够更新部分网页的技术。  使用案例 1234567891011121314151617181920212223242526272829303132   fu">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Web/Ajax" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/09/14/Web/Ajax/" class="article-date">
+  <time datetime="2018-09-14T07:30:49.000Z" itemprop="datePublished">2018-09-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ajax
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82703233" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82703233</a><br>   Ajax：一种提升用户体验，使用<strong>异步</strong>操作使得无需重新加载整个网页的情况下，能够更新部分网页的技术。</p>
+<p> 使用案例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">   function createXMLHttpRequest() &#123;</span><br><span class="line">	      try &#123;</span><br><span class="line">	          return new XMLHttpRequest();</span><br><span class="line">	      &#125; catch(e) &#123;</span><br><span class="line">	          try &#123;</span><br><span class="line">	          return new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);</span><br><span class="line">	      &#125; catch(e) &#123;</span><br><span class="line">	          try &#123;</span><br><span class="line">	              return new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</span><br><span class="line">	          &#125; catch(e) &#123;</span><br><span class="line">	              alert(&quot;哥们儿，你用的是什么浏览器啊？&quot;);</span><br><span class="line">	              throw e;</span><br><span class="line">	          &#125;</span><br><span class="line">	      &#125;</span><br><span class="line">	      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">window.οnlοad=function()&#123;	//从文档加载完执行函数</span><br><span class="line">  	//获取XMLHttpRequest对象</span><br><span class="line">  	var xmlHttp=createXMLHttpRequest();</span><br><span class="line">  	xmlHttp.open(&quot;GET&quot;,&quot;&lt;c:url value=&apos;/provinceServlet&apos;/&gt;&quot;,true);</span><br><span class="line">  	xmlHttp.send(null);</span><br><span class="line">  	xmlHttp.onreadystatechange=function()&#123;</span><br><span class="line">	    //标准请求：当readyState为4时表示服务器请求完成，status是状元码：如200、404、405</span><br><span class="line">	    if(xmlHttp.readyState==4 &amp;&amp; xmlHttp.status==200)&#123;</span><br><span class="line">            // 获取服务器的响应内容</span><br><span class="line">            var text = xmlHttp.responseText;</span><br><span class="line">            alert(text);</span><br><span class="line">            //获取XML格式的响应内容</span><br><span class="line">            var xml=xmlHttp.responseXML;</span><br><span class="line">        &#125;</span><br><span class="line">  	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<ul>
+<li>使用步骤： 1、获取XMLHttpRequest对象，以下为在javascript中获取XMLHttpRequest对象方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> function createXMLHttpRequest() &#123;</span><br><span class="line">      try &#123;</span><br><span class="line">          return new XMLHttpRequest();</span><br><span class="line">      &#125; catch(e) &#123;</span><br><span class="line">          try &#123;</span><br><span class="line">          return new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);</span><br><span class="line">      &#125; catch(e) &#123;</span><br><span class="line">          try &#123;</span><br><span class="line">              return new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);</span><br><span class="line">          &#125; catch(e) &#123;</span><br><span class="line">              alert(&quot;哥们儿，你用的是什么浏览器啊？&quot;);</span><br><span class="line">              throw e;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">window.οnlοad=function()&#123;	//从文档加载完执行函数</span><br><span class="line">  	//获取XMLHttpRequest对象</span><br><span class="line">  	var xmlHttp=createXMLHttpRequest();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 2、连接服务器并设置参数</p>
+<blockquote>
+<p>请求方式：GET或POST<br>请求的URL：指定服务器端资源，例如；/day23_1/AServlet<br>请求是否为异步：如果为true表示发送异步请求，否则同步请求！</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlHttp.open(&quot;GET&quot;, &quot;&lt;c:url value=&apos;/AServlet&apos;/&gt;&quot;, true)</span><br></pre></td></tr></table></figure>
+
+<p> 3、发送请求给服务器，服务器返回网页的部分更新数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xmlHttp.send(null);//当为Get请求时将null改为请求的参数(&quot;username=xxx&amp;password=123&quot;)</span><br></pre></td></tr></table></figure>
+
+<p> 4、注册监听函数，当状态值改变时触发</p>
+<ul>
+<li>xmlHttp对象一共有5个状态：  <blockquote>
+<p>0状态：刚创建，还没有调用open()方法;<br>1状态：请求开始：调用了open()方法，但还没有调用send()方法<br>2状态：调用完了send()方法了；<br>3状态：服务器已经开始响应，但不表示响应结束了！<br>4状态：服务器响应结束！（通常我们只关心这个状态！！！）  </p>
+</blockquote>
+</li>
+<li>得到xmlHttp对象的状态：  <blockquote>
+<p>var state = xmlHttp.readyState;//可能是0、1、2、3、4  </p>
+</blockquote>
+</li>
+<li>得到服务器响应的状态码  <blockquote>
+<p>var status = xmlHttp.status;//例如为200、404、500  </p>
+</blockquote>
+</li>
+<li>得到服务器响应的内容  <blockquote>
+<p>var content = xmlHttp.responseText;//得到服务器的响应的文本格式的内容<br>var content = xmlHttp.responseXML;//得到服务器的响应的xml响应的内容，它是Document对象了！</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> //给异步对象注册监听器，当状态值改变时触发</span><br><span class="line">xmlHttp.onreadystatechange=function()&#123;</span><br><span class="line">	    //标准请求：当readyState为4时表示服务器请求完成，status是状元码：如200、404、405</span><br><span class="line">	    if(xmlHttp.readyState==4 &amp;&amp; xmlHttp.status==200)&#123;</span><br><span class="line">  		  // 获取服务器的响应内容</span><br><span class="line">	          var text = xmlHttp.responseText;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<ul>
+<li><p>当发送POST请求时：在ajax里一般Get请求不带参数（如果有参数，则直接放在url中发送），ajax一般 设置Post请求带有参数。</p>
+<p>添加一步：设置Content-Type请求头，必须放在open方法后面：  </p>
+<blockquote>
+<p>xmlHttp.setRequestHeader(“Content-Type”, “application/x-www-form-urlencoded”);</p>
+</blockquote>
+<p>改动以下俩处：</p>
+<ul>
+<li>open：xmlHttp.open(“POST” ….);  </li>
+<li>send：xmlHttp.send(“username=zhangSan&amp;password=123”);//发送请求时指定请求体（即请求参数）</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/09/14/Web/Ajax/" data-id="ckib6fink000wg4tptq7cjsdl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2018/09/15/Web/Web的XML文件解析/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Web的XML文件解析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2018/09/13/Web/JavaMail/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JavaMail</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

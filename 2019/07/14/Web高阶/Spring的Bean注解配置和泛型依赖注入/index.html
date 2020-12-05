@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Spring的Bean注解配置和泛型依赖注入 | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Spring：一个拥有控制反转(IOC)和面向切面(AOP)的容器框架，它使用俩种方式将Bean类及控制类装载入IOC容器里，  XML文件方式和注解方式，如下介绍的是注解方式。 一、注解方式获取类（总结：当类之间有关联关系时一般使用@Autowired自动装载） 第一步：给类添加注解：注解有四种，@注解类型（”自定义注解名”），注解类型可以混用，注解名默认为类名的驼峰命名  @Compon">
+<meta name="keywords" content="Web高阶">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring的Bean注解配置和泛型依赖注入">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/Web高阶/Spring的Bean注解配置和泛型依赖注入/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="Spring：一个拥有控制反转(IOC)和面向切面(AOP)的容器框架，它使用俩种方式将Bean类及控制类装载入IOC容器里，  XML文件方式和注解方式，如下介绍的是注解方式。 一、注解方式获取类（总结：当类之间有关联关系时一般使用@Autowired自动装载） 第一步：给类添加注解：注解有四种，@注解类型（”自定义注解名”），注解类型可以混用，注解名默认为类名的驼峰命名  @Compon">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190404215255830.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70">
+<meta property="og:updated_time" content="2019-07-14T08:10:14.980Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring的Bean注解配置和泛型依赖注入">
+<meta name="twitter:description" content="Spring：一个拥有控制反转(IOC)和面向切面(AOP)的容器框架，它使用俩种方式将Bean类及控制类装载入IOC容器里，  XML文件方式和注解方式，如下介绍的是注解方式。 一、注解方式获取类（总结：当类之间有关联关系时一般使用@Autowired自动装载） 第一步：给类添加注解：注解有四种，@注解类型（”自定义注解名”），注解类型可以混用，注解名默认为类名的驼峰命名  @Compon">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20190404215255830.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Web高阶/Spring的Bean注解配置和泛型依赖注入" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/07/14/Web高阶/Spring的Bean注解配置和泛型依赖注入/" class="article-date">
+  <time datetime="2019-07-14T03:06:22.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Spring的Bean注解配置和泛型依赖注入
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   Spring：一个拥有控制反转(IOC)和面向切面(AOP)的容器框架，它使用俩种方式将Bean类及控制类装载入IOC容器里，</p>
+<p> XML文件方式和注解方式，如下介绍的是注解方式。</p>
+<h3 id="一、注解方式获取类（总结：当类之间有关联关系时一般使用-Autowired自动装载）"><a href="#一、注解方式获取类（总结：当类之间有关联关系时一般使用-Autowired自动装载）" class="headerlink" title="一、注解方式获取类（总结：当类之间有关联关系时一般使用@Autowired自动装载）"></a>一、注解方式获取类（总结：当类之间有关联关系时一般使用@Autowired自动装载）</h3><p> 第一步：给类添加注解：注解有四种，@注解类型（”自定义注解名”），注解类型可以混用，注解名默认为类名的驼峰命名</p>
+<p> @Component: 基本注解, 标识了一个受 Spring 管理的组件</p>
+<p> @Repository: 标识持久层组件</p>
+<p> @Service: 标识服务层(业务层)组件</p>
+<p> @Controller: 标识表现层组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> package MVC;</span><br><span class="line"></span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">@Component(&quot;test&quot;)</span><br><span class="line">public class UserTest &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 注意： 当添加注解的类关联（包含）了其它类时，需要使用注解@Autowired来进行自动装载，加在属性前或者setXxx()</p>
+<p> 方法前，该装配默认是通过值类型判断XML文件里加载入IOC容器里的对象来进行匹配并自动装载</p>
+<p> 关联关系的默认XML文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;   </span><br><span class="line">    xmlns=&quot;http://www.springframework.org/schema/beans&quot;  </span><br><span class="line">    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;  </span><br><span class="line">    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans </span><br><span class="line">        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd</span><br><span class="line">        http://www.springframework.org/schema/context</span><br><span class="line">        http://www.springframework.org/schema/context/spring-context-4.2.xsd&quot;</span><br><span class="line">    default-autowire=&quot;byType&quot;&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;bean id=&quot;zoo&quot; class=&quot;com.xrq.bean.Zoo&quot; &gt;</span><br><span class="line">        &lt;property name=&quot;tiger&quot; ref=&quot;tiger&quot; /&gt;</span><br><span class="line">        &lt;property name=&quot;monkey&quot; ref=&quot;monkey&quot; /&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;bean id=&quot;tiger&quot; class=&quot;com.xrq.domain.Tiger&quot; /&gt;</span><br><span class="line">    &lt;bean id=&quot;monkey&quot; class=&quot;com.xrq.domain.Monkey&quot; /&gt;</span><br><span class="line">    </span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 使用注解@Autowired自动装载的XML文件，@Autowired放在属性前或者setXxx方法前</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;beans xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;   </span><br><span class="line">    xmlns=&quot;http://www.springframework.org/schema/beans&quot;  </span><br><span class="line">    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;  </span><br><span class="line">    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans </span><br><span class="line">        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd</span><br><span class="line">        http://www.springframework.org/schema/context</span><br><span class="line">        http://www.springframework.org/schema/context/spring-context-4.2.xsd&quot;&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;context:component-scan base-package=&quot;com.xrq&quot; /&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;bean id=&quot;zoo&quot; class=&quot;com.xrq.bean.Zoo&quot; /&gt;</span><br><span class="line">    &lt;bean id=&quot;tiger&quot; class=&quot;com.xrq.domain.Tiger&quot; /&gt;</span><br><span class="line">    &lt;bean id=&quot;monkey&quot; class=&quot;com.xrq.domain.Monkey&quot; /&gt;</span><br><span class="line">    </span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> public class Zoo</span><br><span class="line">&#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    private Tiger tiger;</span><br><span class="line">    </span><br><span class="line">    @Autowired</span><br><span class="line">    private Monkey monkey;</span><br><span class="line">    </span><br><span class="line">    public String toString()</span><br><span class="line">    &#123;</span><br><span class="line">        return tiger + &quot;\n&quot; + monkey;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 注意：当使用@Autowired注解自动装载的是一个接口（即当前类关联包含的是一个接口类型），且该接口有多个实现类</p>
+<p> ，我们需要在@Autowired下添加Qualifier(“类名”)指定自动装载的是哪个实现类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> @Service</span><br><span class="line">public class BMW implements Car</span><br><span class="line">&#123;</span><br><span class="line">    public String carName()</span><br><span class="line">    &#123;</span><br><span class="line">        return &quot;BMW car&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class Benz implements Car</span><br><span class="line">&#123;</span><br><span class="line">    public String carName()</span><br><span class="line">    &#123;</span><br><span class="line">        return &quot;Benz car&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@Service</span><br><span class="line">public class CarFactory</span><br><span class="line">&#123;</span><br><span class="line">    @Autowired</span><br><span class="line">    @Qualifier(&quot;BMW&quot;)</span><br><span class="line">    private Car car;</span><br><span class="line">    </span><br><span class="line">    public String toString()</span><br><span class="line">    &#123;</span><br><span class="line">        return car.carName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 第二步：修改XML文件：一个配置文件只能有一个 <a href="context:component-scan" target="_blank" rel="noopener">context:component-scan</a>，只要使用了注解配置，都需要添加 <a href="context:component-scan" target="_blank" rel="noopener">context:component-scan</a>标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">	&lt;!-- 注解法配置Bean:添加context命名空间，使用&lt;context:component-scan&gt;标签，base-package指定要扫描的基类包 --&gt;</span><br><span class="line">&lt;context:component-scan</span><br><span class="line"> 	base-package=&quot;MVC&quot;</span><br><span class="line"> 	use-default-filters=&quot;false&quot;</span><br><span class="line"> 	&gt;</span><br><span class="line"> 	&lt;!--&lt;context:exclude-filter type=&quot;annotation&quot; expression=&quot;org.springframework.stereotype.Controller&quot;/&gt; --&gt;</span><br><span class="line"> 	&lt;context:include-filter type=&quot;annotation&quot; expression=&quot;org.springframework.stereotype.Component&quot;/&gt;</span><br><span class="line"> &lt;/context:component-scan&gt;</span><br></pre></td></tr></table></figure>
+
+
+<blockquote>
+<blockquote>
+<ul>
+<li><strong>base-package**</strong>：**表示扫描哪个包中的注解类，其他包中的注解类将不被扫描。需要扫描多个包用空格分隔</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>resource-pattern**</strong>：<em>*表示只扫描当前包中的哪个包，其它包不被扫描。格式：resource-pattern=”包名/</em>.class”</li>
+</ul>
+<ul>
+<li><strong>use-default-filters**</strong>：**是否使用默认过滤器，默认为true使用，false不使用</li>
+</ul>
+<ul>
+<li><strong>annotation-config**</strong>：**表示是否自动支持注解实现Bean依赖注入，默认支持，如果设置为false，将关闭支持注解的依赖注入，需要通过<a href="context:annotation-config/" target="_blank" rel="noopener">context:annotation-config/</a>开启。</li>
+</ul>
+<ul>
+<li><strong><a href="context:include-filter" target="_blank" rel="noopener">context:include-filter</a>**</strong>：<strong>设置IOC自动扫描装配的类，</strong>需要配合use-default-filters使用（设置为 false）**</li>
+</ul>
+<ul>
+<li>** type<strong>**：</strong>表示过滤器类型，annotation：通过注解类全类名过滤 assignable：通过类的全类名过滤</li>
+</ul>
+<ul>
+<li>** expression：注解**类的全类名，表示包含使用了该注解类的所有类，不能包含使用了 org.springframework.stereotype.Component注解的所有类，即设置Component注解 类型不起作用</li>
+</ul>
+<ul>
+<li><strong><a href="context:exclude-filter" target="_blank" rel="noopener">context:exclude-filter</a>：</strong>设置IOC不自动扫描装配的类，它比<a href="context:include-filter" target="_blank" rel="noopener">context:include-filter</a>具有更高优先级；</li>
+</ul>
+<ul>
+<li>** type<strong>**：</strong>表示过滤器类型，annotation：通过注解类全类名过滤 assignable：通过类的全类名过滤</li>
+</ul>
+<ul>
+<li>** expression：注解**类的全类名，表示过滤使用了该注解类的所有类，不能过滤使用了 org.springframework.stereotype.Component注解的所有类，即设置Component注解 类型不起作用</li>
+</ul>
+</blockquote>
+<p> 第三步：通过注解名获取Bean类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	//测试注解法配置Bean,通过getBean(注解名)获取Bean对象，默认为类名的驼峰命名</span><br><span class="line">UserTest userTest=(UserTest) context.getBean(&quot;test&quot;);</span><br><span class="line">System.out.println(userTest);</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二、泛型依赖注入：即当A父类与B父类有关联关系时，继承A类的子类与继承B类的子类自动生成同样的关联关系"><a href="#二、泛型依赖注入：即当A父类与B父类有关联关系时，继承A类的子类与继承B类的子类自动生成同样的关联关系" class="headerlink" title="二、泛型依赖注入：即当A父类与B父类有关联关系时，继承A类的子类与继承B类的子类自动生成同样的关联关系"></a>二、泛型依赖注入：即当A父类与B父类有关联关系时，继承A类的子类与继承B类的子类自动生成同样的关联关系</h3><p> <img src="https://img-blog.csdnimg.cn/20190404215255830.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<p> 第一步：设置装载入IOC容器扫描的包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:component-scan base-package=&quot;GenericInjection&quot;&gt;&lt;/context:component-scan&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 第二步： 创建关联父类与子类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> package GenericInjection;</span><br><span class="line"></span><br><span class="line">import org.springframework.stereotype.Repository;</span><br><span class="line"></span><br><span class="line">@Repository</span><br><span class="line">public class BaseUserBean&lt;T&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> package GenericInjection;</span><br><span class="line"></span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.beans.factory.annotation.Qualifier;</span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line">@Service</span><br><span class="line">public class BaseUserService&lt;T&gt; &#123;</span><br><span class="line">	@Autowired</span><br><span class="line">	public  BaseUserBean&lt;T&gt; bean;</span><br><span class="line">	public void add() &#123;</span><br><span class="line">		System.out.println(&quot;add...&quot;);</span><br><span class="line">		System.out.println(bean);</span><br><span class="line">	&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> package GenericInjection;</span><br><span class="line"></span><br><span class="line">import org.springframework.stereotype.Repository;</span><br><span class="line"></span><br><span class="line">@Repository</span><br><span class="line">public class UserBean extends BaseUserBean&lt;User&gt; &#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> package GenericInjection;</span><br><span class="line"></span><br><span class="line">import org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line">@Service</span><br><span class="line">public class UserService extends BaseUserService&lt;User&gt;&#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 第三步：测试子类是否有关联关系</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">	//测试泛型依赖注入</span><br><span class="line">GenericInjection.UserService userService=(GenericInjection.UserService) context.getBean(&quot;userService&quot;);</span><br><span class="line">userService.add();</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/07/14/Web高阶/Spring的Bean注解配置和泛型依赖注入/" data-id="ckib6fipa0033g4tp8ofcg0x7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC的异常处理/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SpringMVC的异常处理
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC的文件下载和上传/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">SpringMVC的文件下载和上传</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>哈希查找HashSearch | シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/90572949   12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626">
+<meta name="keywords" content="数据结构与算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="哈希查找HashSearch">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/2019/05/26/数据结构与算法/哈希查找HashSearch/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/90572949   12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-14T08:19:28.512Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="哈希查找HashSearch">
+<meta name="twitter:description" content="版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/90572949   12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-数据结构与算法/哈希查找HashSearch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2019/05/26/数据结构与算法/哈希查找HashSearch/" class="article-date">
+  <time datetime="2019-05-26T01:30:41.000Z" itemprop="datePublished">2019-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      哈希查找HashSearch
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/90572949" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/90572949</a><br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"> package Search;</span><br><span class="line">/*</span><br><span class="line"> * 哈希查找(线性探测法)：位置=存数（即要存的数据）%p		//p取小于等于长度的最大素数</span><br><span class="line"> * 						解决冲突时往下移一个位置</span><br><span class="line"> * 						即(存数+1)%p....直至找到位置</span><br><span class="line"> * </span><br><span class="line"> * 能存储的元素个数=p</span><br><span class="line"> * </span><br><span class="line"> * 补充知识点：</span><br><span class="line"> * 1、&amp;&amp;和||是短路运算符（&amp;&amp;：当第一个条件为false，不用判断第二个条件）</span><br><span class="line"> *		      （||：当第一个条件为true，不用判断第二个条件）</span><br><span class="line"> * 2、%和|是非短路运算符：两个条件都需要判断</span><br><span class="line"> */</span><br><span class="line">public class HashSearch &#123;</span><br><span class="line">	public static void entry(int hash[],int key) &#123;		//存元素方法</span><br><span class="line">		int p=getMaxPrime(hash);		//获得小于等于长度的最大素数</span><br><span class="line">		int i=0;</span><br><span class="line">		int pos=(key+i)%p;</span><br><span class="line">		int t=pos;</span><br><span class="line">		while (hash[t]!=0) &#123;	//判断该位置是否为空，不为空接着查下一位置</span><br><span class="line">			i++;</span><br><span class="line">			t=(key+i)%p;	//进入下一位置</span><br><span class="line">			if (t==pos) &#123;	//下一位置已回到原点（pos），表已满</span><br><span class="line">				System.out.println(&quot;表已满&quot;+t);</span><br><span class="line">				return;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		hash[t]=key;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static int getMaxPrime(int[] hash) &#123;	//获得小于等于长度的最大素数</span><br><span class="line">		int maxPrime=hash.length;</span><br><span class="line">		if (maxPrime&lt;=1) &#123;	//当数组长度为1时p取1</span><br><span class="line">			return 1;	</span><br><span class="line">		&#125;</span><br><span class="line">		while (isPrime(maxPrime)==false) &#123;	//判断当前值是否为素数</span><br><span class="line">			maxPrime--;</span><br><span class="line">		&#125;</span><br><span class="line">		return maxPrime;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static boolean isPrime(int prime) &#123;		//判断数是否是素数（传入数必须&gt;=2）</span><br><span class="line">		boolean judge=true;	//默认为真</span><br><span class="line">		for (int i = 2; i &lt; prime; i++) &#123;</span><br><span class="line">			if (prime%i==0) &#123;</span><br><span class="line">				judge=false;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return judge;</span><br><span class="line">	&#125;</span><br><span class="line">	/*</span><br><span class="line">	 * 第一种查找方法：</span><br><span class="line">	 * （1）hash[t]（即当前判断元素为空）：在查找过程中出现hash[t]为空，元素从未插入</span><br><span class="line">	 *                                   （因为元素插入过程如果有空，应立即插在该位置上，返回-1）</span><br><span class="line">	 * （2）hash[t]（即当前判断元素不为空）：第一种==key(查找成功，返回位置t)</span><br><span class="line">	 * 									      第二种!=key(不匹配，移至下一位置继续查找)</span><br><span class="line">	 *      属于（2）情况且必须在移至下一位置后执行：位置移动后的判断（t==pos）,已查找表中所有元素</span><br><span class="line">	 *                                             ，未找到返回-1</span><br><span class="line">	 */</span><br><span class="line">	public static int HashSearchOne(int[] hash,int key) &#123;</span><br><span class="line">		int p=getMaxPrime(hash);</span><br><span class="line">		int i=0;</span><br><span class="line">		int pos=(key+i)%p;</span><br><span class="line">		int t=pos;</span><br><span class="line">		while (hash[t]!=0) &#123;	//当前位置非空</span><br><span class="line">			if (hash[t]==key) &#123;</span><br><span class="line">				return t;</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				i++;</span><br><span class="line">				t=(t+i)%p;</span><br><span class="line">			&#125;</span><br><span class="line">			if (t==pos)return -1;	//查找失败，表已全部查完</span><br><span class="line">		&#125;</span><br><span class="line">		return -1;				//当前位置为空，查找失败</span><br><span class="line">	&#125;</span><br><span class="line">	/*</span><br><span class="line">	 * 第二种查找方法：</span><br><span class="line">	 * （1）hash[t]==key：查找成功</span><br><span class="line">	 * （2）hash[t]!=key:第一种为空：查找失败</span><br><span class="line">	 *                   第二种不为空：移至下一元素继续匹配</span><br><span class="line">	 *      属于（2）需要在移动至下一元素语句后判断：t==pos，表已走位，查找失败</span><br><span class="line">	 */</span><br><span class="line">	public static int HashSearchTwo(int[] hash,int key) &#123;</span><br><span class="line">		int p=getMaxPrime(hash);</span><br><span class="line">		int pos=key%p;</span><br><span class="line">		int t=pos;</span><br><span class="line">		while (hash[t]!=key) &#123;</span><br><span class="line">			if (hash[t]==0) &#123;		//为空，查找失败</span><br><span class="line">				return -1;</span><br><span class="line">			&#125;else &#123;					//不为空，移至下一位置</span><br><span class="line">				t=(t+1)%p;</span><br><span class="line">			&#125;</span><br><span class="line">			if(t==pos) return -1;	//表已走完，未找到元素</span><br><span class="line">		&#125;</span><br><span class="line">		return t;		//查找成功</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> package Search;</span><br><span class="line"></span><br><span class="line">public class test &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		int[] hash=new int[5];</span><br><span class="line">		int[] key=new int[]&#123;2,1,5,3,4&#125;;</span><br><span class="line">		for (int i = 0; i &lt; key.length; i++) &#123;</span><br><span class="line">			HashSearch.entry(hash, key[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(&quot;hash表的存储结构：&quot;);</span><br><span class="line">		for (int i = 0; i &lt; HashSearch.getMaxPrime(hash); i++) &#123;</span><br><span class="line">			System.out.println(hash[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(&quot;5的索引：&quot;+HashSearch.HashSearchOne(hash, 5));</span><br><span class="line">		System.out.println(&quot;2的索引：&quot;+HashSearch.HashSearchOne(hash, 2));</span><br><span class="line">		System.out.println(&quot;5的索引：&quot;+HashSearch.HashSearchTwo(hash, 5));</span><br><span class="line">		System.out.println(&quot;2的索引：&quot;+HashSearch.HashSearchTwo(hash, 2));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2019/05/26/数据结构与算法/哈希查找HashSearch/" data-id="ckib6firi005jg4tpnk73csyw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/Blog/master/2019/05/26/c++/详解STL里的Vector底层代码/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          详解STL里的Vector底层代码
+        
+      </div>
+    </a>
+  
+  
+    <a href="/Blog/master/2019/05/24/java基础/ArrayList与String[]数组之间的转换/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ArrayList与String[]数组之间的转换</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

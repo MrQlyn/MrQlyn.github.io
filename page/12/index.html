@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>シェンキンリンのブログ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="シェンキンリンのブログ">
+<meta property="og:url" content="https://github.com/MrQlyn/MrQlyn.github.io/page/12/index.html">
+<meta property="og:site_name" content="シェンキンリンのブログ">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="シェンキンリンのブログ">
+  
+    <link rel="alternate" href="/Blog/master/atom.xml" title="シェンキンリンのブログ" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/Blog/master/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/Blog/master/" id="logo">シェンキンリンのブログ</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/Blog/master/" id="subtitle">Learning records of a typist</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/Blog/master/">Home</a>
+        
+          <a class="main-nav-link" href="/Blog/master/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/Blog/master/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/MrQlyn/MrQlyn.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-Android/Android里的前端界面" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/07/12/Android/Android里的前端界面/" class="article-date">
+  <time datetime="2018-07-12T07:55:55.000Z" itemprop="datePublished">2018-07-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/07/12/Android/Android里的前端界面/">Android里的前端界面</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81011301" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81011301</a><br>   如果说活动是每个界面的后台逻辑，Android里的前端界面就是res里的layout的XML文件。</p>
+<p> <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%E3%80%81%E6%8E%A7%E4%BB%B6">一、控件</a></p>
+<p> <a href="#Button%3A%E6%8C%89%E9%92%AE%E6%8E%A7%E4%BB%B6">Button:按钮控件</a></p>
+<p> <a href="#TextView%3A%E6%96%87%E6%9C%AC%E6%8E%A7%E4%BB%B6%EF%BC%8C%E7%94%A8%E6%9D%A5%E6%98%BE%E7%A4%BA%E6%96%87%E6%9C%AC">TextView:文本控件，用来显示文本</a></p>
+<p> <a href="#EditText%3A%E6%96%87%E6%9C%AC%E8%BE%93%E5%85%A5%EF%BC%88%E7%BC%96%E8%BE%91%EF%BC%89%E6%A1%86">EditText:文本输入（编辑）框</a></p>
+<p> <a href="#ImageView%3A%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87%E6%8E%A7%E4%BB%B6">ImageView:显示图片控件</a></p>
+<p> <a href="#ProgressBar%3A%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E8%BF%9B%E5%BA%A6%E6%9D%A1">ProgressBar:加载数据进度条</a></p>
+<p> <a href="#ProgressDialog%3A%E8%BF%9B%E5%BA%A6%E6%9D%A1%E5%AF%B9%E8%AF%9D%E6%A1%86%C2%A0%20%C2%A0%C2%A0">ProgressDialog:进度条对话框 </a></p>
+<p> <a href="#%EF%BC%88%E9%87%8D%E7%82%B9%EF%BC%89ListView%3A%E5%88%97%E8%A1%A8%E6%8E%A7%E4%BB%B6%2C%E4%B8%8D%E5%90%8C%E4%BA%8E%E4%B8%8A%E9%9D%A2%E5%85%B6%E5%AE%83%E6%8E%A7%E4%BB%B6%EF%BC%8C%E6%A0%BC%E5%BC%8F%E4%B8%BA%3A%3CListView%3E%3C%2FListView%3E">（重点）ListView:列表控件,不同于上面其它控件，格式为:</a></p>
+<p> <a href="#%E4%BA%8C%E3%80%81%E5%B8%83%E5%B1%80">二、布局</a></p>
+<p> <a href="#%E4%B8%89%E3%80%81XML%E5%BC%95%E5%85%A5%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B8%83%E5%B1%80">三、XML引入自定义布局</a></p>
+<hr>
+<hr>
+<h2 id="一、控件"><a href="#一、控件" class="headerlink" title="一、控件"></a>一、控件</h2><blockquote>
+<p>1、每个控件都有id，长，宽，即在XML代码中都有android：id属性和android：layout_width属性和</p>
+<p> android:layout_heigh属性</p>
+<p> 定义id：android:id=”@+id/id名”</p>
+<p> 引用id：android:od=”@id/id名”</p>
+<p> android：layout_width和android:layout_heigh有俩种可选值：match_parent(与父布局大小一致)和</p>
+<p> wrap_content(大小刚好包住内容)</p>
+<p> 2、控件代码都是&lt;控件名 属性1、属性2、…. /&gt;，属性值都用””包含</p>
+<p> 3、所有控件都有android：visibility属性</p>
+<p> android:visibility：设置控件显示状态。可选值：visible(可见)，invisible(隐藏仍占用屏幕),gone(消失且不占屏幕)</p>
+<p> 后台逻辑操控属性方法：</p>
+<p> setVisibility():可传入View.VISIBLE、View.INVISIBLE,View.GONE</p>
+<p> 4、 android:gravity:指定文字对齐方式</p>
+<p> android:layout_gravity:指定控件在布局对齐方式</p>
+<p> android:layout_weight:先按控件尺寸分配屏幕，再按layout_weight比例进行分配</p>
+<p> 如：布局有俩个按钮，一个按钮layout_weight属性为1，另一按钮未设置该属性，则</p>
+<p> 未设置按钮分配完基本尺寸后，剩余空间都为另一个按钮所占，此时比例为1/1.</p>
+<p> 若设置了为1，则俩按钮平分布局空间</p>
+<p> android:weightSum:设置layout_weight的总比例值，一般在父布局（即上一层控件）中设置</p>
+</blockquote>
+<h3 id="Button-按钮控件"><a href="#Button-按钮控件" class="headerlink" title="Button:按钮控件"></a>Button:按钮控件</h3><p> XML属性可自行查询文档，这里主要讲后台逻辑部分</p>
+<p> 当获取到布局文件中的元素(通过Button,findViewById(R.id.id名))后，按钮的触发事件添加方式有俩钟。</p>
+<blockquote>
+<p>第一种：单个按钮时使用，直接调用。如：</p>
+<p> button.setOnClickListener(new OnClickListener(){</p>
+<p> public void onClick(View v){</p>
+<p> //添加触发事件逻辑</p>
+<p> }</p>
+<p> });</p>
+<p> 第二种：多个按钮时使用</p>
+<p> One：使当前类继承OnClickListener接口（implements OnClickListener）</p>
+<p> Two：若有多个按钮，都设置当前类为监听类。button.setOnClickListener(this);</p>
+<p> Three:在当前类重写onClick(View v)。</p>
+<p> public void onClick(View v){ //View指的是点击按钮,根据不同按钮id不同设置不同触发代码</p>
+<p> switch(v.getId()) {<br> case R.id.button1:Toast.makeText(this, “按钮1”, Toast.LENGTH_SHORT).show();break;<br> case R.id.button2:Toast.makeText(this, “按钮2”, Toast.LENGTH_SHORT).show();break;</p>
+<p> default:break;</p>
+<p> }</p>
+<p> }</p>
+<p> 第三种：在类里定义一个方法，然后XML文件里android:onClick属性设置为方法名</p>
+</blockquote>
+<h3 id="TextView-文本控件，用来显示文本"><a href="#TextView-文本控件，用来显示文本" class="headerlink" title="TextView:文本控件，用来显示文本"></a>TextView:文本控件，用来显示文本</h3><p> 有以下属性:</p>
+<blockquote>
+<p>android:text:显示文本内容</p>
+<p> android:gravity:指定文字对齐方式(top,bttom,left,right,center),可用”|”来指定多个值，如：”center_vertical | </p>
+<p> center_horizontal”来表示文字在水平和垂直方向都居中</p>
+<p> android:textSize:指定文字大小，单位sp</p>
+<p> android:textColor:指定文字颜色，可用16进制数或英文</p>
+</blockquote>
+<h3 id="EditText-文本输入（编辑）框"><a href="#EditText-文本输入（编辑）框" class="headerlink" title="EditText:文本输入（编辑）框"></a>EditText:文本输入（编辑）框</h3><p> 有以下属性：</p>
+<blockquote>
+<p>android:hint:设置未输入时显示内容，输入时小时</p>
+<p> android:maxLines:设置输入时最大行数，避免内容过多导致控件变形</p>
+<p> android:inputType:可设置为textPassword将文本框变为密码框</p>
+<p> 方法:</p>
+</blockquote>
+<blockquote>
+<p>getText().toString():获得String形式文本</p>
+<p> 如：EditText editText=(EditText)findViewById(R.id.id名);</p>
+<p> editText.getText().toString();</p>
+</blockquote>
+<h3 id="ImageView-显示图片控件"><a href="#ImageView-显示图片控件" class="headerlink" title="ImageView:显示图片控件"></a>ImageView:显示图片控件</h3><p> 属性：</p>
+<blockquote>
+<p>android:src:设置显示图片，如：android:src=”@drawable/图片名”</p>
+<p> scaleType：让图片铺满ImageView</p>
+<p> 方法：</p>
+</blockquote>
+<blockquote>
+<p>setImageResource(R.drawable.图片名):设置显示图片</p>
+</blockquote>
+<h3 id="ProgressBar-加载数据进度条"><a href="#ProgressBar-加载数据进度条" class="headerlink" title="ProgressBar:加载数据进度条"></a>ProgressBar:加载数据进度条</h3><p> 属性:</p>
+<blockquote>
+<p>（style=”?android:attr/progressBarStyleHorizontal”）：指定成水平进度条</p>
+<p> android:max:指定进度条最大值</p>
+<p> 后台：</p>
+<p> progressBar（进度条类）和progress（进度类）配合使用，如：</p>
+<p> progress=progressBar.getProgress();</p>
+<p> progress+=10;</p>
+<p> progressBar.setProgress(progress);</p>
+<p> AlertDialog.Builder:在当前界面弹出警告对话框</p>
+<p> 后台：</p>
+<p> setTitle(String):设置警告对话框标题</p>
+<p> setMessage(String):设置警告对话框信息（内容）</p>
+<p> setCancelable(true/false):设置警告对话框是否可取消</p>
+<p> //设置确定键</p>
+<p> setPositiveButton(String,new DialogInterface.OnClickListen(){</p>
+<p> public void onClick(DialogInterface,int which){</p>
+<p> }</p>
+<p> });</p>
+<p> //设置取消键</p>
+<p> setNegativeButton(String,new DialogInterface.OnClickListen(){</p>
+<p> public void onClick(DialogInterface,int which){</p>
+<p> }</p>
+<p> });</p>
+<p> show():显示警告对话框</p>
+</blockquote>
+<h3 id="ProgressDialog-进度条对话框"><a href="#ProgressDialog-进度条对话框" class="headerlink" title="ProgressDialog:进度条对话框"></a>ProgressDialog:进度条对话框</h3><p> 后台： </p>
+<blockquote>
+<p>setTitle(String):设置进度条对话框标题</p>
+<p> setMessage(String):设置进度条对话框信息（内容）</p>
+<p> setCancelable(true/false):设置进度条对话框是否可取消</p>
+<p> show():显示进度条对话框</p>
+<p> dimiss():关闭对话框</p>
+</blockquote>
+<h3 id="（重点）ListView-列表控件-不同于上面其它控件，格式为"><a href="#（重点）ListView-列表控件-不同于上面其它控件，格式为" class="headerlink" title="（重点）ListView:列表控件,不同于上面其它控件，格式为:"></a><strong>（重点）ListView:列表控件,不同于上面其它控件，格式为:<listview></listview></strong></h3><blockquote>
+<p>** Part One后台**：用到ListView类和适配器类(这里选用数组适配器类ArrayAdapter&lt;列表子项类型&gt;)</p>
+<p> ListView后台代码：</p>
+<p> setAdapter():传入设置的适配器</p>
+<p> setOnItemClickListener(new OnItemClickListener(){</p>
+<p> public void onItemClick(AdapterView&lt;?&gt; parent,int position, longid){</p>
+<p> //点击子项触发事件代码….此处position为子项索引值，可用ArrayAdapter类型的适配器类的get(position)方法</p>
+<p> //从子项数组取出子项类</p>
+<p> }</p>
+<p> });</p>
+<p> ArrayAdapter&lt;列表子项类型&gt;后台代码：</p>
+<p> ArrayAdapter&lt;列表子项类型&gt;(当前活动.this,列表子项布局id,列表子项数组):构造一个适配器，若此时id为</p>
+<p> android.R.layout.simple_list_item_1,此时子项布局为内置布局文件，只有一个</p>
+<p> TextView，子项数组应为String类型与之对应</p>
+<p> ** Part Two自定义子项步骤：**</p>
+<p> 1、自定义子项布局文件，在构建适配器时传入布局id</p>
+<p> 2、自定义子项类（包含对应的类型变量，如 TextView对应定义String变量，图片对应int变量），同时重写子项类构造</p>
+<p> 函数和对应变量的返回函数</p>
+<p> 3、自定义适配器类（包含子项布局ID变量resourceId，因为后面要用）继承于ArrayAdapter&lt;自定义子项类&gt;</p>
+<p> 重写构造方法：super(当前活动.this,列表子项布局id,列表子项数组)</p>
+<p> resourceId=列表子项布局id;</p>
+<p> 重写public View getView(int position,View cachView,ViewGroup parent):当列表滚动至屏幕包含子项调用的方法</p>
+<p> Fruit fruit=getItem(position); //获得滚动进屏幕的子项类</p>
+<p> View view;</p>
+<p> if(cachView==null){ //缓存视图为空</p>
+<p> view=LayoutInflater.from(getContext()).inflate(resourceId,null); //获得子项布局View</p>
+<p> } else{</p>
+<p> view=cachView;</p>
+<p> } </p>
+<p> //接下来就是给布局文件里的具体控件加载资源</p>
+<p> //如：TextView textView=findViewById(R.id.控件id名);</p>
+<p> // textView.setText(fruit.getText());…. </p>
+<p> return view; //最后返回子项布局view</p>
+<p> }</p>
+</blockquote>
+<h2 id="二、布局"><a href="#二、布局" class="headerlink" title="二、布局"></a>二、布局</h2><blockquote>
+<p>LinearLayout：线性布局</p>
+<p> RelativeLayout:相对布局（推荐使用，可随意放置控件布置）</p>
+<p> TableLayout:表格布局</p>
+<p> FrameLayout:少用</p>
+</blockquote>
+<h2 id="三、XML引入自定义布局"><a href="#三、XML引入自定义布局" class="headerlink" title="三、XML引入自定义布局"></a>三、XML引入自定义布局</h2><blockquote>
+<p>&lt;#include layout=”@layout/布局文件名”&gt;</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/07/12/Android/Android里的前端界面/" data-id="ckib6fisy007ag4tpndd9izlc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Android/Android的活动Activity" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/07/11/Android/Android的活动Activity/" class="article-date">
+  <time datetime="2018-07-11T11:01:45.000Z" itemprop="datePublished">2018-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/07/11/Android/Android的活动Activity/">Android的活动Activity</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81004729" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81004729</a><br>   AndroidManifest.xml：所有四大组件都需要在这里注册</p>
+<p> 活动（Activity类）：活动即每个界面的后台逻辑，前端界面为layout的xml文件。所有的活动都要继承于Activity类。</p>
+<h3 id="一、活动的注册"><a href="#一、活动的注册" class="headerlink" title="一、活动的注册"></a>一、活动的注册</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;application</span><br><span class="line">        android:allowBackup=&quot;true&quot;</span><br><span class="line">        android:icon=&quot;@drawable/ic_launcher&quot;</span><br><span class="line">        android:label=&quot;@string/app_name&quot;</span><br><span class="line">        android:theme=&quot;@style/AppTheme&quot;&gt;</span><br><span class="line">        &lt;activity</span><br><span class="line">            android:name=&quot;.当前活动类名&quot;</span><br><span class="line">            android:label=&quot;标题栏内容&quot;</span><br><span class="line">            android:icon=&quot;引用图片名(即设置应用图标)&quot;</span><br><span class="line">            android:launchMode=&quot;启动类型&quot;&gt;</span><br><span class="line">            &lt;intent-filter&gt;    //此标签可复制设置主活动</span><br><span class="line">                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;</span><br><span class="line">                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;</span><br><span class="line">            &lt;/intent-filter&gt;</span><br><span class="line">        &lt;/activity&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/application&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二、活动的启动类型"><a href="#二、活动的启动类型" class="headerlink" title="二、活动的启动类型"></a>二、活动的启动类型</h3><blockquote>
+<p>standard(默认)：每次启动活动都创建一个新的实例</p>
+<p> singleTop:当栈顶活动为该活动时不会创建新的示例</p>
+<p> <strong>singleTask(推荐)：当栈里有该活动时，不会创建新的实例，将该活动之上的活动都出栈</strong></p>
+<p> singleInstance:在有其它应用想使用是使用（即共享活动）</p>
+<p> 创建一个单独的栈来管理活动</p>
+<p> <img src="https://img-blog.csdn.net/2018071118094329?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt></p>
+</blockquote>
+<h3 id="三、活动类经常使用的方法"><a href="#三、活动类经常使用的方法" class="headerlink" title="三、活动类经常使用的方法"></a>三、活动类经常使用的方法</h3><blockquote>
+<p>super.onCreate(Bundle):创建活动时加载临时数据</p>
+<p> requestWindowFeature(Window.FEATURE_NO_TITLE):取消标题栏，必须在setContentView()前执行，不然报错</p>
+<p> setContentView(R.layout.布局名):给活动加载布局</p>
+<p> startActivity(Intent):通过Intent启动活动</p>
+<p> startActivityForResult(Intent,int):通过Intent启动活动，int为请求码(自己设定)，被启动活动销毁后会返回数据给上一活动，</p>
+<p> 上一活动会自调用onActivityResult()方法 会自动调用onActivityResult()方法</p>
+<p> setResult(Result,Intent):Result为Result_OK或Result_CANCELED用来向上一活动返回处理结果，Intent用来装返回数据</p>
+<p> getIntent():获取启动当前活动的Intent</p>
+<p> findViewById(R.id.id名):获取在布局文件中的元素，如：控件</p>
+</blockquote>
+<h3 id="四、活动类可重写的方法"><a href="#四、活动类可重写的方法" class="headerlink" title="四、活动类可重写的方法"></a>四、活动类可重写的方法</h3><blockquote>
+<p>** 活动的状态函数：onXXX()，如:onCreate(),重写时必须在第一行调用super.onXXX(),如：super.onCreate(Bundle);**</p>
+</blockquote>
+<blockquote>
+<p>onActivityResult(int requestCode,int result,Intent data): requestCode为请求吗,result为Result为Result_OK或</p>
+<p> Result_CANCELED,data为被启动活动返回数据</p>
+<p> onSaveInstanceState(Bundle):保存临时数据，必须调用super.onSaveInstanceState(Bundle),方法在活动在回收之前调用，</p>
+<p> 将数据保存至Bundle里，该Bundle即onCreate(Bundle)里的Bundle</p>
+<p> onBackPressed():当手机按下Back键触发的方法，可用来解决Back键的活动之间返回数据不成功等问题</p>
+</blockquote>
+<h3 id="五、数据传输保存类和消息提示类（Intent-Bundle，Toast）"><a href="#五、数据传输保存类和消息提示类（Intent-Bundle，Toast）" class="headerlink" title="五、数据传输保存类和消息提示类（Intent,Bundle，Toast）"></a>五、数据传输保存类和消息提示类（Intent,Bundle，Toast）</h3><blockquote>
+<p><strong>保存数据有俩个类：Intent和Bundle,消息提示类:Toast</strong></p>
+<p> <strong>Intent：被用于不同组件传输数据，可用来启动活动，启动服务，发送广播等</strong></p>
+</blockquote>
+<p> 有以下方法：</p>
+<blockquote>
+<p>Intent(启动活动.this,被启动活动.class):配合startActivity(Intent)或startActivityForResult(Intent,int)作为显示启动方法</p>
+<p> Intent(String):String为被启动活动的XML文件里的<intent-filter>里的<action>里的android:name属性值。</action></intent-filter></p>
+<p> addCategory(String):String为除默认Category外的category，方法给Intent指定<category>里的的android:name属性值</category></p>
+<p> 注意：1、当活动与Intent里的<action>里的android:name和<category>里的android:name都一致时为隐式启动</category></action></p>
+<p> 活动方法</p>
+<p> 2、一个Intent可以指定一个action，多个category</p>
+<p> 3、android.intent.category.DEFAULT是默认category,Intent无需指定</p>
+<p> putExtra(String Key,String Value):用键值对方式往Intent里放入数据</p>
+<p> getXxxExtra(String Key):通过Key取出数据Value（Xxx可为String等数据类型）</p>
+</blockquote>
+<p> <strong>Bundle：长用来保存临时数据，super.onCreate(Bundle)和onSaveInstance(Bundle)配合使用</strong></p>
+<p> 有以下方法：</p>
+<blockquote>
+<p>putXxx(String Key,String Value):以键值对方式往Bundle放入数据（Xxx可为String等数据类型）</p>
+<p> getXxx(String Key):通过Key得到Value（Xxx可为String等数据类型</p>
+<p> <strong>Toast:在屏幕底部弹出小黑框消息</strong></p>
+</blockquote>
+<blockquote>
+<p>格式:Toast.makeText(显示活动.this,String content,Toast.LENGTH):Toast.LENGTH 可为Toast.LENGTH.LONG</p>
+<p> 或Toast.LENGTH.SHORT用来设置显示时间长短</p>
+<p> content为显示内容</p>
+</blockquote>
+<h3 id="六、活动的小技巧"><a href="#六、活动的小技巧" class="headerlink" title="六、活动的小技巧"></a>六、活动的小技巧</h3><blockquote>
+<p>小技巧One: 知晓当前活动的类名<br> 1、写一个基类BaseActivity<br> 2、让所有类继承于BaseActivity<br> 3、在BaseActivity的onCreate(Bundle)方法上写入<br> Log.d(“BaseActivity”,getClass().getSimpleName());</p>
+<p> 小技巧Two:瞬间退出程序<br> 1、创建活动管理类ActivityCollector<br> 2、写一个基类BaseActivity,当活动onCreate()时添加至ActivityCollector里，onDestroy()时删除该<br> 活动<br> 3、让所有类继承于BaseActivity</p>
+</blockquote>
+<h3 id="1、创建活动管理类ActivityCollector"><a href="#1、创建活动管理类ActivityCollector" class="headerlink" title="** 1、创建活动管理类ActivityCollector**"></a>** 1、创建活动管理类ActivityCollector**</h3><p> ** 2、写一个基类BaseActivity,当活动onCreate()时添加至ActivityCollector里，onDestroy()时删除该活动**</p>
+<p> ** 3、让所有类继承于BaseActivity**</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/07/11/Android/Android的活动Activity/" data-id="ckib6fin8000ig4tp67zdo58l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Android/Android基础入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/07/11/Android/Android基础入门/" class="article-date">
+  <time datetime="2018-07-11T09:52:21.000Z" itemprop="datePublished">2018-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/07/11/Android/Android基础入门/">Android基础入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81004629" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81004629</a><br>   一，构建Android的开发环境，此处不表，网上很多文章</p>
+<p> 二，创建的Android项目：选Android应用程序项目（第一个选4.0，第二个4.4第三个6.0）</p>
+<p> 三，文件分析：</p>
+<p> SRC：后端操作的地方，即放JAVA代码的地方</p>
+<p> 斌：编译文件（有APK）</p>
+<p> 库：放第三方的jar包，所有在库的JAR包会自动添加至构建路径上。</p>
+<p> RES：放置资源文件（照片放在抽拉-HDPI下，布局放在布局下，字符串放）以键值对方式放在值下）</p>
+<p> 如图1所示，取字符串俩种方式：代码用R.string键名，XML用@串/键名</p>
+<p> 2，XML引用图片，字符串，布局：@绘制/图片名，@串/键名，@布局/布局名</p>
+<p> 3，XML定义用：@ + D / I名</p>
+<p> 安卓的的Manifest.xml：</p>
+<p> projec.properties：</p>
+<p> 安卓的介绍</p>
+<p> 安卓的四大组件：活动，服务，广播接收器，内容</p>
+<p> 活动（活动类）：可以理解为界面的业务逻辑</p>
+<p> 广播接收器（广播接收器）：接收广播的类，应用程序间或应用程序内部通讯的工具类</p>
+<p> 服务：后台看不见默默运行的类</p>
+<p> 内容：待更新</p>
+<p> 安卓的打印工具</p>
+<p> 日志工具：以下打印信息等级从低到高</p>
+<p> 格式：Log.d（“当前类名”，打印内容）</p>
+<p> Log.v（）：打印琐碎信息</p>
+<p> Log.d（）：打印调试信息</p>
+<p> Log.i（）：打印重要数据信息</p>
+<p> Log.w（）：打印警告信息</p>
+<p> Log.e（）：打印错误信息</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/07/11/Android/Android基础入门/" data-id="ckib6fimv0006g4tp1jasypww" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据库/MySQL学习笔记(四)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/07/11/数据库/MySQL学习笔记(四)/" class="article-date">
+  <time datetime="2018-07-11T09:28:59.000Z" itemprop="datePublished">2018-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/07/11/数据库/MySQL学习笔记(四)/">MySQL学习笔记(四)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79516314" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79516314</a><br>   <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%E3%80%81%E8%A1%A5%E5%85%85%E7%9F%A5%E8%AF%86%EF%BC%9A">一、补充知识：</a></p>
+<p> <a href="#%E4%BA%8C%E3%80%81%E8%A7%A6%E5%8F%91%E5%99%A8%EF%BC%9A%E9%A1%BE%E5%90%8D%E6%80%9D%E4%B9%89%EF%BC%8C%E8%A7%A6%E5%8F%91%E5%99%A8%E5%B0%B1%E6%98%AF%E5%9C%A8%E5%AF%B9%E8%A1%A8%E8%BF%9B%E8%A1%8C%E6%8F%92%E5%85%A5%EF%BC%8C%E6%9B%B4%E6%96%B0%EF%BC%8C%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C%E6%97%B6%E4%BC%9A%E8%A7%A6%E5%8F%91%E7%9A%84%E6%93%8D%E4%BD%9C">二、触发器：顾名思义，触发器就是在对表进行插入，更新，删除操作时会触发的操作</a></p>
+<hr>
+<h3 id="一、补充知识："><a href="#一、补充知识：" class="headerlink" title="一、补充知识："></a>一、补充知识：</h3><p> 1.1 AUTO_INCREMENT关键字（在尾部添加，放在主键后面）：设置变量为自增变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> CREATE TABLE   test</span><br><span class="line">(</span><br><span class="line">             id int PRIMARY KEY AUTO_INCREMENT</span><br><span class="line">)AUTO_INCREMENT = 100;</span><br></pre></td></tr></table></figure>
+
+<p> 1.2 一般情况下，MySQL的默认是以; 作为结束执行语句，与触发器中需要的分行起冲突</p>
+<p> 解决办法：DELIMITER ||，可以将结束符号变成||</p>
+<p> 当触发器创建后，可用DELIMITER ; 进行还原</p>
+<p> 1.3 FOREIGN_KEY_CHECKS变量：用来控制外键约束，可设置为0取消外键约束，设置为1还原外键约束</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> create trigger updateBookName before update on book for each row</span><br><span class="line">begin</span><br><span class="line">SET FOREIGN_KEY_CHECKS = 0;</span><br><span class="line">if(old.图书编号!=new.图书编号) then</span><br><span class="line">	update onsale set 图书编号=new.图书编号 where 图书编号=old.图书编号;</span><br><span class="line">end if;</span><br><span class="line">SET FOREIGN_KEY_CHECKS = 1;</span><br><span class="line">end;$$</span><br><span class="line">delimiter ;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二、触发器：顾名思义，触发器就是在对表进行插入，更新，删除操作时会触发的操作"><a href="#二、触发器：顾名思义，触发器就是在对表进行插入，更新，删除操作时会触发的操作" class="headerlink" title="二、触发器：顾名思义，触发器就是在对表进行插入，更新，删除操作时会触发的操作"></a>二、触发器：顾名思义，触发器就是在对表进行插入，更新，删除操作时会触发的操作</h3><p> <strong>2.1创建触发器</strong></p>
+<p> 格式：在每个行的表名触发的操作之前/之后创建触发器名</p>
+<blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;  CREATE TRIGGER 触发器名 BEFORE|AFTER 触发事件</span><br><span class="line">ON 表名 FOR EACH ROW</span><br><span class="line">BEGIN</span><br><span class="line">    执行语句列表</span><br><span class="line">END</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<p> 触发时间有俩种</p>
+</blockquote>
+<p> before：在操作前触发</p>
+<p> after：在操作后触发</p>
+<p> 触发事件有三种：</p>
+<p> insert：insert触发进行操作，load data和replace也同样会触发操作。</p>
+<p> update：update触发进行操作。</p>
+<p> delete：删除触发进行操作，replace也会触发操作。</p>
+<p> 注意：对于一张表来说不能有俩个触发操作同样的触发器，只能各自有一个。</p>
+<p> <strong>2.2删除触发器</strong></p>
+<blockquote>
+<p>drop trigger 器名</p>
+<p> <strong>2.3触发器的俩个对象：old对象和new对象。</strong></p>
+</blockquote>
+<p> 可用old和new对新纪录或旧纪录进行操作，比对。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> insert触发器：会将待插入的记录写入new对象里，可在触发器里使用&quot; new.列名 &quot;调用数据</span><br><span class="line"></span><br><span class="line">delete触发器：会将待删除的记录写入old对象里，可在触发器里使用&quot; old.列名 &quot;调用数据</span><br><span class="line"></span><br><span class="line">update触发器：会将已存在旧记录写入old对象，马上更新记录写入new对象。</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 实验用的雇员数据表，数项设置为AUTO_INCREMENT自增属性，插入时自动增加。</p>
+<p> //增加数列列的语句：alter table employee add column number int（1）primary key auto_increment;</p>
+<p> <img src="https://img-blog.csdn.net/20180311164041395" alt></p>
+<p> 可以知道当前人数有7位，假定我们设定只能存入七位职员数据，通过一个触发器inspeck判断插入前人数（数目）是否超过人数限制7位</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> delimiter || </span><br><span class="line"></span><br><span class="line">create trigger t1 before insert</span><br><span class="line"></span><br><span class="line">for each row</span><br><span class="line"></span><br><span class="line">begin</span><br><span class="line"></span><br><span class="line">declare x int;</span><br><span class="line"></span><br><span class="line">select count(id) into x from employee;</span><br><span class="line"></span><br><span class="line">if(x &gt; = 7)then</span><br><span class="line"></span><br><span class="line">insert into bucunzai values(0); //目前的MySQL的没有抛出异常方法，设置一个语句</span><br><span class="line">                                //插入不存在的表数据抛出异常</span><br><span class="line"></span><br><span class="line">end if;</span><br><span class="line">end;</span><br><span class="line"></span><br><span class="line">delimiter ;</span><br></pre></td></tr></table></figure>
+
+<p> 此时已知表中有六位职员，只能添加最后一位，达到触发器限制，会在添加前（之前）限制添加。</p>
+<p> <img src="https://img-blog.csdn.net/20180311164614451" alt></p>
+<p> 触发器可以使用的场景有很多，且具有一定逻辑性，例如：一张货物表，一张订单表，当添加一个新订单时需要检查货物数量是否达到订单要求，可以使用触发器在订单插入前检查另一表中数量。</p>
+<p> 最后，删除触发器，毕竟一张表同一类型的触发器只能有一个。</p>
+<p> 记得要将结束符改回来：DELIMITER;</p>
+<p> <strong>相关章节：</strong></p>
+<p> （一）<a href="https://blog.csdn.net/qq_38487155/article/details/79475851" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79475851</a></p>
+<p> （二）<a href="https://blog.csdn.net/qq_38487155/article/details/79488478" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79488478</a></p>
+<p> （三）<a href="https://blog.csdn.net/qq_38487155/article/details/79508140" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79508140</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/07/11/数据库/MySQL学习笔记(四)/" data-id="ckib6fir2004wg4tppsjwjkqc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据库/MySQL学习笔记(三)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/07/11/数据库/MySQL学习笔记(三)/" class="article-date">
+  <time datetime="2018-07-11T09:28:52.000Z" itemprop="datePublished">2018-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/07/11/数据库/MySQL学习笔记(三)/">MySQL学习笔记(三)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79508140" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79508140</a><br>   <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%E3%80%81%E6%95%B0%E6%8D%AE%E8%A1%A8%E9%87%8C%E5%86%85%E5%AE%B9%E7%9A%84%E4%BF%AE%E6%94%B9%E5%92%8C%E5%88%A0%E9%99%A4%EF%BC%88%E6%9B%B4%E6%94%B9%EF%BC%8C%E5%88%A0%E9%99%A4%EF%BC%89">一、数据表里内容的修改和删除（更改，删除）</a></p>
+<p> <a href="#%E4%BA%8C%E3%80%81%E6%95%B0%E6%8D%AE%E8%A1%A8%E9%87%8C%E5%86%85%E5%AE%B9%E7%9A%84%E6%9B%B4%E6%96%B0%EF%BC%88%E6%9B%B4%E6%96%B0%EF%BC%89">二、数据表里内容的更新（更新）</a></p>
+<p> <a href="#%E4%B8%89%E3%80%81%E7%B4%A2%E5%BC%95%E5%92%8C%E8%A7%86%E5%9B%BE">三、索引和视图</a></p>
+<p> <a href="#%E5%9B%9B%E3%80%81%20%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0">四、 内置函数</a></p>
+<hr>
+<p>准备好一个表的员工，接下来都是对这个表进行操作</p>
+<p> <img src="https://img-blog.csdn.net/2018031016064672" alt></p>
+<h2 id="一、数据表里内容的修改和删除（更改，删除）"><a href="#一、数据表里内容的修改和删除（更改，删除）" class="headerlink" title="一、数据表里内容的修改和删除（更改，删除）"></a>一、数据表里内容的修改和删除（更改，删除）</h2><p> <strong>1.1增加一列数据</strong></p>
+<p> <strong>格式：alter table 表名 add column 列名 数据类型（数据长度）;</strong></p>
+<p> 注意：当名添加至某一固定位置时，在尾部添加之后列名1即可添加至列名1的后面，当添加至第一列时直接在尾部添加第一即可。</p>
+<p> 在名字的后面增加一列数据薪水</p>
+<p> alter table employee add column salary float（1）;</p>
+<p> <img src="https://img-blog.csdn.net/20180310161806939" alt></p>
+<p> <strong>1.2删除一列数据</strong></p>
+<p> <strong>格式：alter table 表名 drop column 列名;</strong></p>
+<p> 删除薪水列</p>
+<p> alter table employee drop column salary;</p>
+<p> <img src="https://img-blog.csdn.net/20180310161819102" alt></p>
+<p> ** 1.3删除一行数据**</p>
+<p> <strong>格式：delete from 表名 where 条件</strong></p>
+<p> 注意：若不添加条件，则清空整张表</p>
+<p> 删除最后一行玛丽的数据</p>
+<p> delete from employee where name =’mary’;</p>
+<p> <img src="https://img-blog.csdn.net/20180310161825976" alt></p>
+<p> <strong>1.4对一列数据的重定义（一般用来重命名）</strong></p>
+<p> <strong>格式：alter table 表名 change 原列名新列名数据类型（数据长度）约束;</strong></p>
+<p> 注意：此时若修改了数据类型，可能会造成数据丢失。</p>
+<p> 添加一列薪水（ENUM），后修改为性别</p>
+<p> alter table employee add column salary int（1）;</p>
+<p> alter table employee change salary sex int（1）;</p>
+<p> <img src="https://img-blog.csdn.net/20180310162803161" alt></p>
+<p> <strong>1.5对一列数据类型的修改</strong></p>
+<p> <strong>格式：alter table 表名 modiify 列名 数据类型</strong></p>
+<p> 将性别的INT型改成枚举类型</p>
+<p> alter table employee modify sex enum（’男’，’女’）;</p>
+<p> <img src="https://img-blog.csdn.net/20180310162812722" alt></p>
+<h2 id="二、数据表里内容的更新（更新）"><a href="#二、数据表里内容的更新（更新）" class="headerlink" title="二、数据表里内容的更新（更新）"></a>二、数据表里内容的更新（更新）</h2><p> <strong>2.1更新表中某行一个或多个数据</strong></p>
+<p> <strong>格式：update 表名 set 列名=’更新值’，列名=更新值……where 条件（条件用来确定哪一行，可确定多行）</strong></p>
+<p> 注意：若不加条件，则会更新每一行的列数据</p>
+<p> 将第一行汤姆的性别改为男，年龄改为1岁</p>
+<p> 更新员工设置性别=’男’，年龄= 1，其中name =’tom’;</p>
+<p> <img src="https://img-blog.csdn.net/20180310162825626" alt></p>
+<h2 id="三、索引和视图"><a href="#三、索引和视图" class="headerlink" title="三、索引和视图"></a>三、索引和视图</h2><p> <strong>3.1索引：就像字典里的目录，加快查找数据速度</strong></p>
+<blockquote>
+<blockquote>
+<ol>
+<li>主键列一定要建立索引 </li>
+<li>外键列可以建立索引 </li>
+<li>text和二进制数据不要建立索引<br><strong>格式：create index 索引名 on 表名（列名）</strong></li>
+</ol>
+</blockquote>
+</blockquote>
+<p> 给ID加上索引</p>
+<p> 在雇员（ID）上创建索引idsy;</p>
+<p> <img src="https://img-blog.csdn.net/20180310193119237" alt></p>
+<p> <strong>显示当前已加的索引：show indexs from 表名</strong></p>
+<p> <img src="https://img-blog.csdn.net/20180310193124599" alt></p>
+<p> 可以看到员工表中已经设置有索引的有编号和名称俩项。</p>
+<p> <strong>删除索引：drop index 索引名 on 表名</strong></p>
+<p> <strong>3.2视图的创建</strong></p>
+<p> 视图：在原有表或视图的基础上，挑选需要的列数据创建的一个新表叫做视图，这个新表的数据全部来源于原有表，当原有表的</p>
+<p> 数据改变时，视图的数据也会跟着改变。视图可以看做一张表，对视图数据进行更改，原有表数据也会更改。</p>
+<p> <strong>格式：create view 视图名（列名，….）as select 语句 【with local / cascaded check option】</strong></p>
+<p> <strong>with local check option（可不加） ：在对视图进行update、insert、delete时要保证满足select语句里的where条件</strong></p>
+<p> ** 若当前视图建立在视图基础上，只检查当前视图的select语句里的where条件**</p>
+<p> <strong>with cascaded check option（可不加）：在对视图进行update、insert、delete时要保证满足select语句里的where条件</strong> </p>
+<p> ** 若当前视图建立在视图基础上，检查当前视图、底层视图的select语句里的where条件**</p>
+<h2 id="四、-内置函数"><a href="#四、-内置函数" class="headerlink" title="四、 内置函数"></a>四、 内置函数</h2><p> 内置函数：即mysql里已有的函数，函数可以嵌套。</p>
+<p> <strong>4.1数学函数</strong></p>
+<blockquote>
+<p>abs（x）：返回x的绝对值</p>
+<p> pow（x，y）：x的y次方/幂</p>
+<p> mod（x，y）：x除以y后的余数</p>
+<p> sqrt（x）：x的二次方开方，求根。</p>
+<p> exp（x）：e的x次方</p>
+<p> ceil（x）：返回不小于x的最小整数值</p>
+<p> floor（x）：返回不大于x的最大整数值</p>
+<p> rand（）：返回0~1的随机数</p>
+<p> pi（）：返回PI值</p>
+<p> round（x）：返回离x最近的整数</p>
+<p> round（x，y）：保留x小数点后y位的值，截取时需要四舍五入</p>
+<p> <strong>4.2字符串函数</strong></p>
+</blockquote>
+<blockquote>
+<p>concat（s1，s2，…）：将多个字符串连接为一个字符串</p>
+<p> group_concat（列名）：将一整列数据连接成未一个字符串</p>
+<p> 4.3日期和时间函数</p>
+</blockquote>
+<blockquote>
+<p>curdate（）：返回日期，即年月日</p>
+<p> curtime（）：返回时间，即时分秒</p>
+<p> Now（）：返回当前日期和时间</p>
+<p> year（d）：返回日期d里的年份</p>
+<p> month（d）：返回日期的月份</p>
+<p> dayofmonth（d）：返回日期d是本月第几天</p>
+<p> hour（d）/ minute（d）/ second（d）：返回日期里的小时值，分钟值，秒值</p>
+<p> datediff（d1，d2）：日期d1和日期d2相隔天数</p>
+<p> adddate（d，n）：日期+n天后的日期</p>
+<p> subdate（d，n）：日期-n天后的日期</p>
+</blockquote>
+<p> <strong>相关章节：</strong></p>
+<p> （一）<a href="https://blog.csdn.net/qq_38487155/article/details/79475851" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79475851</a></p>
+<p> （二）<a href="https://blog.csdn.net/qq_38487155/article/details/79488478" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79488478</a></p>
+<p> （四）<a href="https://blog.csdn.net/qq_38487155/article/details/79516314" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79516314</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/07/11/数据库/MySQL学习笔记(三)/" data-id="ckib6fir0004ug4tpjiffmbm1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据库/MySQL学习笔记(一)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/07/11/数据库/MySQL学习笔记(一)/" class="article-date">
+  <time datetime="2018-07-11T09:28:36.000Z" itemprop="datePublished">2018-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/07/11/数据库/MySQL学习笔记(一)/">MySQL学习笔记(一)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79475851" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79475851</a><br>   <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5">一，数据库系统概念</a></p>
+<p> <a href="#%E4%BA%8C%EF%BC%8CMysql%E7%9A%84%E7%9A%84%E7%9A%84%E7%9A%84%E7%9A%84%E5%AE%89%E8%A3%85">二，Mysql的安装</a></p>
+<p> <a href="#%E4%B8%89%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">三，数据库的基本操作</a></p>
+<p> <a href="#%E5%9B%9B%EF%BC%8C%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">四，数据表的基本操作</a></p>
+<p> <a href="#%E4%BA%94%EF%BC%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">五，数据类型</a></p>
+<p> <a href="#%E5%85%AD%EF%BC%8C%E4%BA%94%E5%A4%A7%E7%BA%A6%E6%9D%9F">六，五大约束</a></p>
+<hr>
+<h3 id="一，数据库系统概念"><a href="#一，数据库系统概念" class="headerlink" title="一，数据库系统概念"></a>一，数据库系统概念</h3><p> 数据库：指装数据的库（硬盘空间）。</p>
+<p> 数据库管理软件：指在操作系统上用户所使用的管理数据库的应用软件（MySQL、Oracle等）</p>
+<p> 数据库系统：是包含数据管理员，数据库，数据管理软件的统称。</p>
+<h3 id="二，Mysql的安装"><a href="#二，Mysql的安装" class="headerlink" title="二，Mysql的安装"></a>二，Mysql的安装</h3><p> 这个不多赘述，网上教程很多，自行百度即可。</p>
+<p> 安装好MySQL后，先不要着急安装可视化工具，可以先使用黑框，熟悉后再使用可视化工具。打开的mysql的的的命令框，</p>
+<p> 输入密码根进入，可见到以下场景，即为安装成功</p>
+<p> <img src="https://img-blog.csdn.net/20180307195650460" alt></p>
+<h3 id="三，数据库的基本操作"><a href="#三，数据库的基本操作" class="headerlink" title="三，数据库的基本操作"></a>三，数据库的基本操作</h3><p> <strong>显示当前数据库：show databases;<br> 删除数据库：drop database库名;</strong></p>
+<p> <strong>创建数据库：create database库名; //注意不要漏掉分号</strong></p>
+<p> <strong>使用数据库：use 库名;</strong></p>
+<p> 以上为整合，接下来逐一介绍：</p>
+<p> <strong>3.1显示当前数据库：show databases;</strong></p>
+<p> <strong><img src="https://img-blog.csdn.net/20180307200154837" alt></strong></p>
+<p> <strong>3.2创建数据库：create database 库名; //注意不要漏掉分号</strong></p>
+<p> *<em>3.3使用数据库：use 库名; *</em></p>
+<p> <strong>** 显示当前数据库：show databases;**</strong></p>
+<p> <strong><strong><img src="https://img-blog.csdn.net/20180307200205852" alt></strong></strong></p>
+<p> <strong>*<em>3.4删除数据库：drop database *</em></strong>库名;****</p>
+<p> <strong><strong><img src="https://img-blog.csdn.net/20180307200251179" alt></strong></strong></p>
+<h3 id="四，数据表的基本操作"><a href="#四，数据表的基本操作" class="headerlink" title="四，数据表的基本操作"></a><strong><strong>四，数据表的基本操作</strong></strong></h3><p> 数据表是数据库的组成部分之一，数据表操作必须在使用某一个数据库后才能进行。</p>
+<p> 而一个数据库中一般会有多张表，这些各自独立的表通过建立关系被联接起来，才成为可以交叉查阅，一目了然的数据库如下便是一张表：</p>
+<p> ID名称电话</p>
+<p> 01 Tom 110110110</p>
+<p> 02杰克119119119</p>
+<p> 0 3 Rose 114114114</p>
+<p> <strong>4.1查看当前数据表：show tables;</strong></p>
+<p> <strong><img src="https://img-blog.csdn.net/20180307201027189" alt></strong></p>
+<p> 此时我的数据库中有三张数据表：当然，标记，学生;</p>
+<p> <strong>4.2新建数据表：create table 表名（列名 数据类型(</strong>数据长度)，<strong>列名 数据类型(</strong>数据长度)……<strong>）;</strong></p>
+<p> <img src="https://img-blog.csdn.net/20180307201522107" alt></p>
+<p> <strong>4.3往数据表中插入自定义数据：insert into 表名（列名a，列名b，列名c）values（值1，值2，值3），</strong>values（值1，****</p>
+<p> <strong>** 值2，值3）</strong> ….；**</p>
+<p> **  注意：（列名a，列名b，列名c）可省略，默认为插入表中所有列。**</p>
+<p> ** 往数据表中插入其它表的数据：insert into 表1（列名a，列名b，列名c）values（值1，值2，值3）…select （列名a，**</p>
+<p> ** 列名b，列名c） from 表2;**</p>
+<p> 注意：表1和表2不能相同，且select语句不能包含order by</p>
+<p> <strong>4.4删除数据表：drop table表名 ;</strong></p>
+<p> <strong><strong>4.5修改数据表名：rename table原名到新名;</strong></strong></p>
+<p> <strong>4.6清空数据表：delete from 表名;</strong></p>
+<h3 id="五，数据类型"><a href="#五，数据类型" class="headerlink" title="五，数据类型"></a>五，数据类型</h3><p> MySQL的的常用数据类型：</p>
+<p> 数据类型大小（字节）用途格式</p>
+<p> INT 4整数 </p>
+<p> FLOAT 4单精度浮点数 </p>
+<p> DOUBLE 8双精度浮点数 </p>
+<p> ENUM 单选，如：ENUM（’A’，’B’，’C’）</p>
+<p> SET 多选 如：SET（’1’，’2’，’3’）</p>
+<p> Date 日期，格式：YYYY-MM-DD 如：2018-12-31</p>
+<p> DateTime 日期和时间，格式：YYYY-MM-DD HH：MM：SS 如：2018-12-31 00:00:00</p>
+<p> Year 年份</p>
+<p> CHAR 0~255定长字符串 </p>
+<p> VARCHAR 0~255变长字符串 </p>
+<p> TEXT 0~65535长文本数据 </p>
+<p> 注意：VARCHAR和炭区别是VARCHAR在存储时存储空间后根据实际字符长度变化，而炭不会，分配CHAR（10）空间后如果存储 ‘张三’ 字符串会多存储6个空字符，没有伸缩性。</p>
+<h3 id="六，五大约束"><a href="#六，五大约束" class="headerlink" title="六，五大约束"></a>六，五大约束</h3><p> 约束是一种限制，它通过对表的行或列的数据做出限制，来确保表的数据的完整性，唯一性（<strong>即对当前列数据的要求）。</strong>。</p>
+<p> <strong>约束：一般在创建表时设置</strong></p>
+<p> <strong>not null：该列列值不能为空，数据插入时不能为空</strong></p>
+<p> ** <strong>**格式：列名 数据类型（数据长度）not null，……</strong></p>
+<p> <strong>unique：该列数据都是独特的，即不能重复。</strong></p>
+<p> ** <strong>** 唯一约束不仅可以在一个表内创建，而且可以同时多表创建组合唯一约束。</strong></p>
+<p> ** <strong>** 格式：列名 数据类型（数据长度）unique，……</strong></p>
+<p> ** 格式：unique(列名1，列名2，…)**</p>
+<p> <strong>default：列数据时的默认值，当插入时没有给出该列数据时的默认值</strong></p>
+<p> ** <strong>** 格式：列名 数据类型（数据长度）default 默认值</strong></p>
+<p> <strong>primary key**</strong>：unique + not null，插入时数据既不能时表中已有的，又不能为空。一个表只能有一个主键**</p>
+<p> ** <strong>** 格式： 列名 数据类型（数据长度）primary key，……</strong></p>
+<p> ** 格式：primary key(列名1，列名2，…)**</p>
+<p> <strong>foreigne key：外键表示表与表之间的关系，指定的当前列完全依赖于另一表的主键列。</strong></p>
+<p> ** 外键必须参考（参考）另一个表主键，外键约束的列在插入数据时在参考列中必须有对应值…**</p>
+<p> ** 一个表<strong>**外键可以有多个</strong></p>
+<p> ** <strong>** 格式：constraint 约束名 foreign key(外键列名) references 表名(主键列名) [ on delete cascade/on update cascade ]</strong></p>
+<p> ** on delete cascade：级联删除（可不加），删除主键表列数据，外键表跟着删除列数据。解决了删除主键表前需要**</p>
+<p> ** 先删除外键表数据的问题**</p>
+<p> ** on update cascade：级联更新（可不加），更新主键表列数据，外键表跟着更新列数据。**</p>
+<p> ** 注意：外键和主键数据类型要相同，一般外键名和主键名也设为相同**</p>
+<p> <strong>删除以上约束方法：</strong></p>
+<p> <strong>删除主键约束：alter table 表名 drop primary key</strong></p>
+<p> <strong>删除外键约束：alter table 表名 drop foreign key 约束名</strong></p>
+<p> <strong>删除其它约束（即直接在列名后添加的约束）：alter table 表名 modify 列名 数据类型 （此处不加约束即删除了约束）</strong></p>
+<p> <strong>相关章节：</strong></p>
+<p> （二）<a href="https://blog.csdn.net/qq_38487155/article/details/79488478" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79488478</a></p>
+<p> （三）<a href="https://blog.csdn.net/qq_38487155/article/details/79508140" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79508140</a></p>
+<p> （四）<a href="https://blog.csdn.net/qq_38487155/article/details/79516314" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79516314</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/07/11/数据库/MySQL学习笔记(一)/" data-id="ckib6fiqw004qg4tpzblitzx9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/04/28/数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）/" class="article-date">
+  <time datetime="2018-04-28T08:43:59.000Z" itemprop="datePublished">2018-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/04/28/数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）/">JDBC学习笔记（事务的处理和批量处理SQL语句）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/80136659" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/80136659</a>   </p>
+<h3 id="一、数据库事务：数据库事务是对数据库操作的实时记录，用来防止数据操作中断等错误引起的数据库更新不一致等一系列问题。"><a href="#一、数据库事务：数据库事务是对数据库操作的实时记录，用来防止数据操作中断等错误引起的数据库更新不一致等一系列问题。" class="headerlink" title="一、数据库事务：数据库事务是对数据库操作的实时记录，用来防止数据操作中断等错误引起的数据库更新不一致等一系列问题。"></a>一、数据库事务：数据库事务是对数据库操作的实时记录，用来防止数据操作中断等错误引起的数据库更新不一致等一系列问题。</h3><p> 举个例子：小明向小红转账1000元，在转账过程中系统突然中断，小红的账户未到账1000元，可小明账户已经扣款1000元。数据库事务就是为了解决类似问题产生，当转账发生错误时系统会回滚事务，将小明和小红的数据还原成转账前的状态。</p>
+<p> Connection类里提供三个方法来支持数据库的事务操作</p>
+<blockquote>
+<p><strong>开始事务（即不设置操作为自动提交的状态）：setAutoCommit(false)</strong></p>
+<p> ** 完成事务（提交操作）：commit()**</p>
+<p> ** 回滚事务（还原数据至开始事务前的状态）：rollback()**</p>
+</blockquote>
+<h3 id="二、批量处理SQL语句（往往必须与数据库事务搭配，防止执行过程中发生错误）"><a href="#二、批量处理SQL语句（往往必须与数据库事务搭配，防止执行过程中发生错误）" class="headerlink" title="二、批量处理SQL语句（往往必须与数据库事务搭配，防止执行过程中发生错误）"></a><strong>二、批量处理SQL语句（往往必须与数据库事务搭配，防止执行过程中发生错误）</strong></h3><p> preparedstatement类里提供了俩个关于批量处理SQL语句的方法：</p>
+<blockquote>
+<p>addBatch()：积攒SQL语句</p>
+<p> executeBatch()：执行已积攒的SQL语句</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/28/数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）/" data-id="ckib6fiqj004kg4tpyxrpyq2m" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据库/JDBC学习笔记(dbcp数据库连接池)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/04/28/数据库/JDBC学习笔记(dbcp数据库连接池)/" class="article-date">
+  <time datetime="2018-04-28T08:27:06.000Z" itemprop="datePublished">2018-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/04/28/数据库/JDBC学习笔记(dbcp数据库连接池)/">JDBC学习笔记(dbcp数据库连接池)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/80136235" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/80136235</a><br>   常用的数据库连接池有俩种：dbcp和c3p0</p>
+<p> 数据库连接池作用：可以控制数据库连接池来优化效率，使得连接不必频繁获得和关闭操作</p>
+<h3 id="dbcp数据库连接池"><a href="#dbcp数据库连接池" class="headerlink" title="dbcp数据库连接池"></a>dbcp数据库连接池</h3><p> <strong>使用前必须导入：mysql-connector-java-5.1.7-bin.jar，commons-dbcp-1.4.jar和commons-pool-1.5.5.jar俩个jar包</strong></p>
+<p> dbcp数据库连接池的创建有俩种方式。</p>
+<p> 第一种：提供BasicDataSource类，来创建连接池</p>
+<p> BasicDataSource里提供了以下方法：</p>
+<blockquote>
+<p>*** setInitialSize(int count):设置连接池初始化连接个数  </p>
+<ul>
+<li><p>setMaxActive(int count):设置同一时刻允许向数据库同时申请连接个数  </p>
+</li>
+<li><p>setMinIdle(int count):设置连接池允许存在的最少空闲连接数目  </p>
+</li>
+<li><p>setMaxWait(int count):设置向连接池申请连接的时间（单位为毫秒），超过时间会抛出异常**</p>
+</li>
+<li><ul>
+<li><ul>
+<li>getConnection():获得连接对象Connection**</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> 以下为操作示例：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> BasicDataSource basicDataSource=new BasicDataSource();</span><br><span class="line"></span><br><span class="line">//设置连接池操作信息</span><br><span class="line">basicDataSource.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);//设置数据库类型</span><br><span class="line">basicDataSource.setUrl(&quot;jdbc:mysql://localhost:3306/test&quot;);//设置连接数据库名</span><br><span class="line">basicDataSource.setUsername(&quot;root&quot;);    //设置用户名</span><br><span class="line">basicDataSource.setPassword(&quot;123456&quot;);  //设置登录密码</span><br><span class="line"></span><br><span class="line">//设置连接池初始化连接个数</span><br><span class="line">basicDataSource.setInitialSize(10);</span><br><span class="line"></span><br><span class="line">//设置同一时刻内允许向连接池获得连接的最大连接数</span><br><span class="line">basicDataSource.setMaxActive(20);</span><br><span class="line"></span><br><span class="line">//设置在连接池内允许保存的最小空闲连接数</span><br><span class="line">basicDataSource.setMinIdle(5);</span><br><span class="line"></span><br><span class="line">//等待连接池分配连接的最长时间（单位为毫秒），超出该时间抛出异常，</span><br><span class="line">basicDataSource.setMaxWait(5*1000);</span><br><span class="line"></span><br><span class="line">//从连接池获得连接</span><br><span class="line">Connection connection=basicDataSource.getConnection();</span><br><span class="line"></span><br><span class="line">System.out.println(connection.getClass());</span><br></pre></td></tr></table></figure>
+
+<p> 第二种方法：提供DataSource类，来创建连接池</p>
+<p> ** BasicDataSourceFactory().createDataSource(properties)：通过配置文件获得DataSource对象<br> getConnection():获得连接<br> 注意：其余设置均可在配置文件完成，但需要名字小写开头且与方法名字对应**  </p>
+<ul>
+<li><p>如:  </p>
+</li>
+<li><p>driverClassName=com.mysql.jdbc.Driver  </p>
+</li>
+<li><p>url=jdbc:mysql://localhost:3306/test  </p>
+</li>
+<li><p>maxActive=20</p>
+<p>此方法通过读取配置文件设置好数据库连接池的设置</p>
+<p>先在src目录下创建一个dbcp.properties配置文件,设置好以下参数</p>
+</li>
+</ul>
+<blockquote>
+<p>driverClassName=com.mysql.jdbc.Driver<br> url=jdbc:mysql://localhost:3306/test<br> username=root<br> password=123456  </p>
+<p> initialSize=10<br> maxActive=20<br> minIdle=5</p>
+<p> maxWait=5000</p>
+<p> 再回到创建方法里：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">                 //第二种获得连接的方法</span><br><span class="line">                Properties properties=new Properties();</span><br><span class="line">                InputStream input=Use_dbcp.class.getClassLoader().getResourceAsStream(&quot;dbcp.properties&quot;);</span><br><span class="line">                properties.load(input);</span><br><span class="line"></span><br><span class="line">               //通过配置文件设置连接池所有需要的参数</span><br><span class="line">              DataSource datasource=new BasicDataSourceFactory().createDataSource(properties);</span><br><span class="line"></span><br><span class="line">              System.out.println(datasource.getConnection());</span><br></pre></td></tr></table></figure>
+
+
+<p>### </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/28/数据库/JDBC学习笔记(dbcp数据库连接池)/" data-id="ckib6fiqd004gg4tpj4xi774t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据库/JDBC学习笔记（查询SQL语句得到的结果对象）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/04/28/数据库/JDBC学习笔记（查询SQL语句得到的结果对象）/" class="article-date">
+  <time datetime="2018-04-28T08:01:21.000Z" itemprop="datePublished">2018-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/04/28/数据库/JDBC学习笔记（查询SQL语句得到的结果对象）/">JDBC学习笔记（查询SQL语句得到的结果对象）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/80135931" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/80135931</a><br>   通过Statement或PreparedStatement执行查询SQL语句后会得到一个结果对象（ResultSet）</p>
+<h3 id="一、ResultSet-结果集，操作查询操作后的数据表"><a href="#一、ResultSet-结果集，操作查询操作后的数据表" class="headerlink" title="一、ResultSet:结果集，操作查询操作后的数据表"></a>一、ResultSet:结果集，操作查询操作后的数据表</h3><p> 本质：ResultSet里有一个行指针，指向数据表，默认指向第一行的上方。</p>
+<p> <strong>* 有以下方法:</strong></p>
+<blockquote>
+<p>** * next():将指针往下移动一行，当返回为true时返回当前指向的行数据，否则为false**</p>
+<p> ** * previous():将指针往上移动一行，当返回为true时返回当前指向的行数据，否则为false**</p>
+<p> ** * first():将指针重置为第一行**</p>
+<p> ** * last():将指针重置为最后一行**</p>
+<p> ** * getXxx(int count):得到数据类型为Xxx的第count列数据**</p>
+<p> ** * getXxx(String name):得到数据类型为Xxx的列名为name的数据**</p>
+<p> ** * getMetaData():获得ResultSetMetaData对象**</p>
+<p> 以下为操作示例：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">                 //获得表table_01所有数据的SQL语句</span><br><span class="line">                String sql=&quot;select* from table_01&quot;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                Connection connection=JDBCTools.getConnection();    //JDBCTools为后面集合的工具类，封装了一些方法</span><br><span class="line"></span><br><span class="line">                Statement statement=connection.createStatement();</span><br><span class="line"></span><br><span class="line">                ResultSet resultset=statement.executeQuery(sql);</span><br><span class="line"></span><br><span class="line">                System.out.println(&quot;name&quot;+&quot;\tid&quot;+&quot;\tsex&quot;);</span><br><span class="line"></span><br><span class="line">                while(resultset.next()!=false) &#123;</span><br><span class="line"></span><br><span class="line">                String name=resultset.getString(1);</span><br><span class="line"></span><br><span class="line">                int id=resultset.getInt(2);</span><br><span class="line"></span><br><span class="line">                String sex=resultset.getString(&quot;sex&quot;);</span><br><span class="line"></span><br><span class="line">                System.out.println(name+&quot;\t&quot;+id+&quot;\t&quot;+sex);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                JDBCTools.release(connection, statement,resultset);    //statement、resultset都需要关闭</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二、ResultSetMetaData：查询后的数据表的信息对象"><a href="#二、ResultSetMetaData：查询后的数据表的信息对象" class="headerlink" title="二、ResultSetMetaData：查询后的数据表的信息对象"></a>二、ResultSetMetaData：查询后的数据表的信息对象</h3><p> ResultSetMetaData对象：通过ResultSet的getMetaData方法获得。</p>
+<p> 提供了以下方法：</p>
+<blockquote>
+<p>** getColumnCount()：获得当前数据表的列数**</p>
+<p> ** getColumnName(int index): 获得当前数据表的列名,从第1列开始，没有第0列。**</p>
+<p> 以下为操作示例：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">                String sql=&quot;select* from table_01&quot;;</span><br><span class="line"></span><br><span class="line">                ResultSet resultset=JDBCTools.Select(sql);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                ResultSetMetaData resultsetmetadata=resultset.getMetaData();</span><br><span class="line"></span><br><span class="line">                System.out.println(&quot;table_01表:&quot;);</span><br><span class="line"></span><br><span class="line">                for(int i=0;i&lt;resultsetmetadata.getColumnCount();i++) &#123;</span><br><span class="line"></span><br><span class="line">                            System.out.print(resultsetmetadata.getColumnName(i+1)+&quot;\t&quot;);</span><br><span class="line"></span><br><span class="line">                            System.out.println();</span><br><span class="line"></span><br><span class="line">                            while(resultset.next()) &#123;</span><br><span class="line"></span><br><span class="line">                            for(int i=0;i&lt;resultsetmetadata.getColumnCount();i++) &#123;</span><br><span class="line"></span><br><span class="line">                                    System.out.print(resultset.getObject(i+1)+&quot;\t&quot;);</span><br><span class="line">                            &#125;</span><br><span class="line">                    System.out.println();</span><br><span class="line">                &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/28/数据库/JDBC学习笔记（查询SQL语句得到的结果对象）/" data-id="ckib6fiqm004mg4tpj5b5hdl7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据库/JDBC学习笔记（SQL语句的执行）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/Blog/master/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/" class="article-date">
+  <time datetime="2018-04-28T07:40:06.000Z" itemprop="datePublished">2018-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/Blog/master/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/">JDBC学习笔记（SQL语句的执行）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/80135309" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/80135309</a><br>   在获得数据库连接后，紧接着就是执行SQL语句。这里用到俩个类：Statement和PreparedStatement</p>
+<h3 id="一、Statment"><a href="#一、Statment" class="headerlink" title="一、Statment"></a>一、Statment</h3><p> <strong>Statement提供了以下方法用来执行SQL语句：</strong></p>
+<blockquote>
+<p>** * executeQuery(String sql):执行一条SQL查询语句，返回查询结果对象（ResultSet）  </p>
+<ul>
+<li>executeUpdate(String sql):执行一条SQL更新，插入，删除操作语句。**</li>
+</ul>
+<p> ** * execute(String sql):执行一条SQL语句**</p>
+<p> ** <em>close():关闭Statement。和Connection一样，Statement使用后也需要关闭。*</em></p>
+</blockquote>
+<p> *注意：Statement通过connection的createStatement方法获得。</p>
+<p> 以下为执行SQL语句示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">     Statement statement=connection.createStatement();</span><br><span class="line">String sql=&quot;insert into table_01 values(&apos;呵呵&apos;,1,&apos;男&apos;),(&apos;哈哈&apos;,2,&apos;女&apos;),(&apos;嘿嘿&apos;,3,&apos;男&apos;)&quot;;</span><br><span class="line">statement.executeUpdate(sql);</span><br><span class="line">sql=&quot;delete from table_01 where id=3&quot;;</span><br><span class="line">statement.executeUpdate(sql);</span><br><span class="line">sql=&quot;update table_01 set id=3,name=&apos;hh&apos; where id=2&quot;;</span><br><span class="line">statement.executeUpdate(sql);</span><br><span class="line"></span><br><span class="line">//使用后一定要关闭</span><br><span class="line">connection.close();</span><br><span class="line">statement.close();</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二、PreparedStatement"><a href="#二、PreparedStatement" class="headerlink" title="二、PreparedStatement"></a>二、PreparedStatement</h3><p> ProparedStatement:是Statement的子接口，同样用来执行SQL语句，比Statement书写方便<br> ProparedStatement的优点：  </p>
+<ul>
+<li><p>1、书写方便，先写好SQL语句再设置参数。如：INSERT INTO table VALUES(?,?,?…)，不用拼写SQL语句</p>
+</li>
+<li><p>2、防止SQL注入（这点很重要）</p>
+</li>
+<li><p>注意：在开始就赋入sql语句（此时的sql语句可以设置未知参数，通过？设置），后通过SetObject(int index,Object obj)设置sql语句里的参数，索引从1开始</p>
+</li>
+</ul>
+<p> <strong>PreparedStatement提供了三个方法：</strong></p>
+<blockquote>
+<p>** setXxx():设置SQL语句里的参数,Xxx为参数的类型**</p>
+<p> ** executeUpdate():参数设置完毕后，执行插入、删除、更新的sql语句。**</p>
+<p> ** executeQuery():参数设置完毕后，执行查询的sql语句，返回结果对象（ResultSet）**</p>
+</blockquote>
+<p> 以下为使用示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> String sql=&quot;insert into table_01 values(?,?,?)&quot;;</span><br><span class="line">PreparedStatement preparedstatement=connection.prepareStatement(sql); //需要提前设置好SQL语句</span><br><span class="line">//设置SQL里的参数(索引从1开始)</span><br><span class="line">preparedstatement.setString(1,&quot;张天笑&quot;);</span><br><span class="line">preparedstatement.setInt(2,2);</span><br><span class="line">preparedstatement.setString(3,&quot;女&quot;);</span><br><span class="line">//直接executeUpdate()方法，不用传入SQL语句</span><br><span class="line"></span><br><span class="line">preparedstatement.executeUpdate();</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 不要求掌握知识：即在插入时获得主键</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> //获得主键</span><br><span class="line">String sql=&quot;INSERT INTO table_01(name,sex) VALUES(?,?)&quot;;</span><br><span class="line">Connection connection=JDBCTools.getConnection();</span><br><span class="line">//设置好PreparedStatement是返回主键类型</span><br><span class="line"></span><br><span class="line">PreparedStatement preparedstatement=</span><br><span class="line"></span><br><span class="line">                connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);</span><br><span class="line"></span><br><span class="line">preparedstatement.setObject(1,&quot;王富贵&quot;);</span><br><span class="line">preparedstatement.setObject(2, &quot;男&quot;);</span><br><span class="line">preparedstatement.executeUpdate();</span><br><span class="line"></span><br><span class="line">ResultSet resultset=preparedstatement.getGeneratedKeys();</span><br><span class="line">ResultSetMetaData resultsetmetadata=resultset.getMetaData();</span><br><span class="line">System.out.println(resultsetmetadata.getColumnName(1));</span><br><span class="line">while(resultset.next()) &#123;</span><br><span class="line">System.out.println(resultset.getObject(1));</span><br><span class="line">&#125;</span><br><span class="line">JDBCTools.release(connection, preparedstatement,resultset);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/MrQlyn/MrQlyn.github.io/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/" data-id="ckib6fiqh004ig4tpm3zmlgee" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/Blog/master/page/11/">&laquo; 上一页</a><a class="page-number" href="/Blog/master/">1</a><span class="space">&hellip;</span><a class="page-number" href="/Blog/master/page/10/">10</a><a class="page-number" href="/Blog/master/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/Blog/master/page/13/">13</a><a class="page-number" href="/Blog/master/page/14/">14</a><a class="extend next" rel="next" href="/Blog/master/page/13/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Android/">Android</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/C/">C++</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Git/">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Java基础/">Java基础</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web/">Web</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/Web高阶/">Web高阶</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/基础操作/">基础操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/Blog/master/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/Blog/master/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/Blog/master/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/Blog/master/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/Blog/master/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/Blog/master/tags/Web/" style="font-size: 20px;">Web</a> <a href="/Blog/master/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/Blog/master/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/Blog/master/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/Blog/master/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/Blog/master/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/Blog/master/archives/2017/10/">十月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
+          </li>
+        
+          <li>
+            <a href="/Blog/master/2019/07/14/Web高阶/SpringMVC对网页发来的数据请求处理和转发/">SpringMVC对网页发来的数据请求处理和转发</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Qin Lin<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/Blog/master/" class="mobile-nav-link">Home</a>
+  
+    <a href="/Blog/master/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/Blog/master/fancybox/jquery.fancybox.css">
+  <script src="/Blog/master/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/Blog/master/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
