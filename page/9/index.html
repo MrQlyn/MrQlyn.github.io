@@ -66,6 +66,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Web/JSONObject：将Bean对象转化为JSON数据" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/15/Web/JSONObject：将Bean对象转化为JSON数据/" class="article-date">
+  <time datetime="2018-09-15T08:19:01.000Z" itemprop="datePublished">2018-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/15/Web/JSONObject：将Bean对象转化为JSON数据/">JSONObject：将Bean对象转化为JSON数据</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82715067" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82715067</a><br>   导入的包：</p>
+<p> commons-beanutils-1.8.3.jar<br> commons-collections-3.2.1.jar<br> commons-lang-2.5.jar<br> commons-logging-1.1.1.jar<br> ezmorph-1.0.6.jar<br> json-lib-2.4-jdk15.jar<br> xom-1.1.jar</p>
+<blockquote>
+<p><strong>JSONObject.fromObject(Bean).toString()：将Bean对象转化为String类型的JSON数据</strong></p>
+<p> <strong>JSONArray.fromObject(List<bean>).toString()：将Bean的List列表转化为String类型的JSON数据</bean></strong></p>
+<p> JSONArray还可以这么使用：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">         City city1=new City(&quot;张三&quot;,&quot;dsda1&quot;);</span><br><span class="line">        City city2=new City(&quot;李四&quot;,&quot;我是李四&quot;);</span><br><span class="line">        JSONArray jsonArray=new JSONArray();</span><br><span class="line">        jsonArray.add(city1);</span><br><span class="line">        jsonArray.add(city2);</span><br><span class="line">        System.out.println(jsonArray.toString());</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/09/15/Web/JSONObject：将Bean对象转化为JSON数据/" data-id="ckibawdn3001g64tprq2yqy5g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Web/XStream：将Bean对象转为XML数据" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/15/Web/XStream：将Bean对象转为XML数据/" class="article-date">
@@ -105,7 +155,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/15/Web/XStream：将Bean对象转为XML数据/" data-id="ckib9qkif0025ootpy6vwtpny" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/15/Web/XStream：将Bean对象转为XML数据/" data-id="ckibawdnp002a64tpl303mo1e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -173,7 +223,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/15/Web/Web的XML文件解析/" data-id="ckib9qki9001xootpclrw5hsh" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/15/Web/Web的XML文件解析/" data-id="ckibawdnk002264tpl2zr1soa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -267,7 +317,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/14/Web/Ajax/" data-id="ckib9qkhi0012ootpqgu7csrb" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/14/Web/Ajax/" data-id="ckibawdms001264tpiniw2y31" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -314,7 +364,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/13/Web/JavaMail/" data-id="ckib9qkhx001iootphxmeo2nt" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/13/Web/JavaMail/" data-id="ckibawdn7001l64tphsckoayk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -379,7 +429,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/13/Web/Web的文件下载/" data-id="ckib9qkie0023ootpgkr9rnu8" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/13/Web/Web的文件下载/" data-id="ckibawdnm002664tpet7g7c9i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -475,7 +525,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/13/Web/Web的文件上传/" data-id="ckib9qkic0021ootplfvhqm9i" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/13/Web/Web的文件上传/" data-id="ckibawdnl002464tpm4u8y79k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -551,7 +601,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/12/Web/JavaWeb的三大组件之过滤器/" data-id="ckib9qki6001tootpdfjm0mft" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/12/Web/JavaWeb的三大组件之过滤器/" data-id="ckibawdnf001w64tp1vpexst4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -707,7 +757,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/11/Web/JavaWeb的三大组件之事件监听组件（Listener）/" data-id="ckib9qki5001rootpl6kdmfxj" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/11/Web/JavaWeb的三大组件之事件监听组件（Listener）/" data-id="ckibawdnc001s64tplyvvtf51" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -746,72 +796,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/09/Web/CommonUtils工具类/" data-id="ckib9qkhk0014ootpo4adcylw" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/09/Web/CommonUtils工具类/" data-id="ckibawdmv001564tpa35yx1j7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/" class="article-date">
-  <time datetime="2018-09-09T02:19:21.000Z" itemprop="datePublished">2018-09-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/">Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>   <strong>目录</strong></p>
-<p>一、String、StringBuffer/StringBuilder、基本类型包装类（如：Float、Double）、<br>Byte[ ]、char[ ]转换图<br>二、String：字符串，==比较的是引用是否相同，equals比较的是内容是否相同。<br>三、StringBuffer/StringBuilder：可修改字符串，java.lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。</p>
-<hr>
-<h3 id="一、String、StringBuffer-StringBuilder、基本类型包装类（如：Float、Double）、Byte-、char-转换图"><a href="#一、String、StringBuffer-StringBuilder、基本类型包装类（如：Float、Double）、Byte-、char-转换图" class="headerlink" title="一、String、StringBuffer/StringBuilder、基本类型包装类（如：Float、Double）、Byte[ ]、char[ ]转换图"></a>一、String、StringBuffer/StringBuilder、基本类型包装类（如：Float、Double）、Byte[ ]、char[ ]转换图</h3><p>Float和float区别：一个类、一个是基本类型关键字  </p>
-<p> <img src="https://img-blog.csdnimg.cn/20190113182149961.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
-<p>总结：转大包容小。</p>
-<blockquote>
-<pre><code>StringBuffer,等级比String高，用构造函数包含即可
-转回String用:toString()
-String等级比字节数组、字符数组高，转换成String用构造函数包含即可
-转回字节数组用：getByte() 转回字符数组用:toCharArray()
-String转换成基本数据类型，包装类用:Integer.parseXxx()方法 
-基本数据类型，包装类转换成String用:String.ValueOF(int)方法</code></pre></blockquote>
-<h3 id="二、String：字符串，-比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意-的使用，比较的是引用"><a href="#二、String：字符串，-比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意-的使用，比较的是引用" class="headerlink" title="二、String：字符串，==比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意==的使用，比较的是引用"></a>二、String：字符串，==比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意==的使用，比较的是引用</h3><blockquote>
-<pre><code>String str1=&quot;abc&quot;;                //直接在字符串常量池里引用
-String str2=new String(&quot;abc&quot;);    //new一定会新建一个对象，存放字符串。
-System.out.println(str1==str2);          //false
-System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
-<blockquote>
-<p>char charAt(int index)：返回索引为index的字符<br>int length()：返回字符串长度<br>int indexOf(String str)：返回字符串中第一次出现的索引值<br>String replace(char old , char new)：替换所有old字符为new字符<br>String substring(int begin)：抓取索引为begin开始至结束的字符串<br>String substring(int begin , int end)：抓取从索引begin开始至end的字符串<br>String trim()：删除起始和结束俩段空格<br>String[] spilt(String str)：分割str字符串为若干子串<br>String toUpperCase()：转化大写<br>String toLowerCase()：转化小写<br>boolean equals(String str)：判断与str字符串内容是否一致<br>boolean startsWith(String str)：判断是否已str字符串开始<br>boolean endsWith(String str)：判断是否已str字符串结束</p>
-</blockquote>
-<h3 id="三、StringBuffer-StringBuilder：可修改字符串，java-lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。"><a href="#三、StringBuffer-StringBuilder：可修改字符串，java-lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。" class="headerlink" title="三、StringBuffer/StringBuilder：可修改字符串，java.lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。"></a>三、StringBuffer/StringBuilder：可修改字符串，java.lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。</h3><blockquote>
-<p>StringBuffer append(char c)：追加字符c<br>StringBuffer insert(int index , String str)：在索引index处插入字符串str<br>StringBuffer delete(int start , int end)：删除索引从start至end字符串<br>StringBuffer delete(int index)：删除索引为index字符<br>StringBuffer setCharAt(int index , char c)：设置索引为index字符为c<br>StringBuffer reverse()：反转字符串<br>String toString()：转化为String类型</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/" data-id="ckib9qkjn003oootpebl4p229" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
 
     </footer>
   </div>
@@ -848,7 +836,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a> <a href="/tags/生活照片/" style="font-size: 10px;">生活照片</a>
+      <a href="/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a> <a href="/tags/生活照片/" style="font-size: 11.43px;">生活照片</a>
     </div>
   </div>
 
@@ -874,6 +862,10 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
           </li>
         
           <li>
+            <a href="/2020/12/05/上传图片测试/">LifeRecord</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
           </li>
         
@@ -883,10 +875,6 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
         
           <li>
             <a href="/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
           </li>
         
       </ul>

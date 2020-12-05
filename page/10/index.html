@@ -93,7 +93,69 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/09/java基础/Java代码生成不重复的32位长的大写字符串/" data-id="ckib9qkjj003jootpve1wncso" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/09/java基础/Java代码生成不重复的32位长的大写字符串/" data-id="ckibawdop003h64tp1zzig4lm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/" class="article-date">
+  <time datetime="2018-09-09T02:19:21.000Z" itemprop="datePublished">2018-09-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/">Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   <strong>目录</strong></p>
+<p>一、String、StringBuffer/StringBuilder、基本类型包装类（如：Float、Double）、<br>Byte[ ]、char[ ]转换图<br>二、String：字符串，==比较的是引用是否相同，equals比较的是内容是否相同。<br>三、StringBuffer/StringBuilder：可修改字符串，java.lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。</p>
+<hr>
+<h3 id="一、String、StringBuffer-StringBuilder、基本类型包装类（如：Float、Double）、Byte-、char-转换图"><a href="#一、String、StringBuffer-StringBuilder、基本类型包装类（如：Float、Double）、Byte-、char-转换图" class="headerlink" title="一、String、StringBuffer/StringBuilder、基本类型包装类（如：Float、Double）、Byte[ ]、char[ ]转换图"></a>一、String、StringBuffer/StringBuilder、基本类型包装类（如：Float、Double）、Byte[ ]、char[ ]转换图</h3><p>Float和float区别：一个类、一个是基本类型关键字  </p>
+<p> <img src="https://img-blog.csdnimg.cn/20190113182149961.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM4NDg3MTU1,size_16,color_FFFFFF,t_70" alt></p>
+<p>总结：转大包容小。</p>
+<blockquote>
+<pre><code>StringBuffer,等级比String高，用构造函数包含即可
+转回String用:toString()
+String等级比字节数组、字符数组高，转换成String用构造函数包含即可
+转回字节数组用：getByte() 转回字符数组用:toCharArray()
+String转换成基本数据类型，包装类用:Integer.parseXxx()方法 
+基本数据类型，包装类转换成String用:String.ValueOF(int)方法</code></pre></blockquote>
+<h3 id="二、String：字符串，-比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意-的使用，比较的是引用"><a href="#二、String：字符串，-比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意-的使用，比较的是引用" class="headerlink" title="二、String：字符串，==比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意==的使用，比较的是引用"></a>二、String：字符串，==比较的是引用是否相同，equals比较的是内容是否相同。所有字符常量在Java中存放在常量池里，所以String对象要注意==的使用，比较的是引用</h3><blockquote>
+<pre><code>String str1=&quot;abc&quot;;                //直接在字符串常量池里引用
+String str2=new String(&quot;abc&quot;);    //new一定会新建一个对象，存放字符串。
+System.out.println(str1==str2);          //false
+System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
+<blockquote>
+<p>char charAt(int index)：返回索引为index的字符<br>int length()：返回字符串长度<br>int indexOf(String str)：返回字符串中第一次出现的索引值<br>String replace(char old , char new)：替换所有old字符为new字符<br>String substring(int begin)：抓取索引为begin开始至结束的字符串<br>String substring(int begin , int end)：抓取从索引begin开始至end的字符串<br>String trim()：删除起始和结束俩段空格<br>String[] spilt(String str)：分割str字符串为若干子串<br>String toUpperCase()：转化大写<br>String toLowerCase()：转化小写<br>boolean equals(String str)：判断与str字符串内容是否一致<br>boolean startsWith(String str)：判断是否已str字符串开始<br>boolean endsWith(String str)：判断是否已str字符串结束</p>
+</blockquote>
+<h3 id="三、StringBuffer-StringBuilder：可修改字符串，java-lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。"><a href="#三、StringBuffer-StringBuilder：可修改字符串，java-lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。" class="headerlink" title="三、StringBuffer/StringBuilder：可修改字符串，java.lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。"></a>三、StringBuffer/StringBuilder：可修改字符串，java.lang包。StringBuffer特点是线程安全，StringBuilder特点是速度较快，其它基本一致。</h3><blockquote>
+<p>StringBuffer append(char c)：追加字符c<br>StringBuffer insert(int index , String str)：在索引index处插入字符串str<br>StringBuffer delete(int start , int end)：删除索引从start至end字符串<br>StringBuffer delete(int index)：删除索引为index字符<br>StringBuffer setCharAt(int index , char c)：设置索引为index字符为c<br>StringBuffer reverse()：反转字符串<br>String toString()：转化为String类型</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/" data-id="ckibawdou003m64tpdon621an" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
@@ -148,7 +210,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/08/Web/JNDI和Local/" data-id="ckib9qkht001dootpzhym1w8g" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/08/Web/JNDI和Local/" data-id="ckibawdmy001964tpelkptvgl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -208,7 +270,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/08/数据库/JDBC学习笔记(cp30数据库连接池)/" data-id="ckib9qkk9004footp1t4t5whe" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/08/数据库/JDBC学习笔记(cp30数据库连接池)/" data-id="ckibawdpq004l64tp521yzjrz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -250,7 +312,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Web项目里的各种路径/" data-id="ckib9qkih0027ootpg3d6f6a7" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Web项目里的各种路径/" data-id="ckibawdno002864tpzk5vmxm9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -373,7 +435,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/JSTL/" data-id="ckib9qkhv001footpxyn9d5lf" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/JSTL/" data-id="ckibawdn5001i64tpmc5mkaas" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -470,7 +532,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Cookie和Session/" data-id="ckib9qkhp0019ootpcsgr0b0d" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Cookie和Session/" data-id="ckibawdmx001764tpx2qmgc9i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -540,7 +602,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/EL表达式/" data-id="ckib9qkhn0016ootpf5gb70ab" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/EL表达式/" data-id="ckibawdn0001c64tp1nt4gtug" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -610,7 +672,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/06/Web/JavaBean及BeanUtils的使用/" data-id="ckib9qkhz001kootp93fbpa0x" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/06/Web/JavaBean及BeanUtils的使用/" data-id="ckibawdn8001n64tp40ze6m8j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -677,140 +739,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/05/Web/JavaWeb的JSP/" data-id="ckib9qki1001nootpv0w0dwzr" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Web/myeclipse新建项目设置编码" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/08/25/Web/myeclipse新建项目设置编码/" class="article-date">
-  <time datetime="2018-08-25T06:15:20.000Z" itemprop="datePublished">2018-08-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/25/Web/myeclipse新建项目设置编码/">myeclipse新建项目设置编码</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="版权声明：转载请说明去处，文章仅供学习参考-https-blog-csdn-net-qq-38487155-article-details-82051040"><a href="#版权声明：转载请说明去处，文章仅供学习参考-https-blog-csdn-net-qq-38487155-article-details-82051040" class="headerlink" title=" 版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/82051040   "></a> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82051040" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82051040</a>   </h2><p> 最新处理项目编码问题：</p>
-<p> 1、在web.xml里添加以下代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> &lt;filter&gt;</span><br><span class="line">    &lt;display-name&gt;EncodeFilter&lt;/display-name&gt;</span><br><span class="line">    &lt;filter-name&gt;EncodeFilter&lt;/filter-name&gt;</span><br><span class="line">    &lt;filter-class&gt;Encode.EncodeFilter&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">    &lt;filter-name&gt;EncodeFilter&lt;/filter-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 2、导入：EncodeFilter.java，EncodeRequest.java俩类处理请求</p>
-<p> EncodeFilter.java</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"> package Encode;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import javax.servlet.Filter;</span><br><span class="line">import javax.servlet.FilterChain;</span><br><span class="line">import javax.servlet.FilterConfig;</span><br><span class="line">import javax.servlet.ServletException;</span><br><span class="line">import javax.servlet.ServletRequest;</span><br><span class="line">import javax.servlet.ServletResponse;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Servlet Filter implementation class EncodeFilter</span><br><span class="line"> */</span><br><span class="line">public class EncodeFilter implements Filter &#123;</span><br><span class="line">	public void destroy() &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException &#123;</span><br><span class="line">		HttpServletRequest req=(HttpServletRequest) request;</span><br><span class="line">		/*</span><br><span class="line">		 * 调包request</span><br><span class="line">		 * 1. 写一个request的装饰类</span><br><span class="line">		 * 2. 在放行(通过过滤器时)，使用我们自己的request</span><br><span class="line">		 */</span><br><span class="line">		if(req.getMethod().equals(&quot;GET&quot;)) &#123;</span><br><span class="line">			EncodeRequest ER = new EncodeRequest(req);</span><br><span class="line">			chain.doFilter(ER, response);</span><br><span class="line">		&#125; else if(req.getMethod().equals(&quot;POST&quot;)) &#123;</span><br><span class="line">			// 处理post请求编码问题</span><br><span class="line">			request.setCharacterEncoding(&quot;utf-8&quot;);</span><br><span class="line">			chain.doFilter(request, response);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public void init(FilterConfig fConfig) throws ServletException &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> EncodeRequest.java</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> package Encode;</span><br><span class="line"></span><br><span class="line">import java.io.UnsupportedEncodingException;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletRequestWrapper;</span><br><span class="line"></span><br><span class="line">public class EncodeRequest extends HttpServletRequestWrapper &#123;</span><br><span class="line">	private HttpServletRequest req;</span><br><span class="line">	</span><br><span class="line">	public EncodeRequest(HttpServletRequest request) &#123;</span><br><span class="line">		super(request);</span><br><span class="line">		this.req = request;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public String getParameter(String name) &#123;</span><br><span class="line">		String value = req.getParameter(name);</span><br><span class="line">		// 处理编码问题</span><br><span class="line">		try &#123;</span><br><span class="line">			value = new String(value.getBytes(&quot;iso-8859-1&quot;), &quot;utf-8&quot;);</span><br><span class="line">		&#125; catch (UnsupportedEncodingException e) &#123;</span><br><span class="line">			throw new RuntimeException(e);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		return value;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 3、在doGet和doPost里设置response编码（添加如下代码）：</p>
-<blockquote>
-<p>response.setContentType(“text/html;charset=utf-8”);</p>
-</blockquote>
-<hr>
-<p> 编码<br> 常见字符编码：iso-8859-1(不支持中文)、gb2312、gbk、gb18030(系统默认编码，中国的国标码)、utf-8(万国码，支持全世界的编码，所以我们使用这个)</p>
-<ol>
-<li>响应编码(Response，即页面显示数据)  </li>
-</ol>
-<ul>
-<li>当使用response.getWriter()来向客户端发送字符数据时，如果在之前没有设置编码，那么默认使用iso，因为iso不支持中文，一定乱码  </li>
-<li>在使用response.getWriter()之前可以使用response.setCharaceterEncoding()来设置字符流的编码为gbk或utf-8，当然我们通常会选择utf-8。这样使用response.getWriter()发送的字符就是使用utf-8编码的。但还是会出现乱码！因为浏览器并不知道服务器发送过来的是什么编码的数据！这时浏览器会使用gbk来解码，所以乱码！  </li>
-<li>在使用response.getWriter()之前可以使用response.setHeader(“Content-type”,”text/html;charset=utf-8”)来设置响应头，通知浏览器服务器这边使用的是utf-8编码，而且在调用setHeader()后，还会自动执行setCharacterEncding()方法。这样浏览器会使用utf-8解码，所以就不会乱码了！  </li>
-<li>setHeader(“Content-Type”, “text/html;charset=utf-8”)的快捷方法是：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">           response.setContentType(&quot;text/html;charset=utf-8&quot;);</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>请求编码（Request，即向服务器请求数据）  </li>
-</ol>
-<ul>
-<li>客户端发送给服务器的请求参数是什么编码：<br>客户端首先要打开一个页面，然后在页面中提交表单或点击超链接！在请求这个页面时，服务器响应的编码是什么，那么客户端发送请求时的编码就是什么。  </li>
-<li>服务器端默认使用什么编码来解码参数：<br>服务器端默认使用ISO-8859-1来解码！所以这一定会出现乱码的！因为iso不支持中文！  </li>
-<li>请求编码处理分为两种：GET和POST：GET请求参数不在请求体中，而POST请求参数在请求体中，所以它们的处理方式是不同的！</li>
-</ul>
-<blockquote>
-<blockquote>
-<ul>
-<li>GET请求编码处理：<br>String username = new String(request.getParameter(“iso-8859-1”), “utf-8”);  </li>
-<li>POST请求编码处理：<br>在获取参数之前调用request.setCharacterEncoding(“utf-8”);</li>
-</ul>
-</blockquote>
-<ol start="3">
-<li>URL编码<br>表单的类型：Content-Type: application/x-www-form-urlencoded，就是把中文转换成%后面跟随两位的16进制。<br>为什么要用它：在客户端和服务器之间传递中文时需要把它转换成网络适合的方式。</li>
-</ol>
-</blockquote>
-<ul>
-<li><p>它不是字符编码！  </p>
-</li>
-<li><p>它是用来在客户端与服务器之间传递参数用的一种方式！  </p>
-</li>
-<li><p>URL编码需要先指定一种字符编码，把字符串解码后，得到byte[]，然后把小于0的字节+256，再转换成16进制。前面再添加一个%。  </p>
-</li>
-<li><p>POST请求默认就使用URL编码！tomcat会自动使用URL解码！  </p>
-</li>
-<li><p>URL编码：String username = URLEncoder.encode(username, “utf-8”);  </p>
-</li>
-<li><p>URL解码：String username = URLDecoder.decode(username, “utf-8”);</p>
-<p>我们需要把链接中的中文参数，使用url来编码！今天不行，html中不能给出java代码，jsp就可以。</p>
-<p>路径  </p>
-</li>
-<li><p>web.xml中<url-pattern>路径，（叫它Servlet路径！）  </url-pattern></p>
-<blockquote>
-<p>要么以“*”开关，要么为“/”开头  </p>
-</blockquote>
-</li>
-<li><p>转发和包含路径  </p>
-<blockquote>
-<p>*****以“/”开头：相对当前项目路径，例如：<a href="http://localhost:8080/项目名/" target="_blank" rel="noopener">http://localhost:8080/项目名/</a> request.getRequestdispacher(“/BServlet”).for…();<br>不以“/”开头：相对当前Servlet路径。 request.getRequestdispacher(“/BServlet”).for…();，假如当前Servlet是：<a href="http://localhost:8080/项目名/servlet/AServlet，" target="_blank" rel="noopener">http://localhost:8080/项目名/servlet/AServlet，</a> 就是<a href="http://localhost:8080/项目名/servlet/BServlet" target="_blank" rel="noopener">http://localhost:8080/项目名/servlet/BServlet</a>  </p>
-</blockquote>
-</li>
-<li><p>重定向路径（客户端路径）  </p>
-<blockquote>
-<p>以“/”开头：相对当前主机，例如：<a href="http://localhost:8080/，" target="_blank" rel="noopener">http://localhost:8080/，</a> 所以需要自己手动添加项目名，例如；response.sendRedirect(“/day10_1/Bservlet”);  </p>
-</blockquote>
-</li>
-<li><p>页面中超链接和表单路径  </p>
-<blockquote>
-<p>与重定向相同，都是客户端路径！需要添加项目名</p>
-</blockquote>
-</li>
-</ul>
-<hr>
-<p> myeclipse新建项目设置编码</p>
-<p> 按以下操作设置：</p>
-<ol>
-<li>General –&gt; Workspace –&gt; UTF-8  </li>
-<li>General –&gt; Editors –&gt; Associations –&gt; JSP –&gt; MyEclipse JSP Editor  </li>
-<li>搜索jsp –&gt; UTF-8  </li>
-<li>Java –&gt; Installed JREs –&gt; 添加  </li>
-<li>Tomcat  </li>
-<li>去除MyEclise自带tomcat  </li>
-<li>General –&gt; Startup and Shutdown –&gt; MyEclipse Derby</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/08/25/Web/myeclipse新建项目设置编码/" data-id="ckib9qkil002bootp7yuuhha3" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/05/Web/JavaWeb的JSP/" data-id="ckibawdna001q64tp3pcnk199" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -850,7 +779,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a> <a href="/tags/生活照片/" style="font-size: 10px;">生活照片</a>
+      <a href="/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a> <a href="/tags/生活照片/" style="font-size: 11.43px;">生活照片</a>
     </div>
   </div>
 
@@ -876,6 +805,10 @@
           </li>
         
           <li>
+            <a href="/2020/12/05/上传图片测试/">LifeRecord</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
           </li>
         
@@ -885,10 +818,6 @@
         
           <li>
             <a href="/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
           </li>
         
       </ul>

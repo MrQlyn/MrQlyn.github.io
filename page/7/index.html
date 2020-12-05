@@ -66,6 +66,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据结构与算法/数据结构：栈" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/12/数据结构与算法/数据结构：栈/" class="article-date">
+  <time datetime="2019-01-12T07:22:58.000Z" itemprop="datePublished">2019-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/12/数据结构与算法/数据结构：栈/">数据结构（栈）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%E3%80%81%E6%A0%88%E7%BB%93%E7%82%B9">一、栈结点</a></p>
+<p> <a href="#%E4%BA%8C%E3%80%81%E9%A1%BA%E5%BA%8F%E6%A0%88">二、顺序栈</a></p>
+<p> <a href="#%E4%B8%89%E3%80%81%E9%93%BE%E6%A0%88">三、链栈</a></p>
+<hr>
+<h3 id="一、栈结点"><a href="#一、栈结点" class="headerlink" title="一、栈结点"></a>一、栈结点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"> package Stack;</span><br><span class="line">class multipleNode&#123;		//多项式结点</span><br><span class="line">	multipleNode()&#123;</span><br><span class="line">		next=null;</span><br><span class="line">	&#125;</span><br><span class="line">	multipleNode(int c,int e)&#123;</span><br><span class="line">		coef=c;</span><br><span class="line">		exp=e;</span><br><span class="line">		next=null;</span><br><span class="line">	&#125;</span><br><span class="line">	int coef;	//系数</span><br><span class="line">	int exp;	//指数</span><br><span class="line">	multipleNode next;	</span><br><span class="line">&#125;</span><br><span class="line">public class Node &#123;</span><br><span class="line">	Node(char data)&#123;</span><br><span class="line">		this.data=data;</span><br><span class="line">		next=null;</span><br><span class="line">		pre=null;</span><br><span class="line">	&#125;</span><br><span class="line">	Node()&#123;</span><br><span class="line">		next=null;</span><br><span class="line">		pre=null;</span><br><span class="line">	&#125;</span><br><span class="line">	char data;</span><br><span class="line">	Node next;</span><br><span class="line">	Node pre;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二、顺序栈"><a href="#二、顺序栈" class="headerlink" title="二、顺序栈"></a>二、顺序栈</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"> package Stack;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 顺序栈</span><br><span class="line"> */</span><br><span class="line">public class OrderStack &#123;</span><br><span class="line">	int max;	//栈初始大小</span><br><span class="line">	int size=0;	//栈规模大小，同时也是栈顶指针</span><br><span class="line">	Object[] objects;</span><br><span class="line">	OrderStack() &#123;	//栈默认为100</span><br><span class="line">		max=100;</span><br><span class="line">		objects=new Object[max];</span><br><span class="line">	&#125;</span><br><span class="line">	OrderStack(int max) &#123;	//自己设置栈大小</span><br><span class="line">		this.max=max;</span><br><span class="line">		objects=new Object[max];</span><br><span class="line">	&#125;</span><br><span class="line">	//入栈</span><br><span class="line">	public void push(Object o) &#123;</span><br><span class="line">		//判断空间是否足够</span><br><span class="line">		if(size==max) &#123;</span><br><span class="line">			expand();	//调用扩容方法</span><br><span class="line">		&#125;</span><br><span class="line">		objects[size]=o;</span><br><span class="line">		size++;</span><br><span class="line">	&#125;</span><br><span class="line">	//扩容（补充：实现深度复制方法（即不是取别名方法）：实现Cloneable接口，重写clone()方法）</span><br><span class="line">	private void expand() &#123;</span><br><span class="line">		Object[] o =new Object[max];</span><br><span class="line">		for(int i=0;i&lt;objects.length;i++) &#123;</span><br><span class="line">			o[i]=objects[i];</span><br><span class="line">		&#125;//以上可用浅复制，即取别名方法代替Object[] o=obj.clone();</span><br><span class="line">		max=max*2;</span><br><span class="line">		objects=new Object[max];</span><br><span class="line">		for (int i = 0; i &lt; o.length; i++) &#123;</span><br><span class="line">			objects[i]=o[i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//出栈</span><br><span class="line">	public Object pull() &#123;</span><br><span class="line">		if (size==0) &#123;		//栈空</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		int i=--size;</span><br><span class="line">		Object temp=objects[i];</span><br><span class="line">		objects[i]=null;</span><br><span class="line">		return temp;</span><br><span class="line">	&#125;</span><br><span class="line">	//获得栈顶元素</span><br><span class="line">	public Object getTop() &#123;</span><br><span class="line">		if (size==0) &#123;		//栈空</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		int temp=size-1;</span><br><span class="line">		return objects[temp];</span><br><span class="line">	&#125;</span><br><span class="line">	//将元素逐个出栈</span><br><span class="line">	public void traverse() &#123;</span><br><span class="line">		while (size!=0) &#123;</span><br><span class="line">			System.out.println(objects[--size]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="三、链栈"><a href="#三、链栈" class="headerlink" title="三、链栈"></a>三、链栈</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"> package Stack;</span><br><span class="line">/*</span><br><span class="line"> * 链栈</span><br><span class="line"> */</span><br><span class="line">public class ChainStack &#123;</span><br><span class="line">	Node head;</span><br><span class="line">	ChainStack() &#123;</span><br><span class="line">		head=new Node();</span><br><span class="line">		head.next=null;</span><br><span class="line">	&#125;</span><br><span class="line">	public void push(char c) &#123;</span><br><span class="line">		Node t =new Node();</span><br><span class="line">		t.data=c;</span><br><span class="line">		t.next=head.next;</span><br><span class="line">		head.next=t;</span><br><span class="line">	&#125;</span><br><span class="line">	public char pop() &#123;</span><br><span class="line">		if (head.next==null) &#123;</span><br><span class="line">			return &apos; &apos;;</span><br><span class="line">		&#125;</span><br><span class="line">		Node t=head.next;</span><br><span class="line">		head.next=t.next;</span><br><span class="line">		return t.data;</span><br><span class="line">	&#125;</span><br><span class="line">	public char getTop() &#123;</span><br><span class="line">		if (head.next==null) &#123;</span><br><span class="line">			return &apos; &apos;;</span><br><span class="line">		&#125;</span><br><span class="line">		return head.next.data;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：栈/" data-id="ckibawdqu005v64tpirennblf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-数据结构与算法/数据结构：约瑟夫问题（链式结构）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（链式结构）/" class="article-date">
@@ -97,7 +151,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（链式结构）/" data-id="ckib9qklm005rootpp8mhjbdo" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（链式结构）/" data-id="ckibawdqw005x64tp8l1trld1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -140,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（顺序结构）/" data-id="ckib9qklo005tootppkz1rt4f" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（顺序结构）/" data-id="ckibawdqx005z64tpavpm3ig7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -179,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表改为双向循环链表/" data-id="ckib9qkl70059ootpek2kcr09" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表改为双向循环链表/" data-id="ckibawdqg005f64tpuwcjvknr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -218,7 +272,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表构造成三环形链表/" data-id="ckib9qkl9005bootpm9xs5h7g" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表构造成三环形链表/" data-id="ckibawdqj005h64tpe6ripyj1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -261,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/删除结点/" data-id="ckib9qkl50057ootpc2a9iul4" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/删除结点/" data-id="ckibawdqf005d64tph0a5mxst" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -300,7 +354,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/链表寻找相同数据/" data-id="ckib9qklr005xootp9irzojom" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/链表寻找相同数据/" data-id="ckibawdr0006364tpsyveuov4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -339,7 +393,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（不生成新链表）/" data-id="ckib9qkle005hootp4zjg1b06" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（不生成新链表）/" data-id="ckibawdqm005l64tpadz1gja9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -378,7 +432,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/分解链表/" data-id="ckib9qkl40055ootpiwb78i9g" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/分解链表/" data-id="ckibawdqd005b64tpay9mb8u8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -421,46 +475,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/一元多项式相加/" data-id="ckib9qkl20053ootphayduam7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据结构与算法/合并链表（生成新链表）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/11/数据结构与算法/合并链表（生成新链表）/" class="article-date">
-  <time datetime="2019-01-11T06:42:47.000Z" itemprop="datePublished">2019-01-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/11/数据结构与算法/合并链表（生成新链表）/">合并链表（生成新链表）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/86300761" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/86300761</a><br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"> package Linear;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 合并链表：将两递增有序A，B合并为一个递增有序链表C(链式结构)</span><br><span class="line"> */</span><br><span class="line">public class B &#123;</span><br><span class="line">	public static Node merge(Node pa,Node pb) &#123;</span><br><span class="line">		Node h =new Node();</span><br><span class="line">		Node p=h;</span><br><span class="line">		pa=pa.next;	//跳过头结点</span><br><span class="line">		pb=pb.next;	//跳过头结点</span><br><span class="line">		while(pa!=null&amp;&amp;pb!=null) &#123;</span><br><span class="line">			if(pa.data&lt;=pb.data) &#123;</span><br><span class="line">				p.next=pa;</span><br><span class="line">				pa=pa.next;</span><br><span class="line">				p=p.next;</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				p.next=pb;</span><br><span class="line">				pb=pb.next;</span><br><span class="line">				p=p.next;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if(pa==null) &#123;</span><br><span class="line">			p.next=pb;</span><br><span class="line">		&#125;</span><br><span class="line">		if(pb==null) &#123;</span><br><span class="line">			p.next=pb;</span><br><span class="line">		&#125;</span><br><span class="line">		return h;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Node A=NodeTool.CreateNodeList(&quot;123&quot;);</span><br><span class="line">		Node B=NodeTool.CreateNodeList(&quot;46&quot;);</span><br><span class="line">		Node C=merge(A, B);</span><br><span class="line">		NodeTool.traverseWithHead(C);</span><br><span class="line">		NodeTool.traverseWithHead(A);</span><br><span class="line">		NodeTool.traverseWithHead(B);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（生成新链表）/" data-id="ckib9qklc005footpwcgd7pvz" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/一元多项式相加/" data-id="ckibawdqa005664tpyqhhbc1h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -500,7 +515,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a> <a href="/tags/生活照片/" style="font-size: 10px;">生活照片</a>
+      <a href="/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a> <a href="/tags/生活照片/" style="font-size: 11.43px;">生活照片</a>
     </div>
   </div>
 
@@ -526,6 +541,10 @@
           </li>
         
           <li>
+            <a href="/2020/12/05/上传图片测试/">LifeRecord</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
           </li>
         
@@ -535,10 +554,6 @@
         
           <li>
             <a href="/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
           </li>
         
       </ul>

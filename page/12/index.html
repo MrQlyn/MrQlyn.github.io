@@ -66,6 +66,88 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Android/Android的广播接收器BroadcastReceiver" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/13/Android/Android的广播接收器BroadcastReceiver/" class="article-date">
+  <time datetime="2018-07-12T16:56:24.000Z" itemprop="datePublished">2018-07-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/13/Android/Android的广播接收器BroadcastReceiver/">Android的广播接收器BroadcastReceiver</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81024098" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81024098</a>   </p>
+<h3 id="注意-广播的注册最好不要在监听方法内，容易造成onReceiver-方法调用多次"><a href="#注意-广播的注册最好不要在监听方法内，容易造成onReceiver-方法调用多次" class="headerlink" title="注意:广播的注册最好不要在监听方法内，容易造成onReceiver()方法调用多次"></a>注意:广播的注册最好不要在监听方法内，容易造成onReceiver()方法调用多次</h3><p> 一、广播分为<strong>标准广播</strong>，<strong>有序广播，</strong>本地广播****。Android内置了很多系统广播，我们可以监听这些广播来得到系统信息，如开机完成后的广播，电池电量变化广播等等。</p>
+<p> <strong>标准广播：系统内广播，任何应用几乎同时收到</strong></p>
+<p> ** 有序广播（一般静态注册）：系统内广播，应用按优先级分先后<strong>收到，先收到的广播接收器可切断该广播继续往下传播**</strong></p>
+<p> ** 本地广播（只能动态注册）：应用内广播，只能在应用内传播，安全性高，推荐使用**</p>
+<p> 二、广播的俩种注册方式： 静态注册，动态注册，注册后必须在onDestroy()里取消注册广播接收器</p>
+<p> 不管是动态注册还是静态注册，若涉及到系统关键信息都需要在XML注册文件添加权限</p>
+<p> 如： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//监听开机广播权限</span><br><span class="line"></span><br><span class="line">        &lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        对应的系统广播：android.intent.action.BOOT_COMPLETED</span><br><span class="line"></span><br><span class="line">        //查询系统网络状态权限</span><br><span class="line"></span><br><span class="line">        &lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot;/&gt;      </span><br><span class="line"></span><br><span class="line">        对应的系统广播：android.net.conn.CONNECTIVITY_CHANGE</span><br></pre></td></tr></table></figure>
+
+<p> <strong>静态注册：在XML注册文件里注册广播接收器和发送的广播，后定义广播接收类继承于BroadcastReceiver,重写</strong></p>
+<p> ** onReceive(Context context, Intent intent)**</p>
+<p> 格式： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">          &lt;receiver</span><br><span class="line">            android:name=&quot;.广播接收器类名&quot;&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=&quot;自定义广播或系统广播&quot; /&gt;</span><br><span class="line">            &lt;/intent-filter&gt;</span><br><span class="line">         &lt;/receiver&gt;</span><br><span class="line"></span><br><span class="line">        public class MyBroadcastReceiver extends BroadcastReceiver &#123;</span><br><span class="line">                public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">                        Toast.makeText(context, &quot;接收到标准广播&quot;,Toast.LENGTH_SHORT).show();</span><br><span class="line">                        abortBroadcast();</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br></pre></td></tr></table></figure>
+
+<p> ** 动态注册：直接在Activity类里调用registerReceiver(BroadcastReceive,IntentFilter)方法发送广播，后定义广播接收**</p>
+<p> ** 类继承于BroadcastReceiver,重写onReceive(Context context,Intent intent)**</p>
+<p> Activity补充方法 ： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> registerReceiver(BroadcastReceive,IntentFilter)：注册广播接收器</span><br><span class="line"></span><br><span class="line">unregisterReceiver( BroadcastReceive)：取消注册广播接收器</span><br><span class="line"></span><br><span class="line">sendBroadcast(Intent):发送标准广播</span><br><span class="line"></span><br><span class="line">sendOrderedBroadcast(Intent,null):发送有序广播，有序广播在intent-filter标签的android:priority    </span><br><span class="line">                                  属性设置优先级，采用静态注册方式。</span><br><span class="line"></span><br><span class="line">abortBroadcast():在onReceive()里调用，用来截断有序广播</span><br></pre></td></tr></table></figure>
+
+<p> Intent补充知识： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> ​</span><br><span class="line">Intent(String):String为被启动活动的XML文件里的&lt;intent-filter&gt;里的&lt;action&gt;里的android:name属性</span><br><span class="line">值，在发送广播时String为系统广播或自定义广播，也就是&lt;receiver&gt;里的&lt;intent-filter&gt;里的&lt;action&gt; 里</span><br><span class="line">的android:name属性值</span><br><span class="line"></span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+
+<p> IntentFilter类：通过Intent的 <action>标签的android:name属性过滤掉不对应的广播</action></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">    方法：addAction(String):String为系统广播或自定义广播</span><br></pre></td></tr></table></figure>
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   动态提醒网络变化例子(记得添加权限和在Activity里注册广播接收器)：</span><br><span class="line"></span><br><span class="line">public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line"></span><br><span class="line">           Connectivity ManagerconnctivityManager=</span><br><span class="line"></span><br><span class="line">                     (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);</span><br><span class="line"></span><br><span class="line">           NetworkInfo networkInfo=connctivityManager.getActiveNetworkInfo();</span><br><span class="line">           if(networkInfo!=null&amp;&amp;networkInfo.isAvailable()) &#123;</span><br><span class="line">               Toast.makeText(context, &quot;网络可用&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">           &#125;else &#123;</span><br><span class="line">                Toast.makeText(context, &quot;网络不可用&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">           &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 三、本地广播发送<strong>(接收不到系统广播,即接收不到标准广播和有序广播，只能接收自己发送的自定义本地广播)</strong></p>
+<p> ** 1、 需要导入android-support-v4.jar包**</p>
+<p> Eclipse导入方法：<br> Project &gt;&gt; Properties &gt;&gt; Java Build Path &gt;&gt; Libraries &gt;&gt; Add External JARs<br> 找到之前下载好的android-support-v4.jar，打开后可以看到已经添加进去列表中了，此时还需要点击 Order and Export，勾 选android-support-v4.jar 这一项，然后点击OK即可。<br> 此时回到代码界面，按快捷键ctrl + shift + O即可自动导入LocalBroadcastManager。<br> 也可以手动导入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import android.support.v4.content.LocalBroadcastManager;</span><br></pre></td></tr></table></figure>
+
+<p> 完成后LocalBroadcastManager 不再报错，ctrl + S保存并刷新MainActivity.java。 </p>
+<p> 程序即可正常运行。</p>
+<p> ** 2、与动态注册一样接收使用IntentFilter类和自定义广播接收类接收广播，不同点在于注册广播，发送广播，取消注册广播 都使用LocalReceiverManager类，不使用Activity类，但仍需写在Activity里.** </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  LocalBroadcastManager类用来发送广播有以下方法：</span><br><span class="line"></span><br><span class="line">        LocalBroadcastManager.getInstance(this):静态方法，构建一个LocalBroadcastManager类实例</span><br><span class="line"></span><br><span class="line">        registerReceiver(BroadcastReceive,IntentFilter)：注册广播接收器</span><br><span class="line"></span><br><span class="line">        unregisterReceiver( BroadcastReceive)：取消注册广播接收器</span><br><span class="line"></span><br><span class="line">        sendBroadcast(Intent):发送标准广播</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/07/13/Android/Android的广播接收器BroadcastReceiver/" data-id="ckibawdmb000h64tpwzvgcc9d" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Android/Android的基类Context和View" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/12/Android/Android的基类Context和View/" class="article-date">
@@ -94,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/12/Android/Android的基类Context和View/" data-id="ckib9qkgv000cootp7isucjzm" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/12/Android/Android的基类Context和View/" data-id="ckibawdm9000f64tpx0d67z2g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -293,7 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/12/Android/Android里的前端界面/" data-id="ckib9qkmq0079ootpo6ecikcv" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/12/Android/Android里的前端界面/" data-id="ckibawds0007a64tp11oqa0mr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -399,7 +481,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/Android/Android的活动Activity/" data-id="ckib9qkh5000lootp43uyarbp" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/11/Android/Android的活动Activity/" data-id="ckibawdmg000o64tpmw57hlln" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -463,7 +545,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/Android/Android基础入门/" data-id="ckib9qkgl0005ootp6282e6fc" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/11/Android/Android基础入门/" data-id="ckibawdlu000764tpnit3gfq9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -557,7 +639,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(四)/" data-id="ckib9qkku004tootp0mjroi4e" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(四)/" data-id="ckibawdq5005064tpqasegxge" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -700,7 +782,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(三)/" data-id="ckib9qkkq004pootp40g0p0fa" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(三)/" data-id="ckibawdq2004w64tpchfynugk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -828,7 +910,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(一)/" data-id="ckib9qkks004rootp70o5x00i" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(一)/" data-id="ckibawdq3004y64tpuhoua3nz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -879,7 +961,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）/" data-id="ckib9qkkg004jootpz4xr2th7" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）/" data-id="ckibawdpw004q64tpdjw4q0wm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -968,73 +1050,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记(dbcp数据库连接池)/" data-id="ckib9qkk7004dootpuq2fdh5q" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据库/JDBC学习笔记（查询SQL语句得到的结果对象）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/28/数据库/JDBC学习笔记（查询SQL语句得到的结果对象）/" class="article-date">
-  <time datetime="2018-04-28T08:01:21.000Z" itemprop="datePublished">2018-04-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/28/数据库/JDBC学习笔记（查询SQL语句得到的结果对象）/">JDBC学习笔记（查询SQL语句得到的结果对象）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/80135931" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/80135931</a><br>   通过Statement或PreparedStatement执行查询SQL语句后会得到一个结果对象（ResultSet）</p>
-<h3 id="一、ResultSet-结果集，操作查询操作后的数据表"><a href="#一、ResultSet-结果集，操作查询操作后的数据表" class="headerlink" title="一、ResultSet:结果集，操作查询操作后的数据表"></a>一、ResultSet:结果集，操作查询操作后的数据表</h3><p> 本质：ResultSet里有一个行指针，指向数据表，默认指向第一行的上方。</p>
-<p> <strong>* 有以下方法:</strong></p>
-<blockquote>
-<p>** * next():将指针往下移动一行，当返回为true时返回当前指向的行数据，否则为false**</p>
-<p> ** * previous():将指针往上移动一行，当返回为true时返回当前指向的行数据，否则为false**</p>
-<p> ** * first():将指针重置为第一行**</p>
-<p> ** * last():将指针重置为最后一行**</p>
-<p> ** * getXxx(int count):得到数据类型为Xxx的第count列数据**</p>
-<p> ** * getXxx(String name):得到数据类型为Xxx的列名为name的数据**</p>
-<p> ** * getMetaData():获得ResultSetMetaData对象**</p>
-<p> 以下为操作示例：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">                 //获得表table_01所有数据的SQL语句</span><br><span class="line">                String sql=&quot;select* from table_01&quot;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                Connection connection=JDBCTools.getConnection();    //JDBCTools为后面集合的工具类，封装了一些方法</span><br><span class="line"></span><br><span class="line">                Statement statement=connection.createStatement();</span><br><span class="line"></span><br><span class="line">                ResultSet resultset=statement.executeQuery(sql);</span><br><span class="line"></span><br><span class="line">                System.out.println(&quot;name&quot;+&quot;\tid&quot;+&quot;\tsex&quot;);</span><br><span class="line"></span><br><span class="line">                while(resultset.next()!=false) &#123;</span><br><span class="line"></span><br><span class="line">                String name=resultset.getString(1);</span><br><span class="line"></span><br><span class="line">                int id=resultset.getInt(2);</span><br><span class="line"></span><br><span class="line">                String sex=resultset.getString(&quot;sex&quot;);</span><br><span class="line"></span><br><span class="line">                System.out.println(name+&quot;\t&quot;+id+&quot;\t&quot;+sex);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                JDBCTools.release(connection, statement,resultset);    //statement、resultset都需要关闭</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="二、ResultSetMetaData：查询后的数据表的信息对象"><a href="#二、ResultSetMetaData：查询后的数据表的信息对象" class="headerlink" title="二、ResultSetMetaData：查询后的数据表的信息对象"></a>二、ResultSetMetaData：查询后的数据表的信息对象</h3><p> ResultSetMetaData对象：通过ResultSet的getMetaData方法获得。</p>
-<p> 提供了以下方法：</p>
-<blockquote>
-<p>** getColumnCount()：获得当前数据表的列数**</p>
-<p> ** getColumnName(int index): 获得当前数据表的列名,从第1列开始，没有第0列。**</p>
-<p> 以下为操作示例：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> </span><br><span class="line">                String sql=&quot;select* from table_01&quot;;</span><br><span class="line"></span><br><span class="line">                ResultSet resultset=JDBCTools.Select(sql);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                ResultSetMetaData resultsetmetadata=resultset.getMetaData();</span><br><span class="line"></span><br><span class="line">                System.out.println(&quot;table_01表:&quot;);</span><br><span class="line"></span><br><span class="line">                for(int i=0;i&lt;resultsetmetadata.getColumnCount();i++) &#123;</span><br><span class="line"></span><br><span class="line">                            System.out.print(resultsetmetadata.getColumnName(i+1)+&quot;\t&quot;);</span><br><span class="line"></span><br><span class="line">                            System.out.println();</span><br><span class="line"></span><br><span class="line">                            while(resultset.next()) &#123;</span><br><span class="line"></span><br><span class="line">                            for(int i=0;i&lt;resultsetmetadata.getColumnCount();i++) &#123;</span><br><span class="line"></span><br><span class="line">                                    System.out.print(resultset.getObject(i+1)+&quot;\t&quot;);</span><br><span class="line">                            &#125;</span><br><span class="line">                    System.out.println();</span><br><span class="line">                &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（查询SQL语句得到的结果对象）/" data-id="ckib9qkkm004lootpvwuksdwn" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记(dbcp数据库连接池)/" data-id="ckibawdps004m64tpxjrtqseq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -1074,7 +1090,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a> <a href="/tags/生活照片/" style="font-size: 10px;">生活照片</a>
+      <a href="/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a> <a href="/tags/生活照片/" style="font-size: 11.43px;">生活照片</a>
     </div>
   </div>
 
@@ -1100,6 +1116,10 @@
           </li>
         
           <li>
+            <a href="/2020/12/05/上传图片测试/">LifeRecord</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
           </li>
         
@@ -1109,10 +1129,6 @@
         
           <li>
             <a href="/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
           </li>
         
       </ul>

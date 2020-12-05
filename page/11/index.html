@@ -66,6 +66,139 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Web/myeclipse新建项目设置编码" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/25/Web/myeclipse新建项目设置编码/" class="article-date">
+  <time datetime="2018-08-25T06:15:20.000Z" itemprop="datePublished">2018-08-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/25/Web/myeclipse新建项目设置编码/">myeclipse新建项目设置编码</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="版权声明：转载请说明去处，文章仅供学习参考-https-blog-csdn-net-qq-38487155-article-details-82051040"><a href="#版权声明：转载请说明去处，文章仅供学习参考-https-blog-csdn-net-qq-38487155-article-details-82051040" class="headerlink" title=" 版权声明：转载请说明去处，文章仅供学习参考 https://blog.csdn.net/qq_38487155/article/details/82051040   "></a> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82051040" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82051040</a>   </h2><p> 最新处理项目编码问题：</p>
+<p> 1、在web.xml里添加以下代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> &lt;filter&gt;</span><br><span class="line">    &lt;display-name&gt;EncodeFilter&lt;/display-name&gt;</span><br><span class="line">    &lt;filter-name&gt;EncodeFilter&lt;/filter-name&gt;</span><br><span class="line">    &lt;filter-class&gt;Encode.EncodeFilter&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">    &lt;filter-name&gt;EncodeFilter&lt;/filter-name&gt;</span><br><span class="line">    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 2、导入：EncodeFilter.java，EncodeRequest.java俩类处理请求</p>
+<p> EncodeFilter.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"> package Encode;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import javax.servlet.Filter;</span><br><span class="line">import javax.servlet.FilterChain;</span><br><span class="line">import javax.servlet.FilterConfig;</span><br><span class="line">import javax.servlet.ServletException;</span><br><span class="line">import javax.servlet.ServletRequest;</span><br><span class="line">import javax.servlet.ServletResponse;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Servlet Filter implementation class EncodeFilter</span><br><span class="line"> */</span><br><span class="line">public class EncodeFilter implements Filter &#123;</span><br><span class="line">	public void destroy() &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException &#123;</span><br><span class="line">		HttpServletRequest req=(HttpServletRequest) request;</span><br><span class="line">		/*</span><br><span class="line">		 * 调包request</span><br><span class="line">		 * 1. 写一个request的装饰类</span><br><span class="line">		 * 2. 在放行(通过过滤器时)，使用我们自己的request</span><br><span class="line">		 */</span><br><span class="line">		if(req.getMethod().equals(&quot;GET&quot;)) &#123;</span><br><span class="line">			EncodeRequest ER = new EncodeRequest(req);</span><br><span class="line">			chain.doFilter(ER, response);</span><br><span class="line">		&#125; else if(req.getMethod().equals(&quot;POST&quot;)) &#123;</span><br><span class="line">			// 处理post请求编码问题</span><br><span class="line">			request.setCharacterEncoding(&quot;utf-8&quot;);</span><br><span class="line">			chain.doFilter(request, response);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public void init(FilterConfig fConfig) throws ServletException &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> EncodeRequest.java</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> package Encode;</span><br><span class="line"></span><br><span class="line">import java.io.UnsupportedEncodingException;</span><br><span class="line"></span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletRequestWrapper;</span><br><span class="line"></span><br><span class="line">public class EncodeRequest extends HttpServletRequestWrapper &#123;</span><br><span class="line">	private HttpServletRequest req;</span><br><span class="line">	</span><br><span class="line">	public EncodeRequest(HttpServletRequest request) &#123;</span><br><span class="line">		super(request);</span><br><span class="line">		this.req = request;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public String getParameter(String name) &#123;</span><br><span class="line">		String value = req.getParameter(name);</span><br><span class="line">		// 处理编码问题</span><br><span class="line">		try &#123;</span><br><span class="line">			value = new String(value.getBytes(&quot;iso-8859-1&quot;), &quot;utf-8&quot;);</span><br><span class="line">		&#125; catch (UnsupportedEncodingException e) &#123;</span><br><span class="line">			throw new RuntimeException(e);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		return value;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 3、在doGet和doPost里设置response编码（添加如下代码）：</p>
+<blockquote>
+<p>response.setContentType(“text/html;charset=utf-8”);</p>
+</blockquote>
+<hr>
+<p> 编码<br> 常见字符编码：iso-8859-1(不支持中文)、gb2312、gbk、gb18030(系统默认编码，中国的国标码)、utf-8(万国码，支持全世界的编码，所以我们使用这个)</p>
+<ol>
+<li>响应编码(Response，即页面显示数据)  </li>
+</ol>
+<ul>
+<li>当使用response.getWriter()来向客户端发送字符数据时，如果在之前没有设置编码，那么默认使用iso，因为iso不支持中文，一定乱码  </li>
+<li>在使用response.getWriter()之前可以使用response.setCharaceterEncoding()来设置字符流的编码为gbk或utf-8，当然我们通常会选择utf-8。这样使用response.getWriter()发送的字符就是使用utf-8编码的。但还是会出现乱码！因为浏览器并不知道服务器发送过来的是什么编码的数据！这时浏览器会使用gbk来解码，所以乱码！  </li>
+<li>在使用response.getWriter()之前可以使用response.setHeader(“Content-type”,”text/html;charset=utf-8”)来设置响应头，通知浏览器服务器这边使用的是utf-8编码，而且在调用setHeader()后，还会自动执行setCharacterEncding()方法。这样浏览器会使用utf-8解码，所以就不会乱码了！  </li>
+<li>setHeader(“Content-Type”, “text/html;charset=utf-8”)的快捷方法是：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">           response.setContentType(&quot;text/html;charset=utf-8&quot;);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>请求编码（Request，即向服务器请求数据）  </li>
+</ol>
+<ul>
+<li>客户端发送给服务器的请求参数是什么编码：<br>客户端首先要打开一个页面，然后在页面中提交表单或点击超链接！在请求这个页面时，服务器响应的编码是什么，那么客户端发送请求时的编码就是什么。  </li>
+<li>服务器端默认使用什么编码来解码参数：<br>服务器端默认使用ISO-8859-1来解码！所以这一定会出现乱码的！因为iso不支持中文！  </li>
+<li>请求编码处理分为两种：GET和POST：GET请求参数不在请求体中，而POST请求参数在请求体中，所以它们的处理方式是不同的！</li>
+</ul>
+<blockquote>
+<blockquote>
+<ul>
+<li>GET请求编码处理：<br>String username = new String(request.getParameter(“iso-8859-1”), “utf-8”);  </li>
+<li>POST请求编码处理：<br>在获取参数之前调用request.setCharacterEncoding(“utf-8”);</li>
+</ul>
+</blockquote>
+<ol start="3">
+<li>URL编码<br>表单的类型：Content-Type: application/x-www-form-urlencoded，就是把中文转换成%后面跟随两位的16进制。<br>为什么要用它：在客户端和服务器之间传递中文时需要把它转换成网络适合的方式。</li>
+</ol>
+</blockquote>
+<ul>
+<li><p>它不是字符编码！  </p>
+</li>
+<li><p>它是用来在客户端与服务器之间传递参数用的一种方式！  </p>
+</li>
+<li><p>URL编码需要先指定一种字符编码，把字符串解码后，得到byte[]，然后把小于0的字节+256，再转换成16进制。前面再添加一个%。  </p>
+</li>
+<li><p>POST请求默认就使用URL编码！tomcat会自动使用URL解码！  </p>
+</li>
+<li><p>URL编码：String username = URLEncoder.encode(username, “utf-8”);  </p>
+</li>
+<li><p>URL解码：String username = URLDecoder.decode(username, “utf-8”);</p>
+<p>我们需要把链接中的中文参数，使用url来编码！今天不行，html中不能给出java代码，jsp就可以。</p>
+<p>路径  </p>
+</li>
+<li><p>web.xml中<url-pattern>路径，（叫它Servlet路径！）  </url-pattern></p>
+<blockquote>
+<p>要么以“*”开关，要么为“/”开头  </p>
+</blockquote>
+</li>
+<li><p>转发和包含路径  </p>
+<blockquote>
+<p>*****以“/”开头：相对当前项目路径，例如：<a href="http://localhost:8080/项目名/" target="_blank" rel="noopener">http://localhost:8080/项目名/</a> request.getRequestdispacher(“/BServlet”).for…();<br>不以“/”开头：相对当前Servlet路径。 request.getRequestdispacher(“/BServlet”).for…();，假如当前Servlet是：<a href="http://localhost:8080/项目名/servlet/AServlet，" target="_blank" rel="noopener">http://localhost:8080/项目名/servlet/AServlet，</a> 就是<a href="http://localhost:8080/项目名/servlet/BServlet" target="_blank" rel="noopener">http://localhost:8080/项目名/servlet/BServlet</a>  </p>
+</blockquote>
+</li>
+<li><p>重定向路径（客户端路径）  </p>
+<blockquote>
+<p>以“/”开头：相对当前主机，例如：<a href="http://localhost:8080/，" target="_blank" rel="noopener">http://localhost:8080/，</a> 所以需要自己手动添加项目名，例如；response.sendRedirect(“/day10_1/Bservlet”);  </p>
+</blockquote>
+</li>
+<li><p>页面中超链接和表单路径  </p>
+<blockquote>
+<p>与重定向相同，都是客户端路径！需要添加项目名</p>
+</blockquote>
+</li>
+</ul>
+<hr>
+<p> myeclipse新建项目设置编码</p>
+<p> 按以下操作设置：</p>
+<ol>
+<li>General –&gt; Workspace –&gt; UTF-8  </li>
+<li>General –&gt; Editors –&gt; Associations –&gt; JSP –&gt; MyEclipse JSP Editor  </li>
+<li>搜索jsp –&gt; UTF-8  </li>
+<li>Java –&gt; Installed JREs –&gt; 添加  </li>
+<li>Tomcat  </li>
+<li>去除MyEclise自带tomcat  </li>
+<li>General –&gt; Startup and Shutdown –&gt; MyEclipse Derby</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/08/25/Web/myeclipse新建项目设置编码/" data-id="ckibawdnr002c64tpjaz51c0n" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Web/JavaWeb的Servlet、ServletContext" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/08/22/Web/JavaWeb的Servlet、ServletContext/" class="article-date">
@@ -144,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/08/22/Web/JavaWeb的Servlet、ServletContext/" data-id="ckib9qki3001pootpqn8dmoao" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/08/22/Web/JavaWeb的Servlet、ServletContext/" data-id="ckibawdnd001u64tpmqmec4i5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -2112,7 +2245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/08/18/前端/HTML、CSS、JavaScript完整版知识点整合/" data-id="ckib9qkod008qootphdrn4f0t" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/08/18/前端/HTML、CSS、JavaScript完整版知识点整合/" data-id="ckibawduc008r64tpytv74tov" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -2161,7 +2294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/08/14/Android/Android阶段总结/" data-id="ckib9qkhb000tootp9xght17p" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/08/14/Android/Android阶段总结/" data-id="ckibawdml000u64tpka7xi86x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -2229,7 +2362,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/08/12/Android/Android里使用百度地图api/" data-id="ckib9qkml0076ootp9m6lg249" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/08/12/Android/Android里使用百度地图api/" data-id="ckibawdrx007864tp7crv1jqf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -2304,7 +2437,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/31/Android/Android的开发技巧/" data-id="ckib9qkh0000hootprpn01m9a" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/31/Android/Android的开发技巧/" data-id="ckibawdmf000m64tpw2680xzx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -2347,7 +2480,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/28/Android/Android Studio导入三方jar包、so包/" data-id="ckib9qkgj0004ootp9tnd5ol0" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/28/Android/Android Studio导入三方jar包、so包/" data-id="ckibawdly000a64tpgpnw7lwv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -2438,7 +2571,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/22/Android/Android里的服务Service/" data-id="ckib9qkmr007bootp0xryy6t0" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/22/Android/Android里的服务Service/" data-id="ckibawds2007c64tp0n7ug55w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -2501,7 +2634,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/21/Android/Android里如何在子线程更新UI/" data-id="ckib9qkh8000pootpd2jirvo8" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/21/Android/Android里如何在子线程更新UI/" data-id="ckibawdmj000s64tp9uc7x1mc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -2635,89 +2768,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/20/Android/Android里的多媒体/" data-id="ckib9qknp008aootp1nt22hju" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Android/Android的广播接收器BroadcastReceiver" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/07/13/Android/Android的广播接收器BroadcastReceiver/" class="article-date">
-  <time datetime="2018-07-12T16:56:24.000Z" itemprop="datePublished">2018-07-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/13/Android/Android的广播接收器BroadcastReceiver/">Android的广播接收器BroadcastReceiver</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81024098" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81024098</a>   </p>
-<h3 id="注意-广播的注册最好不要在监听方法内，容易造成onReceiver-方法调用多次"><a href="#注意-广播的注册最好不要在监听方法内，容易造成onReceiver-方法调用多次" class="headerlink" title="注意:广播的注册最好不要在监听方法内，容易造成onReceiver()方法调用多次"></a>注意:广播的注册最好不要在监听方法内，容易造成onReceiver()方法调用多次</h3><p> 一、广播分为<strong>标准广播</strong>，<strong>有序广播，</strong>本地广播****。Android内置了很多系统广播，我们可以监听这些广播来得到系统信息，如开机完成后的广播，电池电量变化广播等等。</p>
-<p> <strong>标准广播：系统内广播，任何应用几乎同时收到</strong></p>
-<p> ** 有序广播（一般静态注册）：系统内广播，应用按优先级分先后<strong>收到，先收到的广播接收器可切断该广播继续往下传播**</strong></p>
-<p> ** 本地广播（只能动态注册）：应用内广播，只能在应用内传播，安全性高，推荐使用**</p>
-<p> 二、广播的俩种注册方式： 静态注册，动态注册，注册后必须在onDestroy()里取消注册广播接收器</p>
-<p> 不管是动态注册还是静态注册，若涉及到系统关键信息都需要在XML注册文件添加权限</p>
-<p> 如： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//监听开机广播权限</span><br><span class="line"></span><br><span class="line">        &lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;/&gt;</span><br><span class="line"></span><br><span class="line">        对应的系统广播：android.intent.action.BOOT_COMPLETED</span><br><span class="line"></span><br><span class="line">        //查询系统网络状态权限</span><br><span class="line"></span><br><span class="line">        &lt;uses-permission android:name=&quot;android.permission.RECEIVE_BOOT_COMPLETED&quot;/&gt;      </span><br><span class="line"></span><br><span class="line">        对应的系统广播：android.net.conn.CONNECTIVITY_CHANGE</span><br></pre></td></tr></table></figure>
-
-<p> <strong>静态注册：在XML注册文件里注册广播接收器和发送的广播，后定义广播接收类继承于BroadcastReceiver,重写</strong></p>
-<p> ** onReceive(Context context, Intent intent)**</p>
-<p> 格式： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">          &lt;receiver</span><br><span class="line">            android:name=&quot;.广播接收器类名&quot;&gt;</span><br><span class="line">            &lt;intent-filter&gt;</span><br><span class="line">                &lt;action android:name=&quot;自定义广播或系统广播&quot; /&gt;</span><br><span class="line">            &lt;/intent-filter&gt;</span><br><span class="line">         &lt;/receiver&gt;</span><br><span class="line"></span><br><span class="line">        public class MyBroadcastReceiver extends BroadcastReceiver &#123;</span><br><span class="line">                public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">                        Toast.makeText(context, &quot;接收到标准广播&quot;,Toast.LENGTH_SHORT).show();</span><br><span class="line">                        abortBroadcast();</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br></pre></td></tr></table></figure>
-
-<p> ** 动态注册：直接在Activity类里调用registerReceiver(BroadcastReceive,IntentFilter)方法发送广播，后定义广播接收**</p>
-<p> ** 类继承于BroadcastReceiver,重写onReceive(Context context,Intent intent)**</p>
-<p> Activity补充方法 ： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> registerReceiver(BroadcastReceive,IntentFilter)：注册广播接收器</span><br><span class="line"></span><br><span class="line">unregisterReceiver( BroadcastReceive)：取消注册广播接收器</span><br><span class="line"></span><br><span class="line">sendBroadcast(Intent):发送标准广播</span><br><span class="line"></span><br><span class="line">sendOrderedBroadcast(Intent,null):发送有序广播，有序广播在intent-filter标签的android:priority    </span><br><span class="line">                                  属性设置优先级，采用静态注册方式。</span><br><span class="line"></span><br><span class="line">abortBroadcast():在onReceive()里调用，用来截断有序广播</span><br></pre></td></tr></table></figure>
-
-<p> Intent补充知识： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> ​</span><br><span class="line">Intent(String):String为被启动活动的XML文件里的&lt;intent-filter&gt;里的&lt;action&gt;里的android:name属性</span><br><span class="line">值，在发送广播时String为系统广播或自定义广播，也就是&lt;receiver&gt;里的&lt;intent-filter&gt;里的&lt;action&gt; 里</span><br><span class="line">的android:name属性值</span><br><span class="line"></span><br><span class="line">​</span><br></pre></td></tr></table></figure>
-
-<p> IntentFilter类：通过Intent的 <action>标签的android:name属性过滤掉不对应的广播</action></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">    方法：addAction(String):String为系统广播或自定义广播</span><br></pre></td></tr></table></figure>
-
-
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   动态提醒网络变化例子(记得添加权限和在Activity里注册广播接收器)：</span><br><span class="line"></span><br><span class="line">public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line"></span><br><span class="line">           Connectivity ManagerconnctivityManager=</span><br><span class="line"></span><br><span class="line">                     (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);</span><br><span class="line"></span><br><span class="line">           NetworkInfo networkInfo=connctivityManager.getActiveNetworkInfo();</span><br><span class="line">           if(networkInfo!=null&amp;&amp;networkInfo.isAvailable()) &#123;</span><br><span class="line">               Toast.makeText(context, &quot;网络可用&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">           &#125;else &#123;</span><br><span class="line">                Toast.makeText(context, &quot;网络不可用&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">           &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 三、本地广播发送<strong>(接收不到系统广播,即接收不到标准广播和有序广播，只能接收自己发送的自定义本地广播)</strong></p>
-<p> ** 1、 需要导入android-support-v4.jar包**</p>
-<p> Eclipse导入方法：<br> Project &gt;&gt; Properties &gt;&gt; Java Build Path &gt;&gt; Libraries &gt;&gt; Add External JARs<br> 找到之前下载好的android-support-v4.jar，打开后可以看到已经添加进去列表中了，此时还需要点击 Order and Export，勾 选android-support-v4.jar 这一项，然后点击OK即可。<br> 此时回到代码界面，按快捷键ctrl + shift + O即可自动导入LocalBroadcastManager。<br> 也可以手动导入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import android.support.v4.content.LocalBroadcastManager;</span><br></pre></td></tr></table></figure>
-
-<p> 完成后LocalBroadcastManager 不再报错，ctrl + S保存并刷新MainActivity.java。 </p>
-<p> 程序即可正常运行。</p>
-<p> ** 2、与动态注册一样接收使用IntentFilter类和自定义广播接收类接收广播，不同点在于注册广播，发送广播，取消注册广播 都使用LocalReceiverManager类，不使用Activity类，但仍需写在Activity里.** </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  LocalBroadcastManager类用来发送广播有以下方法：</span><br><span class="line"></span><br><span class="line">        LocalBroadcastManager.getInstance(this):静态方法，构建一个LocalBroadcastManager类实例</span><br><span class="line"></span><br><span class="line">        registerReceiver(BroadcastReceive,IntentFilter)：注册广播接收器</span><br><span class="line"></span><br><span class="line">        unregisterReceiver( BroadcastReceive)：取消注册广播接收器</span><br><span class="line"></span><br><span class="line">        sendBroadcast(Intent):发送标准广播</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/13/Android/Android的广播接收器BroadcastReceiver/" data-id="ckib9qkgx000eootp8fwtnw7t" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/20/Android/Android里的多媒体/" data-id="ckibawdt4008b64tp1blhyzlc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -2757,7 +2808,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a> <a href="/tags/生活照片/" style="font-size: 10px;">生活照片</a>
+      <a href="/tags/Android/" style="font-size: 18.57px;">Android</a> <a href="/tags/C/" style="font-size: 12.86px;">C++</a> <a href="/tags/Git/" style="font-size: 11.43px;">Git</a> <a href="/tags/Java基础/" style="font-size: 15.71px;">Java基础</a> <a href="/tags/Web/" style="font-size: 20px;">Web</a> <a href="/tags/Web高阶/" style="font-size: 18.57px;">Web高阶</a> <a href="/tags/前端/" style="font-size: 14.29px;">前端</a> <a href="/tags/基础操作/" style="font-size: 10px;">基础操作</a> <a href="/tags/数据库/" style="font-size: 15.71px;">数据库</a> <a href="/tags/数据结构与算法/" style="font-size: 17.14px;">数据结构与算法</a> <a href="/tags/生活照片/" style="font-size: 11.43px;">生活照片</a>
     </div>
   </div>
 
@@ -2783,6 +2834,10 @@
           </li>
         
           <li>
+            <a href="/2020/12/05/上传图片测试/">LifeRecord</a>
+          </li>
+        
+          <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
           </li>
         
@@ -2792,10 +2847,6 @@
         
           <li>
             <a href="/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/14/Web高阶/springboot项目中使用mybatis逆向工程生成代码实例/">springboot项目中使用mybatis逆向工程生成代码实例</a>
           </li>
         
       </ul>
