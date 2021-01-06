@@ -66,6 +66,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据结构与算法/八皇后问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/29/数据结构与算法/八皇后问题/" class="article-date">
+  <time datetime="2018-01-28T19:36:45.000Z" itemprop="datePublished">2018-01-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/29/数据结构与算法/八皇后问题/">八皇后问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79191125" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79191125</a><br>   <strong>首先，我们需要了解八皇后是什么？**</strong><a href="https://baike.baidu.com/item/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/11053477?fr=aladdin&amp;fromid=10742426&amp;fromtitle=%E5%85%AB%E7%9A%87%E5%90%8E" target="_blank" rel="noopener">八皇后问题</a>（可点击访问）<strong>**是指在一个 8×8 的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后。</strong></p>
+<p> <strong>听起来总是很简单，但实际上<img src="https://img-blog.csdn.net/20180129031257963?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt></strong></p>
+<p> **<br>**</p>
+<p> <strong>好了，开始进入正题：</strong></p>
+<p> <strong>首先构造一个皇后节点类（每一个节点拥有八个方向的节点指针，可以说就是个罗盘）</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129031728567?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>接下来是八皇后的数组类（stl作为八皇后节点的容器栈）</strong></p>
+<p> *<em><img src alt><img src="https://img-blog.csdn.net/20180129031948046?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>最后，就是各个函数的实现了。</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032319550?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032446154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032633219?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032823017?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033034603?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033206167?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><img src="https://img-blog.csdn.net/20180129033311408?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>到这就基本结束了，具体实现函数有231行，基本都有注释，欢迎提出改进意见。</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033558768?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> **<br>**</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/01/29/数据结构与算法/八皇后问题/" data-id="ckjlnzecp005n2stp6k6ir088" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-c++/八皇后问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/01/29/c++/八皇后问题/" class="article-date">
@@ -110,7 +166,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/01/29/c++/八皇后问题/" data-id="ckibb3hin003fxctpregu7am8" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/01/29/c++/八皇后问题/" data-id="ckjlnzeb6003z2stpu6dlv6ju" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
@@ -149,7 +205,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2017/10/08/c++/c++引用/" data-id="ckibb3hip003ixctpjjmkyhx5" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2017/10/08/c++/c++引用/" data-id="ckjlnzeah003d2stp2mxdl2ff" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
@@ -195,7 +251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2017/10/06/c++/c++里的const/" data-id="ckibb3him003dxctpy85zsfif" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2017/10/06/c++/c++里的const/" data-id="ckjlnzeaq003i2stpaa9hm3ed" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
@@ -244,7 +300,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
     </div>
   </div>
 
@@ -255,6 +311,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2020/12/05/上传图片测试/">上传图片测试</a>
@@ -272,10 +332,6 @@
             <a href="/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
           </li>
         
-          <li>
-            <a href="/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -288,7 +344,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2020 Qin Lin<br>
+      &copy; 2021 Qin Lin<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

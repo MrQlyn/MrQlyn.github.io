@@ -66,6 +66,95 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据库/JDBC学习笔记(dbcp数据库连接池)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/28/数据库/JDBC学习笔记(dbcp数据库连接池)/" class="article-date">
+  <time datetime="2018-04-28T08:27:06.000Z" itemprop="datePublished">2018-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/28/数据库/JDBC学习笔记(dbcp数据库连接池)/">JDBC学习笔记(dbcp数据库连接池)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/80136235" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/80136235</a><br>   常用的数据库连接池有俩种：dbcp和c3p0</p>
+<p> 数据库连接池作用：可以控制数据库连接池来优化效率，使得连接不必频繁获得和关闭操作</p>
+<h3 id="dbcp数据库连接池"><a href="#dbcp数据库连接池" class="headerlink" title="dbcp数据库连接池"></a>dbcp数据库连接池</h3><p> <strong>使用前必须导入：mysql-connector-java-5.1.7-bin.jar，commons-dbcp-1.4.jar和commons-pool-1.5.5.jar俩个jar包</strong></p>
+<p> dbcp数据库连接池的创建有俩种方式。</p>
+<p> 第一种：提供BasicDataSource类，来创建连接池</p>
+<p> BasicDataSource里提供了以下方法：</p>
+<blockquote>
+<p>*** setInitialSize(int count):设置连接池初始化连接个数  </p>
+<ul>
+<li><p>setMaxActive(int count):设置同一时刻允许向数据库同时申请连接个数  </p>
+</li>
+<li><p>setMinIdle(int count):设置连接池允许存在的最少空闲连接数目  </p>
+</li>
+<li><p>setMaxWait(int count):设置向连接池申请连接的时间（单位为毫秒），超过时间会抛出异常**</p>
+</li>
+<li><ul>
+<li><ul>
+<li>getConnection():获得连接对象Connection**</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p> 以下为操作示例：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> BasicDataSource basicDataSource=new BasicDataSource();</span><br><span class="line"></span><br><span class="line">//设置连接池操作信息</span><br><span class="line">basicDataSource.setDriverClassName(&quot;com.mysql.jdbc.Driver&quot;);//设置数据库类型</span><br><span class="line">basicDataSource.setUrl(&quot;jdbc:mysql://localhost:3306/test&quot;);//设置连接数据库名</span><br><span class="line">basicDataSource.setUsername(&quot;root&quot;);    //设置用户名</span><br><span class="line">basicDataSource.setPassword(&quot;123456&quot;);  //设置登录密码</span><br><span class="line"></span><br><span class="line">//设置连接池初始化连接个数</span><br><span class="line">basicDataSource.setInitialSize(10);</span><br><span class="line"></span><br><span class="line">//设置同一时刻内允许向连接池获得连接的最大连接数</span><br><span class="line">basicDataSource.setMaxActive(20);</span><br><span class="line"></span><br><span class="line">//设置在连接池内允许保存的最小空闲连接数</span><br><span class="line">basicDataSource.setMinIdle(5);</span><br><span class="line"></span><br><span class="line">//等待连接池分配连接的最长时间（单位为毫秒），超出该时间抛出异常，</span><br><span class="line">basicDataSource.setMaxWait(5*1000);</span><br><span class="line"></span><br><span class="line">//从连接池获得连接</span><br><span class="line">Connection connection=basicDataSource.getConnection();</span><br><span class="line"></span><br><span class="line">System.out.println(connection.getClass());</span><br></pre></td></tr></table></figure>
+
+<p> 第二种方法：提供DataSource类，来创建连接池</p>
+<p> ** BasicDataSourceFactory().createDataSource(properties)：通过配置文件获得DataSource对象<br> getConnection():获得连接<br> 注意：其余设置均可在配置文件完成，但需要名字小写开头且与方法名字对应**  </p>
+<ul>
+<li><p>如:  </p>
+</li>
+<li><p>driverClassName=com.mysql.jdbc.Driver  </p>
+</li>
+<li><p>url=jdbc:mysql://localhost:3306/test  </p>
+</li>
+<li><p>maxActive=20</p>
+<p>此方法通过读取配置文件设置好数据库连接池的设置</p>
+<p>先在src目录下创建一个dbcp.properties配置文件,设置好以下参数</p>
+</li>
+</ul>
+<blockquote>
+<p>driverClassName=com.mysql.jdbc.Driver<br> url=jdbc:mysql://localhost:3306/test<br> username=root<br> password=123456  </p>
+<p> initialSize=10<br> maxActive=20<br> minIdle=5</p>
+<p> maxWait=5000</p>
+<p> 再回到创建方法里：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">                 //第二种获得连接的方法</span><br><span class="line">                Properties properties=new Properties();</span><br><span class="line">                InputStream input=Use_dbcp.class.getClassLoader().getResourceAsStream(&quot;dbcp.properties&quot;);</span><br><span class="line">                properties.load(input);</span><br><span class="line"></span><br><span class="line">               //通过配置文件设置连接池所有需要的参数</span><br><span class="line">              DataSource datasource=new BasicDataSourceFactory().createDataSource(properties);</span><br><span class="line"></span><br><span class="line">              System.out.println(datasource.getConnection());</span><br></pre></td></tr></table></figure>
+
+
+<p>### </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记(dbcp数据库连接池)/" data-id="ckjlnzebo004k2stp2urg0zd4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-数据库/JDBC学习笔记（查询SQL语句得到的结果对象）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/04/28/数据库/JDBC学习笔记（查询SQL语句得到的结果对象）/" class="article-date">
@@ -120,7 +209,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（查询SQL语句得到的结果对象）/" data-id="ckibb3hk4004pxctp0oxq6ng4" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（查询SQL语句得到的结果对象）/" data-id="ckjlnzebw004p2stpzseoajz6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -199,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/" data-id="ckibb3hjv004lxctp8j6owvot" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/" data-id="ckjlnzecy005v2stpfc0e7zqv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -292,7 +381,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/" data-id="ckibb3hk5004rxctpqrzrs8hm" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/" data-id="ckjlnzec2004t2stp96qzv34b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -357,7 +446,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/18/前端/JQuery笔记/" data-id="ckibb3hn40081xctpiebdu2p1" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/18/前端/JQuery笔记/" data-id="ckjlnzef3007u2stpajso6otp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -543,7 +632,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/HTML笔记/" data-id="ckibb3hn3007zxctpvhdt3gbz" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/HTML笔记/" data-id="ckjlnzef4007w2stp31h06kwl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -603,7 +692,7 @@ background-color:red;color:green
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/CSS笔记/" data-id="ckibb3hja0043xctpldyptzjh" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/CSS笔记/" data-id="ckjlnzebe004b2stpi6u0ktez" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -670,7 +759,7 @@ background-color:red;color:green
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/JavaScript笔记/" data-id="ckibb3hn60083xctpep16g96n" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/JavaScript笔记/" data-id="ckjlnzef900822stppmtxlsd1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -724,7 +813,7 @@ background-color:red;color:green
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/03/30/数据库/修改mysql默认密码方法/" data-id="ckibb3hkk0055xctprz1s3czj" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/03/30/数据库/修改mysql默认密码方法/" data-id="ckjlnzec800512stp2lzqrf0k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -768,66 +857,10 @@ background-color:red;color:green
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/02/03/基础操作/win10禁用笔记本原本键盘/" data-id="ckibb3hjh004dxctpcskcyxrn" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/02/03/基础操作/win10禁用笔记本原本键盘/" data-id="ckjlnzeb700412stplfoj8id7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础操作/">基础操作</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据结构与算法/八皇后问题" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/29/数据结构与算法/八皇后问题/" class="article-date">
-  <time datetime="2018-01-28T19:36:45.000Z" itemprop="datePublished">2018-01-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/29/数据结构与算法/八皇后问题/">八皇后问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79191125" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79191125</a><br>   <strong>首先，我们需要了解八皇后是什么？**</strong><a href="https://baike.baidu.com/item/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/11053477?fr=aladdin&amp;fromid=10742426&amp;fromtitle=%E5%85%AB%E7%9A%87%E5%90%8E" target="_blank" rel="noopener">八皇后问题</a>（可点击访问）<strong>**是指在一个 8×8 的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后。</strong></p>
-<p> <strong>听起来总是很简单，但实际上<img src="https://img-blog.csdn.net/20180129031257963?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt></strong></p>
-<p> **<br>**</p>
-<p> <strong>好了，开始进入正题：</strong></p>
-<p> <strong>首先构造一个皇后节点类（每一个节点拥有八个方向的节点指针，可以说就是个罗盘）</strong></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129031728567?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> <strong>接下来是八皇后的数组类（stl作为八皇后节点的容器栈）</strong></p>
-<p> *<em><img src alt><img src="https://img-blog.csdn.net/20180129031948046?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> <strong>最后，就是各个函数的实现了。</strong></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129032319550?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129032446154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129032633219?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129032823017?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129033034603?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129033206167?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><img src="https://img-blog.csdn.net/20180129033311408?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> <strong>到这就基本结束了，具体实现函数有231行，基本都有注释，欢迎提出改进意见。</strong></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129033558768?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> **<br>**</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/01/29/数据结构与算法/八皇后问题/" data-id="ckibb3hki0053xctpn5kjbmse" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
 
     </footer>
   </div>
@@ -873,7 +906,7 @@ background-color:red;color:green
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
     </div>
   </div>
 
@@ -884,6 +917,10 @@ background-color:red;color:green
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2020/12/05/上传图片测试/">上传图片测试</a>
@@ -901,10 +938,6 @@ background-color:red;color:green
             <a href="/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
           </li>
         
-          <li>
-            <a href="/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -917,7 +950,7 @@ background-color:red;color:green
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2020 Qin Lin<br>
+      &copy; 2021 Qin Lin<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

@@ -66,6 +66,58 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Web高阶/SSM异常" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/14/Web高阶/SSM异常/" class="article-date">
+  <time datetime="2019-07-14T03:01:44.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/14/Web高阶/SSM异常/">SSM异常</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   1、文档根元素 “mapper” 必须匹配 DOCTYPE 根 “null”：sql映射文件没有加说明</p>
+<p> 在sql映射文件上面添加说明：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;         </span><br><span class="line">   &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 2、元素类型为 “configuration” 的内容必须匹配 “(properties?,settings?,typeAliases?,typeHandlers?,objectFactory?,objectWrapperFactory?,reflectorFactory?,plugins?,environments?,databaseIdProvider?,mappers?)”。</p>
+<p> 问题：只能有一个<mappers>标签</mappers></p>
+<p> 解决：去除多余<mappers>，将<mapper>写在一个<mappers>里</mappers></mapper></mappers></p>
+<p> 3、No qualifying bean of type [Bean.Pig] is defined: expected single matching bean but found 2: pig1,pig2</p>
+<p> 问题：spring的xml文件里Bean有多个&lt;Bean绑定Bean类，getBean(Class)方法只能获取xml文件里只有一个<bean>的对象</bean></p>
+<p> 4、org.springframework.beans.NullValueInNestedPathException: Invalid property ‘pig’ of bean class [Bean.Person]: Value of nested property ‘pig’ is null</p>
+<p> 问题：spring里的Bean文件使用了级联属性，但没有先初始化Bean属性对象。</p>
+<p> 解决：先初始化Bean属性对象</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SSM异常/" data-id="ckjlnze9v002p2stptic1mbml" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Web高阶/Mybatis缓存篇" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/14/Web高阶/Mybatis缓存篇/" class="article-date">
@@ -124,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Mybatis缓存篇/" data-id="ckibb3hhz002pxctpzygwigxm" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Mybatis缓存篇/" data-id="ckjlnze9t002n2stp1f3smir9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -241,7 +293,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Mybatis动态拼接SQL语句篇/" data-id="ckibb3hhw002lxctpyg4rkdk1" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Mybatis动态拼接SQL语句篇/" data-id="ckjlnzeaa00352stpx8751bs3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -350,7 +402,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/MyBatis自定义映射规则篇（连接查询，需要修改对应映射时使用）/" data-id="ckibb3hmr007jxctp8pkk1ohp" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/MyBatis自定义映射规则篇（连接查询，需要修改对应映射时使用）/" data-id="ckjlnzees007e2stpbt8e3gs3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -393,7 +445,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/数据库/JDBCTool（JDBCTools的更新版，cp30版本）/" data-id="ckibb3hnc0089xctpo0aaylrk" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/数据库/JDBCTool（JDBCTools的更新版，cp30版本）/" data-id="ckjlnzefa00842stphrkzu1m2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -436,7 +488,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/数据库/JDBCTools类/" data-id="ckibb3hn70085xctptbjnhlul" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/数据库/JDBCTools类/" data-id="ckjlnzef700802stp7fwoj4ho" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -479,7 +531,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/数据库/JDBCTool（JDBCTools的更新版，dbcp版本）/" data-id="ckibb3hjo004hxctp8tdvidi7" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/数据库/JDBCTool（JDBCTools的更新版，dbcp版本）/" data-id="ckjlnzebl004i2stpcbcxet55" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -522,7 +574,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/java基础/ReflectionUtils/" data-id="ckibb3hjc0046xctpm78jww2r" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/java基础/ReflectionUtils/" data-id="ckjlnzebk004g2stp2jc52wqe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
@@ -570,7 +622,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/java基础/Java文件IO代码/" data-id="ckibb3hnt008lxctpqusczhn7" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/java基础/Java文件IO代码/" data-id="ckjlnzeg6008g2stp7b6a5qib" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
@@ -613,91 +665,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/java基础/IOFile（文件工具）/" data-id="ckibb3hnp008hxctpnf4pvawf" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java基础/Java基本功：重要知识点" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/07/14/java基础/Java基本功：重要知识点/" class="article-date">
-  <time datetime="2019-07-14T02:55:50.000Z" itemprop="datePublished">2019-07-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/14/java基础/Java基本功：重要知识点/">Java基本功：重要知识点</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>   <strong>目录</strong></p>
-<p> <a href="#%E4%B8%80%E3%80%81%E5%88%9B%E5%BB%BA%E7%B1%BB%E6%98%AF%E5%8F%AF%E9%87%8D%E5%86%99%E6%96%B9%E6%B3%95">一、创建类是可重写方法</a></p>
-<p> <a href="#%E4%BA%8C%E3%80%81%E5%B8%B8%E7%94%A8%E6%98%93%E9%94%99%E7%82%B9">二、常用易错点</a></p>
-<p> <a href="#%E4%B8%89%E3%80%81%E7%B1%BB%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86%E7%82%B9">三、类的基本知识点</a></p>
-<hr>
-<h3 id="一、创建类是可重写方法"><a href="#一、创建类是可重写方法" class="headerlink" title="一、创建类是可重写方法"></a>一、创建类是可重写方法</h3><blockquote>
-<p>equals()：比较内容是否相等</p>
-<p> finalize()：析构函数，即类回收时调用函数，不建议过多使用</p>
-<p> toString()：设置当前类的字符串显示，即System.out.println(类名)时显示内容</p>
-<blockquote>
-<p> 注意：所有使用Collection.sort()或Array.sort()方法要自定义排序规则时需要重写compare或compareTo</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;    int compareTo(Object o)：在使用Array.sort()进行排序时，会自动调用compareTo()进行比较大小，</span><br><span class="line">                           返回值为-1，0，1，分别表示当前类小于，等于，大于传入对象，同时当前</span><br><span class="line">                           类要继承java.lang.Comparable接口</span><br><span class="line"></span><br><span class="line">  int compare(Object o1,Object o2)：与compareTo()同理，调用Array.sort()时会自动调用。</span><br><span class="line">                                    优点是不改变当前类，继承于java.util.Comparator，</span><br><span class="line">                                    主要比较的是o1，和o2，当前类可参与或不参与。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p> 注意：所有使用HashSet、HashMap容器都必须要重写hashCode()和equals()方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;  int hashCode()：获得散列码，计算当前类在数组中的位置，即插入哪条链表，通俗点说：给存入Hash队列类分组</span><br><span class="line"></span><br><span class="line">boolean equals()：判断类与链表中的灭哥哥元素是否相同</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-</blockquote>
-<h3 id="二、常用易错点"><a href="#二、常用易错点" class="headerlink" title="二、常用易错点"></a>二、常用易错点</h3><blockquote>
-<blockquote>
-<ol>
-<li>static是访问上限制，可以拥有非静态，非static是拥有上限制，可以访问static 拥有指<strong>内部类</strong>拥有变量，访问指<strong>内部方法</strong>访问变量。 </li>
-<li>引用类型==和!=比较的是对象引用，一般用equals()比较内容是否相同。同理：引用类型赋值是引用传递，基本类型复制是值传递 </li>
-<li>&amp;&amp;和||为短路运算符，&amp;&amp;前面条件为假则后面不执行判断。||前条件为真则后面不执行判断。 </li>
-<li>String变量==比较的是引用地址 </li>
-<li>静态方法可用类名直接调用 </li>
-<li>默认导入包为java.lang </li>
-</ol>
-</blockquote>
-</blockquote>
-<h3 id="三、类的基本知识点"><a href="#三、类的基本知识点" class="headerlink" title="三、类的基本知识点"></a>三、类的基本知识点</h3><blockquote>
-<blockquote>
-<ol>
-<li>类只能单一继承（<strong>一个父类</strong>），接口能多重继承（<strong>n个父接口</strong>）。 </li>
-<li>类继承类：extends 类继承接口：implements 接口继承接口：extends </li>
-<li>abstratc比interface优点在于：abstract（抽象类）可以只实现部分方法，interface（接口）必须实现所有抽象方法。 </li>
-<li>子类构造方法没有显式调用父类构造方法时，子类在实例化时会自动调用super()，即父类构造方法 </li>
-<li>super()和this()都只能放在第一行，所以有super()没this()，有this()没super ()  </li>
-<li>缺省模式：多个接口继承于单个抽象类 </li>
-<li>final 变量：常量 方法：不可重写 类：不能被继承  </li>
-</ol>
-</blockquote>
-</blockquote>
-<p> · </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/java基础/Java基本功：重要知识点/" data-id="ckibb3hj4003xxctpl5327774" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/java基础/IOFile（文件工具）/" data-id="ckjlnzeg1008e2stplg95lmtm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
@@ -746,7 +714,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
     </div>
   </div>
 
@@ -757,6 +725,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2020/12/05/上传图片测试/">上传图片测试</a>
@@ -774,10 +746,6 @@
             <a href="/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
           </li>
         
-          <li>
-            <a href="/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -790,7 +758,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2020 Qin Lin<br>
+      &copy; 2021 Qin Lin<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

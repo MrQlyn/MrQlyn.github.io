@@ -66,6 +66,84 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Web/CommonUtils工具类" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/09/Web/CommonUtils工具类/" class="article-date">
+  <time datetime="2018-09-09T03:03:07.000Z" itemprop="datePublished">2018-09-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/09/Web/CommonUtils工具类/">CommonUtils工具类</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82556638" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82556638</a><br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> package Tool;</span><br><span class="line"></span><br><span class="line">import java.util.Map;</span><br><span class="line">import java.util.UUID;</span><br><span class="line"></span><br><span class="line">import javax.swing.text.StyledEditorKit.ForegroundAction;</span><br><span class="line"></span><br><span class="line">import org.apache.commons.beanutils.BeanUtils;</span><br><span class="line"></span><br><span class="line">public class commonUtils &#123;</span><br><span class="line">	//生成不重复的32位长的大写字符串</span><br><span class="line">	public static String uuid() &#123;</span><br><span class="line">		return UUID.randomUUID().toString().replace(&quot;-&quot;, &quot;&quot;).toUpperCase();</span><br><span class="line">	&#125;</span><br><span class="line">	// 把map转换成指定类型的javaBean对象</span><br><span class="line">	public static &lt;T&gt; T toBean(Map map, Class&lt;T&gt; clazz) &#123;</span><br><span class="line">		try &#123;</span><br><span class="line">			/*</span><br><span class="line">			 * 1. 创建指定类型的javabean对象</span><br><span class="line">			 */</span><br><span class="line">			T bean = clazz.newInstance();</span><br><span class="line">			/*</span><br><span class="line">			 * 2. 把数据封装到javabean中</span><br><span class="line">			 */</span><br><span class="line">			BeanUtils.populate(bean, map);</span><br><span class="line">			/*</span><br><span class="line">			 * 3. 返回javabean对象</span><br><span class="line">			 */</span><br><span class="line">			return bean;</span><br><span class="line">		&#125; catch(Exception e) &#123;</span><br><span class="line">			throw new RuntimeException(e);		//如果想让用户调用时不用try-catch，使用throw new RuntimeException(e)来抛出运行异常</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/09/09/Web/CommonUtils工具类/" data-id="ckjlnze8i00192stp4wedlzcj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java基础/Java代码生成不重复的32位长的大写字符串" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/09/java基础/Java代码生成不重复的32位长的大写字符串/" class="article-date">
+  <time datetime="2018-09-09T02:19:21.000Z" itemprop="datePublished">2018-09-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/09/java基础/Java代码生成不重复的32位长的大写字符串/">Java代码生成不重复的32位长的大写字符串</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   public static String uuid() {<br> return UUID.randomUUID().toString().replace(“-“, “”).toUpperCase();<br> }</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/09/09/java基础/Java代码生成不重复的32位长的大写字符串/" data-id="ckjlnzeav003m2stpcnfbwfj0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/" class="article-date">
@@ -116,46 +194,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/" data-id="ckibb3hj1003txctpow3tsx96" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java基础/Java代码生成不重复的32位长的大写字符串" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/09/java基础/Java代码生成不重复的32位长的大写字符串/" class="article-date">
-  <time datetime="2018-09-09T02:19:21.000Z" itemprop="datePublished">2018-09-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/09/java基础/Java代码生成不重复的32位长的大写字符串/">Java代码生成不重复的32位长的大写字符串</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>   public static String uuid() {<br> return UUID.randomUUID().toString().replace(“-“, “”).toUpperCase();<br> }</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/09/java基础/Java代码生成不重复的32位长的大写字符串/" data-id="ckibb3hiu003mxctpjib7z60p" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/" data-id="ckjlnzeb0003r2stpjzk9dzzw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
@@ -210,7 +249,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/08/Web/JNDI和Local/" data-id="ckibb3hgv001exctp5xjtvubc" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/08/Web/JNDI和Local/" data-id="ckjlnze8l001d2stpmrbao6y0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -270,7 +309,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/08/数据库/JDBC学习笔记(cp30数据库连接池)/" data-id="ckibb3hjm004fxctpa30r2dav" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/08/数据库/JDBC学习笔记(cp30数据库连接池)/" data-id="ckjlnzecb00552stpq2p96zqu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -312,7 +351,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Web项目里的各种路径/" data-id="ckibb3hhq002cxctpp3vgnjs6" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Web项目里的各种路径/" data-id="ckjlnze9c00242stpfwi9wnko" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -435,7 +474,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/JSTL/" data-id="ckibb3hh0001jxctpfr8oioyz" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/JSTL/" data-id="ckjlnze9800202stpxuccuby9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -532,7 +571,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Cookie和Session/" data-id="ckibb3hgn0019xctp5yydwmez" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Cookie和Session/" data-id="ckjlnze8g00172stp5xhnpned" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -602,7 +641,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/EL表达式/" data-id="ckibb3hgt001cxctp0yy73pqa" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/EL表达式/" data-id="ckjlnze8k001c2stp98qt2msu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -672,74 +711,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/06/Web/JavaBean及BeanUtils的使用/" data-id="ckibb3hh3001oxctpppqpbotz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Web/JavaWeb的JSP" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/05/Web/JavaWeb的JSP/" class="article-date">
-  <time datetime="2018-09-05T12:58:20.000Z" itemprop="datePublished">2018-09-05</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/05/Web/JavaWeb的JSP/">JavaWeb的JSP</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82429903" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82429903</a><br>   一、JSP：是一种JavaWeb的动态资源，能与html结合生成动态网页。JSP = html + java脚本 + jsp动作标签(包含EL表达式)。</p>
-<p> 1、 JSP中java脚本：</p>
-<blockquote>
-<blockquote>
-<p> &lt;% … %&gt;：写代码段，Java语句。</p>
-</blockquote>
-<p> &lt;%= … %&gt;：写输出语句，与&lt;% out.print(…..)；%&gt;效果相同。</p>
-<p> &lt;%! … %&gt;：定义成员变量，成员方法（需要在&lt;%%&gt;里调用）。</p>
-<p> 2、JSP的本质：一个<strong>Servlet类</strong>，</p>
-</blockquote>
-<p> 其中含有九大内置对象：</p>
-<p> request：HttpServletequest</p>
-<p> response：HttpServletResponse</p>
-<p> session：HttpSession</p>
-<p> application：ServletContext</p>
-<p> out：输出流</p>
-<p> pagecontext：全局对象，可获取其它八大大对象任意一个</p>
-<blockquote>
-<p>代理其他域：pageContext.setAttribute(“xxx”, “XXX”, PageContext.SESSION_SCOPE);<br>全域查找：pageContext.findAttribute(“xxx”);从小到大，依赖查找！<br>获取其他8个内置对象：</p>
-</blockquote>
-<p> config：ServletConfig</p>
-<p> page：当前jsp对象（Object page=this）</p>
-<p> exception：Throwable</p>
-<p> 3、 JSP 的注释：&lt;%– –%&gt;</p>
-<p> 4、JSP中导Java类与导标签库</p>
-<p> 导Java类：&lt;%@ page import=”包名.类名” %&gt;</p>
-<p> 导标签库：&lt;%@ tablib prefix=”前缀名（自取）” uri=”（标签库路径）”%&gt;</p>
-<hr>
-<hr>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/05/Web/JavaWeb的JSP/" data-id="ckibb3hh4001qxctplghe2qls" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/06/Web/JavaBean及BeanUtils的使用/" data-id="ckjlnze8n001g2stp1b69fz8g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -788,7 +760,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
     </div>
   </div>
 
@@ -799,6 +771,10 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2020/12/05/上传图片测试/">上传图片测试</a>
@@ -816,10 +792,6 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
             <a href="/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
           </li>
         
-          <li>
-            <a href="/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -832,7 +804,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2020 Qin Lin<br>
+      &copy; 2021 Qin Lin<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

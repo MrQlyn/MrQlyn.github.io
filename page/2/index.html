@@ -66,6 +66,64 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Web高阶/SpringMVC的文件下载和上传" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/14/Web高阶/SpringMVC的文件下载和上传/" class="article-date">
+  <time datetime="2019-07-14T03:06:03.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/14/Web高阶/SpringMVC的文件下载和上传/">SpringMVC的文件下载和上传</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%E3%80%81%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD">一、文件下载</a></p>
+<p> <a href="#%E4%BA%8C%E3%80%81%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0">二、文件上传</a></p>
+<hr>
+<h3 id="一、文件下载"><a href="#一、文件下载" class="headerlink" title="一、文件下载"></a>一、文件下载</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">	// 用来对下载的文件名称进行编码的！</span><br><span class="line">public static String filenameEncoding(String filename, HttpServletRequest request) &#123;</span><br><span class="line">	String agent = request.getHeader(&quot;User-Agent&quot;); //获取浏览器</span><br><span class="line">	try &#123;</span><br><span class="line">		if (agent.contains(&quot;Firefox&quot;)) &#123;</span><br><span class="line">			BASE64Encoder base64Encoder = new BASE64Encoder();</span><br><span class="line">			filename = &quot;=?utf-8?B?&quot;</span><br><span class="line">					+ base64Encoder.encode(filename.getBytes(&quot;utf-8&quot;))</span><br><span class="line">					+ &quot;?=&quot;;</span><br><span class="line">		&#125; else if(agent.contains(&quot;MSIE&quot;)) &#123;</span><br><span class="line">			filename = URLEncoder.encode(filename, &quot;utf-8&quot;);</span><br><span class="line">		&#125; else &#123;</span><br><span class="line">			filename = URLEncoder.encode(filename, &quot;utf-8&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; catch (IOException e) &#123;</span><br><span class="line">		throw new RuntimeException(e);</span><br><span class="line">	&#125;</span><br><span class="line">	return filename;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">	/*</span><br><span class="line"> * 文件下载</span><br><span class="line"> * 1、加入jar包：jackson-annotations-2.1.5.jar、jackson-core-2.1.5.jar、jackson-databind-2.1.5.jar</span><br><span class="line"> * 2、在方法前加@ResponseBody注解</span><br><span class="line"> * 3、返回值设置为ResponseEntity&lt;byte[]&gt;类型，byte[]数组即返回给客户端的数据</span><br><span class="line"> */</span><br><span class="line">@ResponseBody</span><br><span class="line">@RequestMapping(&quot;downloadFile&quot;)</span><br><span class="line">public ResponseEntity&lt;byte[]&gt; downloadFile(HttpServletRequest request,HttpSession session)&#123;</span><br><span class="line">	//获取文件数据</span><br><span class="line">	byte[]body=new byte[(int) IOFile.getFileLength(&quot;D:\\音乐&quot;,&quot;G.E.M.邓紫棋-喜欢你.mp3&quot;)];</span><br><span class="line">	body=IOFile.getData(&quot;D:\\音乐&quot;,&quot;G.E.M.邓紫棋-喜欢你.mp3&quot;);</span><br><span class="line">	</span><br><span class="line">	//创建响应头对象</span><br><span class="line">	HttpHeaders headers = new HttpHeaders();</span><br><span class="line"></span><br><span class="line">	// 为了使下载框中下载文件名显示中文文件名称不出乱码！</span><br><span class="line">	String filename = filenameEncoding(&quot;G.E.M.邓紫棋-喜欢你.mp3&quot;, request);</span><br><span class="line">	//设置下载框文件名（响应头添加键值对：key=Content-Disposition value=attachment;filename=文件名）</span><br><span class="line">	headers.add(&quot;Content-Disposition&quot;, &quot;attachment;filename=&quot;+filename);</span><br><span class="line">	</span><br><span class="line">	//获取全局Servlet对象，通过文件名获取文件类型</span><br><span class="line">	ServletContext servletContext=session.getServletContext();</span><br><span class="line">	String contentType = servletContext.getMimeType(filename);</span><br><span class="line">	headers.add(&quot;Content-Type&quot;,contentType);</span><br><span class="line">	</span><br><span class="line">	//设置返回码：如OK：请求成功 BadRequest：请求失败</span><br><span class="line">	HttpStatus statusCode = HttpStatus.OK;</span><br><span class="line">	</span><br><span class="line">	//将文件读取的字节数据、响应头、返回码传入ResponseEntit的构造函数y</span><br><span class="line">	ResponseEntity&lt;byte[]&gt; responseEntity=new ResponseEntity&lt;byte[]&gt;(body, headers, statusCode);</span><br><span class="line">	return responseEntity;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二、文件上传"><a href="#二、文件上传" class="headerlink" title="二、文件上传"></a>二、文件上传</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">	&lt;bean id=&quot;multipartResolver&quot;</span><br><span class="line">	class=&quot;org.springframework.web.multipart.commons.CommonsMultipartResolver&quot;&gt;</span><br><span class="line">	    &lt;!-- 设定默认编码 --&gt;</span><br><span class="line">	    &lt;property name=&quot;defaultEncoding&quot; value=&quot;UTF-8&quot;&gt;&lt;/property&gt;</span><br><span class="line">	    &lt;!-- 设定文件上传的最大值为5MB，5*1024*1024 --&gt;</span><br><span class="line">	    &lt;property name=&quot;maxUploadSize&quot; value=&quot;5242880&quot;&gt;&lt;/property&gt;</span><br><span class="line">	    &lt;!-- 设定文件上传时写入内存的最大值，如果小于这个参数不会生成临时文件，默认为10240 --&gt;</span><br><span class="line">	    &lt;property name=&quot;maxInMemorySize&quot; value=&quot;40960&quot;&gt;&lt;/property&gt;</span><br><span class="line">	    &lt;!-- 上传文件的临时路径 --&gt;</span><br><span class="line">	    &lt;property name=&quot;uploadTempDir&quot; value=&quot;fileUpload/temp&quot;&gt;&lt;/property&gt;</span><br><span class="line">	    &lt;!-- 延迟文件解析 --&gt;</span><br><span class="line">	    &lt;property name=&quot;resolveLazily&quot; value=&quot;true&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">	/*</span><br><span class="line"> * 文件上传： </span><br><span class="line"> * 需要在表单中进行文件上传时，就需要将&lt;form encType=””&gt;中的encType需要设置为multipart/form-data</span><br><span class="line"> * 1、导入jar包：commons-fileupload-1.2.1.jar、commons-io-2.0.jar</span><br><span class="line"> * 2、在springmvc配置文件中配置CommonsMultipartResolver</span><br><span class="line"> * 3、定义MultipartFile类型方法参数，并在该参数前使用@RequestParam(value = &quot;file&quot;)映射文件表单输入项</span><br><span class="line"> *    MultipartFile拥有的方法：</span><br><span class="line"> *    		  isEmpty()：判断文件是否为空</span><br><span class="line"> * 		      file.getOriginalFilename()：获取上传文件名称</span><br><span class="line"> *  		  file.getContentType()：获取上传文件类型</span><br><span class="line"> *  		  file.getSize()：获取上传文件长度（字节数）</span><br><span class="line"> *  		  file.getBytes()：获取文件数据（字节数组）</span><br><span class="line"> *  		  file.getInputStream()：获取文件读取流</span><br><span class="line"> *   		  file.transferTo(File)： 将上传文件转存至服务器（服务器存放文件目录需要存在，否则报错）</span><br><span class="line"> *    			</span><br><span class="line"> */</span><br><span class="line">@RequestMapping(&quot;/fileupload&quot;)</span><br><span class="line">public String upload(@RequestParam(&quot;file&quot;) MultipartFile file, </span><br><span class="line">		HttpServletRequest request, HttpSession session) &#123;</span><br><span class="line">    // 文件不为空</span><br><span class="line">    if(!file.isEmpty()) &#123;</span><br><span class="line">        //上传文件名称</span><br><span class="line">    	System.out.println(file.getOriginalFilename());</span><br><span class="line">        //上传文件类型</span><br><span class="line">    	System.out.println(file.getContentType());</span><br><span class="line">    	//上传文件长度</span><br><span class="line">    	System.out.println(file.getSize());</span><br><span class="line">    	try &#123;</span><br><span class="line">	    	//文件数据</span><br><span class="line">			System.out.println(new String(file.getBytes()));</span><br><span class="line">	    	IOFile.getFile(file.getBytes(),&quot;d:/upload/file/&quot;+file.getOriginalFilename() );</span><br><span class="line">	    	//文件读取流</span><br><span class="line">	    	System.out.println(file.getInputStream());</span><br><span class="line">	    	// 将上传文件转存至服务器（服务器存放文件目录需要存在，否则报错）</span><br><span class="line">	    	IOFile.create(&quot;d:/upload/file/&quot;);	//创建目录</span><br><span class="line">	    	File svFile=new File(&quot;d:/fileupload/&quot;+file.getOriginalFilename());	//获取创建文件流(不存在fileupload文件夹将报错)</span><br><span class="line">	    	file.transferTo(svFile);	</span><br><span class="line">		&#125; catch (IOException e) &#123;</span><br><span class="line">			throw new RuntimeException(e);</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return &quot;success&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SpringMVC的文件下载和上传/" data-id="ckjlnzea600312stpu0kjcb9q" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Web高阶/Mybatis之sql映射文件篇" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/14/Web高阶/Mybatis之sql映射文件篇/" class="article-date">
@@ -139,7 +197,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Mybatis之sql映射文件篇/" data-id="ckibb3hhv002jxctptzdyvsu3" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Mybatis之sql映射文件篇/" data-id="ckjlnze9p002i2stpv9erakw2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -193,7 +251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SpringMVC的拦截器/" data-id="ckibb3hi6002xxctpn9e3urab" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SpringMVC的拦截器/" data-id="ckjlnzeaf003b2stpf3ee5c4x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -242,7 +300,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SpringMVC的JSP文件及其提供的form标签/" data-id="ckibb3hi4002vxctpw82nndwh" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SpringMVC的JSP文件及其提供的form标签/" data-id="ckjlnze9z002u2stpo2nvn4b4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -303,7 +361,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SpringMVC的初步使用/" data-id="ckibb3hi8002zxctpno7ax8y2" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SpringMVC的初步使用/" data-id="ckjlnzea2002x2stpzm3k7fad" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -432,7 +490,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的AOP切面编程/" data-id="ckibb3hms007lxctpj7h3hkyy" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的AOP切面编程/" data-id="ckjlnzeew007k2stpow4yzjij" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -492,7 +550,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的初步使用/" data-id="ckibb3hik003bxctpxxl2rxym" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的初步使用/" data-id="ckjlnzead00392stpw2gi4aul" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -548,7 +606,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的事务处理/" data-id="ckibb3hii0039xctptbioz0jm" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的事务处理/" data-id="ckjlnzeao003f2stpemobq3wv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -731,7 +789,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的BeanXML文件配置/" data-id="ckibb3hnm008dxctplh33km4c" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring的BeanXML文件配置/" data-id="ckjlnzeft00882stprlavlbzi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -778,59 +836,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring不常用知识/" data-id="ckibb3hif0035xctptfzdefxe" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Web高阶/SSM异常" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/07/14/Web高阶/SSM异常/" class="article-date">
-  <time datetime="2019-07-14T03:01:44.000Z" itemprop="datePublished">2019-07-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/14/Web高阶/SSM异常/">SSM异常</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>   1、文档根元素 “mapper” 必须匹配 DOCTYPE 根 “null”：sql映射文件没有加说明</p>
-<p> 在sql映射文件上面添加说明：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE mapper PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;         </span><br><span class="line">   &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-<p> 2、元素类型为 “configuration” 的内容必须匹配 “(properties?,settings?,typeAliases?,typeHandlers?,objectFactory?,objectWrapperFactory?,reflectorFactory?,plugins?,environments?,databaseIdProvider?,mappers?)”。</p>
-<p> 问题：只能有一个<mappers>标签</mappers></p>
-<p> 解决：去除多余<mappers>，将<mapper>写在一个<mappers>里</mappers></mapper></mappers></p>
-<p> 3、No qualifying bean of type [Bean.Pig] is defined: expected single matching bean but found 2: pig1,pig2</p>
-<p> 问题：spring的xml文件里Bean有多个&lt;Bean绑定Bean类，getBean(Class)方法只能获取xml文件里只有一个<bean>的对象</bean></p>
-<p> 4、org.springframework.beans.NullValueInNestedPathException: Invalid property ‘pig’ of bean class [Bean.Person]: Value of nested property ‘pig’ is null</p>
-<p> 问题：spring里的Bean文件使用了级联属性，但没有先初始化Bean属性对象。</p>
-<p> 解决：先初始化Bean属性对象</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/SSM异常/" data-id="ckibb3hi1002rxctpiw3ax0gt" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web高阶/Spring不常用知识/" data-id="ckjlnzea900332stp8jz8vubh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -879,7 +885,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
     </div>
   </div>
 
@@ -890,6 +896,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2020/12/05/上传图片测试/">上传图片测试</a>
@@ -907,10 +917,6 @@
             <a href="/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
           </li>
         
-          <li>
-            <a href="/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -923,7 +929,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2020 Qin Lin<br>
+      &copy; 2021 Qin Lin<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

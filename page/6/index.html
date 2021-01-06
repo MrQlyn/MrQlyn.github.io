@@ -66,6 +66,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Web/BaseServlet（MVC架构的Servle类都继承于该类）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/24/Web/BaseServlet（MVC架构的Servle类都继承于该类）/" class="article-date">
+  <time datetime="2019-05-23T23:01:06.000Z" itemprop="datePublished">2019-05-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/24/Web/BaseServlet（MVC架构的Servle类都继承于该类）/">BaseServlet（MVC架构的Servle类都继承于该类）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82556005" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82556005</a><br>   该类无需在web.xml注册：但继承的Servlet类需要在web.xml注册</p>
+<p> 1、 通过该抽象类能使得请求参数method使得Servlet类来决定调用哪个方法， 同时该方法返回值为转发</p>
+<p> 或者重定向地址（该方法会通过返回值自行判断）</p>
+<p> 2、Servlet类只需要继承该类，请求参数加上方法名（?method=方法名）同时在Servlet类中<strong>定义一个同名方法返回值为</strong></p>
+<p> ** String**，就会自动根据参数选择调用方法并重定向或转发</p>
+<p> 3、返回值用来转发或重定向String里使用冒号分割字符串，得到前缀和后缀！前缀为F或者f表示转发，同时没有冒号</p>
+<p> ** **也表示转发；前缀为R或者r表示重定向</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"> package WebServlet;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">import javax.servlet.ServletException;</span><br><span class="line">import javax.servlet.http.HttpServlet;</span><br><span class="line">import javax.servlet.http.HttpServletRequest;</span><br><span class="line">import javax.servlet.http.HttpServletResponse;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public abstract class BaseServlet extends HttpServlet &#123;</span><br><span class="line">	public void service(HttpServletRequest request, HttpServletResponse response)</span><br><span class="line">				throws ServletException, IOException &#123;</span><br><span class="line">		request.setCharacterEncoding(&quot;utf-8&quot;);</span><br><span class="line">		response.setContentType(&quot;text/html;charset=utf-8&quot;);</span><br><span class="line">			/*</span><br><span class="line">			 * 1. 获取参数，用来识别用户想请求的方法</span><br><span class="line">			 * 2. 然后判断是否哪一个方法，是哪一个我们就调用哪一个</span><br><span class="line">			 */</span><br><span class="line">			String methodName = request.getParameter(&quot;method&quot;);</span><br><span class="line">			</span><br><span class="line">			if(methodName == null || methodName.trim().isEmpty()) &#123;</span><br><span class="line">				throw new RuntimeException(&quot;您没有传递method参数！无法确定您想要调用的方法！&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			/*</span><br><span class="line">			 * 得到方法名称，是否可通过反射来调用方法？</span><br><span class="line">			 * 1. 得到方法名，通过方法名再得到Method类的对象！</span><br><span class="line">			 *   * 需要得到Class，然后调用它的方法进行查询！得到Method</span><br><span class="line">			 *   * 我们要查询的是当前类的方法，所以我们需要得到当前类的Class</span><br><span class="line">			 */</span><br><span class="line">			Class c = this.getClass();//得到当前类的class对象</span><br><span class="line">			Method method = null;</span><br><span class="line">			try &#123;</span><br><span class="line">				method = c.getMethod(methodName, </span><br><span class="line">						HttpServletRequest.class, HttpServletResponse.class);</span><br><span class="line">			&#125; catch (Exception e) &#123;</span><br><span class="line">				throw new RuntimeException(&quot;您要调用的方法：&quot; + methodName + &quot;(HttpServletrequestuest,HttpServletresponseonse)，它不存在！&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">			/*</span><br><span class="line">			 * 调用method表示的方法</span><br><span class="line">			 */</span><br><span class="line">			try &#123;</span><br><span class="line">				String result = (String)method.invoke(this, request, response);</span><br><span class="line">				/*</span><br><span class="line">				 * 获取请求处理方法执行后返回的字符串，它表示转发或重定向的路径！</span><br><span class="line">				 * 帮它完成转发或重定向！</span><br><span class="line">				 */</span><br><span class="line">				/*</span><br><span class="line">				 * 如果用户返回的是字符串为null，或为&quot;&quot;，那么我们什么也不做！</span><br><span class="line">				 */</span><br><span class="line">				if(result == null || result.trim().isEmpty()) &#123;</span><br><span class="line">					return;</span><br><span class="line">				&#125;</span><br><span class="line">				/*</span><br><span class="line">				 * 查看返回的字符串中是否包含冒号，如果没有，表示转发</span><br><span class="line">				 * 如果有，使用冒号分割字符串，得到前缀和后缀！</span><br><span class="line">				 * 其中前缀如果是f，表示转发，如果是r表示重定向，后缀就是要转发或重定向的路径了！</span><br><span class="line">				 */</span><br><span class="line">				if(result.contains(&quot;:&quot;)) &#123;</span><br><span class="line">					// 使用冒号分割字符串，得到前缀和后缀</span><br><span class="line">					int index = result.indexOf(&quot;:&quot;);//获取冒号的位置</span><br><span class="line">					String s = result.substring(0, index);//截取出前缀，表示操作</span><br><span class="line">					String path = result.substring(index+1);//截取出后缀，表示路径</span><br><span class="line">					if(s.equalsIgnoreCase(&quot;r&quot;)) &#123;//如果前缀是r，那么重定向！</span><br><span class="line">						response.sendRedirect(request.getContextPath() + path);</span><br><span class="line">					&#125; else if(s.equalsIgnoreCase(&quot;f&quot;)) &#123;</span><br><span class="line">						request.getRequestDispatcher(path).forward(request, response);</span><br><span class="line">					&#125; else &#123;</span><br><span class="line">						throw new RuntimeException(&quot;你指定的操作：&quot; + s + &quot;，当前版本还不支持！&quot;);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125; else &#123;//没有冒号，默认为转发！</span><br><span class="line">					request.getRequestDispatcher(result).forward(request, response);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125; catch (Exception e) &#123;</span><br><span class="line">				System.out.println(&quot;您调用的方法：&quot; + methodName + &quot;,　它内部抛出了异常！&quot;);</span><br><span class="line">				throw new RuntimeException(e);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2019/05/24/Web/BaseServlet（MVC架构的Servle类都继承于该类）/" data-id="ckjlnze8e00152stpjczlv60h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-c++/STL容器使用（二）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/20/c++/STL容器使用（二）/" class="article-date">
@@ -123,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/04/20/c++/STL容器使用（二）/" data-id="ckibb3hmv007pxctpv06xhdr7" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/04/20/c++/STL容器使用（二）/" data-id="ckjlnzeeu007i2stppk12wnua" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
@@ -180,7 +230,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/04/20/c++/STL容器使用（一）/" data-id="ckibb3hno008fxctp5vwcqtr5" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/04/20/c++/STL容器使用（一）/" data-id="ckjlnzefw008a2stpvwaoufs2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
@@ -363,7 +413,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/19/Git/Git的使用/" data-id="ckibb3hmn007fxctpmsxlgrze" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/19/Git/Git的使用/" data-id="ckjlnzeen007a2stp6p4n164n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -523,7 +573,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/19/Web/JavaWeb的Response、Request/" data-id="ckibb3hmq007hxctp87hjv9vi" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/19/Web/JavaWeb的Response、Request/" data-id="ckjlnzeeq007c2stp2gv7n2qp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -576,7 +626,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/16/java基础/Java基本功：容器Map/" data-id="ckibb3hiy003qxctppspwvpxo" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/16/java基础/Java基本功：容器Map/" data-id="ckjlnzeb2003u2stphzj8bjem" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
@@ -645,7 +695,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/16/java基础/Java基本功：容器Collection/" data-id="ckibb3hn0007vxctp8d3jm9h5" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/16/java基础/Java基本功：容器Collection/" data-id="ckjlnzef1007s2stpd9oticzk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
@@ -720,7 +770,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/16/java基础/Java基本功：常见类及其方法/" data-id="ckibb3hj2003uxctpybe69zh5" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/16/java基础/Java基本功：常见类及其方法/" data-id="ckjlnzed600652stpcrcsvbpu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
@@ -766,7 +816,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：图（邻接矩阵法）/" data-id="ckibb3hl2005pxctpjr2qrgxs" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：图（邻接矩阵法）/" data-id="ckjlnzecu005r2stp0u3cs64l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -816,61 +866,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：二叉树/" data-id="ckibb3hkz005mxctpkggiy834" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据结构与算法/数据结构：队" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/12/数据结构与算法/数据结构：队/" class="article-date">
-  <time datetime="2019-01-12T07:25:15.000Z" itemprop="datePublished">2019-01-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/12/数据结构与算法/数据结构：队/">数据结构：队</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>   <strong>目录</strong></p>
-<p> <a href="#%E4%B8%80%E3%80%81%E9%98%9F%E5%88%97%E7%BB%93%E7%82%B9">一、队列结点</a></p>
-<p> <a href="#%E4%BA%8C%E3%80%81%E9%A1%BA%E5%BA%8F%E9%98%9F">二、顺序队</a></p>
-<p> <a href="#%E4%B8%89%E3%80%81%E9%93%BE%E9%98%9F">三、链队</a></p>
-<hr>
-<h3 id="一、队列结点"><a href="#一、队列结点" class="headerlink" title="一、队列结点"></a>一、队列结点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"> package Queue;</span><br><span class="line">class multipleNode&#123;		//多项式结点</span><br><span class="line">	multipleNode()&#123;</span><br><span class="line">		next=null;</span><br><span class="line">	&#125;</span><br><span class="line">	multipleNode(int c,int e)&#123;</span><br><span class="line">		coef=c;</span><br><span class="line">		exp=e;</span><br><span class="line">		next=null;</span><br><span class="line">	&#125;</span><br><span class="line">	int coef;	//系数</span><br><span class="line">	int exp;	//指数</span><br><span class="line">	multipleNode next;	</span><br><span class="line">&#125;</span><br><span class="line">public class Node&#123;</span><br><span class="line">	Node(char data)&#123;</span><br><span class="line">		this.data=data;</span><br><span class="line">		next=null;</span><br><span class="line">		pre=null;</span><br><span class="line">	&#125;</span><br><span class="line">	Node()&#123;</span><br><span class="line">		next=null;</span><br><span class="line">		pre=null;</span><br><span class="line">	&#125;</span><br><span class="line">	char data;</span><br><span class="line">	Node next;</span><br><span class="line">	Node pre;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="二、顺序队"><a href="#二、顺序队" class="headerlink" title="二、顺序队"></a>二、顺序队</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"> package Queue;</span><br><span class="line">/*</span><br><span class="line"> * 顺序队：使用循环队列实现</span><br><span class="line"> * 思想：flag(true:end指向下一元素时（start和end指向同一元素时），置为true表示队满)</span><br><span class="line"> * 		   (flase:start指向下一元素时（start和end指向同一元素时），置为false表示队空)</span><br><span class="line"> *      start:指向下一个要出队的元素(已入队)</span><br><span class="line"> *      end：指向下一个要入队的元素的位置(未入队)</span><br><span class="line"> */</span><br><span class="line">public class OrderQueue &#123;</span><br><span class="line">	Object[] objects;	</span><br><span class="line">	int max;		//数组空间的大小</span><br><span class="line">	int start=0;	//队首</span><br><span class="line">	int end=0;		//队尾</span><br><span class="line">	boolean flag=false;	//标志位：协助区分判断队空或队满（true为满，false为空）</span><br><span class="line">	OrderQueue() &#123;	//默认空间大小为4</span><br><span class="line">		max=4;</span><br><span class="line">		objects=new Object[max];</span><br><span class="line">	&#125;</span><br><span class="line">	OrderQueue(int max) &#123;	//自己设置空间大小</span><br><span class="line">		this.max=max;</span><br><span class="line">		objects=new Object[max];</span><br><span class="line">	&#125;</span><br><span class="line">	public void entry(Object o) &#123;	//入队</span><br><span class="line">		if (end==start&amp;&amp;flag==true) &#123;	//假如不带flag会导致一开始就出现start==end无法入队</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		if((end+1)%max==start) &#123;</span><br><span class="line">			flag=true;					//此处不返回return原因：当前start还有元素，只是</span><br><span class="line">										//下一个元素与end重合时队才为空</span><br><span class="line">		&#125;</span><br><span class="line">		objects[end]=o;</span><br><span class="line">		end=(end+1)%max;</span><br><span class="line">	&#125;</span><br><span class="line">	public Object exit() &#123;			//出队</span><br><span class="line">		if (start==end&amp;&amp;flag==false) &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		if((start+1)%max==end) &#123;</span><br><span class="line">			flag=false;</span><br><span class="line">		&#125;</span><br><span class="line">		Object temp=objects[start];</span><br><span class="line">		objects[start]=null;</span><br><span class="line">		start=(start+1)%max;</span><br><span class="line">		return temp;</span><br><span class="line">	&#125;</span><br><span class="line">	public Object getStart() &#123;	//取队首元素</span><br><span class="line">		if (start==end&amp;&amp;flag==false) &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		return objects[start];	//start指向的是已入队最开始的元素，直接返回</span><br><span class="line">	&#125;</span><br><span class="line">	public Object getEnd() &#123;	//取队尾元素</span><br><span class="line">		if (start==end&amp;&amp;flag==false) &#123;</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		return objects[(end+max-1)%max];	//end指向的是即将入队的元素位置，需要退一个位置</span><br><span class="line">											//防止出现减1后为索引为-1情况需要先加max</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="三、链队"><a href="#三、链队" class="headerlink" title="三、链队"></a>三、链队</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"> package Queue;</span><br><span class="line">/*</span><br><span class="line"> * 链队</span><br><span class="line"> * 补充知识点（Java值传递与引用传递）</span><br><span class="line"> * 1.对象作为函数的参数传递过去的时候，是以原对象的引用的方式传递的，更改参数对象的值，会影响原来的对象。</span><br><span class="line"> * 2.对象作为函数的返回值的时候，传递过来的也是一个引用传递，更改传递过来的对象的时候，会影响原来的对象 </span><br><span class="line"> * 3.对象A给另一个对象B赋值的时候（无论B是否经过了new 开辟新空间），此时的B是对A对象的一个引用，更改B会影响A</span><br><span class="line"> * 总结：传基本数据类型是值传递，传对象是引用传递（传的是对象的拷贝，若接收参数开辟新空间new对象后，则不再指向传入参数空间。）</span><br><span class="line"> */</span><br><span class="line">public class ChainQueue &#123;</span><br><span class="line">	Node head;	//队头直接用头结点指针判断</span><br><span class="line">	Node end;</span><br><span class="line">	ChainQueue() &#123;</span><br><span class="line">		head=new Node();</span><br><span class="line">		head.next=null;</span><br><span class="line">		end=head;</span><br><span class="line">	&#125;</span><br><span class="line">	public void entry(char c) &#123;</span><br><span class="line">		if(head.next==null) &#123;	//当队空时（正在进行时：队空后再次入队时进行判断）</span><br><span class="line">			end=head;	</span><br><span class="line">		&#125;</span><br><span class="line">		Node t=new Node();</span><br><span class="line">		t.data=c;</span><br><span class="line">		t.next=end.next;</span><br><span class="line">		end.next=t;</span><br><span class="line">		end=t;</span><br><span class="line">	&#125;</span><br><span class="line">	public char exit() &#123;</span><br><span class="line">		if (head.next==null) &#123;	//队空(当队空后再次出队时进行判断)</span><br><span class="line">			return &apos; &apos;;</span><br><span class="line">		&#125;</span><br><span class="line">		Node t=head.next;</span><br><span class="line">		char c=t.data;</span><br><span class="line">		head.next=t.next;</span><br><span class="line">		t=null;</span><br><span class="line">		return c;</span><br><span class="line">	&#125;</span><br><span class="line">	public char getStart() &#123;	//取队首元素</span><br><span class="line">		if (head.next==null) &#123;</span><br><span class="line">			return &apos; &apos;;</span><br><span class="line">		&#125;</span><br><span class="line">		return head.next.data;</span><br><span class="line">	&#125;</span><br><span class="line">	public char getEnd() &#123;		//取队尾元素</span><br><span class="line">		if (head==end) &#123;</span><br><span class="line">			return &apos; &apos;;</span><br><span class="line">		&#125;</span><br><span class="line">		return end.data;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：队/" data-id="ckibb3hl8005xxctpctyfnkyg" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：二叉树/" data-id="ckjlnzecq005o2stphuzd4veu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -919,7 +915,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">一月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">十二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">四月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">十月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">九月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li></ul>
     </div>
   </div>
 
@@ -930,6 +926,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
+          </li>
         
           <li>
             <a href="/2020/12/05/上传图片测试/">上传图片测试</a>
@@ -947,10 +947,6 @@
             <a href="/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
           </li>
         
-          <li>
-            <a href="/2019/07/14/Web高阶/SpringBoot开发总结/">SpringBoot开发总结</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -963,7 +959,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2020 Qin Lin<br>
+      &copy; 2021 Qin Lin<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
