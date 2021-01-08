@@ -66,6 +66,69 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Android/Android里如何在子线程更新UI" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/21/Android/Android里如何在子线程更新UI/" class="article-date">
+  <time datetime="2018-07-21T08:02:20.000Z" itemprop="datePublished">2018-07-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/21/Android/Android里如何在子线程更新UI/">Android里如何在子线程更新UI</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81140482" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81140482</a><br>   一、Message：在线程间传递消息，传输少量数据</p>
+<p> Handler：发送和处理消息（Message），必须定义在主线程中，如果是多个类直接互相调用，需要传递content对象</p>
+<p> 或通过接口调用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Message有int静态变量what（判断消息），int静态变量arg1、arg2，静态Object对象obj</span><br></pre></td></tr></table></figure>
+
+<p> Handler有以下调用方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sendMessage(Message):发送Message</span><br></pre></td></tr></table></figure>
+
+<p> 以下可重写方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">handleMessage(Message):可重写，接收Message，在此处更新UI</span><br></pre></td></tr></table></figure>
+
+<p> 具体例子 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> //定义在主线程的Handler类，并重写handleMessage()方法</span><br><span class="line">public Handler handler = new Handler() &#123;</span><br><span class="line">        //接收Message，并对UI的处理</span><br><span class="line">		@Override</span><br><span class="line">		public void handleMessage(Message msg) &#123;</span><br><span class="line">			super.handleMessage(msg);</span><br><span class="line">			switch (msg.what) &#123;</span><br><span class="line">			case 0:</span><br><span class="line">				//完成主界面更新,拿到数据</span><br><span class="line">				String data = (String)msg.obj;</span><br><span class="line">				textView.setText(data);</span><br><span class="line">				break;</span><br><span class="line">			default:</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">&#125;;</span><br><span class="line">//子线程类发送消息</span><br><span class="line">public void send&#123;</span><br><span class="line">    new Thread(new Runnable()&#123;</span><br><span class="line">        public void run()&#123;</span><br><span class="line">            Message msg=new Message();</span><br><span class="line">            msg.what=0;</span><br><span class="line">            MainActivity.handler.sendMessage(message);    //发送Message</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 二、.AsyncTask:子线程不能更新UI：因此在一些下载任务需要进度更新，文件读取等耗时操作,如果全部放到主线程去执行,就可能会造成后面任务的阻塞，所以使用AsyncTask进行异步操作</p>
+<p> AsyncTask&lt;Params,Progress,Result&gt;是一个抽象类,通常用于被继承.继承AsyncTask需要指定如下三个泛型参数:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> Params:启动任务时输入的参数类型.</span><br><span class="line"></span><br><span class="line">Progress:后台任务执行中返回进度值的类型.</span><br><span class="line"></span><br><span class="line">Result:后台任务执行完成后返回结果的类型.（可为Boolean判断成功失败）</span><br></pre></td></tr></table></figure>
+
+<p> .构建AsyncTask子类的回调方法</p>
+<p> AsyncTask有以下可重写方法（doInBackground必须重写，其余可写可不写）:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> doInBackground（Params）：异步执行后台线程任务,耗时操作将在此方法中完成.</span><br><span class="line"></span><br><span class="line">onPreExecute（）：执行后台任务前被调用,通常用于进行初始化操作.</span><br><span class="line"></span><br><span class="line">onProgressUpdate（Progress）：:当doInBackground()方法中调用publishProgress(Progress)方法后,将自动调用此方法.通过此方法我们可以更新任务的进度，可通过此方法进行UI的更新.</span><br><span class="line"></span><br><span class="line">onPostExecute（Result）：:当doInBackground()方法完成后,系统将自动调用此方法,并将doInBackground方法返回的值(即Result)，此方法可以进行UI更新，如任务完成关闭进度条等</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/07/21/Android/Android里如何在子线程更新UI/" data-id="ckjoefqho000u7otpy3rlqqlf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Android/Android里的多媒体" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/20/Android/Android里的多媒体/" class="article-date">
@@ -188,7 +251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/20/Android/Android里的多媒体/" data-id="ckjlp6ki0008fxotp9wh7cx43" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/20/Android/Android里的多媒体/" data-id="ckjoefqp6008g7otprngzf89v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -270,7 +333,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/13/Android/Android的广播接收器BroadcastReceiver/" data-id="ckjlp6k7g000ixotp9nk3yzb0" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/13/Android/Android的广播接收器BroadcastReceiver/" data-id="ckjoefqhg000j7otpi2qsl0db" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -310,7 +373,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/12/Android/Android的基类Context和View/" data-id="ckjlp6k7e000gxotpzv92a45l" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/12/Android/Android的基类Context和View/" data-id="ckjoefqhe000h7otpo9urlt2n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -509,7 +572,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/12/Android/Android里的前端界面/" data-id="ckjlp6kge007exotpty2hrek2" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/12/Android/Android里的前端界面/" data-id="ckjoefqo6007f7otprwxhw473" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -615,7 +678,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/Android/Android的活动Activity/" data-id="ckjlp6k7r000pxotpol12qu3h" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/11/Android/Android的活动Activity/" data-id="ckjoefqhl000q7otpgm5avhbv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -679,7 +742,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/Android/Android基础入门/" data-id="ckjlp6k750008xotputyfm5bs" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/11/Android/Android基础入门/" data-id="ckjoefqh000097otpanledeny" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -773,7 +836,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(四)/" data-id="ckjlp6kd80051xotpdwdenh55" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(四)/" data-id="ckjoefqlw00547otpc1jqj6v0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -916,7 +979,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(三)/" data-id="ckjlp6kd6004zxotp8ao99iz9" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(三)/" data-id="ckjoefqls00507otpyfxm2og3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -1044,58 +1107,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(一)/" data-id="ckjlp6kd4004xxotpnm6uhsto" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/28/数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）/" class="article-date">
-  <time datetime="2018-04-28T08:43:59.000Z" itemprop="datePublished">2018-04-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/28/数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）/">JDBC学习笔记（事务的处理和批量处理SQL语句）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/80136659" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/80136659</a>   </p>
-<h3 id="一、数据库事务：数据库事务是对数据库操作的实时记录，用来防止数据操作中断等错误引起的数据库更新不一致等一系列问题。"><a href="#一、数据库事务：数据库事务是对数据库操作的实时记录，用来防止数据操作中断等错误引起的数据库更新不一致等一系列问题。" class="headerlink" title="一、数据库事务：数据库事务是对数据库操作的实时记录，用来防止数据操作中断等错误引起的数据库更新不一致等一系列问题。"></a>一、数据库事务：数据库事务是对数据库操作的实时记录，用来防止数据操作中断等错误引起的数据库更新不一致等一系列问题。</h3><p> 举个例子：小明向小红转账1000元，在转账过程中系统突然中断，小红的账户未到账1000元，可小明账户已经扣款1000元。数据库事务就是为了解决类似问题产生，当转账发生错误时系统会回滚事务，将小明和小红的数据还原成转账前的状态。</p>
-<p> Connection类里提供三个方法来支持数据库的事务操作</p>
-<blockquote>
-<p><strong>开始事务（即不设置操作为自动提交的状态）：setAutoCommit(false)</strong></p>
-<p> ** 完成事务（提交操作）：commit()**</p>
-<p> ** 回滚事务（还原数据至开始事务前的状态）：rollback()**</p>
-</blockquote>
-<h3 id="二、批量处理SQL语句（往往必须与数据库事务搭配，防止执行过程中发生错误）"><a href="#二、批量处理SQL语句（往往必须与数据库事务搭配，防止执行过程中发生错误）" class="headerlink" title="二、批量处理SQL语句（往往必须与数据库事务搭配，防止执行过程中发生错误）"></a><strong>二、批量处理SQL语句（往往必须与数据库事务搭配，防止执行过程中发生错误）</strong></h3><p> preparedstatement类里提供了俩个关于批量处理SQL语句的方法：</p>
-<blockquote>
-<p>addBatch()：积攒SQL语句</p>
-<p> executeBatch()：执行已积攒的SQL语句</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）/" data-id="ckjlp6kcy004rxotpqeukg3b7" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(一)/" data-id="ckjoefqlq004y7otp5sw9usmo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -1157,6 +1169,10 @@
       <ul>
         
           <li>
+            <a href="/2021/01/08/迟来的2020总结与2021眺望/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2021/01/07/2020-1-7记/">(no title)</a>
           </li>
         
@@ -1170,10 +1186,6 @@
         
           <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
           </li>
         
       </ul>

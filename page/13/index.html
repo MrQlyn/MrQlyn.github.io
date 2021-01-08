@@ -66,6 +66,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/28/数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）/" class="article-date">
+  <time datetime="2018-04-28T08:43:59.000Z" itemprop="datePublished">2018-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/28/数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）/">JDBC学习笔记（事务的处理和批量处理SQL语句）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/80136659" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/80136659</a>   </p>
+<h3 id="一、数据库事务：数据库事务是对数据库操作的实时记录，用来防止数据操作中断等错误引起的数据库更新不一致等一系列问题。"><a href="#一、数据库事务：数据库事务是对数据库操作的实时记录，用来防止数据操作中断等错误引起的数据库更新不一致等一系列问题。" class="headerlink" title="一、数据库事务：数据库事务是对数据库操作的实时记录，用来防止数据操作中断等错误引起的数据库更新不一致等一系列问题。"></a>一、数据库事务：数据库事务是对数据库操作的实时记录，用来防止数据操作中断等错误引起的数据库更新不一致等一系列问题。</h3><p> 举个例子：小明向小红转账1000元，在转账过程中系统突然中断，小红的账户未到账1000元，可小明账户已经扣款1000元。数据库事务就是为了解决类似问题产生，当转账发生错误时系统会回滚事务，将小明和小红的数据还原成转账前的状态。</p>
+<p> Connection类里提供三个方法来支持数据库的事务操作</p>
+<blockquote>
+<p><strong>开始事务（即不设置操作为自动提交的状态）：setAutoCommit(false)</strong></p>
+<p> ** 完成事务（提交操作）：commit()**</p>
+<p> ** 回滚事务（还原数据至开始事务前的状态）：rollback()**</p>
+</blockquote>
+<h3 id="二、批量处理SQL语句（往往必须与数据库事务搭配，防止执行过程中发生错误）"><a href="#二、批量处理SQL语句（往往必须与数据库事务搭配，防止执行过程中发生错误）" class="headerlink" title="二、批量处理SQL语句（往往必须与数据库事务搭配，防止执行过程中发生错误）"></a><strong>二、批量处理SQL语句（往往必须与数据库事务搭配，防止执行过程中发生错误）</strong></h3><p> preparedstatement类里提供了俩个关于批量处理SQL语句的方法：</p>
+<blockquote>
+<p>addBatch()：积攒SQL语句</p>
+<p> executeBatch()：执行已积攒的SQL语句</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）/" data-id="ckjoefqll004s7otpifjw57zq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-数据库/JDBC学习笔记(dbcp数据库连接池)" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/04/28/数据库/JDBC学习笔记(dbcp数据库连接池)/" class="article-date">
@@ -143,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记(dbcp数据库连接池)/" data-id="ckjlp6kcp004nxotpiscjiq0b" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记(dbcp数据库连接池)/" data-id="ckjoefqlf004o7otpw7d5q4do" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -209,7 +260,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（查询SQL语句得到的结果对象）/" data-id="ckjlp6kd0004txotp1gfocgm1" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（查询SQL语句得到的结果对象）/" data-id="ckjoefqlm004u7otp4575uek0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -288,7 +339,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/" data-id="ckjlp6kcu004pxotpxxe7o8by" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/" data-id="ckjoefqli004q7otpqqu4duzy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -381,7 +432,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/" data-id="ckjlp6kd2004vxotp4v5lg1oa" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/" data-id="ckjoefqlo004w7otpm9yasxfp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -446,7 +497,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/18/前端/JQuery笔记/" data-id="ckjlp6khb0084xotpexa74ptg" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/18/前端/JQuery笔记/" data-id="ckjoefqot00857otptpbp2gid" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -632,7 +683,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/HTML笔记/" data-id="ckjlp6kh90082xotp6bnhzsia" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/HTML笔记/" data-id="ckjoefqoq00837otpozwzg6s2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -692,7 +743,7 @@ background-color:red;color:green
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/CSS笔记/" data-id="ckjlp6kby004cxotpi0zpxyf2" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/CSS笔记/" data-id="ckjoefqkz004d7otp6ncnbv4r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -759,7 +810,7 @@ background-color:red;color:green
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/JavaScript笔记/" data-id="ckjlp6khd0086xotpcsru4tfn" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/JavaScript笔记/" data-id="ckjoefqov00877otpap6y2coy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -813,54 +864,10 @@ background-color:red;color:green
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/03/30/数据库/修改mysql默认密码方法/" data-id="ckjlp6kdd0053xotpzx5m748w" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/03/30/数据库/修改mysql默认密码方法/" data-id="ckjoefqly00567otprmvgtisf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-基础操作/win10禁用笔记本原本键盘" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/02/03/基础操作/win10禁用笔记本原本键盘/" class="article-date">
-  <time datetime="2018-02-03T12:51:18.000Z" itemprop="datePublished">2018-02-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/03/基础操作/win10禁用笔记本原本键盘/">win10禁用笔记本原本键盘</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>   以管理员身份运行命令提示符: </p>
-<p> 输入：sc config i8042prt start= disabled</p>
-<p> 重启电脑</p>
-<p> 想恢复时：</p>
-<p> 输入:sc config i8042prt start= auto  </p>
-<p> 转自：<a href="https://www.chenxublog.com/2016/08/12/win10-disable-keybroad.html" target="_blank" rel="noopener">https://www.chenxublog.com/2016/08/12/win10-disable-keybroad.html</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/02/03/基础操作/win10禁用笔记本原本键盘/" data-id="ckjlp6kcd004hxotp6jxzxmzk" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础操作/">基础操作</a></li></ul>
 
     </footer>
   </div>
@@ -919,6 +926,10 @@ background-color:red;color:green
       <ul>
         
           <li>
+            <a href="/2021/01/08/迟来的2020总结与2021眺望/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2021/01/07/2020-1-7记/">(no title)</a>
           </li>
         
@@ -932,10 +943,6 @@ background-color:red;color:green
         
           <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
           </li>
         
       </ul>

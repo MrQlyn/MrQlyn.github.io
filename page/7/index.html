@@ -66,6 +66,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据结构与算法/数据结构：二叉树" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/12/数据结构与算法/数据结构：二叉树/" class="article-date">
+  <time datetime="2019-01-12T07:27:57.000Z" itemprop="datePublished">2019-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/12/数据结构与算法/数据结构：二叉树/">数据结构：二叉树</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>   <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%BB%93%E7%82%B9">二叉树结点</a></p>
+<p> <a href="#%E4%BA%8C%E3%80%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9E%84%E9%80%A0%E5%8F%8A%E9%81%8D%E5%8E%86%EF%BC%88%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8%E9%98%9F%E5%88%97%EF%BC%89">二叉树的构造及遍历（层次遍历需要使用队列）</a></p>
+<hr>
+<h3 id="二叉树结点"><a href="#二叉树结点" class="headerlink" title="二叉树结点"></a>二叉树结点</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> package Tree;</span><br><span class="line"></span><br><span class="line">public class TreeNode &#123;</span><br><span class="line">	char data;</span><br><span class="line">	TreeNode left;</span><br><span class="line">	TreeNode right;</span><br><span class="line">	public void setLeft(TreeNode left) &#123;</span><br><span class="line">		this.left = left;</span><br><span class="line">	&#125;</span><br><span class="line">	public void setRight(TreeNode right) &#123;</span><br><span class="line">		this.right = right;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="二叉树的构造及遍历（层次遍历需要使用队列）"><a href="#二叉树的构造及遍历（层次遍历需要使用队列）" class="headerlink" title="二叉树的构造及遍历（层次遍历需要使用队列）"></a>二叉树的构造及遍历（层次遍历需要使用队列）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"> package Tree;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">public class TreeTool &#123;</span><br><span class="line">	//构造树（先序法）</span><br><span class="line">	public static TreeNode CreateTree(TreeNode tree) &#123;	</span><br><span class="line">		//逐行读取单个字符方式</span><br><span class="line">		/*Scanner sc=new Scanner(System.in);</span><br><span class="line">		char c=sc.next().charAt(0);*/</span><br><span class="line">		</span><br><span class="line">		//一行逐个读取单个字符方式(字符必须相邻)</span><br><span class="line">		char c = 0;</span><br><span class="line">		try &#123;</span><br><span class="line">			c = (char)System.in.read();</span><br><span class="line">		&#125; catch (IOException e) &#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		if (c==&apos;#&apos;) &#123;		//递归结束标志:&apos;#&apos;字符</span><br><span class="line">			return null;</span><br><span class="line">		&#125;</span><br><span class="line">		else&#123;</span><br><span class="line">			//tree=new TreeNode();	//引用方式，此句会让tree指向新的内存空间，原内存空间</span><br><span class="line">									//并未改变,尽管原内存指向为null，这里再new同样会指向</span><br><span class="line">									//新内存空间。</span><br><span class="line">			tree.data=c;</span><br><span class="line">			tree.setLeft(CreateTree(new TreeNode()));</span><br><span class="line">			tree.setRight(CreateTree(new TreeNode()));</span><br><span class="line">			return tree;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//先序遍历树</span><br><span class="line">	public static void pre(TreeNode T) &#123;	</span><br><span class="line">		if (T!=null) &#123;		//当T==null是递归结束标志</span><br><span class="line">			System.out.println(T.data);</span><br><span class="line">			pre(T.left);</span><br><span class="line">			pre(T.right);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//中序遍历树</span><br><span class="line">	public static void now(TreeNode T) &#123;	</span><br><span class="line">		if (T!=null) &#123;		//当T==null是递归结束标志</span><br><span class="line">			now(T.left);</span><br><span class="line">			System.out.println(T.data);</span><br><span class="line">			now(T.right);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//后序遍历树</span><br><span class="line">	public static void after(TreeNode T) &#123;	</span><br><span class="line">		if (T!=null) &#123;		//当T==null是递归结束标志</span><br><span class="line">			after(T.left);</span><br><span class="line">			after(T.right);</span><br><span class="line">			System.out.println(T.data);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//层次遍历</span><br><span class="line">	public static void level(TreeNode T) &#123;</span><br><span class="line">		OrderQueue queue=new OrderQueue();</span><br><span class="line">		if (T!=null) &#123;</span><br><span class="line">			queue.entry(T); 	//根结点入队</span><br><span class="line">			while (queue.getStart()!=null) &#123;	//当队列未空时</span><br><span class="line">				TreeNode treeNode=(TreeNode) queue.exit();</span><br><span class="line">				System.out.println(treeNode.data);</span><br><span class="line">				if (treeNode.left!=null) &#123;</span><br><span class="line">					queue.entry(treeNode.left);</span><br><span class="line">				&#125;</span><br><span class="line">				if (treeNode.right!=null) &#123;</span><br><span class="line">					queue.entry(treeNode.right);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line"> 		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：二叉树/" data-id="ckjoefqmi005q7otp54jrpc9u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-数据结构与算法/数据结构：队" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/12/数据结构与算法/数据结构：队/" class="article-date">
@@ -108,7 +158,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：队/" data-id="ckjlp6kg00079xotp9gtjtf2p" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：队/" data-id="ckjoefqmu00627otp1f0lgfwj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -162,7 +212,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：栈/" data-id="ckjlp6keg005uxotpryjxyutq" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：栈/" data-id="ckjoefqmr005y7otpn3nllai2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -205,7 +255,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（链式结构）/" data-id="ckjlp6kej005xxotpywyryfdx" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（链式结构）/" data-id="ckjoefqmo005v7otp5hb4ccyp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -248,7 +298,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（顺序结构）/" data-id="ckjlp6kek005yxotpm73jwtb1" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（顺序结构）/" data-id="ckjoefqms005z7otpgrdoug38" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -287,7 +337,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表改为双向循环链表/" data-id="ckjlp6kdr005exotpjzst7uto" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表改为双向循环链表/" data-id="ckjoefqm6005e7otpfez5cy5f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -326,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表构造成三环形链表/" data-id="ckjlp6kdw005hxotpwnibz029" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表构造成三环形链表/" data-id="ckjoefqma005i7otpxv9gkv0n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -369,7 +419,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/删除结点/" data-id="ckjlp6kdm005dxotpl5zm775r" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/删除结点/" data-id="ckjoefqm7005f7otppjci0i70" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -408,7 +458,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/链表寻找相同数据/" data-id="ckjlp6kep0061xotpph9m5hkv" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/链表寻找相同数据/" data-id="ckjoefqnx007a7otpxmu7rezt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -447,46 +497,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（不生成新链表）/" data-id="ckjlp6ke0005lxotpe240dpbt" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据结构与算法/分解链表" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/11/数据结构与算法/分解链表/" class="article-date">
-  <time datetime="2019-01-11T06:43:59.000Z" itemprop="datePublished">2019-01-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/11/数据结构与算法/分解链表/">分解链表</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/86300797" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/86300797</a><br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"> package Linear;</span><br><span class="line">/*</span><br><span class="line"> * 分解链表：将A分解为A和B，A的序号为奇数，B序号为偶数</span><br><span class="line"> */</span><br><span class="line">public class D &#123;</span><br><span class="line">	public static void decompose(Node h) &#123;</span><br><span class="line">		Node A=h;</span><br><span class="line">		Node B=new Node();</span><br><span class="line">		Node p =h.next;</span><br><span class="line">		Node q=B;</span><br><span class="line">		if(p.next==null) &#123;	//A只有一个结点，序号为奇数</span><br><span class="line">			B.next=null;</span><br><span class="line">			NodeTool.traverse(A);</span><br><span class="line">			NodeTool.traverse(B);</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		while(p!=null) &#123;</span><br><span class="line">			Node t =p.next;</span><br><span class="line">			if (t==null) &#123;		//如果p下个结点为空，即可以结束循环</span><br><span class="line">				q.next=null;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">			p.next=t.next;</span><br><span class="line">			q.next=t;</span><br><span class="line">			p=p.next;</span><br><span class="line">			q=q.next;</span><br><span class="line">		&#125;</span><br><span class="line">		NodeTool.traverse(A);</span><br><span class="line">		NodeTool.traverse(B);</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Node h =NodeTool.CreateNodeList(&quot;123&quot;);</span><br><span class="line">		decompose(h);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/分解链表/" data-id="ckjlp6kdk005bxotpi9h438jz" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（不生成新链表）/" data-id="ckjoefqmb005j7otp6yv1wmdn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -548,6 +559,10 @@
       <ul>
         
           <li>
+            <a href="/2021/01/08/迟来的2020总结与2021眺望/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2021/01/07/2020-1-7记/">(no title)</a>
           </li>
         
@@ -561,10 +576,6 @@
         
           <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
           </li>
         
       </ul>

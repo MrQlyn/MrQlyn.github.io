@@ -66,6 +66,45 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据结构与算法/分解链表" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/11/数据结构与算法/分解链表/" class="article-date">
+  <time datetime="2019-01-11T06:43:59.000Z" itemprop="datePublished">2019-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/11/数据结构与算法/分解链表/">分解链表</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/86300797" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/86300797</a><br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"> package Linear;</span><br><span class="line">/*</span><br><span class="line"> * 分解链表：将A分解为A和B，A的序号为奇数，B序号为偶数</span><br><span class="line"> */</span><br><span class="line">public class D &#123;</span><br><span class="line">	public static void decompose(Node h) &#123;</span><br><span class="line">		Node A=h;</span><br><span class="line">		Node B=new Node();</span><br><span class="line">		Node p =h.next;</span><br><span class="line">		Node q=B;</span><br><span class="line">		if(p.next==null) &#123;	//A只有一个结点，序号为奇数</span><br><span class="line">			B.next=null;</span><br><span class="line">			NodeTool.traverse(A);</span><br><span class="line">			NodeTool.traverse(B);</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		while(p!=null) &#123;</span><br><span class="line">			Node t =p.next;</span><br><span class="line">			if (t==null) &#123;		//如果p下个结点为空，即可以结束循环</span><br><span class="line">				q.next=null;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">			p.next=t.next;</span><br><span class="line">			q.next=t;</span><br><span class="line">			p=p.next;</span><br><span class="line">			q=q.next;</span><br><span class="line">		&#125;</span><br><span class="line">		NodeTool.traverse(A);</span><br><span class="line">		NodeTool.traverse(B);</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Node h =NodeTool.CreateNodeList(&quot;123&quot;);</span><br><span class="line">		decompose(h);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/分解链表/" data-id="ckjoefqm4005c7otpwms55mmk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-数据结构与算法/一元多项式相加" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/11/数据结构与算法/一元多项式相加/" class="article-date">
@@ -97,7 +136,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/一元多项式相加/" data-id="ckjlp6kdh0057xotp3vy4uza5" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/一元多项式相加/" data-id="ckjoefqm2005a7otp09si2mt4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -136,7 +175,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（生成新链表）/" data-id="ckjlp6ke2005mxotpvvze2xed" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（生成新链表）/" data-id="ckjoefqmf005n7otp1vbkikws" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -175,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表逆置/" data-id="ckjlp6kdx005ixotps6ij9xrj" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表逆置/" data-id="ckjoefqmd005m7otp2v2141wi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -418,7 +457,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/前端/前端重要知识点总结/" data-id="ckjlp6khk0088xotpvbi3sjlf" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/前端/前端重要知识点总结/" data-id="ckjoefqox00897otpfh2b0b57" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -507,7 +546,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/10/前端/Javascript的DOM对象/" data-id="ckjlp6kc3004fxotp2yl32xuz" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/10/前端/Javascript的DOM对象/" data-id="ckjoefql4004g7otpj9hog5c3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -565,7 +604,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/10/06/Git/Git使用报错解决/" data-id="ckjlp6k860011xotpn38b85le" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/10/06/Git/Git使用报错解决/" data-id="ckjoefqhz00127otpvpij75ag" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -619,7 +658,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/26/Web高阶/Mybatis查找返回Map，List集合类型的数据/" data-id="ckjlp6k9o002oxotpjpu40s1o" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/26/Web高阶/Mybatis查找返回Map，List集合类型的数据/" data-id="ckjoefqji002p7otpmbpanh47" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -686,7 +725,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/25/Web高阶/MyBatis的初步使用/" data-id="ckjlp6k9i002hxotp8crau29g" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/25/Web高阶/MyBatis的初步使用/" data-id="ckjoefqjc002i7otppu37pzlh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -746,52 +785,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/16/数据库/MySQL恢复root用户超级权限方法/" data-id="ckjlp6kdf0055xotpqazrkqxo" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/16/数据库/MySQL恢复root用户超级权限方法/" data-id="ckjoefqlu00527otpbop0fxlq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Web/MyEclipse的非法关闭导致servers报错" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/16/Web/MyEclipse的非法关闭导致servers报错/" class="article-date">
-  <time datetime="2018-09-16T05:24:40.000Z" itemprop="datePublished">2018-09-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/16/Web/MyEclipse的非法关闭导致servers报错/">MyEclipse的非法关闭导致servers报错</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82723177" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82723177</a><br>   <strong>进入工作空间下的</strong></p>
-<p> <strong>.metadata.plugins\org.eclipse.core.runtime.settings</strong></p>
-<p> <strong>删除com.genuitec.eclipse.ast.deploy.core.prefs</strong></p>
-<p> <strong>重启myeclipse，ok搞定。</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/16/Web/MyEclipse的非法关闭导致servers报错/" data-id="ckjlp6k93001zxotp4sow89u7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
 
     </footer>
   </div>
@@ -850,6 +847,10 @@
       <ul>
         
           <li>
+            <a href="/2021/01/08/迟来的2020总结与2021眺望/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2021/01/07/2020-1-7记/">(no title)</a>
           </li>
         
@@ -863,10 +864,6 @@
         
           <li>
             <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
-          </li>
-        
-          <li>
-            <a href="/2019/07/14/前端/Bootstrap笔记（一）/">Bootstrap笔记（一）</a>
           </li>
         
       </ul>
