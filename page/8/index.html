@@ -66,6 +66,45 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据结构与算法/合并链表（不生成新链表）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/11/数据结构与算法/合并链表（不生成新链表）/" class="article-date">
+  <time datetime="2019-01-11T06:45:17.000Z" itemprop="datePublished">2019-01-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/11/数据结构与算法/合并链表（不生成新链表）/">合并链表（不生成新链表）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/86300833" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/86300833</a><br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"> package Linear;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 合并链表：将两递增有序A，B合并为一个递增有序链表C(链式结构),利用A和B中的结点</span><br><span class="line"> */</span><br><span class="line">public class E &#123;</span><br><span class="line">	public static Node merge(Node A,Node B) &#123;</span><br><span class="line">		Node ppre=A;		//永远指向p前缀结点</span><br><span class="line">		Node qpre=B;		//永远指向q前缀结点</span><br><span class="line">		Node p =A.next;</span><br><span class="line">		Node q =B.next;</span><br><span class="line">		Node C=new Node();</span><br><span class="line">		Node t =C;</span><br><span class="line">		while (p!=null&amp;&amp;q!=null) &#123;</span><br><span class="line">			if (p.data&lt;=q.data) &#123;</span><br><span class="line">				ppre.next=p.next;</span><br><span class="line">				p.next=t.next;</span><br><span class="line">				t.next=p;</span><br><span class="line">				t=t.next;</span><br><span class="line">				p=ppre.next;</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				qpre.next=q.next;</span><br><span class="line">				q.next=t.next;</span><br><span class="line">				t.next=q;</span><br><span class="line">				t=t.next;</span><br><span class="line">				q=qpre.next;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (p==null) &#123;</span><br><span class="line">			t.next=q;</span><br><span class="line">			B.next=null;</span><br><span class="line">			B=null;</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			t.next=p;</span><br><span class="line">			A.next=null;</span><br><span class="line">			A=null;</span><br><span class="line">		&#125;</span><br><span class="line">		return C;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Node A=NodeTool.CreateNodeList(&quot;134&quot;);</span><br><span class="line">		Node B=NodeTool.CreateNodeList(&quot;246&quot;);</span><br><span class="line">		Node C=merge(A, B);</span><br><span class="line">		NodeTool.traverseWithHead(C);</span><br><span class="line">		NodeTool.traverseWithHead(A);</span><br><span class="line">		NodeTool.traverseWithHead(B);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（不生成新链表）/" data-id="ckjzj9wos005n04tpifm6uwp9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-数据结构与算法/分解链表" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/11/数据结构与算法/分解链表/" class="article-date">
@@ -93,7 +132,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/分解链表/" data-id="ckjoefqm4005c7otpwms55mmk" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/分解链表/" data-id="ckjzj9woi005d04tpsqi2byre" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -136,7 +175,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/一元多项式相加/" data-id="ckjoefqm2005a7otp09si2mt4" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/一元多项式相加/" data-id="ckjzj9wof005904tpem7fpbh6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -175,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（生成新链表）/" data-id="ckjoefqmf005n7otp1vbkikws" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（生成新链表）/" data-id="ckjzj9wou005o04tptz6rl0ze" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -214,7 +253,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表逆置/" data-id="ckjoefqmd005m7otp2v2141wi" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表逆置/" data-id="ckjzj9wop005k04tpcdv3fdqa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -457,7 +496,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/前端/前端重要知识点总结/" data-id="ckjoefqox00897otpfh2b0b57" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/前端/前端重要知识点总结/" data-id="ckjzj9ws6008b04tppg2s7gh3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -546,7 +585,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/10/前端/Javascript的DOM对象/" data-id="ckjoefql4004g7otpj9hog5c3" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/10/前端/Javascript的DOM对象/" data-id="ckjzj9wnm004h04tpg9oepjny" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -604,7 +643,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/10/06/Git/Git使用报错解决/" data-id="ckjoefqhz00127otpvpij75ag" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/10/06/Git/Git使用报错解决/" data-id="ckjzj9wjp001304tpot6j8719" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/">Git</a></li></ul>
@@ -658,7 +697,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/26/Web高阶/Mybatis查找返回Map，List集合类型的数据/" data-id="ckjoefqji002p7otpmbpanh47" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/26/Web高阶/Mybatis查找返回Map，List集合类型的数据/" data-id="ckjzj9wlh002q04tpupj2sayw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
@@ -725,70 +764,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/25/Web高阶/MyBatis的初步使用/" data-id="ckjoefqjc002i7otppu37pzlh" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/25/Web高阶/MyBatis的初步使用/" data-id="ckjzj9wl7002j04tpve2ts5qo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web高阶/">Web高阶</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据库/MySQL恢复root用户超级权限方法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/16/数据库/MySQL恢复root用户超级权限方法/" class="article-date">
-  <time datetime="2018-09-16T08:50:32.000Z" itemprop="datePublished">2018-09-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/16/数据库/MySQL恢复root用户超级权限方法/">MySQL恢复root用户超级权限方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82725873" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82725873</a><br>   1、在my.ini里的[mysqld]后面添加：</p>
-<blockquote>
-<p>skip-grant-tables </p>
-<p> 停止mysql服务器。不用密码按enter键即可登陆。</p>
-</blockquote>
-<p> 2 手动修改用户的权限。使其可以设置权限。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE mysql.user SET Grant_priv=&apos;Y&apos;, Super_priv=&apos;Y&apos; WHERE User=&apos;root&apos;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p> 3 刷新缓冲区</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
-
-<p> 4、授权</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL ON *.* TO &apos;root&apos;@&apos;localhost&apos;;</span><br></pre></td></tr></table></figure>
-
-<p> 5、可以使用如下命令产看用户权限</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from mysql.user\G</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/16/数据库/MySQL恢复root用户超级权限方法/" data-id="ckjoefqlu00527otpbop0fxlq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
 
     </footer>
   </div>
@@ -847,15 +826,15 @@
       <ul>
         
           <li>
+            <a href="/2021/01/16/2021-1-16记/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2021/01/08/迟来的2020总结与2021眺望/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
+            <a href="/2021/01/07/2021-1-7记/">(no title)</a>
           </li>
         
           <li>
@@ -863,7 +842,7 @@
           </li>
         
           <li>
-            <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
           </li>
         
       </ul>

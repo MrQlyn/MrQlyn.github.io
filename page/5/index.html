@@ -66,6 +66,94 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Android/Android框架之OKHttpUtils" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/14/Android/Android框架之OKHttpUtils/" class="article-date">
+  <time datetime="2019-07-14T02:50:21.000Z" itemprop="datePublished">2019-07-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/14/Android/Android框架之OKHttpUtils/">Android框架之OKHttpUtils</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  OKHttpUtils是对OKHttp的一个封装类，OKHttp有很多功能：如文件上传、下载；文本数据的请求get和提交post；下载图片等</p>
+<p> 需要导入三个jar包：okhttp-3.4.1.jar、okhttputils-2_6_2.jar、okio-1.9.0.jar，我已经收集出来，下面是下载地址</p>
+<p> 百度云盘地址：<a href="https://pan.baidu.com/s/1O6kBWu0PNGGtWcbwLwWLmg" target="_blank" rel="noopener">https://pan.baidu.com/s/1O6kBWu0PNGGtWcbwLwWLmg</a></p>
+<p> 密码：cugv</p>
+<blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;  回调类：okhttpUtils是获取http服务器连接前后，会调用类里的各种方法</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+</blockquote>
+<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;  AbsCallback: 所有回调的父类，抽象类</span><br><span class="line"></span><br><span class="line">StringCallBack：如果返回值类型是纯文本数据，即可使用该回调</span><br><span class="line">BitmapCallback：如果请求的是图片数据，则可以使用该回调</span><br><span class="line">FileCallBack：如果要做文件下载，则必须使用该回调，内部封装了关于文件下载进度回调的方法</span><br><span class="line"></span><br><span class="line">1，CallBackString类的onResponse方法中返回值是String类型。</span><br><span class="line">2，CallBackBitmap类的onResponse方法中返回值是Bitmap类型。</span><br><span class="line">3，CallBackFile类的onResponse方法中返回值是File类型。</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<blockquote>
+<p> 回调类有以下方法（可以重写回调类里的方法，实现文件下载前的动画演示，文件下载进度等等设置）：</p>
+</blockquote>
+<p> 以StringCallback为例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class MyStringCallback extends StringCallback &#123;</span><br><span class="line">       //与服务器连接错误调用方法</span><br><span class="line">       @Override</span><br><span class="line">       public void onError(Call call, Exception e, int i) &#123;</span><br><span class="line">           Toast.makeText(OkhttpUtilsActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();</span><br><span class="line">       &#125;</span><br><span class="line">       //连接成功，服务器返回数据方法，s为获得的数据</span><br><span class="line">       @Override</span><br><span class="line">       public void onResponse(String s, int i) &#123;</span><br><span class="line">           //textView.setText(&quot;请求返回值:&quot;+s);</span><br><span class="line">       &#125;</span><br><span class="line">       //返回进度的方法</span><br><span class="line">       @Override</span><br><span class="line">       public void inProgress(float progress, long total, int id) &#123;</span><br><span class="line">           // super.inProgress(progress, total, id);</span><br><span class="line">           System.out.println(&quot;进度&quot;+100 * progress);</span><br><span class="line">       &#125;</span><br><span class="line">       //与服务器连接之后调用方法（不管get或post是否成功都会调用该方法）</span><br><span class="line">       @Override</span><br><span class="line">       public void onAfter(int id) &#123;</span><br><span class="line">           //super.onAfter(id);</span><br><span class="line">           Toast.makeText(OkhttpUtilsActivity.this,&quot;服务器连接完成&quot;,Toast.LENGTH_LONG).show();</span><br><span class="line">       &#125;</span><br><span class="line">       //与服务器连接之前调用方法</span><br><span class="line">       @Override</span><br><span class="line">       public void onBefore(Request request, int id) &#123;</span><br><span class="line">           //super.onBefore(request, id);</span><br><span class="line">           Toast.makeText(OkhttpUtilsActivity.this,&quot;开始连接服务器&quot;,Toast.LENGTH_SHORT).show();</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 上面是获取OkhttpUtils设置获取http连接前后回调类的方法，下面才是真正使用OKhttpUtils的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> //get请求文本</span><br><span class="line">public void getHttpText() throws Exception &#123;</span><br><span class="line">    OkHttpUtils</span><br><span class="line">            .get()</span><br><span class="line">            .url(&quot;http://www.baidu.com&quot;)</span><br><span class="line">            .addParams(&quot;username&quot;, &quot;heyman&quot;)</span><br><span class="line">            .addParams(&quot;password&quot;, &quot;123&quot;)</span><br><span class="line">            .id(20)</span><br><span class="line">            .build()</span><br><span class="line">            .execute(new MyStringCallback());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//post提交文本</span><br><span class="line">public void postHttpText()&#123;</span><br><span class="line">    String url = &quot;http://www.baidu.com&quot;;</span><br><span class="line">    OkHttpUtils</span><br><span class="line">            .post()</span><br><span class="line">            .url(url)</span><br><span class="line">            .id(100)</span><br><span class="line">            .build()</span><br><span class="line">            .execute(new MyStringCallback());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> //下载文件</span><br><span class="line">public void downloadFile()&#123;</span><br><span class="line">    OkHttpUtils//</span><br><span class="line">            .get()//</span><br><span class="line">            .url(&quot;http://vfx.mtime.cn/Video/2016/07/24/mp4/160724055620533327_480.mp4&quot;)//</span><br><span class="line">            .build()//</span><br><span class="line">            .execute(new FileCallBack(Environment.getExternalStorageDirectory().getAbsolutePath(),&quot;MyMusic.mp4&quot;)&#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void onError(Call call, Exception e, int i) &#123;</span><br><span class="line">                &#125;</span><br><span class="line">                @Override</span><br><span class="line">                public void onResponse(File file, int i) &#123;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line">                @Override</span><br><span class="line">                public void inProgress(float progress, long total, int id) &#123;</span><br><span class="line">                    super.inProgress(progress, total, id);</span><br><span class="line">                    progressBar.setProgress((int) (100 * progress));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 上传文件还需要一个已经编写好的Servlet的war文件来做测试，将他放入tomcat服务器的webapps目录下，启动tomcat服务器</p>
+<p> 在这给出百度云盘链接：<a href="https://pan.baidu.com/s/1fzSLh7yMSq5ypoWVsTylSg" target="_blank" rel="noopener">https://pan.baidu.com/s/1fzSLh7yMSq5ypoWVsTylSg</a></p>
+<p> 云盘链接密码：6v0z</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> //上传多个或者单个文件</span><br><span class="line">public void uploadFile()&#123;</span><br><span class="line">    //192.168.1.104为本机IP地址</span><br><span class="line">    //由于端口冲突：http://192.168.1.104:8080为tomcat地址</span><br><span class="line">    //http://192.168.1.104为apache地址</span><br><span class="line">    String url = &quot;http://192.168.1.104:8080/FileUpload/FileUploadServlet&quot;;</span><br><span class="line">    File fileOne = new File(Environment.getExternalStorageDirectory(), &quot;tiao.mp4&quot;);</span><br><span class="line">    File fileTWo = new File(Environment.getExternalStorageDirectory(), &quot;shumei.txt&quot;);</span><br><span class="line">    if (!fileOne.exists() || !fileTWo.exists()) &#123;</span><br><span class="line">        Toast.makeText(OkhttpUtilsActivity.this, &quot;文件不存在，请修改文件路径&quot;, Toast.LENGTH_SHORT).show();</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    Map&lt;String, String&gt; paramsMap= new HashMap&lt;&gt;();</span><br><span class="line">    //填写用户名与密码，有的服务器需要</span><br><span class="line">    paramsMap.put(&quot;username&quot;, &quot;name&quot;);</span><br><span class="line">    paramsMap.put(&quot;password&quot;, &quot;123&quot;);</span><br><span class="line"></span><br><span class="line">    OkHttpUtils.post()</span><br><span class="line">            .addFile(&quot;mFile&quot;, &quot;server_afu.mp4&quot;, fileOne)</span><br><span class="line">            .addFile(&quot;mFile&quot;, &quot;server_test.txt&quot;, fileTWo)</span><br><span class="line">            .url(url)</span><br><span class="line">            .params(paramsMap)</span><br><span class="line">            .build()</span><br><span class="line">            .execute(new MyStringCallback());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"> //获取图片</span><br><span class="line">public void getPicture()</span><br><span class="line">&#123;</span><br><span class="line">    String url = &quot;http://images.csdn.net/20150817/1.jpg&quot;;</span><br><span class="line">    String url2=&quot;http://pics.sc.chinaz.com/files/pic/pic9/201807/bpic7704.jpg&quot;;</span><br><span class="line">    OkHttpUtils</span><br><span class="line">            .get()</span><br><span class="line">            .url(url2)</span><br><span class="line">            .tag(this)</span><br><span class="line">            .build()</span><br><span class="line">            .connTimeOut(20000)</span><br><span class="line">            .readTimeOut(20000)</span><br><span class="line">            .writeTimeOut(20000)</span><br><span class="line">            .execute(new BitmapCallback() &#123;</span><br><span class="line">                @Override</span><br><span class="line">                public void onError(Call call, Exception e, int id) &#123;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                @Override</span><br><span class="line">                public void onResponse(Bitmap bitmap, int id) &#123;</span><br><span class="line">                    Log.e(&quot;TAG&quot;, &quot;onResponse：complete&quot;);</span><br><span class="line">                    imageView.setImageBitmap(bitmap);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> //使用okhttp-utils上传多个或者单个文件（带参数）：</span><br><span class="line">public void multiFileUpload()</span><br><span class="line">&#123;</span><br><span class="line">    HashMap&lt;String, String&gt; map = new HashMap&lt;&gt;();</span><br><span class="line">    map.put(&quot;Action&quot;, &quot;AppVersion&quot;);</span><br><span class="line">    map.put(&quot;Version&quot;, &quot;ss&quot;);</span><br><span class="line">    map.put(&quot;Type&quot;, &quot;1&quot;);</span><br><span class="line"></span><br><span class="line">    String url = &quot;请求接口地址&quot; ;</span><br><span class="line">    OkHttpUtils.post()</span><br><span class="line">            .url(url)</span><br><span class="line">            .params(map)</span><br><span class="line">            .build()</span><br><span class="line">            .execute(new MyStringCallback());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 最后要在活动的onDestroy里重写取消与http的连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> public void onPause() &#123;</span><br><span class="line">    super.onPause();</span><br><span class="line">    //取消网络请求,根据tag取消请求</span><br><span class="line">    OkHttpUtils.getInstance().cancelTag(this);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Android/Android框架之OKHttpUtils/" data-id="ckjzj9wix000e04tp7fwptjtg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Android/Android的Bug" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/14/Android/Android的Bug/" class="article-date">
@@ -106,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Android/Android的Bug/" data-id="ckjoefqhb000e7otpeu6w9aac" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Android/Android的Bug/" data-id="ckjzj9wj3000f04tp9y61rugn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -185,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Android/Android框架之EventBus及Butterknife/" data-id="ckjoefqh1000a7otp3v01o6c3" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Android/Android框架之EventBus及Butterknife/" data-id="ckjzj9wiw000d04tp94i0svif" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -255,7 +343,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Android/Android里的RecyclerView/" data-id="ckjoefqo4007d7otpzfzzovnp" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Android/Android里的RecyclerView/" data-id="ckjzj9wqr007f04tpydyrskfc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -312,7 +400,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Android/Android进阶控件/" data-id="ckjoefqhn000s7otp3oc8ixv6" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Android/Android进阶控件/" data-id="ckjzj9wjh000t04tpvfpw030a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -355,7 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/14/Web/图文自动生产类/" data-id="ckjoefqjb002g7otpaw6cxoza" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/14/Web/图文自动生产类/" data-id="ckjzj9wl4002h04tp9go820hv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -423,7 +511,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/13/Android/Android的数据存储/" data-id="ckjoefqhk000o7otp61dfnd4d" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/13/Android/Android的数据存储/" data-id="ckjzj9wje000p04tpke5ioezv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -474,7 +562,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/07/12/hello-world/" data-id="ckjoefqel00027otpba02baxy" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/07/12/hello-world/" data-id="ckjzj9wft000304tpxrpm04ho" class="article-share-link">Share</a>
       
       
     </footer>
@@ -522,7 +610,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/05/26/c++/详解STL里的List底层代码/" data-id="ckjoefqol007x7otpyjyurosz" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/05/26/c++/详解STL里的List底层代码/" data-id="ckjzj9wrp007z04tp1jtvk3k2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
@@ -572,54 +660,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/05/26/c++/详解STL里的Vector底层代码/" data-id="ckjoefqoj007v7otpjfaw4zg3" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/05/26/c++/详解STL里的Vector底层代码/" data-id="ckjzj9wri007x04tpsrui4u5z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据结构与算法/哈希查找HashSearch" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/26/数据结构与算法/哈希查找HashSearch/" class="article-date">
-  <time datetime="2019-05-26T01:30:41.000Z" itemprop="datePublished">2019-05-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/26/数据结构与算法/哈希查找HashSearch/">哈希查找HashSearch</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/90572949" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/90572949</a><br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"> package Search;</span><br><span class="line">/*</span><br><span class="line"> * 哈希查找(线性探测法)：位置=存数（即要存的数据）%p		//p取小于等于长度的最大素数</span><br><span class="line"> * 						解决冲突时往下移一个位置</span><br><span class="line"> * 						即(存数+1)%p....直至找到位置</span><br><span class="line"> * </span><br><span class="line"> * 能存储的元素个数=p</span><br><span class="line"> * </span><br><span class="line"> * 补充知识点：</span><br><span class="line"> * 1、&amp;&amp;和||是短路运算符（&amp;&amp;：当第一个条件为false，不用判断第二个条件）</span><br><span class="line"> *		      （||：当第一个条件为true，不用判断第二个条件）</span><br><span class="line"> * 2、%和|是非短路运算符：两个条件都需要判断</span><br><span class="line"> */</span><br><span class="line">public class HashSearch &#123;</span><br><span class="line">	public static void entry(int hash[],int key) &#123;		//存元素方法</span><br><span class="line">		int p=getMaxPrime(hash);		//获得小于等于长度的最大素数</span><br><span class="line">		int i=0;</span><br><span class="line">		int pos=(key+i)%p;</span><br><span class="line">		int t=pos;</span><br><span class="line">		while (hash[t]!=0) &#123;	//判断该位置是否为空，不为空接着查下一位置</span><br><span class="line">			i++;</span><br><span class="line">			t=(key+i)%p;	//进入下一位置</span><br><span class="line">			if (t==pos) &#123;	//下一位置已回到原点（pos），表已满</span><br><span class="line">				System.out.println(&quot;表已满&quot;+t);</span><br><span class="line">				return;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		hash[t]=key;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static int getMaxPrime(int[] hash) &#123;	//获得小于等于长度的最大素数</span><br><span class="line">		int maxPrime=hash.length;</span><br><span class="line">		if (maxPrime&lt;=1) &#123;	//当数组长度为1时p取1</span><br><span class="line">			return 1;	</span><br><span class="line">		&#125;</span><br><span class="line">		while (isPrime(maxPrime)==false) &#123;	//判断当前值是否为素数</span><br><span class="line">			maxPrime--;</span><br><span class="line">		&#125;</span><br><span class="line">		return maxPrime;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public static boolean isPrime(int prime) &#123;		//判断数是否是素数（传入数必须&gt;=2）</span><br><span class="line">		boolean judge=true;	//默认为真</span><br><span class="line">		for (int i = 2; i &lt; prime; i++) &#123;</span><br><span class="line">			if (prime%i==0) &#123;</span><br><span class="line">				judge=false;</span><br><span class="line">				break;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return judge;</span><br><span class="line">	&#125;</span><br><span class="line">	/*</span><br><span class="line">	 * 第一种查找方法：</span><br><span class="line">	 * （1）hash[t]（即当前判断元素为空）：在查找过程中出现hash[t]为空，元素从未插入</span><br><span class="line">	 *                                   （因为元素插入过程如果有空，应立即插在该位置上，返回-1）</span><br><span class="line">	 * （2）hash[t]（即当前判断元素不为空）：第一种==key(查找成功，返回位置t)</span><br><span class="line">	 * 									      第二种!=key(不匹配，移至下一位置继续查找)</span><br><span class="line">	 *      属于（2）情况且必须在移至下一位置后执行：位置移动后的判断（t==pos）,已查找表中所有元素</span><br><span class="line">	 *                                             ，未找到返回-1</span><br><span class="line">	 */</span><br><span class="line">	public static int HashSearchOne(int[] hash,int key) &#123;</span><br><span class="line">		int p=getMaxPrime(hash);</span><br><span class="line">		int i=0;</span><br><span class="line">		int pos=(key+i)%p;</span><br><span class="line">		int t=pos;</span><br><span class="line">		while (hash[t]!=0) &#123;	//当前位置非空</span><br><span class="line">			if (hash[t]==key) &#123;</span><br><span class="line">				return t;</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				i++;</span><br><span class="line">				t=(t+i)%p;</span><br><span class="line">			&#125;</span><br><span class="line">			if (t==pos)return -1;	//查找失败，表已全部查完</span><br><span class="line">		&#125;</span><br><span class="line">		return -1;				//当前位置为空，查找失败</span><br><span class="line">	&#125;</span><br><span class="line">	/*</span><br><span class="line">	 * 第二种查找方法：</span><br><span class="line">	 * （1）hash[t]==key：查找成功</span><br><span class="line">	 * （2）hash[t]!=key:第一种为空：查找失败</span><br><span class="line">	 *                   第二种不为空：移至下一元素继续匹配</span><br><span class="line">	 *      属于（2）需要在移动至下一元素语句后判断：t==pos，表已走位，查找失败</span><br><span class="line">	 */</span><br><span class="line">	public static int HashSearchTwo(int[] hash,int key) &#123;</span><br><span class="line">		int p=getMaxPrime(hash);</span><br><span class="line">		int pos=key%p;</span><br><span class="line">		int t=pos;</span><br><span class="line">		while (hash[t]!=key) &#123;</span><br><span class="line">			if (hash[t]==0) &#123;		//为空，查找失败</span><br><span class="line">				return -1;</span><br><span class="line">			&#125;else &#123;					//不为空，移至下一位置</span><br><span class="line">				t=(t+1)%p;</span><br><span class="line">			&#125;</span><br><span class="line">			if(t==pos) return -1;	//表已走完，未找到元素</span><br><span class="line">		&#125;</span><br><span class="line">		return t;		//查找成功</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> package Search;</span><br><span class="line"></span><br><span class="line">public class test &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		int[] hash=new int[5];</span><br><span class="line">		int[] key=new int[]&#123;2,1,5,3,4&#125;;</span><br><span class="line">		for (int i = 0; i &lt; key.length; i++) &#123;</span><br><span class="line">			HashSearch.entry(hash, key[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(&quot;hash表的存储结构：&quot;);</span><br><span class="line">		for (int i = 0; i &lt; HashSearch.getMaxPrime(hash); i++) &#123;</span><br><span class="line">			System.out.println(hash[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(&quot;5的索引：&quot;+HashSearch.HashSearchOne(hash, 5));</span><br><span class="line">		System.out.println(&quot;2的索引：&quot;+HashSearch.HashSearchOne(hash, 2));</span><br><span class="line">		System.out.println(&quot;5的索引：&quot;+HashSearch.HashSearchTwo(hash, 5));</span><br><span class="line">		System.out.println(&quot;2的索引：&quot;+HashSearch.HashSearchTwo(hash, 2));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/05/26/数据结构与算法/哈希查找HashSearch/" data-id="ckjoefqmk005r7otpt3evyc14" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
 
     </footer>
   </div>
@@ -678,15 +722,15 @@
       <ul>
         
           <li>
+            <a href="/2021/01/16/2021-1-16记/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2021/01/08/迟来的2020总结与2021眺望/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
+            <a href="/2021/01/07/2021-1-7记/">(no title)</a>
           </li>
         
           <li>
@@ -694,7 +738,7 @@
           </li>
         
           <li>
-            <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
           </li>
         
       </ul>

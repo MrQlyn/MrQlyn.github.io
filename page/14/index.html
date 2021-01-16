@@ -66,6 +66,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据库/修改mysql默认密码方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/03/30/数据库/修改mysql默认密码方法/" class="article-date">
+  <time datetime="2018-03-30T13:46:05.000Z" itemprop="datePublished">2018-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/30/数据库/修改mysql默认密码方法/">修改mysql默认密码方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p> 今天在MAC上安装完MYSQL后，MYSQL默认给分配了一个默认密码，但当自己在终端上使用默认密码登录的时候，总会提示一个授权失败的错误：Access denied for user ‘root’@’localhost’ (using passwor)如图：</p>
+<p> <img src="https://img-blog.csdn.net/20170226164101751?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h1 id="解决方案（x）"><a href="#解决方案（x）" class="headerlink" title="解决方案（x）"></a><a href></a>解决方案（x）</h1><p> 既然现在没法登录到数据库中，改密码和添加用户等操作也无从谈起。好在MySQL中还提供了一种免去密码校验进入数据库的方法，我们就先使用这种方法登入到数据库中。然后将默认密码替换掉，上面的问题就可以解决掉啦~具体操作如下</p>
+<h2 id="一、找到Mysql配置文件"><a href="#一、找到Mysql配置文件" class="headerlink" title="一、找到Mysql配置文件"></a><a href></a>一、找到Mysql配置文件</h2><p> 这个操作，在不同平台下对应的不同的操作文件<br> mac系统中配置文件是mysql安装目录support_file下的my-default文件<br><img src="https://img-blog.csdn.net/20170226170443002?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<blockquote>
+<p>需要注意的是：默认该配置文件不具备写权限需要使用chmod命令先为该文件添加写权限才能进行更改</p>
+<p> ps:windows系统的配置文件是mysql安装根目录的my.ini文件</p>
+</blockquote>
+<h2 id="二、修改配置文件"><a href="#二、修改配置文件" class="headerlink" title="二、修改配置文件"></a><a href></a>二、修改配置文件</h2><p> 打开刚才我们找到的配置文件，然后在里面找到  <code>[mysqld]</code>  这一项，然后在该配置项下添加  <code>skip-grant-tables</code> 这个配置，然后保存文件。<br><img src="https://img-blog.csdn.net/20170226170828229?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h2 id="三、重启mysql服务"><a href="#三、重启mysql服务" class="headerlink" title="三、重启mysql服务"></a><a href></a>三、重启mysql服务</h2><p> 为了使上一步的配置项生效，我们需要重启MySQL的服务<br> Mac系统可以在系统偏好中进行重启：<br><img src="https://img-blog.csdn.net/20170226170943542?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> windows系统可以通过：在我的电脑上右键–&gt;服务–&gt;找到mysql服务进行重启<br> linux系统可以使用：service mysqld restart来重启</p>
+<h2 id="四、免密登录MySQL"><a href="#四、免密登录MySQL" class="headerlink" title="四、免密登录MySQL"></a><a href></a>四、免密登录MySQL</h2><p> 然后再次进入到终端当中，敲入  <code>mysql -u root -p</code>  命令然后回车，当需要输入密码时，直接按enter键，便可以不用密码登录到数据库当中</p>
+<h2 id="五、修改默认的密码"><a href="#五、修改默认的密码" class="headerlink" title="五、修改默认的密码"></a><a href></a>五、修改默认的密码</h2><p> 使用  <code>set password for &#39;username&#39;@&#39;host&#39; = password(&#39;newpassword&#39;)</code>  命令修改新的密码。</p>
+<p> //我的是: <code>set password for &#39;root&#39;@&#39;host&#39; = password(&#39;123456&#39;)</code>  命令修改新的密码。</p>
+<h2 id="六、检验成果"><a href="#六、检验成果" class="headerlink" title="六、检验成果"></a><a href></a>六、检验成果</h2><p> 我们改完默认密码后，再次进入到之前的配置文件中，将我们跳过密码的那个配置行给删除掉，变为系统原先的配置。重启MySQL服务，下次再登录的时候便可以解决掉这个问题了。</p>
+<h1 id="快速方案"><a href="#快速方案" class="headerlink" title="快速方案"></a><a href></a>快速方案</h1><p> 要是你觉得上面的操作过于麻烦，可以使用下面的快捷方式达到上面的效果，针对mac系统为例：<br> 首先进入到  <code>/usr/local/mysql/support-file</code>  这个目录下,然后按照图片上的步骤进行操作</p>
+<p> <img src="https://img-blog.csdn.net/20170226174906154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 进入mysql的安全模式后，键入图中圈起来的四行配置（必须逐行输入），输入完成后使用  <code>contrl+z</code>  键结束输入<br> 然后再终端中使用 mysql -u root -p 同样可以实现密码登录，另外此时密码也已经修改为了  <code>pass</code>  ，下次的登录即可使用pass这个新密码了。与上面的操作达成的效果是相同的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/03/30/数据库/修改mysql默认密码方法/" data-id="ckjzj9wod005704tp6gv85nl5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-基础操作/win10禁用笔记本原本键盘" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/02/03/基础操作/win10禁用笔记本原本键盘/" class="article-date">
@@ -98,66 +152,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/02/03/基础操作/win10禁用笔记本原本键盘/" data-id="ckjoefql6004i7otp44nfwuzc" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/02/03/基础操作/win10禁用笔记本原本键盘/" data-id="ckjzj9wnp004j04tpfqdpdyq9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/基础操作/">基础操作</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据结构与算法/八皇后问题" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/29/数据结构与算法/八皇后问题/" class="article-date">
-  <time datetime="2018-01-28T19:36:45.000Z" itemprop="datePublished">2018-01-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/29/数据结构与算法/八皇后问题/">八皇后问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79191125" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79191125</a><br>   <strong>首先，我们需要了解八皇后是什么？**</strong><a href="https://baike.baidu.com/item/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/11053477?fr=aladdin&amp;fromid=10742426&amp;fromtitle=%E5%85%AB%E7%9A%87%E5%90%8E" target="_blank" rel="noopener">八皇后问题</a>（可点击访问）<strong>**是指在一个 8×8 的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后。</strong></p>
-<p> <strong>听起来总是很简单，但实际上<img src="https://img-blog.csdn.net/20180129031257963?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt></strong></p>
-<p> **<br>**</p>
-<p> <strong>好了，开始进入正题：</strong></p>
-<p> <strong>首先构造一个皇后节点类（每一个节点拥有八个方向的节点指针，可以说就是个罗盘）</strong></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129031728567?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> <strong>接下来是八皇后的数组类（stl作为八皇后节点的容器栈）</strong></p>
-<p> *<em><img src alt><img src="https://img-blog.csdn.net/20180129031948046?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> <strong>最后，就是各个函数的实现了。</strong></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129032319550?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129032446154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129032633219?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129032823017?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129033034603?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129033206167?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><img src="https://img-blog.csdn.net/20180129033311408?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> <strong>到这就基本结束了，具体实现函数有231行，基本都有注释，欢迎提出改进意见。</strong></p>
-<p> *<em><img src="https://img-blog.csdn.net/20180129033558768?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
-<p> **<br>**</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/01/29/数据结构与算法/八皇后问题/" data-id="ckjoefqm000587otp6op5wm3w" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
 
     </footer>
   </div>
@@ -210,10 +208,66 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/01/29/c++/八皇后问题/" data-id="ckjoefqke003m7otprxudkstv" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/01/29/c++/八皇后问题/" data-id="ckjzj9wml003k04tps85o9xvv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-数据结构与算法/八皇后问题" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/01/29/数据结构与算法/八皇后问题/" class="article-date">
+  <time datetime="2018-01-28T19:36:45.000Z" itemprop="datePublished">2018-01-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/29/数据结构与算法/八皇后问题/">八皇后问题</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79191125" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79191125</a><br>   <strong>首先，我们需要了解八皇后是什么？**</strong><a href="https://baike.baidu.com/item/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98/11053477?fr=aladdin&amp;fromid=10742426&amp;fromtitle=%E5%85%AB%E7%9A%87%E5%90%8E" target="_blank" rel="noopener">八皇后问题</a>（可点击访问）<strong>**是指在一个 8×8 的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后。</strong></p>
+<p> <strong>听起来总是很简单，但实际上<img src="https://img-blog.csdn.net/20180129031257963?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt></strong></p>
+<p> **<br>**</p>
+<p> <strong>好了，开始进入正题：</strong></p>
+<p> <strong>首先构造一个皇后节点类（每一个节点拥有八个方向的节点指针，可以说就是个罗盘）</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129031728567?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>接下来是八皇后的数组类（stl作为八皇后节点的容器栈）</strong></p>
+<p> *<em><img src alt><img src="https://img-blog.csdn.net/20180129031948046?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>最后，就是各个函数的实现了。</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032319550?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032446154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032633219?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129032823017?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033034603?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033206167?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><img src="https://img-blog.csdn.net/20180129033311408?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> <strong>到这就基本结束了，具体实现函数有231行，基本都有注释，欢迎提出改进意见。</strong></p>
+<p> *<em><img src="https://img-blog.csdn.net/20180129033558768?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzg0ODcxNTU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt><br>*</em></p>
+<p> **<br>**</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/01/29/数据结构与算法/八皇后问题/" data-id="ckjzj9wog005b04tpen8pxmy2" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
 
     </footer>
   </div>
@@ -249,7 +303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2017/10/08/c++/c++引用/" data-id="ckjoefqk8003h7otpj3ibvm7n" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2017/10/08/c++/c++引用/" data-id="ckjzj9wmh003i04tphkgtkk4l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
@@ -295,7 +349,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2017/10/06/c++/c++里的const/" data-id="ckjoefqkb003j7otpswj3dtj7" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2017/10/06/c++/c++里的const/" data-id="ckjzj9wmq003n04tpmq9betcn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li></ul>
@@ -357,15 +411,15 @@
       <ul>
         
           <li>
+            <a href="/2021/01/16/2021-1-16记/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2021/01/08/迟来的2020总结与2021眺望/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
+            <a href="/2021/01/07/2021-1-7记/">(no title)</a>
           </li>
         
           <li>
@@ -373,7 +427,7 @@
           </li>
         
           <li>
-            <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
           </li>
         
       </ul>

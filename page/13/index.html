@@ -66,6 +66,134 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据库/MySQL学习笔记(一)" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/11/数据库/MySQL学习笔记(一)/" class="article-date">
+  <time datetime="2018-07-11T09:28:36.000Z" itemprop="datePublished">2018-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/11/数据库/MySQL学习笔记(一)/">MySQL学习笔记(一)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79475851" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79475851</a><br>   <strong>目录</strong></p>
+<p> <a href="#%E4%B8%80%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5">一，数据库系统概念</a></p>
+<p> <a href="#%E4%BA%8C%EF%BC%8CMysql%E7%9A%84%E7%9A%84%E7%9A%84%E7%9A%84%E7%9A%84%E5%AE%89%E8%A3%85">二，Mysql的安装</a></p>
+<p> <a href="#%E4%B8%89%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">三，数据库的基本操作</a></p>
+<p> <a href="#%E5%9B%9B%EF%BC%8C%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">四，数据表的基本操作</a></p>
+<p> <a href="#%E4%BA%94%EF%BC%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">五，数据类型</a></p>
+<p> <a href="#%E5%85%AD%EF%BC%8C%E4%BA%94%E5%A4%A7%E7%BA%A6%E6%9D%9F">六，五大约束</a></p>
+<hr>
+<h3 id="一，数据库系统概念"><a href="#一，数据库系统概念" class="headerlink" title="一，数据库系统概念"></a>一，数据库系统概念</h3><p> 数据库：指装数据的库（硬盘空间）。</p>
+<p> 数据库管理软件：指在操作系统上用户所使用的管理数据库的应用软件（MySQL、Oracle等）</p>
+<p> 数据库系统：是包含数据管理员，数据库，数据管理软件的统称。</p>
+<h3 id="二，Mysql的安装"><a href="#二，Mysql的安装" class="headerlink" title="二，Mysql的安装"></a>二，Mysql的安装</h3><p> 这个不多赘述，网上教程很多，自行百度即可。</p>
+<p> 安装好MySQL后，先不要着急安装可视化工具，可以先使用黑框，熟悉后再使用可视化工具。打开的mysql的的的命令框，</p>
+<p> 输入密码根进入，可见到以下场景，即为安装成功</p>
+<p> <img src="https://img-blog.csdn.net/20180307195650460" alt></p>
+<h3 id="三，数据库的基本操作"><a href="#三，数据库的基本操作" class="headerlink" title="三，数据库的基本操作"></a>三，数据库的基本操作</h3><p> <strong>显示当前数据库：show databases;<br> 删除数据库：drop database库名;</strong></p>
+<p> <strong>创建数据库：create database库名; //注意不要漏掉分号</strong></p>
+<p> <strong>使用数据库：use 库名;</strong></p>
+<p> 以上为整合，接下来逐一介绍：</p>
+<p> <strong>3.1显示当前数据库：show databases;</strong></p>
+<p> <strong><img src="https://img-blog.csdn.net/20180307200154837" alt></strong></p>
+<p> <strong>3.2创建数据库：create database 库名; //注意不要漏掉分号</strong></p>
+<p> *<em>3.3使用数据库：use 库名; *</em></p>
+<p> <strong>** 显示当前数据库：show databases;**</strong></p>
+<p> <strong><strong><img src="https://img-blog.csdn.net/20180307200205852" alt></strong></strong></p>
+<p> <strong>*<em>3.4删除数据库：drop database *</em></strong>库名;****</p>
+<p> <strong><strong><img src="https://img-blog.csdn.net/20180307200251179" alt></strong></strong></p>
+<h3 id="四，数据表的基本操作"><a href="#四，数据表的基本操作" class="headerlink" title="四，数据表的基本操作"></a><strong><strong>四，数据表的基本操作</strong></strong></h3><p> 数据表是数据库的组成部分之一，数据表操作必须在使用某一个数据库后才能进行。</p>
+<p> 而一个数据库中一般会有多张表，这些各自独立的表通过建立关系被联接起来，才成为可以交叉查阅，一目了然的数据库如下便是一张表：</p>
+<p> ID名称电话</p>
+<p> 01 Tom 110110110</p>
+<p> 02杰克119119119</p>
+<p> 0 3 Rose 114114114</p>
+<p> <strong>4.1查看当前数据表：show tables;</strong></p>
+<p> <strong><img src="https://img-blog.csdn.net/20180307201027189" alt></strong></p>
+<p> 此时我的数据库中有三张数据表：当然，标记，学生;</p>
+<p> <strong>4.2新建数据表：create table 表名（列名 数据类型(</strong>数据长度)，<strong>列名 数据类型(</strong>数据长度)……<strong>）;</strong></p>
+<p> <img src="https://img-blog.csdn.net/20180307201522107" alt></p>
+<p> <strong>4.3往数据表中插入自定义数据：insert into 表名（列名a，列名b，列名c）values（值1，值2，值3），</strong>values（值1，****</p>
+<p> <strong>** 值2，值3）</strong> ….；**</p>
+<p> **  注意：（列名a，列名b，列名c）可省略，默认为插入表中所有列。**</p>
+<p> ** 往数据表中插入其它表的数据：insert into 表1（列名a，列名b，列名c）values（值1，值2，值3）…select （列名a，**</p>
+<p> ** 列名b，列名c） from 表2;**</p>
+<p> 注意：表1和表2不能相同，且select语句不能包含order by</p>
+<p> <strong>4.4删除数据表：drop table表名 ;</strong></p>
+<p> <strong><strong>4.5修改数据表名：rename table原名到新名;</strong></strong></p>
+<p> <strong>4.6清空数据表：delete from 表名;</strong></p>
+<h3 id="五，数据类型"><a href="#五，数据类型" class="headerlink" title="五，数据类型"></a>五，数据类型</h3><p> MySQL的的常用数据类型：</p>
+<p> 数据类型大小（字节）用途格式</p>
+<p> INT 4整数 </p>
+<p> FLOAT 4单精度浮点数 </p>
+<p> DOUBLE 8双精度浮点数 </p>
+<p> ENUM 单选，如：ENUM（’A’，’B’，’C’）</p>
+<p> SET 多选 如：SET（’1’，’2’，’3’）</p>
+<p> Date 日期，格式：YYYY-MM-DD 如：2018-12-31</p>
+<p> DateTime 日期和时间，格式：YYYY-MM-DD HH：MM：SS 如：2018-12-31 00:00:00</p>
+<p> Year 年份</p>
+<p> CHAR 0~255定长字符串 </p>
+<p> VARCHAR 0~255变长字符串 </p>
+<p> TEXT 0~65535长文本数据 </p>
+<p> 注意：VARCHAR和炭区别是VARCHAR在存储时存储空间后根据实际字符长度变化，而炭不会，分配CHAR（10）空间后如果存储 ‘张三’ 字符串会多存储6个空字符，没有伸缩性。</p>
+<h3 id="六，五大约束"><a href="#六，五大约束" class="headerlink" title="六，五大约束"></a>六，五大约束</h3><p> 约束是一种限制，它通过对表的行或列的数据做出限制，来确保表的数据的完整性，唯一性（<strong>即对当前列数据的要求）。</strong>。</p>
+<p> <strong>约束：一般在创建表时设置</strong></p>
+<p> <strong>not null：该列列值不能为空，数据插入时不能为空</strong></p>
+<p> ** <strong>**格式：列名 数据类型（数据长度）not null，……</strong></p>
+<p> <strong>unique：该列数据都是独特的，即不能重复。</strong></p>
+<p> ** <strong>** 唯一约束不仅可以在一个表内创建，而且可以同时多表创建组合唯一约束。</strong></p>
+<p> ** <strong>** 格式：列名 数据类型（数据长度）unique，……</strong></p>
+<p> ** 格式：unique(列名1，列名2，…)**</p>
+<p> <strong>default：列数据时的默认值，当插入时没有给出该列数据时的默认值</strong></p>
+<p> ** <strong>** 格式：列名 数据类型（数据长度）default 默认值</strong></p>
+<p> <strong>primary key**</strong>：unique + not null，插入时数据既不能时表中已有的，又不能为空。一个表只能有一个主键**</p>
+<p> ** <strong>** 格式： 列名 数据类型（数据长度）primary key，……</strong></p>
+<p> ** 格式：primary key(列名1，列名2，…)**</p>
+<p> <strong>foreigne key：外键表示表与表之间的关系，指定的当前列完全依赖于另一表的主键列。</strong></p>
+<p> ** 外键必须参考（参考）另一个表主键，外键约束的列在插入数据时在参考列中必须有对应值…**</p>
+<p> ** 一个表<strong>**外键可以有多个</strong></p>
+<p> ** <strong>** 格式：constraint 约束名 foreign key(外键列名) references 表名(主键列名) [ on delete cascade/on update cascade ]</strong></p>
+<p> ** on delete cascade：级联删除（可不加），删除主键表列数据，外键表跟着删除列数据。解决了删除主键表前需要**</p>
+<p> ** 先删除外键表数据的问题**</p>
+<p> ** on update cascade：级联更新（可不加），更新主键表列数据，外键表跟着更新列数据。**</p>
+<p> ** 注意：外键和主键数据类型要相同，一般外键名和主键名也设为相同**</p>
+<p> <strong>删除以上约束方法：</strong></p>
+<p> <strong>删除主键约束：alter table 表名 drop primary key</strong></p>
+<p> <strong>删除外键约束：alter table 表名 drop foreign key 约束名</strong></p>
+<p> <strong>删除其它约束（即直接在列名后添加的约束）：alter table 表名 modify 列名 数据类型 （此处不加约束即删除了约束）</strong></p>
+<p> <strong>相关章节：</strong></p>
+<p> （二）<a href="https://blog.csdn.net/qq_38487155/article/details/79488478" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79488478</a></p>
+<p> （三）<a href="https://blog.csdn.net/qq_38487155/article/details/79508140" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79508140</a></p>
+<p> （四）<a href="https://blog.csdn.net/qq_38487155/article/details/79516314" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79516314</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(一)/" data-id="ckjzj9wo4004z04tp7npwlq2f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/04/28/数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）/" class="article-date">
@@ -105,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）/" data-id="ckjoefqll004s7otpifjw57zq" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（事务的处理和批量处理SQL语句）/" data-id="ckjzj9wo0004t04tpn1ho0kr5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -194,7 +322,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记(dbcp数据库连接池)/" data-id="ckjoefqlf004o7otpw7d5q4do" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记(dbcp数据库连接池)/" data-id="ckjzj9wnw004p04tpgstwavua" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -260,7 +388,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（查询SQL语句得到的结果对象）/" data-id="ckjoefqlm004u7otp4575uek0" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（查询SQL语句得到的结果对象）/" data-id="ckjzj9wo1004v04tpe92v1sde" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -339,7 +467,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/" data-id="ckjoefqli004q7otpqqu4duzy" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（SQL语句的执行）/" data-id="ckjzj9wny004r04tpzk58jh2i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -432,7 +560,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/" data-id="ckjoefqlo004w7otpm9yasxfp" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/28/数据库/JDBC学习笔记（获取数据库连接的俩种方式）/" data-id="ckjzj9wo3004x04tpllb2kl85" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -497,7 +625,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/18/前端/JQuery笔记/" data-id="ckjoefqot00857otptpbp2gid" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/18/前端/JQuery笔记/" data-id="ckjzj9wrw008704tprz6l6jkz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -683,7 +811,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/HTML笔记/" data-id="ckjoefqoq00837otpozwzg6s2" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/HTML笔记/" data-id="ckjzj9wru008504tpopdnkvz8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -743,7 +871,7 @@ background-color:red;color:green
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/CSS笔记/" data-id="ckjoefqkz004d7otp6ncnbv4r" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/CSS笔记/" data-id="ckjzj9wnk004e04tphg45jzav" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -810,64 +938,10 @@ background-color:red;color:green
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/JavaScript笔记/" data-id="ckjoefqov00877otpap6y2coy" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/04/11/前端/JavaScript笔记/" data-id="ckjzj9ws3008904tp11vmv0pc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据库/修改mysql默认密码方法" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/03/30/数据库/修改mysql默认密码方法/" class="article-date">
-  <time datetime="2018-03-30T13:46:05.000Z" itemprop="datePublished">2018-03-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/03/30/数据库/修改mysql默认密码方法/">修改mysql默认密码方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p> 今天在MAC上安装完MYSQL后，MYSQL默认给分配了一个默认密码，但当自己在终端上使用默认密码登录的时候，总会提示一个授权失败的错误：Access denied for user ‘root’@’localhost’ (using passwor)如图：</p>
-<p> <img src="https://img-blog.csdn.net/20170226164101751?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h1 id="解决方案（x）"><a href="#解决方案（x）" class="headerlink" title="解决方案（x）"></a><a href></a>解决方案（x）</h1><p> 既然现在没法登录到数据库中，改密码和添加用户等操作也无从谈起。好在MySQL中还提供了一种免去密码校验进入数据库的方法，我们就先使用这种方法登入到数据库中。然后将默认密码替换掉，上面的问题就可以解决掉啦~具体操作如下</p>
-<h2 id="一、找到Mysql配置文件"><a href="#一、找到Mysql配置文件" class="headerlink" title="一、找到Mysql配置文件"></a><a href></a>一、找到Mysql配置文件</h2><p> 这个操作，在不同平台下对应的不同的操作文件<br> mac系统中配置文件是mysql安装目录support_file下的my-default文件<br><img src="https://img-blog.csdn.net/20170226170443002?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<blockquote>
-<p>需要注意的是：默认该配置文件不具备写权限需要使用chmod命令先为该文件添加写权限才能进行更改</p>
-<p> ps:windows系统的配置文件是mysql安装根目录的my.ini文件</p>
-</blockquote>
-<h2 id="二、修改配置文件"><a href="#二、修改配置文件" class="headerlink" title="二、修改配置文件"></a><a href></a>二、修改配置文件</h2><p> 打开刚才我们找到的配置文件，然后在里面找到  <code>[mysqld]</code>  这一项，然后在该配置项下添加  <code>skip-grant-tables</code> 这个配置，然后保存文件。<br><img src="https://img-blog.csdn.net/20170226170828229?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h2 id="三、重启mysql服务"><a href="#三、重启mysql服务" class="headerlink" title="三、重启mysql服务"></a><a href></a>三、重启mysql服务</h2><p> 为了使上一步的配置项生效，我们需要重启MySQL的服务<br> Mac系统可以在系统偏好中进行重启：<br><img src="https://img-blog.csdn.net/20170226170943542?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> windows系统可以通过：在我的电脑上右键–&gt;服务–&gt;找到mysql服务进行重启<br> linux系统可以使用：service mysqld restart来重启</p>
-<h2 id="四、免密登录MySQL"><a href="#四、免密登录MySQL" class="headerlink" title="四、免密登录MySQL"></a><a href></a>四、免密登录MySQL</h2><p> 然后再次进入到终端当中，敲入  <code>mysql -u root -p</code>  命令然后回车，当需要输入密码时，直接按enter键，便可以不用密码登录到数据库当中</p>
-<h2 id="五、修改默认的密码"><a href="#五、修改默认的密码" class="headerlink" title="五、修改默认的密码"></a><a href></a>五、修改默认的密码</h2><p> 使用  <code>set password for &#39;username&#39;@&#39;host&#39; = password(&#39;newpassword&#39;)</code>  命令修改新的密码。</p>
-<p> //我的是: <code>set password for &#39;root&#39;@&#39;host&#39; = password(&#39;123456&#39;)</code>  命令修改新的密码。</p>
-<h2 id="六、检验成果"><a href="#六、检验成果" class="headerlink" title="六、检验成果"></a><a href></a>六、检验成果</h2><p> 我们改完默认密码后，再次进入到之前的配置文件中，将我们跳过密码的那个配置行给删除掉，变为系统原先的配置。重启MySQL服务，下次再登录的时候便可以解决掉这个问题了。</p>
-<h1 id="快速方案"><a href="#快速方案" class="headerlink" title="快速方案"></a><a href></a>快速方案</h1><p> 要是你觉得上面的操作过于麻烦，可以使用下面的快捷方式达到上面的效果，针对mac系统为例：<br> 首先进入到  <code>/usr/local/mysql/support-file</code>  这个目录下,然后按照图片上的步骤进行操作</p>
-<p> <img src="https://img-blog.csdn.net/20170226174906154?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGlzb25namlhMTIz/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br> 进入mysql的安全模式后，键入图中圈起来的四行配置（必须逐行输入），输入完成后使用  <code>contrl+z</code>  键结束输入<br> 然后再终端中使用 mysql -u root -p 同样可以实现密码登录，另外此时密码也已经修改为了  <code>pass</code>  ，下次的登录即可使用pass这个新密码了。与上面的操作达成的效果是相同的。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/03/30/数据库/修改mysql默认密码方法/" data-id="ckjoefqly00567otprmvgtisf" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
 
     </footer>
   </div>
@@ -926,15 +1000,15 @@ background-color:red;color:green
       <ul>
         
           <li>
+            <a href="/2021/01/16/2021-1-16记/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2021/01/08/迟来的2020总结与2021眺望/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
+            <a href="/2021/01/07/2021-1-7记/">(no title)</a>
           </li>
         
           <li>
@@ -942,7 +1016,7 @@ background-color:red;color:green
           </li>
         
           <li>
-            <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
           </li>
         
       </ul>

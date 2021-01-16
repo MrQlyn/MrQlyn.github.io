@@ -66,6 +66,97 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Android/Android里的服务Service" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/22/Android/Android里的服务Service/" class="article-date">
+  <time datetime="2018-07-22T09:04:12.000Z" itemprop="datePublished">2018-07-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/22/Android/Android里的服务Service/">Android里的服务Service</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81155513" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81155513</a><br>   学习郭霖大神的《第一行代码》，记录以下自己的学习笔记，对Service的一个总结</p>
+<p> 一、继承服务类、重写服务方法</p>
+<p> 当我们要自定义服务时，必须要继承于服务类（Service），重写服务的方法,同时最重要的是在注册四大组件的地方注册服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> &lt;service android:name=&quot;.MyService&quot;&gt;</span><br><span class="line">&lt;/service&gt;</span><br></pre></td></tr></table></figure>
+
+<p> 以下为服务的可重写方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">    //绑定服务会触发方法，返回值将传入活动ServiceConnection类的onServiceConnected的参数里</span><br><span class="line">//活动调用bindService()后会回调onBind()方法返回一个IBinder实例到</span><br><span class="line">//活动匿名类ServiceConnection的onServiceConnected的传入参数里</span><br><span class="line">@Override</span><br><span class="line">public IBinder onBind(Intent intent) &#123;</span><br><span class="line">	return null;</span><br><span class="line">&#125;</span><br><span class="line">//创建服务调用方法</span><br><span class="line">public void onCreate() &#123;</span><br><span class="line">	super.onCreate();</span><br><span class="line">&#125;</span><br><span class="line">//启动服务调用方法</span><br><span class="line">public int onStartCommend(Intent intent,int flags,int startId) &#123;</span><br><span class="line">	return super.onStartCommand(intent, flags, startId);</span><br><span class="line">&#125;</span><br><span class="line">//销毁服务调用方法</span><br><span class="line">public void onDestroy() &#123;</span><br><span class="line">	super.onDestroy();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 二、服务的启动与停止</p>
+<p> 服务的启动与停止与显示启动活动类似，通过Intent指定要启动的服务，再通过startService(Intent)、startService(Intent)启动服务和停止服务，服务也可使用stopSelf()自己停止自己来终止服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	//在活动里启动服务MyService</span><br><span class="line">Intent startIntent=new Intent(this,MyService.class);</span><br><span class="line">startService(startIntent);</span><br><span class="line"></span><br><span class="line">//在活动里停止服务MyService</span><br><span class="line">Intent stopIntent=new Intent(this,MyService.class);</span><br><span class="line">stopService(stopIntent);</span><br></pre></td></tr></table></figure>
+
+<p> 三、服务的绑定与解绑，活动对服务的操控（活动与服务之间的通信）</p>
+<p> 服务的绑定可以让服务和活动之前的通信更加灵活，之前我们启动服务后，服务就运行玩onCreate()和onStartCommend()的代码后就一直运行在那，无法做其它事情。可如果使用绑定服务，活动在启动完服务后可以随时随地操控正在运行的服务（获得Binder实例），让服务能为我们做更多的事情（调用Binder里的方法）。（注意：任何一个服务在应用程序里都是通用的，服务可以与任何一个活动进行绑定）</p>
+<p> 1、在<strong>自定义服务类</strong>自定义一个类继承于Binder，并自定义该类的方法（也就是服务提供给活动的方法），同时重写onBind()返回自定义Binder类的实例对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">	//自定义内部类继承于Binder，自定义开始下载方法和进度方法</span><br><span class="line">private DownloadBinder downloadTask=new DownloadBinder();</span><br><span class="line">class DownloadBinder extends Binder&#123;</span><br><span class="line">	//让服务开始下载</span><br><span class="line">	public void startDownload() &#123;</span><br><span class="line">		Log.d(&quot;MyService&quot;, &quot;startDownload executed&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	//让服务返回进度</span><br><span class="line">	public int getProgress() &#123;</span><br><span class="line">		Log.d(&quot;MyService&quot;, &quot;getProgress executed&quot;);</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">//绑定服务会触发方法，返回值将传入活动ServiceConnection类的onServiceConnected的参数里</span><br><span class="line">//活动调用bindService()后会回调onBind()方法返回一个IBinder实例到</span><br><span class="line">//活动匿名类ServiceConnection的onServiceConnected的传入参数里</span><br><span class="line">@Override</span><br><span class="line">public IBinder onBind(Intent intent) &#123;</span><br><span class="line">	// TODO Auto-generated method stub</span><br><span class="line">	return downloadTask;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 2、在<strong>活动类</strong>里定义匿名类ServiceConnection，并重写onServiceDisconnected()、onServiceConnected()方法来获得返回的自定义Binder类实例，同时调用bindService()、unbindService()来绑定和解绑服务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">	private MyService.DownloadBinder downloadBinder;</span><br><span class="line">//ServiceConnection类：定义匿名类用来绑定，解绑服务重写调用方法</span><br><span class="line">private ServiceConnection connection=new ServiceConnection() &#123;</span><br><span class="line">	//活动解绑服务时调用</span><br><span class="line">	public void onServiceDisconnected(ComponentName name) &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	//活动绑定服务时调用(参数IBinder为Service里onBind()返回的IBinder)</span><br><span class="line">	public void onServiceConnected(ComponentName name,IBinder services) &#123;</span><br><span class="line">		//在活动里获得服务的自定义Binder类，可调用Binder里的方法来指挥服务</span><br><span class="line">		downloadBinder=(MyService.DownloadBinder)services;</span><br><span class="line">		//让服务开始下载任务</span><br><span class="line">		downloadBinder.startDownload();</span><br><span class="line">		//获得服务的任务下载进度</span><br><span class="line">		downloadBinder.getProgress();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">	//绑定服务，connection为自定义的ServiceConnection</span><br><span class="line">Intent bindIntent=new Intent(this,MyService.class);</span><br><span class="line">bindService(bindIntent,connection,BIND_AUTO_CREATE);</span><br><span class="line"></span><br><span class="line">//解绑服务，connection为自定义的ServiceConnection</span><br><span class="line">unbindService(connection);</span><br></pre></td></tr></table></figure>
+
+<p> 四、启动运行在子线程的服务俩种方法</p>
+<p> <strong>服务默认运行在主线程，</strong>当我们处理一些耗时任务（如下载任务等）运行在后台服务是可能会造成ANR情况，所以为了避免这种情况，我们需要让耗时任务放在子线程里执行，一般常常使用以下俩种方法：</p>
+<p> 1、在onStartCommend()里开启子线程，并在最后让服务自动停止</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> public int onStartCommand(Intent intent,int flags,int startId) &#123;</span><br><span class="line">	//开启了一个子线程，可执行具体后台服务代码</span><br><span class="line">	new Thread(new Runnable() &#123;</span><br><span class="line">		@Override</span><br><span class="line">		public void run() &#123;</span><br><span class="line">			Log.d(&quot;LongRunningService&quot;,&quot;executed at&quot;+new Date().toString());</span><br><span class="line">			stopSelf();    //执行玩耗时任务后自动停止服务，当不想停止服务可将此句省略</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 2、使用IntentService类，该服务类有一特点：运行在子线程中，且运行完毕后自动停止。</p>
+<p> 具体使用方法：自定义子线程服务类继承于IntentService，重写MyIntentService和onHandleIntent，然后启动该服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> public class MyIntentService extends IntentService&#123;</span><br><span class="line">	public MyIntentService() &#123;</span><br><span class="line">		super(&quot;My IntentService&quot;);	//调用父类的有参构造函数</span><br><span class="line">	&#125;</span><br><span class="line">	//子线程开启服务处理具体逻辑方法</span><br><span class="line">	@Override</span><br><span class="line">	protected void onHandleIntent(Intent intent) &#123;</span><br><span class="line">		//处理耗时任务代码</span><br><span class="line">		Log.d(&quot;MyIntentService&quot;, &quot;Thread is&quot;+Thread.currentThread().getName());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 五、服务的后台执行定时任务例子</p>
+<p> 1、自定义一个一直运行的服务，通过AlarmManager（闹钟管理器）的setExact()设置定时任务，该方法接收三个参数：</p>
+<p> 第一个参数（闹钟的类型，四种）：ELAPSED_REALTIME（开始时间从系统时间算起，不唤醒CPU）、</p>
+<p> ELAPSED_REALTIME_WAKEUP（开始时间从系统时间算起，唤醒CPU）、</p>
+<p> RTC（开始时间从1970年1月1日0点开始算起，不唤醒CPU）、</p>
+<p> RTC_WAKEUP（开始时间从1970年1月1日0点开始算起，唤醒CPU）</p>
+<p> 第二个参数：定时触发时间（单位为毫秒），则闹钟在开始时间加上触发时间的时间点触发</p>
+<p> 第三个参数PendingIntent：用来触发广播接收器，当任务触发是会调用广播接收器的onReceiver方法</p>
+<p> 以下为获得PendingIntent的示例：</p>
+<p> Intent i=new Intent(this,AlarmReceiver.class);<br> PendingIntent pi=PendingIntent.getBroadcast(this, 0, i, 0);</p>
+<p> 2、在触发的广播接收器的onReceiver方法再次启动一直运行服务，形成循环。</p>
+<p> //接收到广播后启动LongRunningService服务<br> Intent i=new Intent(context,LongRunningService.class);<br> context.startService(i);</p>
+<p> 完整例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> public class LongRunningService extends Service&#123;</span><br><span class="line">	@Override</span><br><span class="line">	public IBinder onBind(Intent intent) &#123;</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line">	@TargetApi(Build.VERSION_CODES.KITKAT)</span><br><span class="line">	public int onStartCommand(Intent intent,int flags,int startId) &#123;</span><br><span class="line">		//开启了一个子线程，可执行具体后台服务代码</span><br><span class="line">		new Thread(new Runnable() &#123;</span><br><span class="line">			@Override</span><br><span class="line">			public void run() &#123;</span><br><span class="line">				Log.d(&quot;LongRunningService&quot;,&quot;executed at&quot;+new Date().toString());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;).start();</span><br><span class="line">		AlarmManager manager=(AlarmManager)getSystemService(ALARM_SERVICE);</span><br><span class="line">		int Minute=60*1000;	//这是一分钟的毫秒数</span><br><span class="line">		long triggerTime=SystemClock.elapsedRealtime()+Minute;</span><br><span class="line">		//闹钟管理器AlarmManager设置定时任务,设置AlarmReceiver作为处理定时任务的广播接收器</span><br><span class="line">		Intent i=new Intent(this,AlarmReceiver.class);</span><br><span class="line">		PendingIntent pi=PendingIntent.getBroadcast(this, 0, i, 0);</span><br><span class="line">		manager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerTime, pi);</span><br><span class="line">		return super.onStartCommand(intent, flags, startId);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> public class AlarmReceiver extends BroadcastReceiver&#123;</span><br><span class="line">	@Override</span><br><span class="line">	public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">		//接收到广播后启动LongRunningService服务</span><br><span class="line">		Intent i=new Intent(context,LongRunningService.class);</span><br><span class="line">		context.startService(i);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/07/22/Android/Android里的服务Service/" data-id="ckjzj9wqz007j04tpggux4tap" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Android/Android里如何在子线程更新UI" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/21/Android/Android里如何在子线程更新UI/" class="article-date">
@@ -117,7 +208,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/21/Android/Android里如何在子线程更新UI/" data-id="ckjoefqho000u7otpy3rlqqlf" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/21/Android/Android里如何在子线程更新UI/" data-id="ckjzj9wji000v04tp3qiflxcl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -251,7 +342,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/20/Android/Android里的多媒体/" data-id="ckjoefqp6008g7otprngzf89v" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/20/Android/Android里的多媒体/" data-id="ckjzj9wsm008i04tp7j97hlf4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -333,7 +424,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/13/Android/Android的广播接收器BroadcastReceiver/" data-id="ckjoefqhg000j7otpi2qsl0db" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/13/Android/Android的广播接收器BroadcastReceiver/" data-id="ckjzj9wjc000n04tpvgzua34m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -373,7 +464,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/12/Android/Android的基类Context和View/" data-id="ckjoefqhe000h7otpo9urlt2n" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/12/Android/Android的基类Context和View/" data-id="ckjzj9wj6000i04tpk3fxwoiz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -572,7 +663,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/12/Android/Android里的前端界面/" data-id="ckjoefqo6007f7otprwxhw473" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/12/Android/Android里的前端界面/" data-id="ckjzj9wqx007h04tp7awvb9p7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -678,7 +769,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/Android/Android的活动Activity/" data-id="ckjoefqhl000q7otpgm5avhbv" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/11/Android/Android的活动Activity/" data-id="ckjzj9wjg000r04tp3rx7yzra" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -742,7 +833,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/Android/Android基础入门/" data-id="ckjoefqh000097otpanledeny" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/11/Android/Android基础入门/" data-id="ckjzj9wis000b04tpsgb1691d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -836,7 +927,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(四)/" data-id="ckjoefqlw00547otpc1jqj6v0" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(四)/" data-id="ckjzj9wo8005304tpqblwklcg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -979,135 +1070,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(三)/" data-id="ckjoefqls00507otpyfxm2og3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据库/MySQL学习笔记(一)" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/07/11/数据库/MySQL学习笔记(一)/" class="article-date">
-  <time datetime="2018-07-11T09:28:36.000Z" itemprop="datePublished">2018-07-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/11/数据库/MySQL学习笔记(一)/">MySQL学习笔记(一)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/79475851" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79475851</a><br>   <strong>目录</strong></p>
-<p> <a href="#%E4%B8%80%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5">一，数据库系统概念</a></p>
-<p> <a href="#%E4%BA%8C%EF%BC%8CMysql%E7%9A%84%E7%9A%84%E7%9A%84%E7%9A%84%E7%9A%84%E5%AE%89%E8%A3%85">二，Mysql的安装</a></p>
-<p> <a href="#%E4%B8%89%EF%BC%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">三，数据库的基本操作</a></p>
-<p> <a href="#%E5%9B%9B%EF%BC%8C%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">四，数据表的基本操作</a></p>
-<p> <a href="#%E4%BA%94%EF%BC%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">五，数据类型</a></p>
-<p> <a href="#%E5%85%AD%EF%BC%8C%E4%BA%94%E5%A4%A7%E7%BA%A6%E6%9D%9F">六，五大约束</a></p>
-<hr>
-<h3 id="一，数据库系统概念"><a href="#一，数据库系统概念" class="headerlink" title="一，数据库系统概念"></a>一，数据库系统概念</h3><p> 数据库：指装数据的库（硬盘空间）。</p>
-<p> 数据库管理软件：指在操作系统上用户所使用的管理数据库的应用软件（MySQL、Oracle等）</p>
-<p> 数据库系统：是包含数据管理员，数据库，数据管理软件的统称。</p>
-<h3 id="二，Mysql的安装"><a href="#二，Mysql的安装" class="headerlink" title="二，Mysql的安装"></a>二，Mysql的安装</h3><p> 这个不多赘述，网上教程很多，自行百度即可。</p>
-<p> 安装好MySQL后，先不要着急安装可视化工具，可以先使用黑框，熟悉后再使用可视化工具。打开的mysql的的的命令框，</p>
-<p> 输入密码根进入，可见到以下场景，即为安装成功</p>
-<p> <img src="https://img-blog.csdn.net/20180307195650460" alt></p>
-<h3 id="三，数据库的基本操作"><a href="#三，数据库的基本操作" class="headerlink" title="三，数据库的基本操作"></a>三，数据库的基本操作</h3><p> <strong>显示当前数据库：show databases;<br> 删除数据库：drop database库名;</strong></p>
-<p> <strong>创建数据库：create database库名; //注意不要漏掉分号</strong></p>
-<p> <strong>使用数据库：use 库名;</strong></p>
-<p> 以上为整合，接下来逐一介绍：</p>
-<p> <strong>3.1显示当前数据库：show databases;</strong></p>
-<p> <strong><img src="https://img-blog.csdn.net/20180307200154837" alt></strong></p>
-<p> <strong>3.2创建数据库：create database 库名; //注意不要漏掉分号</strong></p>
-<p> *<em>3.3使用数据库：use 库名; *</em></p>
-<p> <strong>** 显示当前数据库：show databases;**</strong></p>
-<p> <strong><strong><img src="https://img-blog.csdn.net/20180307200205852" alt></strong></strong></p>
-<p> <strong>*<em>3.4删除数据库：drop database *</em></strong>库名;****</p>
-<p> <strong><strong><img src="https://img-blog.csdn.net/20180307200251179" alt></strong></strong></p>
-<h3 id="四，数据表的基本操作"><a href="#四，数据表的基本操作" class="headerlink" title="四，数据表的基本操作"></a><strong><strong>四，数据表的基本操作</strong></strong></h3><p> 数据表是数据库的组成部分之一，数据表操作必须在使用某一个数据库后才能进行。</p>
-<p> 而一个数据库中一般会有多张表，这些各自独立的表通过建立关系被联接起来，才成为可以交叉查阅，一目了然的数据库如下便是一张表：</p>
-<p> ID名称电话</p>
-<p> 01 Tom 110110110</p>
-<p> 02杰克119119119</p>
-<p> 0 3 Rose 114114114</p>
-<p> <strong>4.1查看当前数据表：show tables;</strong></p>
-<p> <strong><img src="https://img-blog.csdn.net/20180307201027189" alt></strong></p>
-<p> 此时我的数据库中有三张数据表：当然，标记，学生;</p>
-<p> <strong>4.2新建数据表：create table 表名（列名 数据类型(</strong>数据长度)，<strong>列名 数据类型(</strong>数据长度)……<strong>）;</strong></p>
-<p> <img src="https://img-blog.csdn.net/20180307201522107" alt></p>
-<p> <strong>4.3往数据表中插入自定义数据：insert into 表名（列名a，列名b，列名c）values（值1，值2，值3），</strong>values（值1，****</p>
-<p> <strong>** 值2，值3）</strong> ….；**</p>
-<p> **  注意：（列名a，列名b，列名c）可省略，默认为插入表中所有列。**</p>
-<p> ** 往数据表中插入其它表的数据：insert into 表1（列名a，列名b，列名c）values（值1，值2，值3）…select （列名a，**</p>
-<p> ** 列名b，列名c） from 表2;**</p>
-<p> 注意：表1和表2不能相同，且select语句不能包含order by</p>
-<p> <strong>4.4删除数据表：drop table表名 ;</strong></p>
-<p> <strong><strong>4.5修改数据表名：rename table原名到新名;</strong></strong></p>
-<p> <strong>4.6清空数据表：delete from 表名;</strong></p>
-<h3 id="五，数据类型"><a href="#五，数据类型" class="headerlink" title="五，数据类型"></a>五，数据类型</h3><p> MySQL的的常用数据类型：</p>
-<p> 数据类型大小（字节）用途格式</p>
-<p> INT 4整数 </p>
-<p> FLOAT 4单精度浮点数 </p>
-<p> DOUBLE 8双精度浮点数 </p>
-<p> ENUM 单选，如：ENUM（’A’，’B’，’C’）</p>
-<p> SET 多选 如：SET（’1’，’2’，’3’）</p>
-<p> Date 日期，格式：YYYY-MM-DD 如：2018-12-31</p>
-<p> DateTime 日期和时间，格式：YYYY-MM-DD HH：MM：SS 如：2018-12-31 00:00:00</p>
-<p> Year 年份</p>
-<p> CHAR 0~255定长字符串 </p>
-<p> VARCHAR 0~255变长字符串 </p>
-<p> TEXT 0~65535长文本数据 </p>
-<p> 注意：VARCHAR和炭区别是VARCHAR在存储时存储空间后根据实际字符长度变化，而炭不会，分配CHAR（10）空间后如果存储 ‘张三’ 字符串会多存储6个空字符，没有伸缩性。</p>
-<h3 id="六，五大约束"><a href="#六，五大约束" class="headerlink" title="六，五大约束"></a>六，五大约束</h3><p> 约束是一种限制，它通过对表的行或列的数据做出限制，来确保表的数据的完整性，唯一性（<strong>即对当前列数据的要求）。</strong>。</p>
-<p> <strong>约束：一般在创建表时设置</strong></p>
-<p> <strong>not null：该列列值不能为空，数据插入时不能为空</strong></p>
-<p> ** <strong>**格式：列名 数据类型（数据长度）not null，……</strong></p>
-<p> <strong>unique：该列数据都是独特的，即不能重复。</strong></p>
-<p> ** <strong>** 唯一约束不仅可以在一个表内创建，而且可以同时多表创建组合唯一约束。</strong></p>
-<p> ** <strong>** 格式：列名 数据类型（数据长度）unique，……</strong></p>
-<p> ** 格式：unique(列名1，列名2，…)**</p>
-<p> <strong>default：列数据时的默认值，当插入时没有给出该列数据时的默认值</strong></p>
-<p> ** <strong>** 格式：列名 数据类型（数据长度）default 默认值</strong></p>
-<p> <strong>primary key**</strong>：unique + not null，插入时数据既不能时表中已有的，又不能为空。一个表只能有一个主键**</p>
-<p> ** <strong>** 格式： 列名 数据类型（数据长度）primary key，……</strong></p>
-<p> ** 格式：primary key(列名1，列名2，…)**</p>
-<p> <strong>foreigne key：外键表示表与表之间的关系，指定的当前列完全依赖于另一表的主键列。</strong></p>
-<p> ** 外键必须参考（参考）另一个表主键，外键约束的列在插入数据时在参考列中必须有对应值…**</p>
-<p> ** 一个表<strong>**外键可以有多个</strong></p>
-<p> ** <strong>** 格式：constraint 约束名 foreign key(外键列名) references 表名(主键列名) [ on delete cascade/on update cascade ]</strong></p>
-<p> ** on delete cascade：级联删除（可不加），删除主键表列数据，外键表跟着删除列数据。解决了删除主键表前需要**</p>
-<p> ** 先删除外键表数据的问题**</p>
-<p> ** on update cascade：级联更新（可不加），更新主键表列数据，外键表跟着更新列数据。**</p>
-<p> ** 注意：外键和主键数据类型要相同，一般外键名和主键名也设为相同**</p>
-<p> <strong>删除以上约束方法：</strong></p>
-<p> <strong>删除主键约束：alter table 表名 drop primary key</strong></p>
-<p> <strong>删除外键约束：alter table 表名 drop foreign key 约束名</strong></p>
-<p> <strong>删除其它约束（即直接在列名后添加的约束）：alter table 表名 modify 列名 数据类型 （此处不加约束即删除了约束）</strong></p>
-<p> <strong>相关章节：</strong></p>
-<p> （二）<a href="https://blog.csdn.net/qq_38487155/article/details/79488478" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79488478</a></p>
-<p> （三）<a href="https://blog.csdn.net/qq_38487155/article/details/79508140" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79508140</a></p>
-<p> （四）<a href="https://blog.csdn.net/qq_38487155/article/details/79516314" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/79516314</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(一)/" data-id="ckjoefqlq004y7otp5sw9usmo" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/11/数据库/MySQL学习笔记(三)/" data-id="ckjzj9wo6005104tpxt33e6hv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -1169,15 +1132,15 @@
       <ul>
         
           <li>
+            <a href="/2021/01/16/2021-1-16记/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2021/01/08/迟来的2020总结与2021眺望/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
+            <a href="/2021/01/07/2021-1-7记/">(no title)</a>
           </li>
         
           <li>
@@ -1185,7 +1148,7 @@
           </li>
         
           <li>
-            <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
           </li>
         
       </ul>

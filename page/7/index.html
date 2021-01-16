@@ -66,6 +66,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据结构与算法/数据结构：图（邻接矩阵法）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/12/数据结构与算法/数据结构：图（邻接矩阵法）/" class="article-date">
+  <time datetime="2019-01-12T07:30:40.000Z" itemprop="datePublished">2019-01-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/12/数据结构与算法/数据结构：图（邻接矩阵法）/">数据结构：图（邻接矩阵法）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+           <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"> package Graph;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.util.Queue;</span><br><span class="line">import java.util.Scanner;</span><br><span class="line"></span><br><span class="line">class GraphNode&#123;</span><br><span class="line">	int data;</span><br><span class="line">&#125;</span><br><span class="line">public class Graph &#123;</span><br><span class="line">	GraphNode vexs[]=new GraphNode[100];	//图的结点表</span><br><span class="line">	int[][] arcs=new int[100][100];			//邻接矩阵（0为无边，1为有边）</span><br><span class="line">	int vexnum,arcnum;		//顶点数和边数</span><br><span class="line">	Graph() &#123;</span><br><span class="line">		//对象数组出现空指针异常：必须逐个初始化</span><br><span class="line">		for (int i = 0; i &lt; vexs.length; i++) &#123;</span><br><span class="line">			vexs[i]=new GraphNode();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	public void create() &#123;		//创建图</span><br><span class="line">		System.out.println(&quot;请输入点数和边数（输入一个换一行）&quot;);</span><br><span class="line">		Scanner sc=new Scanner(System.in);</span><br><span class="line">		vexnum=sc.nextInt();</span><br><span class="line">		arcnum=sc.nextInt();</span><br><span class="line">		System.out.println(&quot;请依次输入结点的数据（请记住每个结点的序号）,用一行相邻字符输入:&quot;);</span><br><span class="line">		for (int i = 0; i &lt; vexnum; i++) &#123;</span><br><span class="line">			try &#123;</span><br><span class="line">				vexs[i].data=(char)System.in.read();</span><br><span class="line">			&#125; catch (IOException e) &#123;</span><br><span class="line">				e.printStackTrace();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		System.out.println(&quot;请输入每条边相连俩个结点的序号&quot;);</span><br><span class="line">		for (int i = 0; i &lt; arcnum; i++) &#123;</span><br><span class="line">			int x=sc.nextInt();</span><br><span class="line">			int y=sc.nextInt();</span><br><span class="line">			arcs[x-1][y-1]=1;	//构建邻接矩阵（序号=索引+1）</span><br><span class="line">			arcs[y-1][x-1]=1;	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	/*</span><br><span class="line">	 * 非递归比递归节省时间，此递归相当于每个结点都用for走了一遍</span><br><span class="line">	 */</span><br><span class="line">	//图非递归深搜</span><br><span class="line">	public void DFSOne(int v) &#123;</span><br><span class="line">		OrderStack stack = new OrderStack(vexnum*vexnum);</span><br><span class="line">		int judge[]=new int[vexnum];	//判断结点是否被访问（0未访问，1已访问）</span><br><span class="line">		int size=0;	//计数（已访问结点）</span><br><span class="line">		int t=-1;	//临时变量</span><br><span class="line">		while (size!=vexnum) &#123;</span><br><span class="line">			if (v==t) &#123;		//当前结点没有相连且未访问结点</span><br><span class="line">				stack.pull();			//退出该结点</span><br><span class="line">				v=(int) stack.getTop();	//返回上一结点	</span><br><span class="line">			&#125;else &#123;			//当前结点有相连且未访问结点</span><br><span class="line">				char c[]=new char[]&#123;(char) vexs[v].data&#125;;</span><br><span class="line">				System.out.println(new String(c));</span><br><span class="line">				stack.push(v); //入栈</span><br><span class="line">				judge[v]=1;</span><br><span class="line">				size++;</span><br><span class="line">			&#125;</span><br><span class="line">			t=v;		//不论是刚退栈的结点v，还是处在深搜的结点v都需要进行如下t的检验</span><br><span class="line">			for (int i = 0; i &lt; vexnum; i++) &#123;</span><br><span class="line">				if (arcs[v][i]!=0&amp;&amp;judge[i]!=1) &#123;	//找到第一个未访问且相连结点</span><br><span class="line">					v=i;</span><br><span class="line">					break;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//图的递归深搜</span><br><span class="line">	int judge[]=new int[100];	//判断当前结点是否被访问，因为是递归方法，</span><br><span class="line">								//所以需要在方法外部建立数组</span><br><span class="line">	public void DFSTwo(int v) &#123;</span><br><span class="line">		if (judge[v]!=1) &#123;</span><br><span class="line">			char c[]=new char[]&#123;(char) vexs[v].data&#125;;</span><br><span class="line">			System.out.println(new String(c));</span><br><span class="line">			judge[v]=1;</span><br><span class="line">		&#125;</span><br><span class="line">		for (int i = 0; i &lt; vexnum; i++) &#123;</span><br><span class="line">			if (arcs[v][i]==1&amp;&amp;judge[i]==0) &#123;	//连通且未访问结点</span><br><span class="line">				DFSTwo(i);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	//图的广度搜索</span><br><span class="line">	public void BFS(int v) &#123;</span><br><span class="line">		int judge[]=new int[vexnum];	//判断结点是否被访问（0未访问，1已访问）</span><br><span class="line">		OrderQueue oq=new OrderQueue(vexnum);</span><br><span class="line">		oq.entry(v);</span><br><span class="line">		while (oq.getStart()!=null) &#123;</span><br><span class="line">			v=(int) oq.exit();</span><br><span class="line">			char c[]=new char[]&#123;(char) vexs[v].data&#125;;</span><br><span class="line">			System.out.println(new String(c));</span><br><span class="line">			judge[v]=1;</span><br><span class="line">			for (int i = 0; i &lt; vexnum; i++) &#123;</span><br><span class="line">				if(arcs[v][i]==1&amp;&amp;judge[i]!=1) &#123;</span><br><span class="line">					oq.entry(i);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"> package Graph;</span><br><span class="line">/*</span><br><span class="line"> * 测试数据：</span><br><span class="line">第一组：</span><br><span class="line">	5</span><br><span class="line">	7</span><br><span class="line">	abcde</span><br><span class="line">	1 2</span><br><span class="line">	1 3</span><br><span class="line">	1 4</span><br><span class="line">	2 3</span><br><span class="line">	2 5</span><br><span class="line">	3 5</span><br><span class="line">	4 5</span><br><span class="line">第二组：</span><br><span class="line">	5</span><br><span class="line">	4</span><br><span class="line">	12345</span><br><span class="line">	1 3</span><br><span class="line">	2 3</span><br><span class="line">	3 5</span><br><span class="line">	5 4</span><br><span class="line"> */</span><br><span class="line">public class test &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Graph graph=new Graph();</span><br><span class="line">		graph.create();</span><br><span class="line">		for(int i=0;i&lt;graph.vexnum;i++) &#123;</span><br><span class="line">			for(int j=0;j&lt;graph.vexnum;j++) &#123;</span><br><span class="line">				System.out.print(graph.arcs[i][j]+&quot; &quot;);</span><br><span class="line">			&#125;</span><br><span class="line">			System.out.println();</span><br><span class="line">		&#125;</span><br><span class="line">		graph.DFSOne(2);</span><br><span class="line">		graph.DFSTwo(2);</span><br><span class="line">		graph.BFS(3);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：图（邻接矩阵法）/" data-id="ckjzj9wp1005v04tpxz814uzd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-数据结构与算法/数据结构：二叉树" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/12/数据结构与算法/数据结构：二叉树/" class="article-date">
@@ -104,7 +150,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：二叉树/" data-id="ckjoefqmi005q7otp54jrpc9u" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：二叉树/" data-id="ckjzj9woy005s04tpgtb77z9l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -158,7 +204,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：队/" data-id="ckjoefqmu00627otp1f0lgfwj" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：队/" data-id="ckjzj9wpb006404tpqr0hi7fr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -212,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：栈/" data-id="ckjoefqmr005y7otpn3nllai2" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：栈/" data-id="ckjzj9wp1005w04tp8rab3whn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -255,7 +301,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（链式结构）/" data-id="ckjoefqmo005v7otp5hb4ccyp" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（链式结构）/" data-id="ckjzj9wp4006004tpl9sbi737" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -298,7 +344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（顺序结构）/" data-id="ckjoefqms005z7otpgrdoug38" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/12/数据结构与算法/数据结构：约瑟夫问题（顺序结构）/" data-id="ckjzj9wp3005z04tpxs0adb8p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -337,7 +383,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表改为双向循环链表/" data-id="ckjoefqm6005e7otpfez5cy5f" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表改为双向循环链表/" data-id="ckjzj9wom005g04tpwmmdl2bn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -376,7 +422,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表构造成三环形链表/" data-id="ckjoefqma005i7otpxv9gkv0n" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/单链表构造成三环形链表/" data-id="ckjzj9woo005j04tp5lqge2ua" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -419,7 +465,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/删除结点/" data-id="ckjoefqm7005f7otppjci0i70" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/删除结点/" data-id="ckjzj9wok005f04tpw0u1s76h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -458,46 +504,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/链表寻找相同数据/" data-id="ckjoefqnx007a7otpxmu7rezt" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-数据结构与算法/合并链表（不生成新链表）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/01/11/数据结构与算法/合并链表（不生成新链表）/" class="article-date">
-  <time datetime="2019-01-11T06:45:17.000Z" itemprop="datePublished">2019-01-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/01/11/数据结构与算法/合并链表（不生成新链表）/">合并链表（不生成新链表）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/86300833" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/86300833</a><br>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"> package Linear;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 合并链表：将两递增有序A，B合并为一个递增有序链表C(链式结构),利用A和B中的结点</span><br><span class="line"> */</span><br><span class="line">public class E &#123;</span><br><span class="line">	public static Node merge(Node A,Node B) &#123;</span><br><span class="line">		Node ppre=A;		//永远指向p前缀结点</span><br><span class="line">		Node qpre=B;		//永远指向q前缀结点</span><br><span class="line">		Node p =A.next;</span><br><span class="line">		Node q =B.next;</span><br><span class="line">		Node C=new Node();</span><br><span class="line">		Node t =C;</span><br><span class="line">		while (p!=null&amp;&amp;q!=null) &#123;</span><br><span class="line">			if (p.data&lt;=q.data) &#123;</span><br><span class="line">				ppre.next=p.next;</span><br><span class="line">				p.next=t.next;</span><br><span class="line">				t.next=p;</span><br><span class="line">				t=t.next;</span><br><span class="line">				p=ppre.next;</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				qpre.next=q.next;</span><br><span class="line">				q.next=t.next;</span><br><span class="line">				t.next=q;</span><br><span class="line">				t=t.next;</span><br><span class="line">				q=qpre.next;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		if (p==null) &#123;</span><br><span class="line">			t.next=q;</span><br><span class="line">			B.next=null;</span><br><span class="line">			B=null;</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			t.next=p;</span><br><span class="line">			A.next=null;</span><br><span class="line">			A=null;</span><br><span class="line">		&#125;</span><br><span class="line">		return C;</span><br><span class="line">	&#125;</span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Node A=NodeTool.CreateNodeList(&quot;134&quot;);</span><br><span class="line">		Node B=NodeTool.CreateNodeList(&quot;246&quot;);</span><br><span class="line">		Node C=merge(A, B);</span><br><span class="line">		NodeTool.traverseWithHead(C);</span><br><span class="line">		NodeTool.traverseWithHead(A);</span><br><span class="line">		NodeTool.traverseWithHead(B);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/合并链表（不生成新链表）/" data-id="ckjoefqmb005j7otp6yv1wmdn" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2019/01/11/数据结构与算法/链表寻找相同数据/" data-id="ckjzj9wp6006304tp6z9r2ixk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据结构与算法/">数据结构与算法</a></li></ul>
@@ -559,15 +566,15 @@
       <ul>
         
           <li>
+            <a href="/2021/01/16/2021-1-16记/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2021/01/08/迟来的2020总结与2021眺望/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
+            <a href="/2021/01/07/2021-1-7记/">(no title)</a>
           </li>
         
           <li>
@@ -575,7 +582,7 @@
           </li>
         
           <li>
-            <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
           </li>
         
       </ul>

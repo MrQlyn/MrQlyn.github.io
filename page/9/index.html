@@ -66,6 +66,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-数据库/MySQL恢复root用户超级权限方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/16/数据库/MySQL恢复root用户超级权限方法/" class="article-date">
+  <time datetime="2018-09-16T08:50:32.000Z" itemprop="datePublished">2018-09-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/16/数据库/MySQL恢复root用户超级权限方法/">MySQL恢复root用户超级权限方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82725873" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82725873</a><br>   1、在my.ini里的[mysqld]后面添加：</p>
+<blockquote>
+<p>skip-grant-tables </p>
+<p> 停止mysql服务器。不用密码按enter键即可登陆。</p>
+</blockquote>
+<p> 2 手动修改用户的权限。使其可以设置权限。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UPDATE mysql.user SET Grant_priv=&apos;Y&apos;, Super_priv=&apos;Y&apos; WHERE User=&apos;root&apos;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p> 3 刷新缓冲区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<p> 4、授权</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL ON *.* TO &apos;root&apos;@&apos;localhost&apos;;</span><br></pre></td></tr></table></figure>
+
+<p> 5、可以使用如下命令产看用户权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from mysql.user\G</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/09/16/数据库/MySQL恢复root用户超级权限方法/" data-id="ckjzj9wob005504tpd4pl4g1k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Web/MyEclipse的非法关闭导致servers报错" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/16/Web/MyEclipse的非法关闭导致servers报错/" class="article-date">
@@ -96,7 +156,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/16/Web/MyEclipse的非法关闭导致servers报错/" data-id="ckjoefqiy00207otpeho2r9l6" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/16/Web/MyEclipse的非法关闭导致servers报错/" data-id="ckjzj9wko002104tpk4vpc0m2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -136,7 +196,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/16/Web/MyEclipse移植工作空间配置/" data-id="ckjoefqj000227otpweormmq1" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/16/Web/MyEclipse移植工作空间配置/" data-id="ckjzj9wkq002304tpba4gad6q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -186,7 +246,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/15/Web/JSONObject：将Bean对象转化为JSON数据/" data-id="ckjoefqii001i7otpyntykdmn" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/15/Web/JSONObject：将Bean对象转化为JSON数据/" data-id="ckjzj9wk7001j04tpawwlsb92" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -237,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/15/Web/XStream：将Bean对象转为XML数据/" data-id="ckjoefqj7002c7otp53a02gx6" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/15/Web/XStream：将Bean对象转为XML数据/" data-id="ckjzj9wkz002d04tpcwmyf8kp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -305,7 +365,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/15/Web/Web的XML文件解析/" data-id="ckjoefqj200247otp3uf28xl4" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/15/Web/Web的XML文件解析/" data-id="ckjzj9wkr002504tpx16kb41f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -399,7 +459,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/14/Web/Ajax/" data-id="ckjoefqi600147otp06v30m8c" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/14/Web/Ajax/" data-id="ckjzj9wjr001504tp23r67ggk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -446,7 +506,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/13/Web/JavaMail/" data-id="ckjoefqio001p7otp2hu2z6xs" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/13/Web/JavaMail/" data-id="ckjzj9wkf001q04tptqbkl1j8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -511,7 +571,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/13/Web/Web的文件下载/" data-id="ckjoefqj300267otp3ae9cxgr" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/13/Web/Web的文件下载/" data-id="ckjzj9wkt002704tpnyj2bf4r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -607,83 +667,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/13/Web/Web的文件上传/" data-id="ckjoefqj500287otpb8fb6gl1" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Web/JavaWeb的三大组件之过滤器" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/12/Web/JavaWeb的三大组件之过滤器/" class="article-date">
-  <time datetime="2018-09-12T04:29:35.000Z" itemprop="datePublished">2018-09-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/12/Web/JavaWeb的三大组件之过滤器/">JavaWeb的三大组件之过滤器</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82659394" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82659394</a>   </p>
-<h1 id="JavaWeb过滤器"><a href="#JavaWeb过滤器" class="headerlink" title="JavaWeb过滤器"></a>JavaWeb过滤器</h1><p> 过滤器可以让请求得到目标资源，也可以不让请求达到！  </p>
-<ul>
-<li><p>过滤器有拦截请求的能力，且过滤器是单例模式！</p>
-<p>过滤器的实现方法：</p>
-</li>
-</ul>
-<ol>
-<li>写一个类实现Filter接口（注意导入的是：javax.servlet.Filter接口）  </li>
-<li>在web.xml中进行配置，以下为具体配置格式</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> &lt;filter&gt;</span><br><span class="line">	&lt;filter-name&gt;helloFilter&lt;/filter-name&gt;</span><br><span class="line">	&lt;filter-class&gt;包名.类名&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">	&lt;filter-name&gt;helloFilter&lt;/filter-name&gt;</span><br><span class="line">	&lt;url-pattern&gt;/要过滤的资源（/*时为过滤所有资源）&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
-
-<p> Filter接口的方法：</p>
-<p> void init(FilterConfig)：创建Filter后执行，在服务器启动时创建</p>
-<ul>
-<li><p>FilterConfig参数–&gt;与ServletConfig相似  </p>
-</li>
-<li><p>获取初始化参数：getInitParameter()  </p>
-</li>
-<li><p>获取过滤器名称：getFilterName()  </p>
-</li>
-<li><p>获取appliction：getServletContext()<br>void destory()：过滤器销毁之前执行！在服务器关闭时销毁<br>void doFilter(ServletRequest,ServletResponse,FilterChain)：每次过滤时都会执行，判断是否通过过滤器</p>
-</li>
-<li><p>FilterChain参数  </p>
-</li>
-<li><p>doFilter(ServletRequest, ServletResponse)：通过当前过滤器，若有多个过滤器则到达下一过滤器。</p>
-<p>过滤器的过滤顺序：根据web.xml的<filter-mapping>的位置从上到下过滤，与过滤资源无关（即与<url-pattern>值无关）。</url-pattern></filter-mapping></p>
-<p>过滤器的四种过滤方式：需要在<filter-mapping>里配置以下标签，四种过滤方式可以随意搭配使用来面对不同的情况</filter-mapping></p>
-</li>
-</ul>
-<blockquote>
-<p><dispatcher>REQUEST</dispatcher>：过滤请求，没有设置时的默认方式，当设置了其它过滤方式时会</p>
-<p> 使用其它过滤方式，默认过滤方式消失。</p>
-<p> <dispatcher>FORWARD</dispatcher>：过滤转发</p>
-<p> <dispatcher>INCLUDE</dispatcher>：过滤包含</p>
-<p> <dispatcher>ERROR</dispatcher>： 过滤错误</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/12/Web/JavaWeb的三大组件之过滤器/" data-id="ckjoefqiw001y7otp5dhmssa5" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/13/Web/Web的文件上传/" data-id="ckjzj9wku002904tpdpwoxhti" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -745,15 +729,15 @@
       <ul>
         
           <li>
+            <a href="/2021/01/16/2021-1-16记/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2021/01/08/迟来的2020总结与2021眺望/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
+            <a href="/2021/01/07/2021-1-7记/">(no title)</a>
           </li>
         
           <li>
@@ -761,7 +745,7 @@
           </li>
         
           <li>
-            <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
           </li>
         
       </ul>

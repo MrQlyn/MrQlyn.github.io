@@ -66,6 +66,76 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Web/EL表达式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/07/Web/EL表达式/" class="article-date">
+  <time datetime="2018-09-07T03:53:30.000Z" itemprop="datePublished">2018-09-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/07/Web/EL表达式/">EL表达式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82494057" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82494057</a><br>   EL表达式：它是可以在JSP页面中直接使用的标签语言！</p>
+<p> 1、EL表达式中的查找并输出：</p>
+<p> 全域查找：从小域往大域查找，pageContext-&gt;request-&gt;session-&gt;application</p>
+<blockquote>
+<p>${xxx}，全域查找名为xxx的属性，如果不存在，输出空字符串。<br> ${pageScope.xxx}、${requestScope.xxx}、${sessionScope.xxx}、${applicationScope.xxx}:指定域获取属性！</p>
+<p> 例：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> $&#123;pageScope.user&#125;：输出pageContext.getAttribute(&quot;user&quot;)</span><br><span class="line">$&#123;requestScope.user&#125;：输出request.getAttribute(&quot;user&quot;);</span><br><span class="line">$&#123;sessionScope.user&#125;：输出session.getAttribute(&quot;user&quot;);</span><br><span class="line">$&#123;applicationScope.user&#125;：输出application.getAttribute(&quot;user&quot;);</span><br></pre></td></tr></table></figure>
+
+<p> 2、EL表达式与JavaBean的结合</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> &lt;%</span><br><span class="line">    	Employee employee=new Employee();</span><br><span class="line">    	employee.setName(&quot;张三&quot;);</span><br><span class="line">    	employee.setSalary(20);</span><br><span class="line">    	request.setAttribute(&quot;employee&quot;, employee);</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">$&#123;requestScope.employee.name&#125;</span><br><span class="line">$&#123;requestScope.employee.salary&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 3、EL函数库</p>
+<p> 使用前需要导入标签库：&lt;%@taglib prefix=”fn” uri=”<a href="http://java.sun.com/jsp/jstl/functions&quot;" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/functions&quot;</a> %&gt;</p>
+<blockquote>
+<p>String toUpperCase(String input)：把参数转换成大写<br> String toLowerCase(String input)：把参数转换成小写<br> int indexOf(String input, String substring)：从大串，输出小串的位置！<br> boolean contains(String input, String substring)：查看大串中是否包含小串<br> boolean containsIgnoreCase(String input, String substring)：忽略大小写的，是否包含<br> boolean startsWith(String input, String substring)：是否以小串为前缀<br> boolean endsWith(String input, String substring)：是否以小串为后缀<br> String substring(String input, int beginIndex, int endIndex)：截取子串<br> String substringAfter(String input, String substring)：获取大串中，小串所在位置后面的字符串<br> substringBefore(String input, String substring)：获取大串中，小串所在位置前面的字符串<br> String escapeXml(String input)：把input中“&lt;”、”&gt;”、”&amp;”、”‘“、”””，进行转义<br> String trim(String input)：去除前后空格<br> String replace(String input, String substringBefore, String substringAfter)：替换<br> String[] split(String input, String delimiters)：分割字符串，得到字符串数组<br> int length(Object obj)：可以获取字符串、数组、各种集合的长度！<br> String join(String array[], String separator)：联合字符串数组！</p>
+<p> 使用格式：${前缀名:函数}，前缀名为导入标签库语句的prefix属性值，此时为fn</p>
+</blockquote>
+<p> 例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;fn:length(arr) &#125;</span><br></pre></td></tr></table></figure>
+
+<p> 4、EL表达式的运算符</p>
+<pre><code>符号   | 常规            | 在EL表达式里使用 | 1 | 2 | 3 | 4 | 5 | 6
+---- | ------------- | --------- | - | - | - | - | - | - 
+等于   | eq   或者  ==   |           |   |   |   |   |   |  
+不等于  | ne   或者 !=    |           |   |   |   |   |   |  
+大于   | gt   或者 &amp;gt;  |           |   |   |   |   |   |  
+小于   | lt   或者 &amp;lt;  |           |   |   |   |   |   |  
+大于等于 | ge   或者 &amp;gt;= |           |   |   |   |   |   |  
+小于等于 | le   或者 &amp;lt;= |           |   |   |   |   |   |  </code></pre><p>值为空格式： ${empty requestScope.键名}</p>
+<p> 值不为空格式： ${! empty requestScope.键名}</p>
+<p> 正则表达式：${ requestScope.键名==0 ? ‘值1’：’值2’}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/EL表达式/" data-id="ckjzj9wk0001f04tplwml1mii" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Web/JavaBean及BeanUtils的使用" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/06/Web/JavaBean及BeanUtils的使用/" class="article-date">
@@ -124,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/06/Web/JavaBean及BeanUtils的使用/" data-id="ckjoefqim001n7otprbl06brl" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/06/Web/JavaBean及BeanUtils的使用/" data-id="ckjzj9wkd001o04tptk96kfep" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -191,7 +261,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/05/Web/JavaWeb的JSP/" data-id="ckjoefqiq001s7otpxv7c6xiz" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/05/Web/JavaWeb的JSP/" data-id="ckjzj9wkh001t04tp9gh725z9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -324,7 +394,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/08/25/Web/myeclipse新建项目设置编码/" data-id="ckjoefqja002e7otpfi386kg8" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/08/25/Web/myeclipse新建项目设置编码/" data-id="ckjzj9wl2002f04tpgagadkqy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -414,7 +484,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/08/22/Web/JavaWeb的Servlet、ServletContext/" data-id="ckjoefqit001u7otpqm4z4n4v" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/08/22/Web/JavaWeb的Servlet、ServletContext/" data-id="ckjzj9wkj001v04tpt2r660dj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -2382,7 +2452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/08/18/前端/HTML、CSS、JavaScript完整版知识点整合/" data-id="ckjoefqq1008w7otp7fiku0m0" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/08/18/前端/HTML、CSS、JavaScript完整版知识点整合/" data-id="ckjzj9wtn008y04tp2o4yik1n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li></ul>
@@ -2431,7 +2501,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/08/14/Android/Android阶段总结/" data-id="ckjoefqht000y7otpc4xvrt6l" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/08/14/Android/Android阶段总结/" data-id="ckjzj9wjl000z04tpjp6b14x6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -2499,7 +2569,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/08/12/Android/Android里使用百度地图api/" data-id="ckjoefqo1007b7otp3imw0v5u" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/08/12/Android/Android里使用百度地图api/" data-id="ckjzj9wqh007e04tpkh9y056s" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -2574,7 +2644,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/31/Android/Android的开发技巧/" data-id="ckjoefqhi000m7otpissjpbz5" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/31/Android/Android的开发技巧/" data-id="ckjzj9wja000k04tpn2gxm5js" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -2617,98 +2687,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/28/Android/Android Studio导入三方jar包、so包/" data-id="ckjoefqh3000c7otpqkc8tnvs" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Android/Android里的服务Service" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/07/22/Android/Android里的服务Service/" class="article-date">
-  <time datetime="2018-07-22T09:04:12.000Z" itemprop="datePublished">2018-07-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/22/Android/Android里的服务Service/">Android里的服务Service</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/81155513" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/81155513</a><br>   学习郭霖大神的《第一行代码》，记录以下自己的学习笔记，对Service的一个总结</p>
-<p> 一、继承服务类、重写服务方法</p>
-<p> 当我们要自定义服务时，必须要继承于服务类（Service），重写服务的方法,同时最重要的是在注册四大组件的地方注册服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> &lt;service android:name=&quot;.MyService&quot;&gt;</span><br><span class="line">&lt;/service&gt;</span><br></pre></td></tr></table></figure>
-
-<p> 以下为服务的可重写方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">    //绑定服务会触发方法，返回值将传入活动ServiceConnection类的onServiceConnected的参数里</span><br><span class="line">//活动调用bindService()后会回调onBind()方法返回一个IBinder实例到</span><br><span class="line">//活动匿名类ServiceConnection的onServiceConnected的传入参数里</span><br><span class="line">@Override</span><br><span class="line">public IBinder onBind(Intent intent) &#123;</span><br><span class="line">	return null;</span><br><span class="line">&#125;</span><br><span class="line">//创建服务调用方法</span><br><span class="line">public void onCreate() &#123;</span><br><span class="line">	super.onCreate();</span><br><span class="line">&#125;</span><br><span class="line">//启动服务调用方法</span><br><span class="line">public int onStartCommend(Intent intent,int flags,int startId) &#123;</span><br><span class="line">	return super.onStartCommand(intent, flags, startId);</span><br><span class="line">&#125;</span><br><span class="line">//销毁服务调用方法</span><br><span class="line">public void onDestroy() &#123;</span><br><span class="line">	super.onDestroy();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 二、服务的启动与停止</p>
-<p> 服务的启动与停止与显示启动活动类似，通过Intent指定要启动的服务，再通过startService(Intent)、startService(Intent)启动服务和停止服务，服务也可使用stopSelf()自己停止自己来终止服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">	//在活动里启动服务MyService</span><br><span class="line">Intent startIntent=new Intent(this,MyService.class);</span><br><span class="line">startService(startIntent);</span><br><span class="line"></span><br><span class="line">//在活动里停止服务MyService</span><br><span class="line">Intent stopIntent=new Intent(this,MyService.class);</span><br><span class="line">stopService(stopIntent);</span><br></pre></td></tr></table></figure>
-
-<p> 三、服务的绑定与解绑，活动对服务的操控（活动与服务之间的通信）</p>
-<p> 服务的绑定可以让服务和活动之前的通信更加灵活，之前我们启动服务后，服务就运行玩onCreate()和onStartCommend()的代码后就一直运行在那，无法做其它事情。可如果使用绑定服务，活动在启动完服务后可以随时随地操控正在运行的服务（获得Binder实例），让服务能为我们做更多的事情（调用Binder里的方法）。（注意：任何一个服务在应用程序里都是通用的，服务可以与任何一个活动进行绑定）</p>
-<p> 1、在<strong>自定义服务类</strong>自定义一个类继承于Binder，并自定义该类的方法（也就是服务提供给活动的方法），同时重写onBind()返回自定义Binder类的实例对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">	//自定义内部类继承于Binder，自定义开始下载方法和进度方法</span><br><span class="line">private DownloadBinder downloadTask=new DownloadBinder();</span><br><span class="line">class DownloadBinder extends Binder&#123;</span><br><span class="line">	//让服务开始下载</span><br><span class="line">	public void startDownload() &#123;</span><br><span class="line">		Log.d(&quot;MyService&quot;, &quot;startDownload executed&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	//让服务返回进度</span><br><span class="line">	public int getProgress() &#123;</span><br><span class="line">		Log.d(&quot;MyService&quot;, &quot;getProgress executed&quot;);</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">//绑定服务会触发方法，返回值将传入活动ServiceConnection类的onServiceConnected的参数里</span><br><span class="line">//活动调用bindService()后会回调onBind()方法返回一个IBinder实例到</span><br><span class="line">//活动匿名类ServiceConnection的onServiceConnected的传入参数里</span><br><span class="line">@Override</span><br><span class="line">public IBinder onBind(Intent intent) &#123;</span><br><span class="line">	// TODO Auto-generated method stub</span><br><span class="line">	return downloadTask;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 2、在<strong>活动类</strong>里定义匿名类ServiceConnection，并重写onServiceDisconnected()、onServiceConnected()方法来获得返回的自定义Binder类实例，同时调用bindService()、unbindService()来绑定和解绑服务。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">	private MyService.DownloadBinder downloadBinder;</span><br><span class="line">//ServiceConnection类：定义匿名类用来绑定，解绑服务重写调用方法</span><br><span class="line">private ServiceConnection connection=new ServiceConnection() &#123;</span><br><span class="line">	//活动解绑服务时调用</span><br><span class="line">	public void onServiceDisconnected(ComponentName name) &#123;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	//活动绑定服务时调用(参数IBinder为Service里onBind()返回的IBinder)</span><br><span class="line">	public void onServiceConnected(ComponentName name,IBinder services) &#123;</span><br><span class="line">		//在活动里获得服务的自定义Binder类，可调用Binder里的方法来指挥服务</span><br><span class="line">		downloadBinder=(MyService.DownloadBinder)services;</span><br><span class="line">		//让服务开始下载任务</span><br><span class="line">		downloadBinder.startDownload();</span><br><span class="line">		//获得服务的任务下载进度</span><br><span class="line">		downloadBinder.getProgress();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">	//绑定服务，connection为自定义的ServiceConnection</span><br><span class="line">Intent bindIntent=new Intent(this,MyService.class);</span><br><span class="line">bindService(bindIntent,connection,BIND_AUTO_CREATE);</span><br><span class="line"></span><br><span class="line">//解绑服务，connection为自定义的ServiceConnection</span><br><span class="line">unbindService(connection);</span><br></pre></td></tr></table></figure>
-
-<p> 四、启动运行在子线程的服务俩种方法</p>
-<p> <strong>服务默认运行在主线程，</strong>当我们处理一些耗时任务（如下载任务等）运行在后台服务是可能会造成ANR情况，所以为了避免这种情况，我们需要让耗时任务放在子线程里执行，一般常常使用以下俩种方法：</p>
-<p> 1、在onStartCommend()里开启子线程，并在最后让服务自动停止</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> public int onStartCommand(Intent intent,int flags,int startId) &#123;</span><br><span class="line">	//开启了一个子线程，可执行具体后台服务代码</span><br><span class="line">	new Thread(new Runnable() &#123;</span><br><span class="line">		@Override</span><br><span class="line">		public void run() &#123;</span><br><span class="line">			Log.d(&quot;LongRunningService&quot;,&quot;executed at&quot;+new Date().toString());</span><br><span class="line">			stopSelf();    //执行玩耗时任务后自动停止服务，当不想停止服务可将此句省略</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;).start();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 2、使用IntentService类，该服务类有一特点：运行在子线程中，且运行完毕后自动停止。</p>
-<p> 具体使用方法：自定义子线程服务类继承于IntentService，重写MyIntentService和onHandleIntent，然后启动该服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"> public class MyIntentService extends IntentService&#123;</span><br><span class="line">	public MyIntentService() &#123;</span><br><span class="line">		super(&quot;My IntentService&quot;);	//调用父类的有参构造函数</span><br><span class="line">	&#125;</span><br><span class="line">	//子线程开启服务处理具体逻辑方法</span><br><span class="line">	@Override</span><br><span class="line">	protected void onHandleIntent(Intent intent) &#123;</span><br><span class="line">		//处理耗时任务代码</span><br><span class="line">		Log.d(&quot;MyIntentService&quot;, &quot;Thread is&quot;+Thread.currentThread().getName());</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 五、服务的后台执行定时任务例子</p>
-<p> 1、自定义一个一直运行的服务，通过AlarmManager（闹钟管理器）的setExact()设置定时任务，该方法接收三个参数：</p>
-<p> 第一个参数（闹钟的类型，四种）：ELAPSED_REALTIME（开始时间从系统时间算起，不唤醒CPU）、</p>
-<p> ELAPSED_REALTIME_WAKEUP（开始时间从系统时间算起，唤醒CPU）、</p>
-<p> RTC（开始时间从1970年1月1日0点开始算起，不唤醒CPU）、</p>
-<p> RTC_WAKEUP（开始时间从1970年1月1日0点开始算起，唤醒CPU）</p>
-<p> 第二个参数：定时触发时间（单位为毫秒），则闹钟在开始时间加上触发时间的时间点触发</p>
-<p> 第三个参数PendingIntent：用来触发广播接收器，当任务触发是会调用广播接收器的onReceiver方法</p>
-<p> 以下为获得PendingIntent的示例：</p>
-<p> Intent i=new Intent(this,AlarmReceiver.class);<br> PendingIntent pi=PendingIntent.getBroadcast(this, 0, i, 0);</p>
-<p> 2、在触发的广播接收器的onReceiver方法再次启动一直运行服务，形成循环。</p>
-<p> //接收到广播后启动LongRunningService服务<br> Intent i=new Intent(context,LongRunningService.class);<br> context.startService(i);</p>
-<p> 完整例子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"> public class LongRunningService extends Service&#123;</span><br><span class="line">	@Override</span><br><span class="line">	public IBinder onBind(Intent intent) &#123;</span><br><span class="line">		return null;</span><br><span class="line">	&#125;</span><br><span class="line">	@TargetApi(Build.VERSION_CODES.KITKAT)</span><br><span class="line">	public int onStartCommand(Intent intent,int flags,int startId) &#123;</span><br><span class="line">		//开启了一个子线程，可执行具体后台服务代码</span><br><span class="line">		new Thread(new Runnable() &#123;</span><br><span class="line">			@Override</span><br><span class="line">			public void run() &#123;</span><br><span class="line">				Log.d(&quot;LongRunningService&quot;,&quot;executed at&quot;+new Date().toString());</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;).start();</span><br><span class="line">		AlarmManager manager=(AlarmManager)getSystemService(ALARM_SERVICE);</span><br><span class="line">		int Minute=60*1000;	//这是一分钟的毫秒数</span><br><span class="line">		long triggerTime=SystemClock.elapsedRealtime()+Minute;</span><br><span class="line">		//闹钟管理器AlarmManager设置定时任务,设置AlarmReceiver作为处理定时任务的广播接收器</span><br><span class="line">		Intent i=new Intent(this,AlarmReceiver.class);</span><br><span class="line">		PendingIntent pi=PendingIntent.getBroadcast(this, 0, i, 0);</span><br><span class="line">		manager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerTime, pi);</span><br><span class="line">		return super.onStartCommand(intent, flags, startId);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> public class AlarmReceiver extends BroadcastReceiver&#123;</span><br><span class="line">	@Override</span><br><span class="line">	public void onReceive(Context context, Intent intent) &#123;</span><br><span class="line">		//接收到广播后启动LongRunningService服务</span><br><span class="line">		Intent i=new Intent(context,LongRunningService.class);</span><br><span class="line">		context.startService(i);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/07/22/Android/Android里的服务Service/" data-id="ckjoefqo7007h7otptphuhvhi" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/07/28/Android/Android Studio导入三方jar包、so包/" data-id="ckjzj9wi4000a04tpw3qjh67j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
@@ -2770,15 +2749,15 @@
       <ul>
         
           <li>
+            <a href="/2021/01/16/2021-1-16记/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2021/01/08/迟来的2020总结与2021眺望/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
+            <a href="/2021/01/07/2021-1-7记/">(no title)</a>
           </li>
         
           <li>
@@ -2786,7 +2765,7 @@
           </li>
         
           <li>
-            <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
           </li>
         
       </ul>

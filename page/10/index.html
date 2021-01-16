@@ -66,6 +66,82 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Web/JavaWeb的三大组件之过滤器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/09/12/Web/JavaWeb的三大组件之过滤器/" class="article-date">
+  <time datetime="2018-09-12T04:29:35.000Z" itemprop="datePublished">2018-09-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/09/12/Web/JavaWeb的三大组件之过滤器/">JavaWeb的三大组件之过滤器</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82659394" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82659394</a>   </p>
+<h1 id="JavaWeb过滤器"><a href="#JavaWeb过滤器" class="headerlink" title="JavaWeb过滤器"></a>JavaWeb过滤器</h1><p> 过滤器可以让请求得到目标资源，也可以不让请求达到！  </p>
+<ul>
+<li><p>过滤器有拦截请求的能力，且过滤器是单例模式！</p>
+<p>过滤器的实现方法：</p>
+</li>
+</ul>
+<ol>
+<li>写一个类实现Filter接口（注意导入的是：javax.servlet.Filter接口）  </li>
+<li>在web.xml中进行配置，以下为具体配置格式</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> &lt;filter&gt;</span><br><span class="line">	&lt;filter-name&gt;helloFilter&lt;/filter-name&gt;</span><br><span class="line">	&lt;filter-class&gt;包名.类名&lt;/filter-class&gt;</span><br><span class="line">&lt;/filter&gt;</span><br><span class="line">&lt;filter-mapping&gt;</span><br><span class="line">	&lt;filter-name&gt;helloFilter&lt;/filter-name&gt;</span><br><span class="line">	&lt;url-pattern&gt;/要过滤的资源（/*时为过滤所有资源）&lt;/url-pattern&gt;</span><br><span class="line">&lt;/filter-mapping&gt;</span><br></pre></td></tr></table></figure>
+
+<p> Filter接口的方法：</p>
+<p> void init(FilterConfig)：创建Filter后执行，在服务器启动时创建</p>
+<ul>
+<li><p>FilterConfig参数–&gt;与ServletConfig相似  </p>
+</li>
+<li><p>获取初始化参数：getInitParameter()  </p>
+</li>
+<li><p>获取过滤器名称：getFilterName()  </p>
+</li>
+<li><p>获取appliction：getServletContext()<br>void destory()：过滤器销毁之前执行！在服务器关闭时销毁<br>void doFilter(ServletRequest,ServletResponse,FilterChain)：每次过滤时都会执行，判断是否通过过滤器</p>
+</li>
+<li><p>FilterChain参数  </p>
+</li>
+<li><p>doFilter(ServletRequest, ServletResponse)：通过当前过滤器，若有多个过滤器则到达下一过滤器。</p>
+<p>过滤器的过滤顺序：根据web.xml的<filter-mapping>的位置从上到下过滤，与过滤资源无关（即与<url-pattern>值无关）。</url-pattern></filter-mapping></p>
+<p>过滤器的四种过滤方式：需要在<filter-mapping>里配置以下标签，四种过滤方式可以随意搭配使用来面对不同的情况</filter-mapping></p>
+</li>
+</ul>
+<blockquote>
+<p><dispatcher>REQUEST</dispatcher>：过滤请求，没有设置时的默认方式，当设置了其它过滤方式时会</p>
+<p> 使用其它过滤方式，默认过滤方式消失。</p>
+<p> <dispatcher>FORWARD</dispatcher>：过滤转发</p>
+<p> <dispatcher>INCLUDE</dispatcher>：过滤包含</p>
+<p> <dispatcher>ERROR</dispatcher>： 过滤错误</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://mrqlyn.github.io/2018/09/12/Web/JavaWeb的三大组件之过滤器/" data-id="ckjzj9wkm001z04tpsgedzoj4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Web/JavaWeb的三大组件之事件监听组件（Listener）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/09/11/Web/JavaWeb的三大组件之事件监听组件（Listener）/" class="article-date">
@@ -210,7 +286,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/11/Web/JavaWeb的三大组件之事件监听组件（Listener）/" data-id="ckjoefqiv001w7otpjf6y07ke" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/11/Web/JavaWeb的三大组件之事件监听组件（Listener）/" data-id="ckjzj9wkl001x04tpoez2xp9k" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -249,7 +325,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/09/Web/CommonUtils工具类/" data-id="ckjoefqia00197otpockb43ou" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/09/Web/CommonUtils工具类/" data-id="ckjzj9wjv001a04tp81dooits" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -311,7 +387,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/" data-id="ckjoefqkk003v7otp9tat2cfc" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/09/java基础/Java基本功：String，StringBufferStringBuilder，基本类型包装类，Byte[ ]，char[ ]的转换/" data-id="ckjzj9wn3003w04tp8gleu9hp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
@@ -350,7 +426,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/09/java基础/Java代码生成不重复的32位长的大写字符串/" data-id="ckjoefqkh003q7otpt5qznaku" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/09/java基础/Java代码生成不重复的32位长的大写字符串/" data-id="ckjzj9wmt003r04tpvyt7jht9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java基础/">Java基础</a></li></ul>
@@ -405,7 +481,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/08/Web/JNDI和Local/" data-id="ckjoefqig001f7otpfkjozf6z" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/08/Web/JNDI和Local/" data-id="ckjzj9wk3001g04tp1hs5y88n" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -465,7 +541,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/08/数据库/JDBC学习笔记(cp30数据库连接池)/" data-id="ckjoefqlc004m7otpfj64n56o" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/08/数据库/JDBC学习笔记(cp30数据库连接池)/" data-id="ckjzj9wns004n04tpu6444db6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -507,7 +583,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Web项目里的各种路径/" data-id="ckjoefqj6002a7otpcsna0ivo" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Web项目里的各种路径/" data-id="ckjzj9wkw002b04tpaf59z7ob" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -630,7 +706,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/JSTL/" data-id="ckjoefqik001k7otpwusdethv" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/JSTL/" data-id="ckjzj9wk9001l04tpzz3yutcx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -727,77 +803,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Cookie和Session/" data-id="ckjoefqic001b7otphksx5pup" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Web/EL表达式" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/07/Web/EL表达式/" class="article-date">
-  <time datetime="2018-09-07T03:53:30.000Z" itemprop="datePublished">2018-09-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/07/Web/EL表达式/">EL表达式</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p> 版权声明：转载请说明去处，文章仅供学习参考 <a href="https://blog.csdn.net/qq_38487155/article/details/82494057" target="_blank" rel="noopener">https://blog.csdn.net/qq_38487155/article/details/82494057</a><br>   EL表达式：它是可以在JSP页面中直接使用的标签语言！</p>
-<p> 1、EL表达式中的查找并输出：</p>
-<p> 全域查找：从小域往大域查找，pageContext-&gt;request-&gt;session-&gt;application</p>
-<blockquote>
-<p>${xxx}，全域查找名为xxx的属性，如果不存在，输出空字符串。<br> ${pageScope.xxx}、${requestScope.xxx}、${sessionScope.xxx}、${applicationScope.xxx}:指定域获取属性！</p>
-<p> 例：</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> $&#123;pageScope.user&#125;：输出pageContext.getAttribute(&quot;user&quot;)</span><br><span class="line">$&#123;requestScope.user&#125;：输出request.getAttribute(&quot;user&quot;);</span><br><span class="line">$&#123;sessionScope.user&#125;：输出session.getAttribute(&quot;user&quot;);</span><br><span class="line">$&#123;applicationScope.user&#125;：输出application.getAttribute(&quot;user&quot;);</span><br></pre></td></tr></table></figure>
-
-<p> 2、EL表达式与JavaBean的结合</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> &lt;%</span><br><span class="line">    	Employee employee=new Employee();</span><br><span class="line">    	employee.setName(&quot;张三&quot;);</span><br><span class="line">    	employee.setSalary(20);</span><br><span class="line">    	request.setAttribute(&quot;employee&quot;, employee);</span><br><span class="line">%&gt;</span><br><span class="line"></span><br><span class="line">$&#123;requestScope.employee.name&#125;</span><br><span class="line">$&#123;requestScope.employee.salary&#125;</span><br></pre></td></tr></table></figure>
-
-<p> 3、EL函数库</p>
-<p> 使用前需要导入标签库：&lt;%@taglib prefix=”fn” uri=”<a href="http://java.sun.com/jsp/jstl/functions&quot;" target="_blank" rel="noopener">http://java.sun.com/jsp/jstl/functions&quot;</a> %&gt;</p>
-<blockquote>
-<p>String toUpperCase(String input)：把参数转换成大写<br> String toLowerCase(String input)：把参数转换成小写<br> int indexOf(String input, String substring)：从大串，输出小串的位置！<br> boolean contains(String input, String substring)：查看大串中是否包含小串<br> boolean containsIgnoreCase(String input, String substring)：忽略大小写的，是否包含<br> boolean startsWith(String input, String substring)：是否以小串为前缀<br> boolean endsWith(String input, String substring)：是否以小串为后缀<br> String substring(String input, int beginIndex, int endIndex)：截取子串<br> String substringAfter(String input, String substring)：获取大串中，小串所在位置后面的字符串<br> substringBefore(String input, String substring)：获取大串中，小串所在位置前面的字符串<br> String escapeXml(String input)：把input中“&lt;”、”&gt;”、”&amp;”、”‘“、”””，进行转义<br> String trim(String input)：去除前后空格<br> String replace(String input, String substringBefore, String substringAfter)：替换<br> String[] split(String input, String delimiters)：分割字符串，得到字符串数组<br> int length(Object obj)：可以获取字符串、数组、各种集合的长度！<br> String join(String array[], String separator)：联合字符串数组！</p>
-<p> 使用格式：${前缀名:函数}，前缀名为导入标签库语句的prefix属性值，此时为fn</p>
-</blockquote>
-<p> 例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;fn:length(arr) &#125;</span><br></pre></td></tr></table></figure>
-
-<p> 4、EL表达式的运算符</p>
-<pre><code>符号   | 常规            | 在EL表达式里使用 | 1 | 2 | 3 | 4 | 5 | 6
----- | ------------- | --------- | - | - | - | - | - | - 
-等于   | eq   或者  ==   |           |   |   |   |   |   |  
-不等于  | ne   或者 !=    |           |   |   |   |   |   |  
-大于   | gt   或者 &amp;gt;  |           |   |   |   |   |   |  
-小于   | lt   或者 &amp;lt;  |           |   |   |   |   |   |  
-大于等于 | ge   或者 &amp;gt;= |           |   |   |   |   |   |  
-小于等于 | le   或者 &amp;lt;= |           |   |   |   |   |   |  </code></pre><p>值为空格式： ${empty requestScope.键名}</p>
-<p> 值不为空格式： ${! empty requestScope.键名}</p>
-<p> 正则表达式：${ requestScope.键名==0 ? ‘值1’：’值2’}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/EL表达式/" data-id="ckjoefqie001e7otpporca6jq" class="article-share-link">Share</a>
+      <a data-url="https://mrqlyn.github.io/2018/09/07/Web/Cookie和Session/" data-id="ckjzj9wjx001c04tpy63vxbsx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
@@ -859,15 +865,15 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
       <ul>
         
           <li>
+            <a href="/2021/01/16/2021-1-16记/">(no title)</a>
+          </li>
+        
+          <li>
             <a href="/2021/01/08/迟来的2020总结与2021眺望/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2021/01/07/2020-1-7记/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
+            <a href="/2021/01/07/2021-1-7记/">(no title)</a>
           </li>
         
           <li>
@@ -875,7 +881,7 @@ System.out.println(str1.equals(str2));   //true</code></pre></blockquote>
           </li>
         
           <li>
-            <a href="/2019/07/14/前端/Bootstrap笔记（二）/">Bootstrap笔记（二）</a>
+            <a href="/2020/12/05/LifeRecord/">LifeRecord</a>
           </li>
         
       </ul>
